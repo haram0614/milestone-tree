@@ -1,7 +1,7 @@
 addLayer("m", {
     name: "milestone", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "M", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
@@ -25,8 +25,8 @@ addLayer("m", {
     row: 0, // Row the layer is in on the tree (0 is the first row)
 	base: new Decimal(1.5),
 	exponent: function(){
-		if(player.m.points.lt(5))return new Decimal(1.7);
 		var base=new Decimal(2);
+		if(player.m.points.lte(4))base=new Decimal(1.7);
 		var firstScaling=player.m.points.sub(tmp.m.getScalingStart).max(0);
 		if(tmp.m.getScalingStart.lte(25)){
 			if(firstScaling.gte(Decimal.sub(25,tmp.m.getScalingStart))){
@@ -42,7 +42,7 @@ addLayer("m", {
 		if(hasUpgrade("ap",23))firstScaling=firstScaling.div(upgradeEffect("ap",23));
 		if(hasUpgrade("pe",12))firstScaling=firstScaling.div(upgradeEffect("pe",12));
 		if(hasUpgrade("se",12))firstScaling=firstScaling.div(upgradeEffect("se",12));
-		return new Decimal(2).add(firstScaling);
+		return base.add(firstScaling);
 	},
     getScalingStart(){
         let start=new Decimal(14);

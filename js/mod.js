@@ -17,6 +17,8 @@ let modInfo = {
 	"layers/super-energy.js",
 	"layers/extra-milestone.js",
 	
+	"checkdomain.js",
+	
 	"tree.js"],
 
 	discordName: "",

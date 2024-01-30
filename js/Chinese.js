@@ -1,6 +1,6 @@
-﻿modInfo.name="里程碑之树";
+modInfo.name="里程碑之树";
 VERSION.name="";
-VERSION.cnum="1";
+VERSION.cnum="2";
 VERSION.withoutName="v"+VERSION.num+"c"+VERSION.cnum;
 VERSION.withName="v"+VERSION.num+"c"+VERSION.cnum+"（中文版）";
 
@@ -11,10 +11,13 @@ displayThings = [
 			return "因为软上限，第一个里程碑的效果变为原来的"+format(getPointGen().log(getPointGenBeforeSoftcap()),4)+"次方。<br>第一个里程碑的软上限在"+format(getPointSoftcapStart())+"开始。";
 		}
 		return "";
-	}
+	},
+	displayThings[2]
 ]
 
 changelog = `<h1>更新日志：</h1><br>
+	<h3>v1.150.1c2</h3><br>
+		- 中文版更新<br>
 	<h3>v1.150.1c1</h3><br>
 		- 中文版更新<br>
 	<h3>v1.150.1</h3><br>
