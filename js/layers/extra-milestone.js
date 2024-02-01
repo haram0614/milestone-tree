@@ -51,6 +51,14 @@ addLayer("em", {
 				return "Third Milestone's effect is better based on your extra-milestones."
 			},
         },
+		{
+			requirementDescription: "3rd Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(2)},
+            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock new Super Energy upgrades."
+			},
+        },
 	],
 	branches: ["mm"],
     resetDescription: "Get ",

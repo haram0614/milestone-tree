@@ -26,7 +26,8 @@ addLayer("m", {
 	base: new Decimal(1.5),
 	exponent: function(){
 		var base=new Decimal(2);
-		if(player.m.points.lte(4))base=new Decimal(1.7);
+		if(player.m.points.lte(4))base=base.sub(0.3);
+		else if(player.m.best.gte(150))base=base.sub(0.05);
 		var firstScaling=player.m.points.sub(tmp.m.getScalingStart).max(0);
 		if(tmp.m.getScalingStart.lte(25)){
 			if(firstScaling.gte(Decimal.sub(25,tmp.m.getScalingStart))){
@@ -42,6 +43,7 @@ addLayer("m", {
 		if(hasUpgrade("ap",23))firstScaling=firstScaling.div(upgradeEffect("ap",23));
 		if(hasUpgrade("pe",12))firstScaling=firstScaling.div(upgradeEffect("pe",12));
 		if(hasUpgrade("se",12))firstScaling=firstScaling.div(upgradeEffect("se",12));
+		if(hasUpgrade("he",12))firstScaling=firstScaling.div(upgradeEffect("he",12));
 		return base.add(firstScaling);
 	},
     getScalingStart(){
@@ -1214,48 +1216,76 @@ addLayer("m", {
 			requirementDescription: "145th Milestone",
             unlocked() {return player[this.layer].best.gte(144)},
             done() {return player[this.layer].best.gte(145)}, // Used to determine when to give the milestone
-            effectDescription:  function(){
-				return "Autogain AP challenge 1 completions.";
-			},
+            effectDescription: "Autogain AP challenge 1 completions."
         },
 		{
 			requirementDescription: "146th Milestone",
             unlocked() {return player[this.layer].best.gte(145)},
             done() {return player[this.layer].best.gte(146)}, // Used to determine when to give the milestone
-            effectDescription:  function(){
-				return "Autogain AP challenge 2 completions.";
-			},
+            effectDescription: "Autogain AP challenge 2 completions."
         },
 		{
 			requirementDescription: "147th Milestone",
             unlocked() {return player[this.layer].best.gte(146)},
             done() {return player[this.layer].best.gte(147)}, // Used to determine when to give the milestone
-            effectDescription:  function(){
-				return "Autogain AP challenge 3 completions.";
-			},
+            effectDescription: "Autogain AP challenge 3 completions."
         },
 		{
 			requirementDescription: "148th Milestone",
             unlocked() {return player[this.layer].best.gte(147)},
             done() {return player[this.layer].best.gte(148)}, // Used to determine when to give the milestone
-            effectDescription:  function(){
-				return "Autogain AP challenge 5 completions.";
-			},
+            effectDescription: "Autogain AP challenge 5 completions."
         },
 		{
 			requirementDescription: "149th Milestone",
             unlocked() {return player[this.layer].best.gte(148)},
             done() {return player[this.layer].best.gte(149)}, // Used to determine when to give the milestone
-            effectDescription:  function(){
-				return "Autogain AP challenge 6 completions.";
-			},
+            effectDescription: "Autogain AP challenge 6 completions."
         },
 		{
 			requirementDescription: "150th Milestone",
             unlocked() {return player[this.layer].best.gte(149)},
             done() {return player[this.layer].best.gte(150)}, // Used to determine when to give the milestone
+            effectDescription: "Unlock a new layer."
+        },
+		{
+			requirementDescription: "151st Milestone",
+            unlocked() {return player[this.layer].best.gte(150)},
+            done() {return player[this.layer].best.gte(151)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Gain additional 100% of Transcend Point gain per second (total 200%)."
+			},
+        },
+		{
+			requirementDescription: "152nd Milestone",
+            unlocked() {return player[this.layer].best.gte(151)},
+            done() {return player[this.layer].best.gte(152)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "AP challenge 2,3,5,6 goals are reduced."
+			},
+        },
+		{
+			requirementDescription: "153rd Milestone",
+            unlocked() {return player[this.layer].best.gte(152)},
+            done() {return player[this.layer].best.gte(153)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Current Endgame";
+				return "Unlock a new row of Transcend Upgrades.";
+			},
+        },
+		{
+			requirementDescription: "154th Milestone",
+            unlocked() {return player[this.layer].best.gte(153)},
+            done() {return player[this.layer].best.gte(154)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Gain additional 100% of Transcend Point gain per second (total 300%)."
+			},
+        },
+		{
+			requirementDescription: "155th Milestone",
+            unlocked() {return player[this.layer].best.gte(154)},
+            done() {return player[this.layer].best.gte(155)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Current endgame"
 			},
         },
 	],

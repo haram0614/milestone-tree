@@ -16,6 +16,7 @@ let modInfo = {
 	"layers/prestige-energy.js",
 	"layers/super-energy.js",
 	"layers/extra-milestone.js",
+	"layers/hyper-energy.js",
 	
 	"checkdomain.js",
 	
@@ -29,11 +30,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.150.1"
+	num: "1.155"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v1.150.1</h3><br>
+	<h3>v1.155 - 2024/2/1</h3><br>
+		- Added 5 milestones
+		- Added 1 meta-milestone
+		- Added 1 extra-milestone
+		- Added 1 super-energy upgrade
+		- Added a new layer with 1 upgrade
+	<h3>v1.150.1 - 2024/1/29</h3><br>
 		- Ported The Milestone Tree to The Modding Tree 2.6.6.2`;
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
@@ -108,6 +115,7 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("t",73))sc=sc.pow(upgradeEffect("t",73));
 	if(hasUpgrade("se",11))sc=sc.pow(upgradeEffect("se",11));
 	sc=sc.pow(layers.t.getSpecialEffect(22));
+	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
 	return sc;
 }
 

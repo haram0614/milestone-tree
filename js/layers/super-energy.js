@@ -59,14 +59,21 @@ addLayer("se", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.se.points.add(1).log10().div(200);
+				if(hasUpgrade("se",14))b=b.mul(1.5);
 				return b.add(1);
             },
-            effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
         },
 		13: {
 			title: "Super Energy Upgrade 13",
             description: "Super Energy Upgrade 11 is boosted.",
             cost: new Decimal(8.06e12),
+            unlocked() { return true}, // The upgrade is only visible when this is true
+        },
+		14: {
+			title: "Super Energy Upgrade 14",
+            description: "Super Energy Upgrade 12 is boosted.",
+            cost: new Decimal(1.01e13),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 	},

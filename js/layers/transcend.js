@@ -129,7 +129,7 @@ addLayer("t", {
 		return amt;
 	},
 	upgrades: {
-        rows: 7,
+        rows: 8,
 		cols: 4,
 		11: {
 			title: "Transcend Upgrade 11",
@@ -227,7 +227,10 @@ addLayer("t", {
             cost: new Decimal(60000),
 			unlocked(){return player.m.points.gte(111);},
 			effect(){
-				return new Decimal(9).plus(player.t.points.add(10).log10().sqrt().mul(1.2));
+				let b = player.t.points.add(10).log10().sqrt().mul(1.2);
+				if(player.t.points.add(10).log10().gte(625/36))b = player.t.points.add(10).log10().mul(0.288);
+				if(hasUpgrade("t",81))b = player.t.points.add(10).log10().sqrt().mul(1.2).max(player.t.points.add(10).log10().mul(0.3)).add(0.65);
+				return new Decimal(9).plus(b);
 			},
             effectDisplay() { return "+"+format(this.effect(),4) },
         },
@@ -330,6 +333,12 @@ addLayer("t", {
             description(){return "Transcend Upgrade 72 and 73 are boosted."},
             cost: new Decimal(4e14),
 			unlocked(){return player.m.points.gte(136);},
+        },
+		81: {
+			title: "Transcend Upgrade 81",
+            description(){return "Transcend Upgrade 52 is boosted."},
+            cost: new Decimal(5e17),
+			unlocked(){return player.m.points.gte(153);},
         },
 	},
 	
@@ -465,9 +474,11 @@ addLayer("t", {
                 rewardDescription() { return "1st milestone's softcap starts later." },
 		},
 	},
-	hardcap:new Decimal(2e17),
+	hardcap:new Decimal(4e18),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
+		if(player.m.points.gte(154))return 3;
+		if(player.m.points.gte(151))return 2;
 		if(player.m.points.gte(133))return 1;
 		if(player.m.points.gte(130))return 0.8;
 		if(player.m.points.gte(127))return 0.6;
@@ -506,7 +517,7 @@ addLayer("t", {
 				["display-text",function(){return "You have "+format(player.t.specialPoints[12])+" Softcapped Transcend Points, 1st Milestone's softcap starts "+format(layers.t.getSpecialEffect(12),4)+"x later"}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[21])+" Prestige-Dilated Transcend Points, Prestige Point gain ^"+format(layers.t.getSpecialEffect(21),4)}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[22])+" Hardcapped Transcend Points, 1st Milestone's softcap starts "+format(layers.t.getSpecialEffect(22),4)+"x later"}],
-				["display-text",function(){return "You have "+format(player.t.specialPoints[31])+" Super-Dilated Transcend Points"}],
+				["display-text",function(){return "You have "+format(player.t.specialPoints[31])+" Super-Dilated Transcend Points, Super-Prestige Point gain ^"+format(layers.t.getSpecialEffect(31),4)}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[32])+" Prestige-Hardcapped Transcend Points"}],
 			],
 			unlocked(){return player.m.points.gte(130);}
@@ -536,6 +547,7 @@ addLayer("t", {
 		if(x==21)return "Prestige-Dilated Transcend Point";
 		if(x==22)return "Hardcapped Transcend Point";
 		if(x==31)return "Super-Dilated Transcend Point";
+		if(x==32)return "Prestige-Hardcapped Transcend Points";
 	},
 	getSpecialEffect(x){
 		if(x==11){
@@ -552,6 +564,10 @@ addLayer("t", {
 		}
 		if(x==22){
 			let effect=player.t.specialPoints[22].add(1).log10().div(100).add(1);
+			return effect;
+		}
+		if(x==31){
+			let effect=player.t.specialPoints[31].add(1).log10().div(100).add(1);
 			return effect;
 		}
 	}
