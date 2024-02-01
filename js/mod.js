@@ -35,13 +35,13 @@ let VERSION = {
 
 let changelog = `<h1>Changelog:</h1><br>
 	<h3>v1.155 - 2024/2/1</h3><br>
-		- Added 5 milestones
-		- Added 1 meta-milestone
-		- Added 1 extra-milestone
-		- Added 1 super-energy upgrade
-		- Added a new layer with 1 upgrade
+		- Added 5 milestones<br>
+		- Added 1 meta-milestone<br>
+		- Added 1 extra-milestone<br>
+		- Added 1 super-energy upgrade<br>
+		- Added a new layer with 1 upgrade<br>
 	<h3>v1.150.1 - 2024/1/29</h3><br>
-		- Ported The Milestone Tree to The Modding Tree 2.6.6.2`;
+		- Ported The Milestone Tree to The Modding Tree 2.6.6.2<br>`;
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
