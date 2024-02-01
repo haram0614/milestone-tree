@@ -1,6 +1,6 @@
 modInfo.name="里程碑之树";
 VERSION.name="";
-VERSION.cnum="2";
+VERSION.cnum="3";
 VERSION.withoutName="v"+VERSION.num+"c"+VERSION.cnum;
 VERSION.withName="v"+VERSION.num+"c"+VERSION.cnum+"（中文版）";
 
@@ -16,6 +16,12 @@ displayThings = [
 ]
 
 changelog = `<h1>更新日志：</h1><br>
+	<h3>v1.155 - 2024/2/1</h3><br>
+		- 增加了5个里程碑
+		- 增加了1个元里程碑
+		- 增加了1个额外里程碑
+		- 增加了1个超级能量升级
+		- 增加了1个层级，带有1个升级
 	<h3>v1.150.1c2 - 2024/1/30</h3><br>
 		- 中文版更新<br>
 	<h3>v1.150.1c1 - 2024/1/29</h3><br>

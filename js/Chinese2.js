@@ -56,6 +56,7 @@ var cnItems = {
 	'E: Collect Prestige Energy': 'E：收集声望能量',
 	'Shift+E: Collect Super Energy': 'Shift+E：收集超级能量',
 	'Ctrl+M: Get Extra-Milestone': 'Ctrl+M：获得额外里程碑',
+	'Ctrl+E: Collect Hyper Energy': 'Shift+E：收集终极能量',
 	
 	'Main': '主要',
 	'Special Transcend Points': '超越挑战点数',
