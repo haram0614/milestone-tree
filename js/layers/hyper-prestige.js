@@ -23,6 +23,8 @@ addLayer("hp", {
         mult = layers.hb.effect()
 		if(hasUpgrade("t",14))mult=mult.mul(1.005);
 		if(hasUpgrade("t",34))mult=mult.mul(1.005);
+		if(player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
+		mult=mult.mul(layers.t.getSpecialEffect(41));
         return mult
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
@@ -184,6 +186,15 @@ addLayer("hp", {
 			},
             unlocked() { return player.m.points.gte(142)}, // The upgrade is only visible when this is true
         },
+		43: {
+			title: "Hyper-Prestige Upgrade 43",
+            description: "First Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
+            cost(){
+				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
+				return new Decimal("e1e10");
+			},
+            unlocked() { return player.m.points.gte(142)}, // The upgrade is only visible when this is true
+        },
 	},
 	
 	buyables: {
@@ -204,6 +215,7 @@ addLayer("hp", {
 				if(a.gte(3)){
 					let p=1.5;
 					if(hasUpgrade("hp",41))p-=0.1;
+					if(hasUpgrade("hp",43))p-=0.1;
 					a=a.div(3).pow(p).mul(3);
 				}
 				return new Decimal("1e8150").mul(Decimal.pow("1e500",a));
@@ -280,6 +292,7 @@ addLayer("hp", {
 			if(target.gte(3)){
 				let p=1.5;
 				if(hasUpgrade("hp",41))p-=0.1;
+				if(hasUpgrade("hp",43))p-=0.1;
 				target=target.div(3).pow(1/p).mul(3);
 			}
 			target=target.add(1).floor();

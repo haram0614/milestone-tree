@@ -32,7 +32,7 @@ addLayer("sp", {
 		if(player.m.points.gte(27))mult=mult.mul(tmp.ap.challenges[12].rewardEffect);
 		if(hasUpgrade("t",13))mult=mult.mul(1.005);
 		if(hasUpgrade("t",33))mult=mult.mul(1.005);
-		if(player.t.activeChallenge==31)mult=mult.mul(tmp.t.dilationEffect);
+		if(player.t.activeChallenge==31||player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(31));
         return mult
     },

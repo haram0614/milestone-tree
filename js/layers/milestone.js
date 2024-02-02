@@ -1285,6 +1285,46 @@ addLayer("m", {
             unlocked() {return player[this.layer].best.gte(154)},
             done() {return player[this.layer].best.gte(155)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				return "The 105th milestone's effect ^1.03";
+			},
+        },
+		{
+			requirementDescription: "156th Milestone",
+            unlocked() {return player[this.layer].best.gte(155)},
+            done() {return player[this.layer].best.gte(156)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a new prestige buyable."
+			},
+        },
+		{
+			requirementDescription: "157th Milestone",
+            unlocked() {return player[this.layer].best.gte(156)},
+            done() {return player[this.layer].best.gte(157)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Autogain AP challenge 4 completions based on your points and milestones."
+			},
+        },
+		{
+			requirementDescription: "158th Milestone",
+            unlocked() {return player[this.layer].best.gte(157)},
+            done() {return player[this.layer].best.gte(158)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a Transcend challenge."
+			},
+        },
+		{
+			requirementDescription: "159th Milestone",
+            unlocked() {return player[this.layer].best.gte(158)},
+            done() {return player[this.layer].best.gte(159)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "The 105th milestone's effect ^1.103";
+			},
+        },
+		{
+			requirementDescription: "160th Milestone",
+            unlocked() {return player[this.layer].best.gte(159)},
+            done() {return player[this.layer].best.gte(160)}, // Used to determine when to give the milestone
+            effectDescription: function(){
 				return "Current endgame"
 			},
         },
@@ -1367,7 +1407,7 @@ addLayer("m", {
 		if(player.mm.best.gte(20)){
 			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(150).add(1));
 		}
-	b=b.mul(Decimal.pow(1.05,player.ap.challenges[21]+player.ap.challenges[22]+player.t.challenges[11]+player.t.challenges[21]+player.t.challenges[31]));
+	b=b.mul(Decimal.pow(1.05,player.ap.challenges[21]+player.ap.challenges[22]+player.t.challenges[11]+player.t.challenges[21]+player.t.challenges[31]+player.t.challenges[41]));
 		if(player.ap.challenges[21]>=1)b=b.mul(1.1/1.05);
 		if(player.ap.challenges[22]>=1)b=b.mul(1.06/1.05);
 		if(player.ap.challenges[21]>=5)b=b.mul(1.1/1.05);
@@ -1448,6 +1488,8 @@ addLayer("m", {
 		var p=player.m.best.div(100);
 		if(player.m.best.gte(133))p=p.pow(1.2);
 		if(player.m.best.gte(143))p=p.pow(1.1);
+		if(player.m.best.gte(155))p=p.pow(1.03);
+		if(player.m.best.gte(159))p=p.pow(1.103);
 		return p;
 	},
     resetDescription: "Get ",

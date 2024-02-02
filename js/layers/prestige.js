@@ -29,13 +29,14 @@ addLayer("p", {
 		if(hasUpgrade("ap",12))mult=mult.mul(upgradeEffect("ap",12));
 		mult=mult.mul(tmp.sp.buyables[11].effect);
 		mult=mult.mul(tmp.hp.buyables[11].effect);
+		mult=mult.mul(tmp.p.buyables[12].effect);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
 		let m=layers.pb.effect();
 		if(hasUpgrade("t",12))m=m.mul(1.005);
 		if(hasUpgrade("t",32))m=m.mul(1.005);
-		if(player.t.activeChallenge==21||player.t.activeChallenge==31)m=m.mul(tmp.t.dilationEffect);
+		if(player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)m=m.mul(tmp.t.dilationEffect);
 		m=m.mul(layers.t.getSpecialEffect(21));
 		return m;
     },
@@ -226,7 +227,7 @@ addLayer("p", {
 	},
 	buyables: {
 		rows: 1,
-		cols: 1,
+		cols: 2,
 		11:{
 			title(){
 				return "Softcap Delayer";
@@ -261,6 +262,40 @@ addLayer("p", {
 				  return player.m.points.gte(123);
 			  }
 		},
+		12:{
+			title(){
+				return "Prestige Multiplier";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"Prestige Point is multiplied by "+format(data.effect)+"<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Prestige points";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				if(a.gte(3)){
+					let p=1.3;
+					a=a.div(3).pow(p).mul(3);
+				}
+				return Decimal.pow("1e100000",a);
+			},
+			canAfford() {
+                   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+               },
+			  effect(){
+				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  let eff=new Decimal("1e10000").pow(player[this.layer].buyables[this.id]);
+				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.m.points.gte(156);
+			  }
+		},
 	},
 	branches: ["m"],
 	passiveGeneration(){
@@ -291,6 +326,17 @@ addLayer("p", {
 			target=target.add(1).floor();
 			if(target.gt(player.p.buyables[11])){
 				player.p.buyables[11]=target;
+			}
+		}
+		if(player.m.points.gte(156)){
+			var target=player.p.points.add(1).log("1e100000");
+			if(target.gte(3)){
+				let p=1.3;
+				target=target.div(3).pow(1/p).mul(3);
+			}
+			target=target.add(1).floor();
+			if(target.gt(player.p.buyables[12])){
+				player.p.buyables[12]=target;
 			}
 		}
 	}

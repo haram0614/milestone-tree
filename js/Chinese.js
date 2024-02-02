@@ -1,6 +1,6 @@
 modInfo.name="里程碑之树";
 VERSION.name="";
-VERSION.cnum="4";
+VERSION.cnum="0";
 VERSION.withoutName="v"+VERSION.num+"c"+VERSION.cnum;
 VERSION.withName="v"+VERSION.num+"c"+VERSION.cnum+"（中文版）";
 
@@ -16,16 +16,21 @@ displayThings = [
 ]
 
 changelog = `<h1>更新日志：</h1><br>
+	<h3>v1.160 - 2024/2/2</h3><br>
+		- 增加了5个里程碑<br>
+		- 增加了1个元里程碑<br>
+	- 增加了1个声望可重复购买<br>
+		- 增加了1个第三级声望升级<br>
+		- 增加了1个超级能量升级<br>
+		- 增加了1个终极能量升级<br>
+		- 增加了1个超越升级<br>
+		- 增加了1个超越挑战<br>
 	<h3>v1.155 - 2024/2/1</h3><br>
 		- 增加了5个里程碑<br>
 		- 增加了1个元里程碑<br>
 		- 增加了1个额外里程碑<br>
 		- 增加了1个超级能量升级<br>
 		- 增加了1个层级，带有1个升级<br>
-	<h3>v1.150.1c2 - 2024/1/30</h3><br>
-		- 中文版更新<br>
-	<h3>v1.150.1c1 - 2024/1/29</h3><br>
-		- 中文版更新<br>
 	<h3>v1.150.1 - 2024/1/29</h3><br>
 		- 模组树版本更新至2.6.6.2<br>`;
 
@@ -348,7 +353,12 @@ layers.m.milestones[151-1].effectDescription="每秒额外获得重置可以获�
 layers.m.milestones[152-1].effectDescription="原子级挑战2,3,5,6的目标减少了。";
 layers.m.milestones[153-1].effectDescription="解锁4个新的超越升级。";
 layers.m.milestones[154-1].effectDescription="每秒额外获得重置可以获得的超越点数的100%，总计300%。";
-layers.m.milestones[155-1].effectDescription="当前残局";
+layers.m.milestones[155-1].effectDescription="第105个里程碑的效果变为原来的1.03次方。";
+layers.m.milestones[156-1].effectDescription="解锁一个声望可重复购买项。";
+layers.m.milestones[157-1].effectDescription="基于点数和里程碑自动获得第四个原子级挑战的完成数。";
+layers.m.milestones[158-1].effectDescription="解锁一个超越挑战。";
+layers.m.milestones[159-1].effectDescription="第105个里程碑的效果变为原来的1.103次方。";
+layers.m.milestones[160-1].effectDescription="当前残局";
 
 layers.m.tabFormat[3][1]=function(){
 	return "里程碑成本快速增加在"+format(tmp.m.getScalingStart,4)+"开始";
@@ -383,7 +393,7 @@ layers.mm.milestones[25-1].effectDescription=function(){
 	return "基于你的元里程碑数量，超越点数的获得变得更好。当前："+format(tmp.mm.meta25Effect)+"x";
 }
 layers.mm.milestones[30-1].effectDescription="第25个元里程碑的效果变为原来的平方。解锁一个新层级。";
-layers.mm.milestones[31-1].effectDescription=layers.mm.milestones[32-1].effectDescription="声望能量的获得变为原来的2倍。";
+layers.mm.milestones[31-1].effectDescription=layers.mm.milestones[32-1].effectDescription=layers.mm.milestones[33-1].effectDescription="声望能量的获得变为原来的2倍。";
 
 
 layers.em.resource="额外里程碑";
@@ -461,6 +471,13 @@ layers.p.buyables[11].display=function(){
 	let data = tmp[this.layer].buyables[this.id];
 	return "等级："+format(player[this.layer].buyables[this.id])+"<br>"+
 	"第一个里程碑的软上限开始得更迟。当前："+format(data.effect)+"x<br>"+
+	"花费："+format(data.cost)+"声望点数";
+};
+layers.p.buyables[12].title="声望点数倍数";
+layers.p.buyables[12].display=function(){
+	let data = tmp[this.layer].buyables[this.id];
+	return "等级："+format(player[this.layer].buyables[this.id])+"<br>"+
+	"声望点数的获得乘以"+format(data.effect)+"。<br>"+
 	"花费："+format(data.cost)+"声望点数";
 };
 
@@ -551,6 +568,7 @@ layers.hp.upgrades[32].description="第一个第三级声望可重复购买项�
 layers.hp.upgrades[23].effectDisplay=function(){return format(this.effect(),4)+"x";}
 layers.hp.upgrades[41].description="第一个第三级声望可重复购买项更便宜，你需要在原子级挑战6里面购买这个升级。";
 layers.hp.upgrades[42].description="第二个第三级声望可重复购买项更便宜，你需要在原子级挑战6里面购买这个升级。";
+layers.hp.upgrades[43].description="第一个第三级声望可重复购买项更便宜，你需要在原子级挑战6里面购买这个升级。";
 
 layers.hp.buyables[11].title="声望点数倍数";
 layers.hp.buyables[11].display=function(){
@@ -661,6 +679,7 @@ layers.t.upgrades[72].description="基于你的超越点数，元里程碑变得
 layers.t.upgrades[73].description="基于你的原子级挑战完成数，第一个里程碑的软上限开始得更迟。";
 layers.t.upgrades[74].description="超越升级72和73的效果变得更好。";
 layers.t.upgrades[81].description="超越升级52的效果变得更好。";
+layers.t.upgrades[82].description="超越升级73的效果变得更好。";
 
 layers.t.challenges[11].name="点数膨胀挑战";
 layers.t.challenges[12].name="软上限挑战";
@@ -668,6 +687,7 @@ layers.t.challenges[21].name="声望膨胀挑战";
 layers.t.challenges[22].name="硬上限挑战";
 layers.t.challenges[31].name="超级膨胀挑战";
 layers.t.challenges[32].name="声望硬上限挑战";
+layers.t.challenges[41].name="终极膨胀挑战";
 layers.t.challenges[11].challengeDescription=function(){
 	return "第一个里程碑的效果变为原来的"+format(tmp.t.dilationEffect)+"次方。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
 }
@@ -686,13 +706,17 @@ layers.t.challenges[31].challengeDescription=function(){
 layers.t.challenges[32].challengeDescription=function(){
 	return "在“硬上限挑战”的基础上，声望点数的获得受第一个里程碑的软上限影响。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
 }
+layers.t.challenges[41].challengeDescription=function(){
+	return "在“超级膨胀挑战”的基础上，第三级声望点数的获得变为原来的"+format(tmp.t.dilationEffect)+"次方。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
+}
 layers.t.challenges[11].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[12].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[21].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[22].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[31].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[32].currencyDisplayName="原子级挑战完成数";
-layers.t.challenges[11].rewardDescription=layers.t.challenges[21].rewardDescription=layers.t.challenges[31].rewardDescription="第三个里程碑的效果变得更好。";
+layers.t.challenges[41].currencyDisplayName="原子级挑战完成数";
+layers.t.challenges[11].rewardDescription=layers.t.challenges[21].rewardDescription=layers.t.challenges[31].rewardDescription=layers.t.challenges[41].rewardDescription="第三个里程碑的效果变得更好。";
 layers.t.challenges[12].rewardDescription=function(){ 
 	if(player.m.points.lt(112))return "第一个里程碑的软上限开始得更迟。当你在这个挑战里面时这个奖励无效。";
 	else return "第一个里程碑的软上限开始得更迟。";
@@ -718,6 +742,7 @@ layers.t.tabFormat["Special Transcend Points"].content=[
 				["display-text",function(){return "你有"+format(player.t.specialPoints[22])+layers.t.getSpecialTPName(22)+"，第1个里程碑的软上限延迟"+format(layers.t.getSpecialEffect(22),4)+"倍出现"}],
 				["display-text",function(){return "你有"+format(player.t.specialPoints[31])+layers.t.getSpecialTPName(31)+"，超级声望点数变为原来的"+format(layers.t.getSpecialEffect(31),4)+"次方"}],
 				["display-text",function(){return "你有"+format(player.t.specialPoints[32])+layers.t.getSpecialTPName(32)}],
+				["display-text",function(){return "你有"+format(player.t.specialPoints[41])+layers.t.getSpecialTPName(41)+"，第三级声望点数变为原来的"+format(layers.t.getSpecialEffect(41),4)+"次方"}],
 			],
 layers.t.getSpecialTPName=function(a){
 	return layers.t.challenges[a]?.name+"点数";
@@ -771,6 +796,8 @@ layers.se.upgrades[11].description="基于你的超级能量，第一个里程�
 layers.se.upgrades[12].description="基于你的超级能量，里程碑成本快速增加的效果变得更慢。";
 layers.se.upgrades[13].description="超级能量升级11的效果变得更好。";
 layers.se.upgrades[14].description="超级能量升级12的效果变得更好。";
+layers.se.upgrades[21].description="超级能量升级11的效果变得更好。";
+layers.se.upgrades[22].description="基于你的超级能量，超越点数的获得变得更好。";
 layers.se.tabFormat[2][1]=function(){
 	let peroom=new Decimal(10).log(tmp.se.base);
 	let power=new Decimal(1).div(tmp.se.exponent);
@@ -788,6 +815,8 @@ for(i in layers.he.upgrades){
 }
 layers.he.upgrades[11].description="基于你的终极能量，第一个里程碑的软上限开始得更迟。";
 layers.he.upgrades[12].description="基于你的终极能量，里程碑成本快速增加的效果变得更慢。";
+layers.he.upgrades[13].description="终极能量升级11的效果变得更好。";
+layers.he.upgrades[14].description="终极能量升级12的效果变得更好。";
 layers.he.tabFormat[2][1]=function(){
 	let peroom=new Decimal(10).log(tmp.se.base);
 	let power=new Decimal(1).div(tmp.se.exponent);

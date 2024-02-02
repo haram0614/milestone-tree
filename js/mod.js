@@ -30,10 +30,19 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.155"
+	num: "1.160"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.160 - 2024/2/2</h3><br>
+		- Added 5 milestones<br>
+		- Added 1 meta-milestone<br>
+		- Added 1 prestige buyable<br>
+		- Added 1 hyper-prestige upgrade<br>
+		- Added 2 super-energy upgrades<br>
+		- Added 2 hyper-energy upgrades<br>
+		- Added 1 transcend upgrade<br>
+		- Added 1 transcend challenge<br>
 	<h3>v1.155 - 2024/2/1</h3><br>
 		- Added 5 milestones<br>
 		- Added 1 meta-milestone<br>
@@ -88,7 +97,7 @@ function getPointGenBeforeSoftcap() {
 	if(hasUpgrade("hp",11))b=b.mul(upgradeEffect("hp",11));
 	if(hasUpgrade("hp",12))b=b.mul(upgradeEffect("hp",12));
 	if(hasUpgrade("ap",11))b=b.mul(upgradeEffect("ap",11));
-	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31)b=b.pow(tmp.t.dilationEffect);
+	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)b=b.pow(tmp.t.dilationEffect);
 	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.points.gte(122)?player.m.points:100);
 	return b
 }

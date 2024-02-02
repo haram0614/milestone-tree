@@ -451,5 +451,8 @@ addLayer("ap", {
 			if(player.m.points.gte(149)){
 				player.ap.challenges[32]=Math.max(player.ap.challenges[32],layers.ap.challenges[32].completionsAfter120());
 			}
+			if(player.m.points.gte(157)){
+				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.best).add(10).log10().div(600).log(1.035).toNumber());
+			}
 		}
 })

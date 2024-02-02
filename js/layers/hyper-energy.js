@@ -47,6 +47,7 @@ addLayer("he", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.he.points.add(1).log10().div(90);
+				if(hasUpgrade("he",13))b=b.mul(2);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect
@@ -58,9 +59,22 @@ addLayer("he", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.he.points.add(1).log10().div(500);
+				if(hasUpgrade("he",14))b=b.mul(2);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
+        },
+		13: {
+			title: "Hyper Energy Upgrade 13",
+            description: "Hyper Energy Upgrade 11 is boosted.",
+            cost: new Decimal(4.42e10),
+            unlocked() { return true}, // The upgrade is only visible when this is true
+        },
+		14: {
+			title: "Hyper Energy Upgrade 14",
+            description: "Hyper Energy Upgrade 12 is boosted.",
+            cost: new Decimal(7.66e10),
+            unlocked() { return true}, // The upgrade is only visible when this is true
         },
 	},
 	

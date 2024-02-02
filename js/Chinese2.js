@@ -42,6 +42,8 @@ var cnItems = {
     'OFF': '关闭',
     'NONE': '不显示',
     'Changelog': '更新日志',
+    'Single-Tab Mode: AUTO': '单标签页模式：自动',
+    'Single-Tab Mode: ALWAYS': '单标签页模式：总是启用',
 	
 	'Hotkeys': '热键',
 	'M: Get Milestone': 'M：获得里程碑',
@@ -78,7 +80,7 @@ var cnPrefix = {
     "Show Milestones: ": "显示里程碑：",
     "Completed Challenges: ": "完成的挑战：",
     "High-Quality Tree: ": "高画质的树：",
-    "": "",
+    "Shift-Click to Toggle Tooltips: ": "Shift+点击以切换工具提示：",
     "": "",
     "": "",
     "": "",
