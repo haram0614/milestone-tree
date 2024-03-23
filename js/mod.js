@@ -22,8 +22,8 @@ let modInfo = {
 	
 	"tree.js"],
 
-	discordName: "",
-	discordLink: "",
+	discordName: "loader3229's Discord Server",
+	discordLink: "https://discord.gg/jztUReQ2vT",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
 	offlineLimit: 24,  // In hours
 }
