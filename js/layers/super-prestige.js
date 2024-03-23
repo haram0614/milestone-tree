@@ -25,6 +25,7 @@ addLayer("sp", {
 		if(hasUpgrade("hp",22))mult=mult.mul(upgradeEffect("hp",22));
 		if(hasUpgrade("ap",13))mult=mult.mul(upgradeEffect("ap",13));
 		mult=mult.mul(tmp.hp.buyables[12].effect);
+		if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return mult.mul(2)}
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

@@ -17,6 +17,7 @@ addLayer("ap", {
         mult = new Decimal(1)
 		if(hasUpgrade("ap",21))mult=mult.mul(upgradeEffect("ap",21));
 		if(hasUpgrade("t",62))mult=mult.mul(upgradeEffect("t",62));
+		if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return mult.mul(2)}
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses

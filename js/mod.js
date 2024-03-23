@@ -80,6 +80,7 @@ function getPointGen() {
 			sc=sc.mul(20);
 		}
 	}
+	if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return b.mul(10)}
 	return b
 }
 
