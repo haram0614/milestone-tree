@@ -201,7 +201,9 @@
       this.layer = Number.NaN;
       this.mag = Number.NaN;
 
-      if (value instanceof Decimal) {
+      if (value === Number.POSITIVE_INFINITY) {
+        this.fromDecimal(Decimal.dInf);
+      } else if (value instanceof Decimal) {
         this.fromDecimal(value);
       } else if (typeof value === "number") {
         this.fromNumber(value);
@@ -1131,6 +1133,10 @@
     };
 
     Decimal.prototype.fromValue = function (value) {
+      if (value === Number.POSITIVE_INFINITY) {
+        return this.fromDecimal(Decimal.dInf);
+      }
+	  
       if (value instanceof Decimal) {
         return this.fromDecimal(value);
       }
