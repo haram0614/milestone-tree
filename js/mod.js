@@ -17,6 +17,7 @@ let modInfo = {
 	"layers/super-energy.js",
 	"layers/extra-milestone.js",
 	"layers/hyper-energy.js",
+	"layers/upgraded-milestone.js",
 	
 	"checkdomain.js",
 	
@@ -30,10 +31,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.160"
+	num: "1.165"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.165 - 2024/5/20</h3><br>
+		- Added 5 milestones<br>
+		- Added 1 extra-milestone<br>
+		- Added 1 hyper-prestige upgrade<br>
+		- Added 1 super-energy upgrade<br>
+		- Added 1 transcend upgrade<br>
 	<h3>v1.160 - 2024/2/2</h3><br>
 		- Added 5 milestones<br>
 		- Added 1 meta-milestone<br>
@@ -98,6 +105,7 @@ function getPointGenBeforeSoftcap() {
 	if(hasUpgrade("hp",11))b=b.mul(upgradeEffect("hp",11));
 	if(hasUpgrade("hp",12))b=b.mul(upgradeEffect("hp",12));
 	if(hasUpgrade("ap",11))b=b.mul(upgradeEffect("ap",11));
+	if(player.um.best.gte(2))b=b.pow(1.01);
 	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)b=b.pow(tmp.t.dilationEffect);
 	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.points.gte(122)?player.m.points:100);
 	return b
@@ -126,6 +134,8 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("se",11))sc=sc.pow(upgradeEffect("se",11));
 	sc=sc.pow(layers.t.getSpecialEffect(22));
 	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
+	if(player.um.best.gte(1))sc=sc.pow(1.1);
+	sc=sc.pow(layers.t.getSpecialEffect(32));
 	return sc;
 }
 
@@ -145,7 +155,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.m.points.gte(150);
+	return player.m.points.gte(165);
 }
 
 

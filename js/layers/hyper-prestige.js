@@ -196,6 +196,15 @@ addLayer("hp", {
 			},
             unlocked() { return player.m.points.gte(142)}, // The upgrade is only visible when this is true
         },
+		44: {
+			title: "Hyper-Prestige Upgrade 44",
+            description: "Second Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
+            cost(){
+				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
+				return new Decimal("e361e8");
+			},
+            unlocked() { return player.m.points.gte(142)}, // The upgrade is only visible when this is true
+        },
 	},
 	
 	buyables: {
@@ -254,6 +263,7 @@ addLayer("hp", {
 				if(a.gte(3)){
 					let p=1.5;
 					if(hasUpgrade("hp",42))p-=0.25;
+					if(hasUpgrade("hp",44))p-=0.05;
 					a=a.div(3).pow(p).mul(3);
 				}
 				return new Decimal("1e690000").mul(Decimal.pow("1e10000",a));
@@ -306,6 +316,7 @@ addLayer("hp", {
 			if(target.gte(3)){
 				let p=1.5;
 				if(hasUpgrade("hp",42))p-=0.25;
+					if(hasUpgrade("hp",44))p-=0.05;
 				target=target.div(3).pow(1/p).mul(3);
 			}
 			target=target.add(1).floor();

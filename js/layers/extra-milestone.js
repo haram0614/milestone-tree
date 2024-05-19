@@ -59,6 +59,14 @@ addLayer("em", {
 				return "Unlock new Super Energy upgrades."
 			},
         },
+		{
+			requirementDescription: "4th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(3)},
+            done() {return player[this.layer].best.gte(4)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "1.1x Transcend Point gain"
+			},
+        },
 	],
 	branches: ["mm"],
     resetDescription: "Get ",

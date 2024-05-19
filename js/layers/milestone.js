@@ -1,83 +1,31 @@
-addLayer("m", {
-    name: "milestone", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "M", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-    startData() { return {
-        unlocked: true,
-		points: new Decimal(0),
-    }},
-    color: "#793784",
-    requires(){
-		//if(player.m.points.gte(99))return new Decimal(Infinity);
-		return new Decimal(10);
-	},
-    resource: "milestones", // Name of prestige currency
-    baseResource: "points", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
-    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
-        return mult
-    },
-    gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
-    },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
-	base: new Decimal(1.5),
-	exponent: function(){
-		var base=new Decimal(2);
-		if(player.m.points.lte(4))base=base.sub(0.3);
-		else if(player.m.best.gte(150))base=base.sub(0.05);
-		var firstScaling=player.m.points.sub(tmp.m.getScalingStart).max(0);
-		if(tmp.m.getScalingStart.lte(25)){
-			if(firstScaling.gte(Decimal.sub(25,tmp.m.getScalingStart))){
-				firstScaling=Decimal.pow(1.03,firstScaling.sub(Decimal.sub(25,tmp.m.getScalingStart))).sub(1).mul(100).add(Decimal.sub(25,tmp.m.getScalingStart));
-			}
-			firstScaling=firstScaling.div(100);
-		}else{
-			firstScaling=Decimal.pow(1.03,firstScaling).sub(1);
-		}
-		if(hasUpgrade("p",31))firstScaling=firstScaling.div(upgradeEffect("p",31));
-		if(hasUpgrade("sp",31))firstScaling=firstScaling.div(upgradeEffect("sp",31));
-		if(hasUpgrade("hp",23))firstScaling=firstScaling.div(upgradeEffect("hp",23));
-		if(hasUpgrade("ap",23))firstScaling=firstScaling.div(upgradeEffect("ap",23));
-		if(hasUpgrade("pe",12))firstScaling=firstScaling.div(upgradeEffect("pe",12));
-		if(hasUpgrade("se",12))firstScaling=firstScaling.div(upgradeEffect("se",12));
-		if(hasUpgrade("he",12))firstScaling=firstScaling.div(upgradeEffect("he",12));
-		return base.add(firstScaling);
-	},
-    getScalingStart(){
-        let start=new Decimal(14);
-		if(hasUpgrade("t",52))start=start.add(upgradeEffect("t",52));
-		return start;
-    },
-    hotkeys: [
-        {key: "m", description: "M: Get Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
-    layerShown(){return true},
-	resetsNothing(){return true},
-	autoPrestige(){return player.mm.points.gte(1)},
-	milestones: [
+var MILESTONES=[
 		{
 			requirementDescription: "1st Milestone",
             unlocked() {return player[this.layer].best.gte(0)},
             done() {return player[this.layer].best.gte(1)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Gain "+format(new Decimal(1).max(getPointGen()))+" points per second."
+				let ret="Gain "+format(new Decimal(1).max(getPointGen()))+" points per second"
+				if(player.um.best.gte(1))ret+=" and this milestone's effect softcap starts later.";
+				else ret+=".";
+				return ret;
 			},
         },
 		{
 			requirementDescription: "2nd Milestone",
             unlocked() {return player[this.layer].best.gte(1)},
             done() {return player[this.layer].best.gte(2)}, // Used to determine when to give the milestone
-            effectDescription: "Triple the first Milestone's effect."
+            effectDescription:  function(){
+				if(player.um.best.gte(2))return "3x, ^1.01 First Milestone's effect. (Upgraded)";
+				return "Triple the first Milestone's effect.";
+			},
         },
 		{
 			requirementDescription: "3rd Milestone",
             unlocked() {return player[this.layer].best.gte(2)},
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "First Milestone's effect is boosted by your points. Currently: "+format(tmp.m.milestone3Effect)+"x";
+				let ret="First Milestone's effect is boosted by your points. Currently: "+format(tmp.m.milestone3Effect)+"x";
+				if(player.um.best.gte(3))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -85,7 +33,8 @@ addLayer("m", {
             unlocked() {return player[this.layer].best.gte(3)},
             done() {return player[this.layer].best.gte(4)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Third Milestone's effect is better based on your milestones. Currently: 3rd Milestone's base effect base +"+format(tmp.m.milestone4Effect);
+				let ret="Third Milestone's effect is better based on your milestones. Currently: 3rd Milestone's base effect base +"+format(tmp.m.milestone4Effect);
+				if(player.um.best.gte(4))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -93,6 +42,7 @@ addLayer("m", {
             unlocked() {return player[this.layer].best.gte(4)},
             done() {return player[this.layer].best.gte(5)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(5))return "Unlock Prestige, and Prestige Point gain ^1.01. (Upgraded)";
 				return "Unlock the next layer. Milestones don't reset on all resets.";
 			},
         },
@@ -1325,11 +1275,123 @@ addLayer("m", {
             unlocked() {return player[this.layer].best.gte(159)},
             done() {return player[this.layer].best.gte(160)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Current endgame"
+				return "Unlock a new layer."
 			},
         },
-	],
+		{
+			requirementDescription: "161st Milestone",
+            unlocked() {return player[this.layer].best.gte(160)},
+            done() {return player[this.layer].best.gte(161)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Gain additional 200% of Transcend Point gain per second (total 500%)."
+			},
+        },
+		{
+			requirementDescription: "162nd Milestone",
+            unlocked() {return player[this.layer].best.gte(161)},
+            done() {return player[this.layer].best.gte(162)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "First Prestige buyable is better."
+			},
+        },
+		{
+			requirementDescription: "163rd Milestone",
+            unlocked() {return player[this.layer].best.gte(162)},
+            done() {return player[this.layer].best.gte(163)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Transcend's requirement is 1e510 instead of 1e640 (slightly increase Transcend Point gain).";
+			},
+        },
+		{
+			requirementDescription: "164th Milestone",
+            unlocked() {return player[this.layer].best.gte(163)},
+            done() {return player[this.layer].best.gte(164)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Gain additional 200% of Transcend Point gain per second (total 700%)."
+			},
+        },
+		{
+			requirementDescription: "165th Milestone",
+            unlocked() {return player[this.layer].best.gte(164)},
+            done() {return player[this.layer].best.gte(165)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Current Endgame"
+			},
+        },
+	];
+
+var st=function(){
+	if(player.um.best.gt(this.id)){
+		return {backgroundColor: "#cccc00"};
+	}
+	return {};
+}
+for(var milestoneId in MILESTONES){
+	MILESTONES[milestoneId].style=st;
+}
+
+addLayer("m", {
+    name: "milestone", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "M", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+    }},
+    color: "#793784",
+    requires(){
+		//if(player.m.points.gte(99))return new Decimal(Infinity);
+		return new Decimal(10);
+	},
+    resource: "milestones", // Name of prestige currency
+    baseResource: "points", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 0, // Row the layer is in on the tree (0 is the first row)
+	base: new Decimal(1.5),
+	exponent: function(){
+		var base=new Decimal(2);
+		if(player.m.points.lte(4))base=base.sub(0.3);
+		else if(player.m.best.gte(150))base=base.sub(0.05);
+		var firstScaling=player.m.points.sub(tmp.m.getScalingStart).max(0);
+		if(tmp.m.getScalingStart.lte(25)){
+			if(firstScaling.gte(Decimal.sub(25,tmp.m.getScalingStart))){
+				firstScaling=Decimal.pow(1.03,firstScaling.sub(Decimal.sub(25,tmp.m.getScalingStart))).sub(1).mul(100).add(Decimal.sub(25,tmp.m.getScalingStart));
+			}
+			firstScaling=firstScaling.div(100);
+		}else{
+			firstScaling=Decimal.pow(1.03,firstScaling).sub(1);
+		}
+		if(hasUpgrade("p",31))firstScaling=firstScaling.div(upgradeEffect("p",31));
+		if(hasUpgrade("sp",31))firstScaling=firstScaling.div(upgradeEffect("sp",31));
+		if(hasUpgrade("hp",23))firstScaling=firstScaling.div(upgradeEffect("hp",23));
+		if(hasUpgrade("ap",23))firstScaling=firstScaling.div(upgradeEffect("ap",23));
+		if(hasUpgrade("pe",12))firstScaling=firstScaling.div(upgradeEffect("pe",12));
+		if(hasUpgrade("se",12))firstScaling=firstScaling.div(upgradeEffect("se",12));
+		if(hasUpgrade("he",12))firstScaling=firstScaling.div(upgradeEffect("he",12));
+		return base.add(firstScaling);
+	},
+    getScalingStart(){
+        let start=new Decimal(14);
+		if(hasUpgrade("t",52))start=start.add(upgradeEffect("t",52));
+		return start;
+    },
+    hotkeys: [
+        {key: "m", description: "M: Get Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return true},
+	resetsNothing(){return true},
+	autoPrestige(){return player.mm.points.gte(1)},
+	milestones: MILESTONES,
 	milestone4EffectExponent(){
+		if(player.um.best.gte(4))return 1;
 		if(player.m.best.gte(118))return 0.8;
 		if(player.m.best.gte(109))return 0.76;
 		if(player.m.best.gte(104))return 0.75;
@@ -1368,7 +1430,8 @@ addLayer("m", {
 		if(player.m.best.gte(86))m=m.pow(1.0005);
 		if(player.m.best.gte(91))m=m.pow(1.0005);
 		if(player.m.best.gte(96))m=m.pow(1.0005);
-		if(player.m.best.gte(107))m=m.pow(1.002);//0.91298476860857272607902105461039
+		if(player.m.best.gte(107))m=m.pow(1.002);
+		if(player.um.best.gte(3))m=m.pow(1.001);//0.913897753377181298805100075665
 		var b=new Decimal(2);
 		if(player.m.best.gte(4)){
 			b=b.add(layers.m.milestone4Effect());

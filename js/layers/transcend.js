@@ -92,6 +92,7 @@ addLayer("t", {
     }},
     color: "#FFFF00",
     requires1(){
+		if(player.m.points.gte(163))return new Decimal("1e510");
 		if(player.m.points.gte(137))return new Decimal("1e640");
 		return new Decimal("1e850");
 	},
@@ -121,28 +122,27 @@ addLayer("t", {
 		if(hasUpgrade("pe",21))mult=mult.mul(upgradeEffect("pe",21));
 		if(hasUpgrade("se",22))mult=mult.mul(upgradeEffect("se",22));
 		if(hasUpgrade("t",63))mult=mult.mul(upgradeEffect("t",63));
+		if(player.em.points.gte(4))mult=mult.mul(1.1);
+		if(player.m.points.gte(163))mult=mult.mul(1.1);
 		return mult;
 	},
 	getResetGain() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(0);
-		let amt=Decimal.log10(player.ap.points).sub(600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.points.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
 		amt=amt.floor();
-		//if(amt.gte(Decimal.sub(4e14,player.t.points)) && !player.t.activeChallenge){
-		//	amt=Decimal.sub(4e14,player.t.points).ceil().max(0);
-		//}
 		return amt;
 	},
 	getNextAt() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
-		let amt=Decimal.log10(player.ap.points).sub(600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.points.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
 		amt=amt.floor().plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(600));
+		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.points.gte(163)?500:600));
 		return amt;
 	},
 	getNextSPAt() {
 		if(!player.t.activeChallenge)return new Decimal(0);
 		let amt=player.t.specialPoints[player.t.activeChallenge].plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(600));
+		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.points.gte(163)?500:600));
 		if(amt.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
 		return amt;
 	},
@@ -269,6 +269,9 @@ addLayer("t", {
 				if(player.m.points.gte(128)){
 					p+=0.1;
 				}
+				if(hasUpgrade("t",83)){
+					p+=0.1;
+				}
 				let eff=player.t.points.add(10).log10().pow(p).mul(m);
 				return new Decimal(1).plus(eff);
 			},
@@ -363,6 +366,12 @@ addLayer("t", {
 			title: "Transcend Upgrade 82",
             description(){return "Transcend Upgrade 73 is better."},
             cost: new Decimal(3e19),
+			unlocked(){return player.m.points.gte(153);},
+        },
+		83: {
+			title: "Transcend Upgrade 83",
+            description(){return "Transcend Upgrade 54 is better."},
+            cost: new Decimal(1e21),
 			unlocked(){return player.m.points.gte(153);},
         },
 	},
@@ -516,9 +525,11 @@ addLayer("t", {
                 rewardDescription() { return "3rd milestone's effect is better." },
 		},
 	},
-	hardcap:new Decimal(1e20),
+	hardcap:new Decimal(6e21),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
+		if(player.m.points.gte(164))return 7;
+		if(player.m.points.gte(161))return 5;
 		if(player.m.points.gte(154))return 3;
 		if(player.m.points.gte(151))return 2;
 		if(player.m.points.gte(133))return 1;
@@ -560,7 +571,7 @@ addLayer("t", {
 				["display-text",function(){return "You have "+format(player.t.specialPoints[21])+" Prestige-Dilated Transcend Points, Prestige Point gain ^"+format(layers.t.getSpecialEffect(21),4)}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[22])+" Hardcapped Transcend Points, 1st Milestone's softcap starts "+format(layers.t.getSpecialEffect(22),4)+"x later"}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[31])+" Super-Dilated Transcend Points, Super-Prestige Point gain ^"+format(layers.t.getSpecialEffect(31),4)}],
-				["display-text",function(){return "You have "+format(player.t.specialPoints[32])+" Prestige-Hardcapped Transcend Points"}],
+				["display-text",function(){return "You have "+format(player.t.specialPoints[32])+" Prestige-Hardcapped Transcend Points, 1st Milestone's softcap starts "+format(layers.t.getSpecialEffect(32),4)+"x later"}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[41])+" Hyper-Dilated Transcend Points, Hyper-Prestige Point gain ^"+format(layers.t.getSpecialEffect(41),4)}],
 			],
 			unlocked(){return player.m.points.gte(130);}

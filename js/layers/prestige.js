@@ -39,6 +39,7 @@ addLayer("p", {
 		if(hasUpgrade("t",32))m=m.mul(1.005);
 		if(player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)m=m.mul(tmp.t.dilationEffect);
 		m=m.mul(layers.t.getSpecialEffect(21));
+		if(player.um.best.gte(5))m=m.mul(1.01);
 		return m;
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
@@ -255,6 +256,7 @@ addLayer("p", {
 				  let b=0.03;
 				  if(hasUpgrade("p",43))b+=0.011;
 				  if(hasUpgrade("p",44))b+=0.011;
+				  if(player.m.points.gte(162))b+=0.008;
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
 				  return eff;

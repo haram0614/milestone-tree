@@ -63,7 +63,11 @@ var cnItems = {
 	'Main': '主要',
 	'Special Transcend Points': '超越挑战点数',
 	
-	
+	'Afdian.net Donation': '用爱发电（捐赠）',
+	'Donate': '捐赠',
+	'Input Supporter Code To Gain Bonuses!': '输入捐赠码获取加成！捐赠码可以通过爱发电捐赠后联系我获取哦！',
+	'Buy me a coffee in Ko-Fi.com': '',
+	'Patreon Donation': '',
     //原样
     '': '',
     '': '',

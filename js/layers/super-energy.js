@@ -61,6 +61,7 @@ addLayer("se", {
 			effect() {
 				let b=player.se.points.add(1).log10().div(200);
 				if(hasUpgrade("se",14))b=b.mul(1.5);
+				if(hasUpgrade("se",23))b=b.mul(1.2);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
@@ -94,6 +95,12 @@ addLayer("se", {
                 return ret;
             },
             effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
+        },
+		23: {
+			title: "Super Energy Upgrade 23",
+            description: "Super Energy Upgrade 12 is boosted.",
+            cost: new Decimal(1e14),
+            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
         },
 	},
 	
