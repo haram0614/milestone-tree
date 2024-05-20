@@ -91,6 +91,7 @@ addLayer("se", {
             unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.1;
+				if(hasUpgrade("se",24))base+=0.05;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -100,6 +101,12 @@ addLayer("se", {
 			title: "Super Energy Upgrade 23",
             description: "Super Energy Upgrade 12 is boosted.",
             cost: new Decimal(1e14),
+            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
+        },
+		24: {
+			title: "Super Energy Upgrade 24",
+            description: "Super Energy Upgrade 22 is boosted.",
+            cost: new Decimal(3.86e14),
             unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
         },
 	},

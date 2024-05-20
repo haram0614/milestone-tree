@@ -66,6 +66,7 @@ addLayer("p", {
 				if(player.m.points.gte(74))base+=0.244;
 				if(player.m.points.gte(84))base+=0.156;
 				if(player.m.points.gte(94))base+=0.1;
+				if(player.um.points.gte(10))base+=0.9;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -86,6 +87,7 @@ addLayer("p", {
 				if(player.m.points.gte(74))base+=0.1;
 				if(player.m.points.gte(84))base+=0.1;
 				if(player.m.points.gte(94))base+=0.1;
+				if(player.um.points.gte(10))base+=0.1;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },

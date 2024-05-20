@@ -31,10 +31,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.165"
+	num: "1.170"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.170 - 2024/5/20</h3><br>
+		- Added 5 milestones<br>
+		- Added 1 meta-milestone<br>
+		- Added 1 extra-milestone<br>
+		- Added 1 hyper-prestige upgrade<br>
+		- Added 1 transcend upgrade<br>
 	<h3>v1.165 - 2024/5/20</h3><br>
 		- Added 5 milestones<br>
 		- Added 1 extra-milestone<br>
@@ -134,7 +140,7 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("se",11))sc=sc.pow(upgradeEffect("se",11));
 	sc=sc.pow(layers.t.getSpecialEffect(22));
 	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
-	if(player.um.best.gte(1))sc=sc.pow(1.1);
+	if(player.um.best.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.points.gte(165)?player.um.points.mul(0.01):0));
 	sc=sc.pow(layers.t.getSpecialEffect(32));
 	return sc;
 }
@@ -155,7 +161,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.m.points.gte(165);
+	return player.m.points.gte(MILESTONES.length);
 }
 
 

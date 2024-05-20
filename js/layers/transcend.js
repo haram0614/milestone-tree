@@ -302,6 +302,7 @@ addLayer("t", {
 			unlocked(){return player.m.points.gte(125);},
 			effect(){
 				let base=1.05;
+				if(hasUpgrade("t",84))base+=0.05;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
 			},
@@ -372,6 +373,12 @@ addLayer("t", {
 			title: "Transcend Upgrade 83",
             description(){return "Transcend Upgrade 54 is better."},
             cost: new Decimal(1e21),
+			unlocked(){return player.m.points.gte(153);},
+        },
+		84: {
+			title: "Transcend Upgrade 84",
+            description(){return "Transcend Upgrade 63 is better."},
+            cost: new Decimal(5e22),
 			unlocked(){return player.m.points.gte(153);},
         },
 	},
@@ -525,7 +532,7 @@ addLayer("t", {
                 rewardDescription() { return "3rd milestone's effect is better." },
 		},
 	},
-	hardcap:new Decimal(6e21),
+	hardcap:new Decimal(4e23),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
 		if(player.m.points.gte(164))return 7;

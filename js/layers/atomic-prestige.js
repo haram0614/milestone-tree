@@ -2,7 +2,7 @@
 addLayer("ap", {
     name: "atomic-prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "AP", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -183,6 +183,10 @@ addLayer("ap", {
                 rewardDescription() { return "Prestige Boost's effect is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.points.gte(166)){
+				if(p.lte("1e1000000"))return 0;
+				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
+			}
 			if(player.m.points.gte(130)){
 				if(p.lte("1e1000000"))return 0;
 				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
@@ -191,6 +195,7 @@ addLayer("ap", {
 			return p.log10().div(1400000).log(1.32).pow(1/1.3).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[11]){
+			if(player.m.points.gte(166))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
 			if(player.m.points.gte(130))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
 			return Decimal.pow(10,Decimal.pow(1.32,Decimal.pow(x,1.3)).mul(1400000));
 		},
@@ -225,6 +230,10 @@ addLayer("ap", {
                 rewardDescription() { return "Super-Prestige points is boosted based on this challenge's completions." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.points.gte(167)){
+				if(p.lte("1e1000000"))return 0;
+				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
+			}
 			if(player.m.points.gte(152)){
 				if(p.lte("1e1000000"))return 0;
 				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
@@ -237,6 +246,7 @@ addLayer("ap", {
 			return p.log10().div(1700000).log(1.32).pow(1/1.3).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[12]){
+			if(player.m.points.gte(167))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
 			if(player.m.points.gte(152))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
 			if(player.m.points.gte(130))return Decimal.pow(10,Decimal.pow(1.31,Decimal.pow(x,1.3)).mul(1500000));
 			return Decimal.pow(10,Decimal.pow(1.32,Decimal.pow(x,1.3)).mul(1700000));
@@ -261,6 +271,10 @@ addLayer("ap", {
                 rewardDescription() { return "3rd milestone's effect is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.points.gte(168)){
+				if(p.lte("1e1000000"))return 0;
+				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
+			}
 			if(player.m.points.gte(152)){
 				if(p.lte("1e1000000"))return 0;
 				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
@@ -273,6 +287,7 @@ addLayer("ap", {
 			return p.log10().div(1140000).log(1.3).pow(1/1.36).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[21]){
+			if(player.m.points.gte(168))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
 			if(player.m.points.gte(152))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
 			if(player.m.points.gte(130))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.34)).mul(1000000));
 			return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.36)).mul(1140000));
@@ -370,6 +385,10 @@ addLayer("ap", {
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.points.gte(169)){
+				if(p.lte("e1.15e9"))return 0;
+				return p.log10().div(1.15e9).log(1.2).pow(1/1.5).toNumber();
+			}
 			if(player.m.points.gte(152)){
 				if(p.lte("e5e9"))return 0;
 				return p.log10().div(5e9).log(1.2).pow(1/1.5).toNumber();
@@ -386,6 +405,7 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.points.gte(169))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1.15e9));
 			if(player.m.points.gte(152))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(5e9));
 			if(player.m.points.gte(141))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e10));
 			if(player.m.points.gte(130))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(2e10));

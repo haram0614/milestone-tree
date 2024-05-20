@@ -67,6 +67,14 @@ addLayer("em", {
 				return "1.1x Transcend Point gain"
 			},
         },
+		{
+			requirementDescription: "5th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(4)},
+            done() {return player[this.layer].best.gte(5)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Milestone Upgrades are cheaper.";
+			},
+        },
 	],
 	branches: ["mm"],
     resetDescription: "Get ",

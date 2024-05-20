@@ -51,7 +51,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(5)},
             done() {return player[this.layer].best.gte(6)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Point gain is boosted by your milestones. Currently: "+format(tmp.m.milestone6Effect)+"x";
+				let ret="Prestige Point gain is boosted by your milestones. Currently: "+format(tmp.m.milestone6Effect)+"x";
+				if(player.um.best.gte(6))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -59,6 +60,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(6)},
             done() {return player[this.layer].best.gte(7)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(7))return "6th Milestone's effect is squared. (Upgraded)";
 				return "6th Milestone's effect is powered by 1.5";
 			},
         },
@@ -67,6 +69,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(7)},
             done() {return player[this.layer].best.gte(8)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(8))return "6th Milestone's effect is squared. (Upgraded)";
 				return "6th Milestone's effect is powered by 1.2";
 			},
         },
@@ -75,6 +78,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(8)},
             done() {return player[this.layer].best.gte(9)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(9))return "6th Milestone's effect is squared. (Upgraded)";
 				return "6th Milestone's effect is powered by 1.1";
 			},
         },
@@ -1315,6 +1319,46 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(164)},
             done() {return player[this.layer].best.gte(165)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				return "1st Milestone's upgraded effect is better, based on your upgraded milestones."
+			},
+        },
+		{
+			requirementDescription: "166th Milestone",
+            unlocked() {return player[this.layer].best.gte(165)},
+            done() {return player[this.layer].best.gte(166)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce AP challenge 1 goal."
+			},
+        },
+		{
+			requirementDescription: "167th Milestone",
+            unlocked() {return player[this.layer].best.gte(166)},
+            done() {return player[this.layer].best.gte(167)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce AP challenge 2 goal."
+			},
+        },
+		{
+			requirementDescription: "168th Milestone",
+            unlocked() {return player[this.layer].best.gte(167)},
+            done() {return player[this.layer].best.gte(168)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce AP challenge 3 goal."
+			},
+        },
+		{
+			requirementDescription: "169th Milestone",
+            unlocked() {return player[this.layer].best.gte(168)},
+            done() {return player[this.layer].best.gte(169)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce AP challenge 6 goal."
+			},
+        },
+		{
+			requirementDescription: "170th Milestone",
+            unlocked() {return player[this.layer].best.gte(169)},
+            done() {return player[this.layer].best.gte(170)}, // Used to determine when to give the milestone
+            effectDescription: function(){
 				return "Current Endgame"
 			},
         },
@@ -1499,9 +1543,9 @@ addLayer("m", {
 		if(player.m.best.gte(139)){
 			p=Decimal.pow(1.05,p);
 		}
-		if(player.m.best.gte(7))p=p.pow(1.5);
-		if(player.m.best.gte(8))p=p.pow(1.2);
-		if(player.m.best.gte(9))p=p.pow(1.1);
+		if(player.m.best.gte(7))p=p.pow(player.um.points.gte(7)?2:1.5);
+		if(player.m.best.gte(8))p=p.pow(player.um.points.gte(8)?2:1.2);
+		if(player.m.best.gte(9))p=p.pow(player.um.points.gte(9)?2:1.1);
 		if(hasUpgrade("p",21))p=p.pow(1.5);
 		if(hasUpgrade("p",22))p=p.pow(1.5);
 		if(player.m.best.gte(35))p=p.pow(3.5);
@@ -1518,6 +1562,7 @@ addLayer("m", {
 		if(player.m.best.gte(92))p=p.pow(player.mm.points.pow(0.3));
 		if(player.m.best.gte(106))p=p.pow(player.mm.points.pow(0.5));
 		if(player.m.best.gte(113))p=p.pow(player.mm.points.pow(0.3));
+		if(player.um.best.gte(6))p=p.pow(player.um.points);
 		return p;
 	},
 	milestone27Effect(){

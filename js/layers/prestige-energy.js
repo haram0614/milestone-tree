@@ -35,6 +35,7 @@ addLayer("pe", {
 		if(player.mm.points.gte(31))b=b.sqrt();
 		if(player.mm.points.gte(32))b=b.sqrt();
 		if(player.mm.points.gte(33))b=b.sqrt();
+		if(player.mm.points.gte(34))b=b.sqrt();
 		return b;
 	},
 	exponent: function(){
