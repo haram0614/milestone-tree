@@ -32,10 +32,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.170"
+	num: "1.180"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.180 - 2024/5/21</h3><br>
+		- Added 10 milestones<br>
+		- Added 1 meta-milestone<br>
+		- Added 1 extra-milestone<br>
+		- Added 2 hyper-energy upgrades<br>
+		- Added 1 transcend challenge<br>
+		- Added atoms<br>
 	<h3>v1.170 - 2024/5/20</h3><br>
 		- Added 5 milestones<br>
 		- Added 1 meta-milestone<br>

@@ -59,10 +59,10 @@ addLayer("hb", {
 		if(hasUpgrade("hb",14)){
 			m+=0.003;
 		}
-		return new Decimal(1).add(player.hb.points.add(e).pow(p).mul(m));
+		return new Decimal(1).add(player.hb.points.add(e).pow(p).mul(m)).pow(layers.a.effect());
 	},
 	effectDescription(){
-		return "hyper-prestige points and prestige boost effect is powered by "+format(layers.hb.effect(),4)
+		return "hyper-prestige points and prestige boost effect ^"+format(layers.hb.effect(),4)
 	},
 	
 	upgrades: {

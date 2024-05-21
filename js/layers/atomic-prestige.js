@@ -21,7 +21,7 @@ addLayer("ap", {
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        m = new Decimal(1)
+        let m=layers.a.effect();
 		if(hasUpgrade("t",22))m=m.mul(1.01);
 		return m;
     },

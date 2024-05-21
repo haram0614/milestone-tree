@@ -48,6 +48,7 @@ addLayer("he", {
 			effect() {
 				let b=player.he.points.add(1).log10().div(90);
 				if(hasUpgrade("he",13))b=b.mul(2);
+				if(hasUpgrade("he",21))b=b.mul(1.5);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect
@@ -75,6 +76,24 @@ addLayer("he", {
             description: "Hyper Energy Upgrade 12 is boosted.",
             cost: new Decimal(7.66e10),
             unlocked() { return true}, // The upgrade is only visible when this is true
+        },
+		21: {
+			title: "Hyper Energy Upgrade 21",
+            description: "Hyper Energy Upgrade 11 is boosted.",
+            cost: new Decimal(1.08e13),
+            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+        },
+		22: {
+			title: "Hyper Energy Upgrade 22",
+            description: "Transcend point gain is boosted based on your hyper energy.",
+            cost: new Decimal(1.66e13),
+            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+			effect() {
+				let base=1.05;
+                let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+                return ret;
+            },
+            effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
         },
 	},
 	

@@ -131,6 +131,7 @@ addLayer("t", {
 		if(player.mm.points.gte(25))mult=mult.mul(tmp.mm.meta25Effect);
 		if(hasUpgrade("pe",21))mult=mult.mul(upgradeEffect("pe",21));
 		if(hasUpgrade("se",22))mult=mult.mul(upgradeEffect("se",22));
+		if(hasUpgrade("he",22))mult=mult.mul(upgradeEffect("he",22));
 		if(hasUpgrade("t",63))mult=mult.mul(upgradeEffect("t",63));
 		if(player.em.points.gte(4))mult=mult.mul(1.1);
 		if(player.m.points.gte(163))mult=mult.mul(1.1);
@@ -570,9 +571,10 @@ addLayer("t", {
                 rewardDescription() { return "1st milestone's softcap starts later." },
 		},
 	},
-	hardcap:new Decimal(2e25),
+	hardcap:new Decimal(5e26),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
+		if(player.m.points.gte(178))return 10;
 		if(player.m.points.gte(164))return 7;
 		if(player.m.points.gte(161))return 5;
 		if(player.m.points.gte(154))return 3;
@@ -643,6 +645,15 @@ addLayer("t", {
 				player.t.specialPoints[11]=layers.t.getResetGain();
 			}
 			player.t.highestAPC[11]=player.t.highestAPC[0];
+		}
+		if(player.m.points.gte(177)){
+			if(layers.t.challenges[12].canComplete()){
+				player.t.challenges[12]++;
+			}
+			if(player.t.specialPoints[12].lt(layers.t.getResetGain())){
+				player.t.specialPoints[12]=layers.t.getResetGain();
+			}
+			player.t.highestAPC[12]=player.t.highestAPC[0];
 		}
 	},
 	dilationEffect(){

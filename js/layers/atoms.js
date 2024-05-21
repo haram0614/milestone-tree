@@ -7,9 +7,9 @@ addLayer("a", {
         unlocked: false,
 		points: new Decimal(0),
     }},
-    color: "#A5FFD0",
+    color: "#AAFFD7",
     requires(){
-		r = new Decimal("e3e10");
+		r = new Decimal("e27e9");
         return r
 	}, // Can be a function that takes requirement increases into account
     resource: "atoms", // Name of prestige currency
@@ -31,10 +31,10 @@ addLayer("a", {
 	branches: ["ap","hb"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
-	base: new Decimal("ee11"),
+	base: new Decimal("e5e9"),
 	exponent: function(x){
 		if(x===undefined)x=player.a.points;
-		let p=new Decimal(1.25);
+		let p=new Decimal(2);
 		if(x.gte(10)){
 			let scaling=x.sub(10).pow(2).div(1000);
 			p=p.add(scaling);
@@ -48,7 +48,7 @@ addLayer("a", {
 		return new Decimal(1).add(player.a.points.add(e).pow(p).mul(m));
 	},
 	effectDescription(){
-		return ""+format(layers.a.effect(),4)
+		return "atomic-prestige points and hyper boost effect ^"+format(layers.a.effect(),4)
 	},
 	
 	resetsNothing(){return false},

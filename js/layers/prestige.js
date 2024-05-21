@@ -21,7 +21,7 @@ addLayer("p", {
 		if(player.m.points.gte(6))mult=mult.mul(tmp.m.milestone6Effect);
 		if(hasUpgrade("p",13))mult=mult.mul(upgradeEffect("p",13));
 		if(hasUpgrade("p",14))mult=mult.mul(upgradeEffect("p",14));
-		if(player.m.points.gte(22))mult=mult.mul(22);
+		if(player.m.points.gte(22))mult=mult.mul(player.um.points.gte(22)?100:22);
 		if(hasUpgrade("sp",13))mult=mult.mul(upgradeEffect("sp",13));
 		if(hasUpgrade("sp",14))mult=mult.mul(upgradeEffect("sp",14));
 		if(hasUpgrade("hp",13))mult=mult.mul(upgradeEffect("hp",13));
@@ -40,6 +40,7 @@ addLayer("p", {
 		if(player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)m=m.mul(tmp.t.dilationEffect);
 		m=m.mul(layers.t.getSpecialEffect(21));
 		if(player.um.best.gte(5))m=m.mul(1.01);
+		if(player.um.best.gte(22))m=m.mul(1.01);
 		return m;
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
@@ -141,13 +142,13 @@ addLayer("p", {
         },
 		21: {
 			title: "Prestige Upgrade 21",
-            description: "6th Milestone's effect ^1.5",
+            description(){ if(player.um.points.gte(21))return "6th Milestone's effect is squared";return "6th Milestone's effect ^1.5";},
             cost: new Decimal(1e25),
             unlocked() { return player.m.points.gte(15)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Prestige Upgrade 22",
-            description: "6th Milestone's effect ^1.5",
+            description(){ if(player.um.points.gte(21))return "6th Milestone's effect is squared";return "6th Milestone's effect ^1.5";},
             cost: new Decimal(1e33),
             unlocked() { return player.m.points.gte(15)}, // The upgrade is only visible when this is true
         },

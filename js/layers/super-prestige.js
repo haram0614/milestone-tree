@@ -35,6 +35,7 @@ addLayer("sp", {
 		if(hasUpgrade("t",33))mult=mult.mul(1.005);
 		if(player.t.activeChallenge==31||player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(31));
+		if(player.um.best.gte(25))mult=mult.mul(1.02);
         return mult
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)

@@ -24,13 +24,20 @@ addLayer("um", {
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
     base(){
+		if(player.um.points.gte(25))return new Decimal("ee99");
+		if(player.um.points.gte(21))return new Decimal("e13e11");
 		if(player.um.points.gte(15))return new Decimal("e96e10");
 		if(player.um.points.gte(8))return new Decimal("e85e10");
 		return new Decimal("ee12");
 	},
-	exponent: function(){
-		var base=new Decimal(2);
-		return base;
+	exponent: function(x){
+		if(x===undefined)x=player.um.points;
+		var p=new Decimal(2);
+		if(x.gte(24)){
+			let scaling=x.sub(23).div(35);
+			p=p.add(scaling);
+		}
+		return p;
 	},
     hotkeys: [
         {key: "u", description: "U: Get Upgraded Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
