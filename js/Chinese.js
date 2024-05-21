@@ -95,34 +95,24 @@ layers.m.milestones[9-1].effectDescription=function(){
 	if(player.um.best.gte(9))return "第六个里程碑的效果变为原来的平方。（已升级）";
 	return "第六个里程碑的效果变为原来的1.1次方。";
 }
-layers.m.milestones[10-1].effectDescription=layers.m.milestones[15-1].effectDescription=layers.m.milestones[21-1].effectDescription=function(){
+layers.m.milestones[10-1].effectDescription=function(){
+	if(player.um.best.gte(10))return "解锁2个新的声望升级，并且声望升级11和12的效果变得更好。（已升级）";
 	return "解锁2个新的声望升级。";
 }
-layers.m.milestones[11-1].effectDescription=function(){
-	return "声望升级11的效果变得更好。";
+layers.m.milestones[15-1].effectDescription=layers.m.milestones[21-1].effectDescription=function(){
+	if(player.um.best.gte(parseInt(this.id)+1))return "解锁2个新的声望升级，并且声望升级13和14的效果变得更好。（已升级）";
+	return "解锁2个新的声望升级。";
 }
-layers.m.milestones[12-1].effectDescription=function(){
-	return "声望升级12的效果变得更好。";
+layers.m.milestones[11-1].effectDescription=layers.m.milestones[12-1].effectDescription=layers.m.milestones[13-1].effectDescription=layers.m.milestones[14-1].effectDescription=function(){
+	let ret="声望升级"+(parseInt(this.id)+1)+"的效果变得更好。";
+	if(player.um.best.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
-layers.m.milestones[13-1].effectDescription=function(){
-	return "声望升级13的效果变得更好。";
-}
-layers.m.milestones[14-1].effectDescription=function(){
-	return "声望升级14的效果变得更好。";
-}
-layers.m.milestones[16-1].effectDescription=function(){
-	return "第三个里程碑的效果变为原来的1.016次方。";
-}
-layers.m.milestones[17-1].effectDescription=function(){
-	return "第三个里程碑的效果变为原来的1.017次方。";
-}
-layers.m.milestones[18-1].effectDescription=function(){
-	return "第三个里程碑的效果变为原来的1.018次方。";
-}
-layers.m.milestones[19-1].effectDescription=function(){
-	return "第三个里程碑的效果变为原来的1.019次方。";
+layers.m.milestones[16-1].effectDescription=layers.m.milestones[17-1].effectDescription=layers.m.milestones[18-1].effectDescription=layers.m.milestones[19-1].effectDescription=function(){
+	if(player.um.best.gte(parseInt(this.id)+1))return "第三个里程碑的效果变为原来的1.05次方。（已升级）";
+	return "第三个里程碑的效果变为原来的1.0"+(parseInt(this.id)+1)+"次方。";
 }
 layers.m.milestones[20-1].effectDescription=function(){
+	if(player.um.points.gte(20))return "每秒获得重置可以获得的声望点数的1e22%。（已升级）";
 	if(player.m.points.gte(135))return "每秒获得重置可以获得的声望点数的1e12%。";
 	return "每秒获得重置可以获得的声望点数的10000%。";
 }
@@ -389,7 +379,13 @@ layers.m.milestones[166-1].effectDescription="原子级挑战1的目标减少了
 layers.m.milestones[167-1].effectDescription="原子级挑战2的目标减少了。";
 layers.m.milestones[168-1].effectDescription="原子级挑战3的目标减少了。";
 layers.m.milestones[169-1].effectDescription="原子级挑战6的目标减少了。";
-layers.m.milestones[170-1].effectDescription="当前残局";
+layers.m.milestones[170-1].effectDescription="解锁一个超越挑战。";
+layers.m.milestones[171-1].effectDescription="超越挑战8的效果变得更好。";
+layers.m.milestones[172-1].effectDescription="超越挑战8的效果变得更好。";
+layers.m.milestones[173-1].effectDescription="超越挑战8的效果变得更好。";
+layers.m.milestones[174-1].effectDescription="超越挑战8的效果变得更好。";
+layers.m.milestones[175-1].effectDescription="解锁一个层级。";
+layers.m.milestones[176-1].effectDescription="自动获得第一个超越挑战的完成数和挑战点数。";
 
 layers.m.tabFormat[3][1]=function(){
 	return "里程碑成本快速增加在"+format(tmp.m.getScalingStart,4)+"开始";
@@ -425,6 +421,7 @@ layers.mm.milestones[25-1].effectDescription=function(){
 }
 layers.mm.milestones[30-1].effectDescription="第25个元里程碑的效果变为原来的平方。解锁一个新层级。";
 layers.mm.milestones[31-1].effectDescription=layers.mm.milestones[32-1].effectDescription=layers.mm.milestones[33-1].effectDescription=layers.mm.milestones[34-1].effectDescription="声望能量的获得变为原来的2倍。";
+layers.mm.milestones[35-1].effectDescription="声望能量的获得变为原来的1.1次方。";
 
 
 layers.em.resource="额外里程碑";
@@ -442,6 +439,7 @@ layers.em.milestones[2-1].effectDescription="基于你的额外里程碑数量�
 layers.em.milestones[3-1].effectDescription="解锁4个新的超级能量升级。";
 layers.em.milestones[4-1].effectDescription="超越点数的获得变为原来的1.1倍。";
 layers.em.milestones[5-1].effectDescription="里程碑升级变得更便宜。";
+layers.em.milestones[6-1].effectDescription="解锁4个新的终极能量升级。";
 
 layers.p.resource="声望点数";
 layers.p.effectDescription="";
@@ -724,6 +722,7 @@ layers.t.challenges[22].name="硬上限挑战";
 layers.t.challenges[31].name="超级膨胀挑战";
 layers.t.challenges[32].name="声望硬上限挑战";
 layers.t.challenges[41].name="终极膨胀挑战";
+layers.t.challenges[42].name="超级硬上限挑战";
 layers.t.challenges[11].challengeDescription=function(){
 	return "第一个里程碑的效果变为原来的"+format(tmp.t.dilationEffect)+"次方。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
 }
@@ -745,6 +744,9 @@ layers.t.challenges[32].challengeDescription=function(){
 layers.t.challenges[41].challengeDescription=function(){
 	return "在“超级膨胀挑战”的基础上，第三级声望点数的获得变为原来的"+format(tmp.t.dilationEffect)+"次方。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
 }
+layers.t.challenges[42].challengeDescription=function(){
+	return "在“声望硬上限挑战”的基础上，超级声望点数的获得受第一个里程碑的软上限影响。<br>已完成"+challengeCompletions(this.layer, this.id) +"次"
+}
 layers.t.challenges[11].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[12].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[21].currencyDisplayName="原子级挑战完成数";
@@ -752,12 +754,13 @@ layers.t.challenges[22].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[31].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[32].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[41].currencyDisplayName="原子级挑战完成数";
+layers.t.challenges[42].currencyDisplayName="原子级挑战完成数";
 layers.t.challenges[11].rewardDescription=layers.t.challenges[21].rewardDescription=layers.t.challenges[31].rewardDescription=layers.t.challenges[41].rewardDescription="第三个里程碑的效果变得更好。";
 layers.t.challenges[12].rewardDescription=function(){ 
 	if(player.m.points.lt(112))return "第一个里程碑的软上限开始得更迟。当你在这个挑战里面时这个奖励无效。";
 	else return "第一个里程碑的软上限开始得更迟。";
 }
-layers.t.challenges[22].rewardDescription=layers.t.challenges[32].rewardDescription="第一个里程碑的软上限开始得更迟。";
+layers.t.challenges[22].rewardDescription=layers.t.challenges[32].rewardDescription=layers.t.challenges[42].rewardDescription="第一个里程碑的软上限开始得更迟。";
 layers.t.tabFormat.Main.content[3][1]=function(){
 	return "超越点数的硬上限为"+format(layers.t.hardcap);
 }
@@ -779,6 +782,7 @@ layers.t.tabFormat["Special Transcend Points"].content=[
 				["display-text",function(){return "你有"+format(player.t.specialPoints[31])+layers.t.getSpecialTPName(31)+"，超级声望点数变为原来的"+format(layers.t.getSpecialEffect(31),4)+"次方"}],
 				["display-text",function(){return "你有"+format(player.t.specialPoints[32])+layers.t.getSpecialTPName(32)+"，第1个里程碑的软上限延迟"+format(layers.t.getSpecialEffect(32),4)+"倍出现"}],
 				["display-text",function(){return "你有"+format(player.t.specialPoints[41])+layers.t.getSpecialTPName(41)+"，第三级声望点数变为原来的"+format(layers.t.getSpecialEffect(41),4)+"次方"}],
+				["display-text",function(){return "你有"+format(player.t.specialPoints[42])+layers.t.getSpecialTPName(42)+"，第1个里程碑的软上限延迟"+format(layers.t.getSpecialEffect(42),4)+"倍出现"}],
 			],
 layers.t.getSpecialTPName=function(a){
 	return layers.t.challenges[a]?.name+"点数";
@@ -817,7 +821,7 @@ layers.pe.upgrades[24].description="声望能量升级21的效果变得更好。
 layers.pe.tabFormat[2][1]=function(){
 	let peroom=new Decimal(10).log(tmp.pe.base);
 	let power=new Decimal(1).div(tmp.pe.exponent);
-	return "(声望能量="+format(peroom)+"*log10(最高声望点数)^"+format(power)+")";
+	return "(声望能量=("+format(peroom)+"*log10(最高声望点数))^"+format(power)+")";
 }
 
 layers.se.resource="超级能量";
@@ -838,7 +842,7 @@ layers.se.upgrades[23].description="超级能量升级12的效果变得更好。
 layers.se.tabFormat[2][1]=function(){
 	let peroom=new Decimal(10).log(tmp.se.base);
 	let power=new Decimal(1).div(tmp.se.exponent);
-	return "(超级能量="+format(peroom)+"*log10(最高超级声望点数)^"+format(power)+")";
+	return "(超级能量=("+format(peroom)+"*log10(最高超级声望点数))^"+format(power)+")";
 }
 
 layers.he.resource="终极能量";
@@ -857,7 +861,7 @@ layers.he.upgrades[14].description="终极能量升级12的效果变得更好。
 layers.he.tabFormat[2][1]=function(){
 	let peroom=new Decimal(10).log(tmp.se.base);
 	let power=new Decimal(1).div(tmp.se.exponent);
-	return "(终极能量="+format(peroom)+"*log10(最高第三级声望点数)^"+format(power)+")";
+	return "(终极能量=("+format(peroom)+"*log10(最高第三级声望点数))^"+format(power)+")";
 }
 
 layers.um.resource="里程碑升级";

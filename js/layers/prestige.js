@@ -67,6 +67,7 @@ addLayer("p", {
 				if(player.m.points.gte(84))base+=0.156;
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.9;
+				if(player.um.points.gte(11))base+=1;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -88,6 +89,7 @@ addLayer("p", {
 				if(player.m.points.gte(84))base+=0.1;
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.1;
+				if(player.um.points.gte(12))base+=0.5;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -108,6 +110,8 @@ addLayer("p", {
 				if(player.m.points.gte(74))base+=0.1;
 				if(player.m.points.gte(84))base+=0.05;
 				if(player.m.points.gte(94))base+=0.05;
+				if(player.um.points.gte(13))base+=0.05;
+				if(player.um.points.gte(15))base+=0.05;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -128,6 +132,8 @@ addLayer("p", {
 				if(player.m.points.gte(74))base+=0.1;
 				if(player.m.points.gte(84))base+=0.05;
 				if(player.m.points.gte(94))base+=0.05;
+				if(player.um.points.gte(14))base+=0.05;
+				if(player.um.points.gte(15))base+=0.05;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -304,16 +310,17 @@ addLayer("p", {
 	},
 	branches: ["m"],
 	passiveGeneration(){
+		if(player.um.points.gte(20))return 1e20;
 		if(player.m.points.gte(135))return 1e10;
 		if(player.m.points.gte(20))return 100;
 		return 0;
 	},
 	softcap(){
-		if(player.t.activeChallenge==32)return getPointSoftcapStart();
+		if(player.t.activeChallenge==32||player.t.activeChallenge==42)return getPointSoftcapStart();
 		return new Decimal(Infinity);
 	},
 	softcapPower(){
-		if(player.t.activeChallenge==32)return new Decimal(0);
+		if(player.t.activeChallenge==32||player.t.activeChallenge==42)return new Decimal(0);
 		return new Decimal(1);
 	},
 		doReset(l){
@@ -324,6 +331,7 @@ addLayer("p", {
 			if(l=="ap")if(player.m.points.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="t")if(player.m.points.gte(100))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="hb")if(player.m.points.gte(104))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="a")layerDataReset("p",["upgrades"]);
 		},
 	update(){
 		if(player.m.points.gte(124)){

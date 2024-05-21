@@ -25,7 +25,7 @@ addLayer("se", {
         {key: "E", description: "Shift+E: Collect Super Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(140)},
-	branches: ["sp"],
+	branches: ["sp","pe"],
 	base: function(){
 		let b=new Decimal("10");
 		return b;

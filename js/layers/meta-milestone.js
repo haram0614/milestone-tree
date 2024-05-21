@@ -309,6 +309,14 @@ addLayer("mm", {
 				return "Prestige Energy gain is doubled";
 			},
         },
+		{
+			requirementDescription: "35th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(34)},
+            done() {return player[this.layer].best.gte(35)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Prestige Energy gain ^1.1";
+			},
+        },
 	],
     resetDescription: "Get ",
 	branches:["m"],

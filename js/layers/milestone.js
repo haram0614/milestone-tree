@@ -87,6 +87,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(9)},
             done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(10))return "Unlock 2 new Prestige Upgrades, and Prestige upgrades 11 & 12 are better. (Upgraded)";
 				return "Unlock 2 new Prestige Upgrades.";
 			},
         },
@@ -95,7 +96,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(10)},
             done() {return player[this.layer].best.gte(11)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Upgrade 11's effect is better.";
+				let ret="Prestige Upgrade 11's effect is better.";
+				if(player.um.best.gte(11))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -103,7 +105,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(11)},
             done() {return player[this.layer].best.gte(12)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Upgrade 12's effect is better.";
+				let ret="Prestige Upgrade 12's effect is better.";
+				if(player.um.best.gte(12))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -111,7 +114,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(12)},
             done() {return player[this.layer].best.gte(13)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Upgrade 13's effect is better.";
+				let ret="Prestige Upgrade 13's effect is better.";
+				if(player.um.best.gte(13))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -119,7 +123,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(13)},
             done() {return player[this.layer].best.gte(14)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Upgrade 14's effect is better.";
+				let ret="Prestige Upgrade 14's effect is better.";
+				if(player.um.best.gte(14))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -127,6 +132,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(14)},
             done() {return player[this.layer].best.gte(15)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(15))return "Unlock 2 new Prestige Upgrades, and Prestige upgrades 13 & 14 are better. (Upgraded)";
 				return "Unlock 2 new Prestige Upgrades.";
 			},
         },
@@ -135,6 +141,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(15)},
             done() {return player[this.layer].best.gte(16)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(16))return "3rd Milestone's effect ^1.05 (Upgraded)";
 				return "3rd Milestone's effect ^1.016";
 			},
         },
@@ -143,6 +150,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(16)},
             done() {return player[this.layer].best.gte(17)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(17))return "3rd Milestone's effect ^1.05 (Upgraded)";
 				return "3rd Milestone's effect ^1.017";
 			},
         },
@@ -151,6 +159,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(17)},
             done() {return player[this.layer].best.gte(18)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(18))return "3rd Milestone's effect ^1.05 (Upgraded)";
 				return "3rd Milestone's effect ^1.018";
 			},
         },
@@ -159,6 +168,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(18)},
             done() {return player[this.layer].best.gte(19)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(19))return "3rd Milestone's effect ^1.05 (Upgraded)";
 				return "3rd Milestone's effect ^1.019";
 			},
         },
@@ -167,6 +177,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(19)},
             done() {return player[this.layer].best.gte(20)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.best.gte(20))return "Gain 1e22% of Prestige Point gain per second. (Upgraded)";
 				if(player[this.layer].best.gte(135))return "Gain 1e12% of Prestige Point gain per second.";
 				return "Gain 10000% of Prestige Point gain per second.";
 			},
@@ -1359,7 +1370,55 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(169)},
             done() {return player[this.layer].best.gte(170)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Current Endgame"
+				return "Unlock a Transcend Challenge."
+			},
+        },
+		{
+			requirementDescription: "171st Milestone",
+            unlocked() {return player[this.layer].best.gte(170)},
+            done() {return player[this.layer].best.gte(171)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Transcend Challenge 8's effect is better."
+			},
+        },
+		{
+			requirementDescription: "172nd Milestone",
+            unlocked() {return player[this.layer].best.gte(171)},
+            done() {return player[this.layer].best.gte(172)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Transcend Challenge 8's effect is better."
+			},
+        },
+		{
+			requirementDescription: "173rd Milestone",
+            unlocked() {return player[this.layer].best.gte(172)},
+            done() {return player[this.layer].best.gte(173)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Transcend Challenge 8's effect is better."
+			},
+        },
+		{
+			requirementDescription: "174th Milestone",
+            unlocked() {return player[this.layer].best.gte(173)},
+            done() {return player[this.layer].best.gte(174)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Transcend Challenge 8's effect is better."
+			},
+        },
+		{
+			requirementDescription: "175th Milestone",
+            unlocked() {return player[this.layer].best.gte(174)},
+            done() {return player[this.layer].best.gte(175)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a new layer."
+			},
+        },
+		{
+			requirementDescription: "176th Milestone",
+            unlocked() {return player[this.layer].best.gte(175)},
+            done() {return player[this.layer].best.gte(176)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Autogain T challenge 1 completions and Dilated Transcend Points."
 			},
         },
 	];
@@ -1480,10 +1539,10 @@ addLayer("m", {
 		if(player.m.best.gte(4)){
 			b=b.add(layers.m.milestone4Effect());
 		}
-		if(player.m.best.gte(16))m=m.mul(1.016);
-		if(player.m.best.gte(17))m=m.mul(1.017);
-		if(player.m.best.gte(18))m=m.mul(1.018);
-		if(player.m.best.gte(19))m=m.mul(1.019);
+		if(player.m.best.gte(16))m=m.mul(player.um.points.gte(16)?1.05:1.016);
+		if(player.m.best.gte(17))m=m.mul(player.um.points.gte(17)?1.05:1.017);
+		if(player.m.best.gte(18))m=m.mul(player.um.points.gte(18)?1.05:1.018);
+		if(player.m.best.gte(19))m=m.mul(player.um.points.gte(19)?1.05:1.019);
 		if(player.m.best.gte(36))m=m.mul(1.036);
 		if(player.m.best.gte(37))m=m.mul(1.037);
 		if(player.m.best.gte(38))m=m.mul(1.038);

@@ -24,6 +24,7 @@ addLayer("um", {
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
     base(){
+		if(player.um.points.gte(15))return new Decimal("e96e10");
 		if(player.um.points.gte(8))return new Decimal("e85e10");
 		return new Decimal("ee12");
 	},

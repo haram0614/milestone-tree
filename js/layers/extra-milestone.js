@@ -75,6 +75,14 @@ addLayer("em", {
 				return "Milestone Upgrades are cheaper.";
 			},
         },
+		{
+			requirementDescription: "6th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(5)},
+            done() {return player[this.layer].best.gte(6)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock new Hyper Energy upgrades."
+			},
+        },
 	],
 	branches: ["mm"],
     resetDescription: "Get ",

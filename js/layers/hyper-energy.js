@@ -2,7 +2,7 @@
 addLayer("he", {
     name: "hyper energy", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "HE", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -25,7 +25,7 @@ addLayer("he", {
         {key: "ctrl+e", description: "Ctrl+E: Collect Hyper Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(150)},
-	branches: ["hp"],
+	branches: ["hp","se"],
 	base: function(){
 		let b=new Decimal("10");
 		return b;

@@ -2,7 +2,7 @@
 addLayer("pb", {
     name: "prestige boost", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "PB", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
 		points: new Decimal(0),
@@ -244,6 +244,7 @@ addLayer("pb", {
 			if(l=="ap")if(player.m.points.gte(81))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
 			if(l=="t")if(player.m.points.gte(101))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
 			if(l=="hb")if(player.m.points.gte(104))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
+			if(l=="a")layerDataReset("pb",["upgrades"]);
 		},
 	//autoPrestige(){return player.m.points.gte(80)},
 	update(){

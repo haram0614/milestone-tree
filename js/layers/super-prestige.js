@@ -307,14 +307,21 @@ addLayer("sp", {
 		if(player.m.points.gte(57))return 1;
 		return 0;
 	},
-	softcap:new Decimal(Infinity),
-	softcapPower:new Decimal(1),
+	softcap(){
+		if(player.t.activeChallenge==42)return getPointSoftcapStart();
+		return new Decimal(Infinity);
+	},
+	softcapPower(){
+		if(player.t.activeChallenge==42)return new Decimal(0);
+		return new Decimal(1);
+	},
 		doReset(l){
 			if(l=="sp"){return;}
 			if(l=="hp")if(player.m.points.gte(65))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
 			if(l=="ap")if(player.m.points.gte(81))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
 			if(l=="t")if(player.m.points.gte(100))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
 			if(l=="hb")if(player.m.points.gte(104))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
+			if(l=="a")layerDataReset("sp",["upgrades"]);
 		},
 	update(){
 		if(player.m.points.gte(83)){

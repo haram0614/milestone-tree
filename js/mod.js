@@ -18,6 +18,7 @@ let modInfo = {
 	"layers/extra-milestone.js",
 	"layers/hyper-energy.js",
 	"layers/upgraded-milestone.js",
+	"layers/atoms.js",
 	
 	"checkdomain.js",
 	
@@ -83,7 +84,7 @@ function canGenPoints(){
 function getPointGen() {
 	var b=getPointGenBeforeSoftcap();var sc=getPointSoftcapStart().log10();
 	if(b.gte(getPointSoftcapStart())){
-		if(player.t.activeChallenge==22||player.t.activeChallenge==32){
+		if(player.t.activeChallenge==22||player.t.activeChallenge==32||player.t.activeChallenge==42){
 			return getPointSoftcapStart();
 		}
 		while(b.log10().gte(sc)){
@@ -124,10 +125,11 @@ function getPointGenString(){
 function getPointSoftcapStart(){
 	var sc=new Decimal("ee9");
 	if(player.m.best.gte(105))sc=sc.pow(tmp.m.milestone105Effect);
-	if(player.t.activeChallenge==12||player.t.activeChallenge==22||player.t.activeChallenge==32)sc=sc.pow(0.0001);
+	if(player.t.activeChallenge==12||player.t.activeChallenge==22||player.t.activeChallenge==32||player.t.activeChallenge==42)sc=sc.pow(0.0001);
 	sc=sc.pow(tmp.t.challenges[12].rewardEffect);
 	sc=sc.pow(tmp.t.challenges[22].rewardEffect);
 	sc=sc.pow(tmp.t.challenges[32].rewardEffect);
+	sc=sc.pow(tmp.t.challenges[42].rewardEffect);
 	if(hasUpgrade("ap",32))sc=sc.pow(upgradeEffect("ap",32));
 	if(hasUpgrade("hb",11))sc=sc.pow(upgradeEffect("hb",11));
 	if(hasUpgrade("pb",31))sc=sc.pow(upgradeEffect("pb",31));
@@ -142,6 +144,7 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
 	if(player.um.best.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.points.gte(165)?player.um.points.mul(0.01):0));
 	sc=sc.pow(layers.t.getSpecialEffect(32));
+	sc=sc.pow(layers.t.getSpecialEffect(42));
 	return sc;
 }
 

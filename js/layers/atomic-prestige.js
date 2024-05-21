@@ -425,6 +425,7 @@ addLayer("ap", {
 		doReset(l){
 			if(l=="ap"){return;}
 			if(l=="t")if(player.m.points.gte(102))layerDataReset("ap",["upgrades"]);else layerDataReset("ap",[]);
+			if(l=="a")layerDataReset("pb",["upgrades"]);
 		},
 		update(){
 			if(player.m.points.gte(103)&&!player.t.activeChallenge){

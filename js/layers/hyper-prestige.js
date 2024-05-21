@@ -296,6 +296,7 @@ addLayer("hp", {
 			if(l=="ap")if(player.m.points.gte(82))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
 			if(l=="t")if(player.m.points.gte(101))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
 			if(l=="hb")if(player.m.points.gte(104))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
+			if(l=="a")layerDataReset("pb",["upgrades"]);
 		},
 	update(){
 		if(player.m.points.gte(95)){
