@@ -25,9 +25,20 @@ addLayer("se", {
         {key: "E", description: "Shift+E: Collect Super Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(140)},
-	branches: ["sp","pe"],
+	branches(){
+		if(player.m.points.gte(186)){//unstable
+			if(Date.now()%1500<500)return ["pb","pe"];
+			if(Date.now()%1500<1000)return ["sp","pb"];
+			return ["sp","pe"];
+		}
+		return ["sp","pe"];
+	},
 	base: function(){
-		let b=new Decimal("10");
+		let b=new Decimal(10);
+		if(player.mm.points.gte(36))b=b.sqrt();
+		if(player.mm.points.gte(37))b=b.sqrt();
+		if(player.mm.points.gte(38))b=b.sqrt();
+		if(player.mm.points.gte(39))b=b.sqrt();
 		return b;
 	},
 	exponent: function(){
@@ -49,6 +60,7 @@ addLayer("se", {
 				let b=player.se.points.add(1).log10().div(100);
 				if(hasUpgrade("se",13))b=b.mul(1.5);
 				if(hasUpgrade("se",21))b=b.mul(1.5);
+				if(hasUpgrade("he",24))b=b.mul(3/2.25);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect

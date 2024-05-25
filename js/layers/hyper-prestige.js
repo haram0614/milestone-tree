@@ -120,6 +120,7 @@ addLayer("hp", {
             unlocked() { return player.m.points.gte(70)}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=3;
+				if(player.m.points.gte(182))base=30;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e91");
             },
@@ -296,7 +297,7 @@ addLayer("hp", {
 			if(l=="ap")if(player.m.points.gte(82))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
 			if(l=="t")if(player.m.points.gte(101))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
 			if(l=="hb")if(player.m.points.gte(104))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
-			if(l=="a")layerDataReset("pb",["upgrades"]);
+			if(l=="a")layerDataReset("hp",["upgrades"]);
 		},
 	update(){
 		if(player.m.points.gte(95)){

@@ -66,5 +66,32 @@ addLayer("a", {
 			}
 		}
 	},
+	upgrades: {
+        rows: 4,
+        cols: 4,
+		11: {
+			title: "Atom Upgrade 11",
+            description: "Atom affects the 1st Milestone's softcap.",
+            cost: new Decimal(5),
+            unlocked() { return player.m.points.gte(179)}, // The upgrade is only visible when this is true
+			effect() {
+				let p=tmp.a.effect;
+				return p;
+            },
+            effectDisplay() { return format(this.effect(),4)+"x later" },
+        },
+		12: {
+			title: "Atom Upgrade 12",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(6),
+            unlocked() { return player.m.points.gte(179)}, // The upgrade is only visible when this is true
+        },
+		13: {
+			title: "Atom Upgrade 13",
+            description: "The Unstability is reduced.",
+            cost: new Decimal(25),
+            unlocked() { return player.m.points.gte(185)}, // The upgrade is only visible when this is true
+        },
+	},
 	
 })

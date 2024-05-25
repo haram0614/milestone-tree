@@ -31,7 +31,16 @@ addLayer("hb", {
         {key: "B", description: "Shift+B: Reset for hyper boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(104)},
-	branches: ["hp","pb"],
+	branches(){
+		if(player.m.points.gte(189)){//unstable
+			if(Date.now()%1300<300)return ["pb","um"];
+			if(Date.now()%1300<600)return ["pb","em"];
+			if(Date.now()%1300<900)return ["um","em"];
+			if(Date.now()%1300<1200)return ["um","hp"];
+			return ["hp","pb"];
+		}
+		return ["hp","pb"];
+	},
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
 	base: new Decimal("1e100000"),
@@ -88,6 +97,7 @@ addLayer("hb", {
 				if(hasUpgrade("hb",22))exp+=0.05;
 				if(hasUpgrade("hb",23))exp+=0.05;
 				if(hasUpgrade("hb",24))exp+=0.05;
+				if(hasUpgrade("a",12))exp+=0.01;
 				let p=player.hb.points.pow(exp);
 				return p;
             },
@@ -128,7 +138,7 @@ addLayer("hb", {
 		doReset(l){
 			if(l=="hb"){return;}
 			if(l=="t")if(player.m.points.gte(134))layerDataReset("hb",["upgrades"]);else layerDataReset("hb",[]);
-			if(l=="a")layerDataReset("pb",["upgrades"]);
+			if(l=="a")layerDataReset("hb",["upgrades"]);
 		},
 	//autoPrestige(){return player.m.points.gte(116)},
 	update(){

@@ -39,8 +39,8 @@ addLayer("p", {
 		if(hasUpgrade("t",32))m=m.mul(1.005);
 		if(player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)m=m.mul(tmp.t.dilationEffect);
 		m=m.mul(layers.t.getSpecialEffect(21));
-		if(player.um.best.gte(5))m=m.mul(1.01);
-		if(player.um.best.gte(22))m=m.mul(1.01);
+		if(player.um.points.gte(5))m=m.mul(1.01);
+		if(player.um.points.gte(22))m=m.mul(1.01);
 		return m;
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
@@ -69,6 +69,7 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.9;
 				if(player.um.points.gte(11))base+=1;
+				if(player.um.points.gte(31))base+=0.5;//7.5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -91,6 +92,7 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.1;
 				if(player.um.points.gte(12))base+=0.5;
+				if(player.um.points.gte(32))base+=0.5;//4.5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -113,6 +115,7 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.05;
 				if(player.um.points.gte(13))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
+				if(player.um.points.gte(33))base+=0.15;//2.2
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -135,6 +138,7 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.05;
 				if(player.um.points.gte(14))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
+				if(player.um.points.gte(34))base+=0.15;//2
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -326,7 +330,7 @@ addLayer("p", {
 	},
 		doReset(l){
 			if(l=="p"){return;}
-			if(l=="sp")if(player.m.points.gte(26))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="sp")if(player.um.points.gte(26))layerDataReset("p",["upgrades","buyables"]);else if(player.m.points.gte(26))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="pb")if(player.m.points.gte(60))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="hp")if(player.m.points.gte(65))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="ap")if(player.m.points.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);

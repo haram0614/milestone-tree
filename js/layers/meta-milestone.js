@@ -1,47 +1,10 @@
-
-addLayer("mm", {
-    name: "meta-milestone", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "MM", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-    startData() { return {
-        unlocked: true,
-		points: new Decimal(0),
-    }},
-    color: "#A057B0",
-    requires(){
-		//if(player.mm.points.gte(20))return new Decimal(Infinity);
-		let b=new Decimal(40);
-		if(hasUpgrade("t",72))b=b.div(upgradeEffect("t",72));
-		return b;
-	}, // Can be a function that takes requirement increases into account
-    resource: "meta-milestones", // Name of prestige currency
-    baseResource: "milestones", // Name of resource prestige is based on
-    baseAmount() {return player.m.points}, // Get the current amount of baseResource
-    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
-        return mult
-    },
-    gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
-    },
-    row: 1, // Row the layer is in on the tree (0 is the first row)
-	base: new Decimal(1.047),
-	exponent: function(){
-		return new Decimal(1)
-	},
-    hotkeys: [
-        {key: "M", description: "Shift+M: Get Meta-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
-    layerShown(){return player.m.best.gte(40)},
-	resetsNothing(){return true},
-	autoPrestige(){return player.em.points.gte(1)},
-	milestones: [
+var METAMILESTONES=[
 		{
 			requirementDescription: "1st Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(0)},
             done() {return player[this.layer].best.gte(1)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(1))return "Autoget Milestones and Milestone Upgrades. (Upgraded)"
 				return "Autoget Milestones."
 			},
         },
@@ -317,7 +280,88 @@ addLayer("mm", {
 				return "Prestige Energy gain ^1.1";
 			},
         },
-	],
+		{
+			requirementDescription: "36th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(35)},
+            done() {return player[this.layer].best.gte(36)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "37th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(36)},
+            done() {return player[this.layer].best.gte(37)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "38th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(37)},
+            done() {return player[this.layer].best.gte(38)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "39th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(38)},
+            done() {return player[this.layer].best.gte(39)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+	]
+	
+var meta_st=function(){
+	if(player.um.meta.gt(this.id)){
+		return {backgroundColor: "#cccc00"};
+	}
+	return {};
+}
+for(var milestoneId in METAMILESTONES){
+	METAMILESTONES[milestoneId].style=meta_st;
+}
+
+addLayer("mm", {
+    name: "meta-milestone", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "MM", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+    }},
+    color: "#A057B0",
+    requires(){
+		//if(player.mm.points.gte(20))return new Decimal(Infinity);
+		let b=new Decimal(40);
+		if(hasUpgrade("t",72))b=b.div(upgradeEffect("t",72));
+		return b;
+	}, // Can be a function that takes requirement increases into account
+    resource: "meta-milestones", // Name of prestige currency
+    baseResource: "milestones", // Name of resource prestige is based on
+    baseAmount() {return player.m.points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+	base: new Decimal(1.047),
+	exponent: function(){
+		return new Decimal(1)
+	},
+    hotkeys: [
+        {key: "M", description: "Shift+M: Get Meta-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown(){return player.m.best.gte(40)},
+	resetsNothing(){return true},
+	autoPrestige(){return player.em.points.gte(1)},
+	milestones: METAMILESTONES,
     resetDescription: "Get ",
 	branches:["m"],
 	doReset(){},

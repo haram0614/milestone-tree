@@ -35,7 +35,7 @@ addLayer("sp", {
 		if(hasUpgrade("t",33))mult=mult.mul(1.005);
 		if(player.t.activeChallenge==31||player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(31));
-		if(player.um.best.gte(25))mult=mult.mul(1.02);
+		if(player.um.points.gte(25))mult=mult.mul(1.02);
         return mult
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
@@ -61,6 +61,8 @@ addLayer("sp", {
 				if(player.m.points.gte(79))base+=10;
 				if(player.m.points.gte(89))base+=5;
 				if(hasUpgrade("sp",44))base+=10;
+				if(player.um.points.gte(30))base+=2;
+				if(player.um.points.gte(31))base+=3;//100
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -80,6 +82,8 @@ addLayer("sp", {
 				if(player.m.points.gte(79))base+=2;
 				if(player.m.points.gte(89))base+=1;
 				if(hasUpgrade("sp",44))base+=2;
+				if(player.um.points.gte(30))base+=2;
+				if(player.um.points.gte(32))base+=3;//25
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -99,6 +103,7 @@ addLayer("sp", {
 				if(player.m.points.gte(79))base+=1;
 				if(player.m.points.gte(89))base+=0.5;
 				if(hasUpgrade("sp",44))base+=1;
+				if(player.um.points.gte(33))base+=2;//10
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -118,6 +123,7 @@ addLayer("sp", {
 				if(player.m.points.gte(79))base+=0.766;
 				if(player.m.points.gte(89))base+=0.234;
 				if(hasUpgrade("sp",44))base+=1;
+				if(player.um.points.gte(34))base+=0.5;//6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },

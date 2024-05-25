@@ -32,10 +32,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.180"
+	num: "1.190",
+	name: "The Unstable Update"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.190£º The Unstable Update - 2024/5/25</h3><br>
+		- Added 10 milestones<br>
+		- Added 1 meta-milestone<br>
+		- Added 1 extra-milestone...<br>
+		- The Tree is becoming unstable so cannot read the full changelog.<br>
 	<h3>v1.180 - 2024/5/21</h3><br>
 		- Added 10 milestones<br>
 		- Added 1 meta-milestone<br>
@@ -119,7 +125,7 @@ function getPointGenBeforeSoftcap() {
 	if(hasUpgrade("hp",11))b=b.mul(upgradeEffect("hp",11));
 	if(hasUpgrade("hp",12))b=b.mul(upgradeEffect("hp",12));
 	if(hasUpgrade("ap",11))b=b.mul(upgradeEffect("ap",11));
-	if(player.um.best.gte(2))b=b.pow(1.01);
+	if(player.um.points.gte(2))b=b.pow(1.01);
 	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)b=b.pow(tmp.t.dilationEffect);
 	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.points.gte(122)?player.m.points:100);
 	return b
@@ -149,9 +155,16 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("se",11))sc=sc.pow(upgradeEffect("se",11));
 	sc=sc.pow(layers.t.getSpecialEffect(22));
 	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
-	if(player.um.best.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.points.gte(165)?player.um.points.mul(0.01):0));
+	if(player.m.points.gte(181) && player.um.points.gte(16)){
+		sc=sc.pow(player.um.points.mul(0.0165).add(1));
+	} else {
+		if(player.um.points.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.points.gte(165)?player.um.points.mul(0.01):0));
+	}
 	sc=sc.pow(layers.t.getSpecialEffect(32));
 	sc=sc.pow(layers.t.getSpecialEffect(42));
+	if(hasUpgrade("a",11))sc=sc.pow(upgradeEffect("a",11));
+	if(player.m.best.gte(186))sc=sc.pow(1+Math.random()/50);
+	else if(player.m.best.gte(184))sc=sc.pow(1+Math.random()/100);
 	return sc;
 }
 
@@ -166,12 +179,19 @@ var displayThings = [
 			return "1st milestone's effect ^"+format(getPointGen().log(getPointGenBeforeSoftcap()),4)+" because of softcap.<br>1st milestone's softcap starts at "+format(getPointSoftcapStart());
 		}
 		return "";
+	},
+	function(){
+		if(player.m.points.gte(190)){
+			return "The Milestone Tree is unstable now. Fixing The Milestone Tree... Milestone Requirement is increased.";
+		}
+		return "";
 	}
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.m.points.gte(MILESTONES.length);
+	return player.m.points.gte(MILESTONES.length+1);
+	//return player.m.points.gte(MILESTONES.length);
 }
 
 

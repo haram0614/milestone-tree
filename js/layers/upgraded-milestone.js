@@ -5,6 +5,7 @@ addLayer("um", {
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
+		meta: new Decimal(0),
     }},
     color: "#ccbb00",
     requires(){
@@ -24,11 +25,17 @@ addLayer("um", {
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
     base(){
-		if(player.um.points.gte(25))return new Decimal("ee99");
+		if(player.um.points.gte(40))return new Decimal("ee13");
 		if(player.um.points.gte(21))return new Decimal("e13e11");
 		if(player.um.points.gte(15))return new Decimal("e96e10");
 		if(player.um.points.gte(8))return new Decimal("e85e10");
 		return new Decimal("ee12");
+	},
+	effectDescription(){
+		if(player.um.meta.gte(1)){
+			return "providing "+format(player.um.meta)+" upgraded Meta-Milestones.";
+		}
+		return "";
 	},
 	exponent: function(x){
 		if(x===undefined)x=player.um.points;
@@ -48,5 +55,20 @@ addLayer("um", {
     resetDescription: "Get ",
 	doReset(){},
 	tabFormat: ["main-display","prestige-button","resource-display"],
-	branches: ["m"],
+	branches(){
+		if(player.m.points.gte(184)){
+			return ["pb"];
+		}
+		return ["m"];
+	},
+	update(){
+		player.um.meta=player.um.points.sub(35).max(0).div(5).floor();
+		if(player.um.meta.gte(1)){//quick autobuy
+			while(true){
+				let req=layers.um.requires().mul(layers.um.base().pow(Decimal.pow(player.um.points,layers.um.exponent())));
+				if(player.points.gt(req))player.um.points=player.um.points.add(1);
+				else break;
+			}
+		}
+	}
 })

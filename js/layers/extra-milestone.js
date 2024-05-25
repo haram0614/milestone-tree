@@ -64,6 +64,8 @@ addLayer("em", {
             unlocked() {return player[this.layer].best.gte(3)},
             done() {return player[this.layer].best.gte(4)}, // Used to determine when to give the milestone
             effectDescription: function(){
+	            if(player.em.points.gte(8))return format(player.em.points)+"x Transcend Point gain"
+	            if(player.em.points.gte(7))return format(player.em.points.sqrt())+"x Transcend Point gain"
 				return "1.1x Transcend Point gain"
 			},
         },
@@ -83,8 +85,31 @@ addLayer("em", {
 				return "Unlock new Hyper Energy upgrades."
 			},
         },
+		{
+			requirementDescription: "7th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(6)},
+            done() {return player[this.layer].best.gte(7)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "4th Extra-Milestone's effect is better based on your Extra-Milestones."
+			},
+        },
+		{
+			requirementDescription: "8th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(7)},
+            done() {return player[this.layer].best.gte(8)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "4th Extra-Milestone's effect is squared."
+			},
+        },
 	],
-	branches: ["mm"],
+	branches(){
+		if(player.m.points.gte(184)){//unstable
+			if(Date.now()%1200<400)return ["pb"];
+			if(Date.now()%1200<800)return ["pe"];
+			return ["mm"];
+		}
+		return ["mm"];
+	},
     resetDescription: "Get ",
 	doReset(){},
 })

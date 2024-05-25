@@ -28,7 +28,15 @@ addLayer("pb", {
         {key: "b", description: "B: Reset for prestige boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(50)},
-	branches: ["p"],
+	branches(){
+		if(player.m.points.gte(184)){//unstable
+			if(Date.now()%1400<350)return [["mm",2]];
+			if(Date.now()%1400<700)return ["mm"];
+			if(Date.now()%1400<1050)return [["p",2]];
+			return ["p"];
+		}
+		return ["p"];
+	},
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
 	base: new Decimal("1e13630"),
@@ -166,6 +174,7 @@ addLayer("pb", {
 				if(hasUpgrade("pb",33))e+=0.1;
 				if(hasUpgrade("pb",34))e+=0.1;
 				if(hasUpgrade("pb",43))e+=0.1;
+				if(player.m.best.gte(180))e+=0.02*(player.m.best.sub(179).toNumber());
 				let p=tmp.pb.effect.pow(e);
 				return p;
             },

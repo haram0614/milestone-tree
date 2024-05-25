@@ -25,7 +25,15 @@ addLayer("pe", {
         {key: "e", description: "E: Collect Prestige Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(125)},
-	branches: ["p"],
+	branches(){
+		if(player.m.points.gte(184)){//unstable
+			if(Date.now()%1400<350)return ["mm"];
+			if(Date.now()%1400<700)return [["p",2]];
+			if(Date.now()%1400<1050)return ["p"];
+			return [["mm",2]];
+		}
+		return ["p"];
+	},
 	base: function(){
 		let b=new Decimal(10);
 		if(player.mm.points.gte(26))b=b.sqrt();
@@ -59,6 +67,7 @@ addLayer("pe", {
 				let b=player.pe.points.add(1).log10().div(100);
 				if(hasUpgrade("pe",13))b=b.mul(1.5);
 				if(hasUpgrade("pe",23))b=b.mul(1.5);
+				if(hasUpgrade("he",24))b=b.mul(3/2.25);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect

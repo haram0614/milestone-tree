@@ -25,7 +25,16 @@ addLayer("he", {
         {key: "ctrl+e", description: "Ctrl+E: Collect Hyper Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return player.m.best.gte(150)},
-	branches: ["hp","se"],
+	branches(){
+		if(player.m.points.gte(189)){//unstable
+			if(Date.now()%1300<300)return ["se","um"];
+			if(Date.now()%1300<600)return ["se","em"];
+			if(Date.now()%1300<900)return ["um","em"];
+			if(Date.now()%1300<1200)return ["em","hp"];
+			return ["hp","se"];
+		}
+		return ["hp","se"];
+	},
 	base: function(){
 		let b=new Decimal("10");
 		return b;
@@ -49,6 +58,7 @@ addLayer("he", {
 				let b=player.he.points.add(1).log10().div(90);
 				if(hasUpgrade("he",13))b=b.mul(2);
 				if(hasUpgrade("he",21))b=b.mul(1.5);
+				if(hasUpgrade("he",23))b=b.mul(1.25);
 				return b.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" }, // Add formatting to the effect
@@ -94,6 +104,18 @@ addLayer("he", {
                 return ret;
             },
             effectDisplay() { return format(this.effect(),4)+"x" }, // Add formatting to the effect
+        },
+		23: {
+			title: "Hyper Energy Upgrade 23",
+            description: "Hyper Energy Upgrade 11 is boosted.",
+            cost: new Decimal(6.62e13),
+            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+        },
+		24: {
+			title: "Hyper Energy Upgrade 24",
+            description: "Increase the effects of Prestige Energy  Upgrade 11 and Super Energy  Upgrade 11.",
+            cost: new Decimal(2.36e14),
+            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
         },
 	},
 	
