@@ -24,7 +24,7 @@ addLayer("pe", {
     hotkeys: [
         {key: "e", description: "E: Collect Prestige Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(125)},
+    layerShown(){return player.m.points.gte(125)},
 	branches(){
 		if(player.m.points.gte(184)){//unstable
 			if(Date.now()%1400<350)return ["mm"];

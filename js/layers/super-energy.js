@@ -24,7 +24,7 @@ addLayer("se", {
     hotkeys: [
         {key: "E", description: "Shift+E: Collect Super Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(140)},
+    layerShown(){return player.m.points.gte(140)},
 	branches(){
 		if(player.m.points.gte(186)){//unstable
 			if(Date.now()%1500<500)return ["pb","pe"];
@@ -94,13 +94,13 @@ addLayer("se", {
 			title: "Super Energy Upgrade 21",
             description: "Super Energy Upgrade 11 is boosted.",
             cost: new Decimal(3.27e13),
-            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Super Energy Upgrade 22",
             description: "Transcend point gain is boosted based on your super energy.",
             cost: new Decimal(3.61e13),
-            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.1;
 				if(hasUpgrade("se",24))base+=0.05;
@@ -113,13 +113,13 @@ addLayer("se", {
 			title: "Super Energy Upgrade 23",
             description: "Super Energy Upgrade 12 is boosted.",
             cost: new Decimal(1e14),
-            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 		24: {
 			title: "Super Energy Upgrade 24",
             description: "Super Energy Upgrade 22 is boosted.",
             cost: new Decimal(3.86e14),
-            unlocked() { return player.em.best.gte(3)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 	},
 	

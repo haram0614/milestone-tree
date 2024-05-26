@@ -43,7 +43,7 @@ addLayer("sp", {
     hotkeys: [
         {key: "s", description: "S: Reset for super-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(25)},
+    layerShown(){return player.m.points.gte(25)},
 	upgrades: {
         rows: 4,
         cols: 4,
@@ -63,6 +63,7 @@ addLayer("sp", {
 				if(hasUpgrade("sp",44))base+=10;
 				if(player.um.points.gte(30))base+=2;
 				if(player.um.points.gte(31))base+=3;//100
+				if(player.um.points.gte(49))base+=5;//105
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -84,6 +85,7 @@ addLayer("sp", {
 				if(hasUpgrade("sp",44))base+=2;
 				if(player.um.points.gte(30))base+=2;
 				if(player.um.points.gte(32))base+=3;//25
+				if(player.um.points.gte(49))base+=5;//30
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -104,6 +106,7 @@ addLayer("sp", {
 				if(player.m.points.gte(89))base+=0.5;
 				if(hasUpgrade("sp",44))base+=1;
 				if(player.um.points.gte(33))base+=2;//10
+				if(player.um.points.gte(49))base+=2;//12
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -124,6 +127,7 @@ addLayer("sp", {
 				if(player.m.points.gte(89))base+=0.234;
 				if(hasUpgrade("sp",44))base+=1;
 				if(player.um.points.gte(34))base+=0.5;//6
+				if(player.um.points.gte(49))base+=1;//7
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },

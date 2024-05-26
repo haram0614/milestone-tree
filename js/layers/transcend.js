@@ -118,7 +118,7 @@ addLayer("t", {
     hotkeys: [
         {key: "t", description: "T: Reset for transcend points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(99)},
+    layerShown(){return player.m.points.gte(99)},
 	branches: ["ap"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
@@ -259,6 +259,7 @@ addLayer("t", {
 				let b = player.t.points.add(10).log10().sqrt().mul(1.2);
 				if(player.t.points.add(10).log10().gte(625/36))b = player.t.points.add(10).log10().mul(0.288);
 				if(hasUpgrade("t",81))b = player.t.points.add(10).log10().sqrt().mul(1.2).max(player.t.points.add(10).log10().mul(0.3)).add(0.65);
+				b = b.min(11);
 				return new Decimal(9).plus(b);
 			},
             effectDisplay() { return "+"+format(this.effect(),4) },
@@ -571,7 +572,7 @@ addLayer("t", {
                 rewardDescription() { return "1st milestone's softcap starts later." },
 		},
 	},
-	hardcap:new Decimal(1e32),
+	hardcap:new Decimal(1e35),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
 		if(player.m.points.gte(183))return 19;
@@ -628,7 +629,7 @@ addLayer("t", {
 	},
 	update(){
 		if(player.t.points.gte(layers.t.hardcap))player.t.points=new Decimal(layers.t.hardcap);
-		if(player.m.best.gte(130) && player.t.activeChallenge){
+		if(player.m.points.gte(130) && player.t.activeChallenge){
 			if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain())){
 				player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain();
 			}

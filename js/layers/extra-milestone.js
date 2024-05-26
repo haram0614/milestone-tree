@@ -31,14 +31,14 @@ addLayer("em", {
     hotkeys: [
         {key: "ctrl+m", description: "Ctrl+M: Get Extra-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.mm.best.gte(30)},
+    layerShown(){return player.mm.points.gte(30)},
 	resetsNothing(){return true},
 	autoPrestige(){return false},
 	milestones: [
 		{
 			requirementDescription: "1st Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(0)},
-            done() {return player[this.layer].best.gte(1)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(1)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Autoget Meta-Milestones."
 			},
@@ -46,7 +46,7 @@ addLayer("em", {
 		{
 			requirementDescription: "2nd Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(1)},
-            done() {return player[this.layer].best.gte(2)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(2)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Third Milestone's effect is better based on your extra-milestones."
 			},
@@ -54,7 +54,7 @@ addLayer("em", {
 		{
 			requirementDescription: "3rd Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(2)},
-            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(3)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Unlock new Super Energy upgrades."
 			},
@@ -62,7 +62,7 @@ addLayer("em", {
 		{
 			requirementDescription: "4th Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(3)},
-            done() {return player[this.layer].best.gte(4)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(4)}, // Used to determine when to give the milestone
             effectDescription: function(){
 	            if(player.em.points.gte(8))return format(player.em.points)+"x Transcend Point gain"
 	            if(player.em.points.gte(7))return format(player.em.points.sqrt())+"x Transcend Point gain"
@@ -72,7 +72,7 @@ addLayer("em", {
 		{
 			requirementDescription: "5th Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(4)},
-            done() {return player[this.layer].best.gte(5)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(5)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Milestone Upgrades are cheaper.";
 			},
@@ -80,7 +80,7 @@ addLayer("em", {
 		{
 			requirementDescription: "6th Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(5)},
-            done() {return player[this.layer].best.gte(6)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(6)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Unlock new Hyper Energy upgrades."
 			},
@@ -88,7 +88,7 @@ addLayer("em", {
 		{
 			requirementDescription: "7th Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(6)},
-            done() {return player[this.layer].best.gte(7)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(7)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "4th Extra-Milestone's effect is better based on your Extra-Milestones."
 			},
@@ -96,7 +96,7 @@ addLayer("em", {
 		{
 			requirementDescription: "8th Extra-Milestone",
             unlocked() {return player[this.layer].best.gte(7)},
-            done() {return player[this.layer].best.gte(8)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(8)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "4th Extra-Milestone's effect is squared."
 			},
@@ -112,4 +112,5 @@ addLayer("em", {
 	},
     resetDescription: "Get ",
 	doReset(){},
+	roundUpCost: true
 })

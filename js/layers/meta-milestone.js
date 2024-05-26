@@ -2,7 +2,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "1st Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(0)},
-            done() {return player[this.layer].best.gte(1)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(1)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				if(player.um.meta.gte(1))return "Autoget Milestones and Milestone Upgrades. (Upgraded)"
 				return "Autoget Milestones."
@@ -11,31 +11,34 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "2nd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(1)},
-            done() {return player[this.layer].best.gte(2)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(2)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(2))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^2"
 			},
         },
 		{
 			requirementDescription: "3rd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(2)},
-            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(3)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(3))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^2"
 			},
         },
 		{
 			requirementDescription: "4th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(3)},
-            done() {return player[this.layer].best.gte(4)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(4)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(4))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^2"
 			},
         },
 		{
 			requirementDescription: "5th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(4)},
-            done() {return player[this.layer].best.gte(5)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(5)}, // Used to determine when to give the milestone
             effectDescription:  function(){
 				return "Third Milestone's effect is better based on your meta-milestones.";
 			},
@@ -43,7 +46,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "6th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(5)},
-            done() {return player[this.layer].best.gte(6)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(6)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.5"
 			},
@@ -51,7 +54,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "7th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(6)},
-            done() {return player[this.layer].best.gte(7)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(7)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.5"
 			},
@@ -59,7 +62,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "8th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(7)},
-            done() {return player[this.layer].best.gte(8)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(8)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.5"
 			},
@@ -67,7 +70,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "9th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(8)},
-            done() {return player[this.layer].best.gte(9)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(9)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "6th Milestone's effect ^1.5"
 			},
@@ -75,7 +78,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "10th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(9)},
-            done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(10)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
@@ -83,7 +86,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "11th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(10)},
-            done() {return player[this.layer].best.gte(11)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(11)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.2"
 			},
@@ -91,7 +94,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "12th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(11)},
-            done() {return player[this.layer].best.gte(12)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(12)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.2"
 			},
@@ -99,7 +102,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "13th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(12)},
-            done() {return player[this.layer].best.gte(13)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(13)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "6th Milestone's effect ^1.2"
 			},
@@ -107,7 +110,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "14th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(13)},
-            done() {return player[this.layer].best.gte(14)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(14)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "6th Milestone's effect ^1.2"
 			},
@@ -115,7 +118,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "15th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(14)},
-            done() {return player[this.layer].best.gte(15)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(15)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
@@ -123,7 +126,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "16th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(15)},
-            done() {return player[this.layer].best.gte(16)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(16)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.2"
 			},
@@ -131,7 +134,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "17th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(16)},
-            done() {return player[this.layer].best.gte(17)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(17)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "6th Milestone's effect ^1.7"
 			},
@@ -139,7 +142,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "18th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(17)},
-            done() {return player[this.layer].best.gte(18)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(18)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.8"
 			},
@@ -147,7 +150,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "19th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(18)},
-            done() {return player[this.layer].best.gte(19)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(19)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "27th Milestone's effect ^1.9"
 			},
@@ -155,7 +158,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "20th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(19)},
-            done() {return player[this.layer].best.gte(20)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(20)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
@@ -163,7 +166,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "21st Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(20)},
-            done() {return player[this.layer].best.gte(21)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(21)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Transcend Point gain is doubled"
 			},
@@ -171,7 +174,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "22nd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(21)},
-            done() {return player[this.layer].best.gte(22)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(22)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Transcend Point gain is doubled"
 			},
@@ -179,7 +182,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "23rd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(22)},
-            done() {return player[this.layer].best.gte(23)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(23)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Transcend Point gain is doubled"
 			},
@@ -187,7 +190,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "24th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(23)},
-            done() {return player[this.layer].best.gte(24)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(24)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Transcend Point gain is doubled"
 			},
@@ -195,7 +198,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "25th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(24)},
-            done() {return player[this.layer].best.gte(25)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(25)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Transcend Point gain is boosted based on your meta-milestones. Currently: "+format(tmp.mm.meta25Effect)+"x";
 			},
@@ -203,7 +206,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "26th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(25)},
-            done() {return player[this.layer].best.gte(26)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(26)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -211,7 +214,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "27th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(26)},
-            done() {return player[this.layer].best.gte(27)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(27)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -219,7 +222,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "28th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(27)},
-            done() {return player[this.layer].best.gte(28)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(28)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -227,7 +230,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "29th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(28)},
-            done() {return player[this.layer].best.gte(29)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(29)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -235,7 +238,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "30th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(29)},
-            done() {return player[this.layer].best.gte(30)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(30)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "25th Meta-Milestone's effect ^2, Unlock a new layer.";
 			},
@@ -243,7 +246,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "31st Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(30)},
-            done() {return player[this.layer].best.gte(31)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(31)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -251,7 +254,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "32nd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(31)},
-            done() {return player[this.layer].best.gte(32)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(32)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -259,7 +262,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "33rd Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(32)},
-            done() {return player[this.layer].best.gte(33)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(33)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -267,7 +270,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "34th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(33)},
-            done() {return player[this.layer].best.gte(34)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(34)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain is doubled";
 			},
@@ -275,7 +278,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "35th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(34)},
-            done() {return player[this.layer].best.gte(35)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(35)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Prestige Energy gain ^1.1";
 			},
@@ -283,7 +286,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "36th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(35)},
-            done() {return player[this.layer].best.gte(36)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(36)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Super Energy gain is doubled";
 			},
@@ -291,7 +294,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "37th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(36)},
-            done() {return player[this.layer].best.gte(37)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(37)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Super Energy gain is doubled";
 			},
@@ -299,7 +302,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "38th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(37)},
-            done() {return player[this.layer].best.gte(38)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(38)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Super Energy gain is doubled";
 			},
@@ -307,7 +310,7 @@ var METAMILESTONES=[
 		{
 			requirementDescription: "39th Meta-Milestone",
             unlocked() {return player[this.layer].best.gte(38)},
-            done() {return player[this.layer].best.gte(39)}, // Used to determine when to give the milestone
+            done() {return player[this.layer].points.gte(39)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Super Energy gain is doubled";
 			},
@@ -358,7 +361,7 @@ addLayer("mm", {
     hotkeys: [
         {key: "M", description: "Shift+M: Get Meta-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(40)},
+    layerShown(){return player.m.points.gte(40)},
 	resetsNothing(){return true},
 	autoPrestige(){return player.em.points.gte(1)},
 	milestones: METAMILESTONES,
@@ -370,4 +373,5 @@ addLayer("mm", {
 		if(player.mm.points.gte(30))ret=ret.pow(2);
 		return ret;
 	},
+	roundUpCost: true
 })

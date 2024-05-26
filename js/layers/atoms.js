@@ -27,8 +27,15 @@ addLayer("a", {
     hotkeys: [
         {key: "A", description: "Shift+A: Reset for atoms", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(175)},
-	branches: ["ap","hb"],
+    layerShown(){return player.m.points.gte(175)},
+	branches(){
+		if(player.m.points.gte(192)){//unstable
+			if(Date.now()%1110<370)return ["ap","he"];
+			if(Date.now()%1110<740)return ["hb","he"];
+			return ["ap","hb"];
+		}
+		return ["ap","hb"];
+	},
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
 	base: new Decimal("e5e9"),
@@ -88,8 +95,14 @@ addLayer("a", {
         },
 		13: {
 			title: "Atom Upgrade 13",
-            description: "The Unstability is reduced.",
+            description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(25),
+            unlocked() { return player.m.points.gte(185)}, // The upgrade is only visible when this is true
+        },
+		14: {
+			title: "Atom Upgrade 14",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(26),
             unlocked() { return player.m.points.gte(185)}, // The upgrade is only visible when this is true
         },
 	},

@@ -24,7 +24,7 @@ addLayer("he", {
     hotkeys: [
         {key: "ctrl+e", description: "Ctrl+E: Collect Hyper Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(150)},
+    layerShown(){return player.m.points.gte(150)},
 	branches(){
 		if(player.m.points.gte(189)){//unstable
 			if(Date.now()%1300<300)return ["se","um"];
@@ -91,13 +91,13 @@ addLayer("he", {
 			title: "Hyper Energy Upgrade 21",
             description: "Hyper Energy Upgrade 11 is boosted.",
             cost: new Decimal(1.08e13),
-            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Hyper Energy Upgrade 22",
             description: "Transcend point gain is boosted based on your hyper energy.",
             cost: new Decimal(1.66e13),
-            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.05;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
@@ -109,13 +109,13 @@ addLayer("he", {
 			title: "Hyper Energy Upgrade 23",
             description: "Hyper Energy Upgrade 11 is boosted.",
             cost: new Decimal(6.62e13),
-            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
         },
 		24: {
 			title: "Hyper Energy Upgrade 24",
             description: "Increase the effects of Prestige Energy  Upgrade 11 and Super Energy  Upgrade 11.",
             cost: new Decimal(2.36e14),
-            unlocked() { return player.em.best.gte(6)}, // The upgrade is only visible when this is true
+            unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
         },
 	},
 	

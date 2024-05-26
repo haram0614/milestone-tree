@@ -33,7 +33,7 @@ addLayer("hp", {
     hotkeys: [
         {key: "h", description: "H: Reset for hyper-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(60)},
+    layerShown(){return player.m.points.gte(60)},
 	branches: ["sp"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
@@ -261,6 +261,10 @@ addLayer("hp", {
 			},
 			cost(){
 				let a=player[this.layer].buyables[this.id];
+				if(a.gte(1e10)){
+					let p=2;
+					a=a.div(1e10).pow(p).mul(1e10);
+				}
 				if(a.gte(3)){
 					let p=1.5;
 					if(hasUpgrade("hp",42))p-=0.25;
@@ -321,6 +325,10 @@ addLayer("hp", {
 					if(hasUpgrade("hp",44))p-=0.05;
 				target=target.div(3).pow(1/p).mul(3);
 			}
+				if(target.gte(1e10)){
+					let p=2;
+					target=target.div(1e10).pow(1/p).mul(1e10);
+				}
 			target=target.add(1).floor();
 			if(target.gt(player.hp.buyables[12])){
 				player.hp.buyables[12]=target;

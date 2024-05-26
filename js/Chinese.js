@@ -186,33 +186,43 @@ layers.m.milestones[40-1].effectDescription=function(){
 	return "解锁下一个层级。解锁2个新的超级声望升级。";
 }
 layers.m.milestones[41-1].effectDescription=function(){
+	if(player.um.points.gte(41))return "第三个里程碑的基础效果指数变为原来的1.005次方。（已升级）";
 	return "第三个里程碑的基础效果指数变为原来的1.003次方。";
 }
 layers.m.milestones[42-1].effectDescription=function(){
+	if(player.um.points.gte(42))return "第六个里程碑的效果变为原来的(里程碑升级数量+元里程碑数量)次方。（已升级）";
 	return "第六个里程碑的效果变为原来的(1+元里程碑数量)次方。";
 }
 layers.m.milestones[43-1].effectDescription=function(){
-	return "第四个里程碑的效果变得更好。";
+	let ret="第四个里程碑的效果变得更好。";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
 layers.m.milestones[44-1].effectDescription=function(){
-	return "第一行声望升级的效果变得更好。";
+	let ret="第一行声望升级的效果变得更好。";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
 layers.m.milestones[45-1].effectDescription=function(){
+	if(player.um.points.gte(45))return "解锁4个新的声望升级，并且这4个升级效果变得更好。（已升级）";
 	return "解锁4个新的声望升级。";
 }
 layers.m.milestones[46-1].effectDescription=function(){
+	if(player.um.points.gte(46))return "第三个里程碑的基础效果指数变为原来的1.005次方。（已升级）";
 	return "第三个里程碑的基础效果指数变为原来的1.001次方。";
 }
 layers.m.milestones[47-1].effectDescription=function(){
+	if(player.um.points.gte(47))return "第27个里程碑的效果变为原来的(元里程碑数量的0.5次方)次方。（已升级）";
 	return "第27个里程碑的效果变为原来的(1+元里程碑数量的0.25次方)次方。";
 }
 layers.m.milestones[48-1].effectDescription=function(){
-	return "第四个里程碑的效果变得更好。";
+	let ret="第四个里程碑的效果变得更好。";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
 layers.m.milestones[49-1].effectDescription=function(){
-	return "第一行超级声望升级的效果变得更好。";
+	let ret="第一行超级声望升级的效果变得更好。";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
 layers.m.milestones[50-1].effectDescription=function(){
+	if(player.um.points.gte(50))return "解锁声望加成。这个里程碑的升级效果已经失效，除非您完成了一次第7行重置。（已升级）";
 	return "解锁下一个层级。";
 }
 layers.m.milestones[51-1].effectDescription=function(){
@@ -475,6 +485,30 @@ layers.m.milestones[188-1].effectDescription="自动获得第三个超越挑战�
 layers.m.milestones[189-1].effectDescription=function(){
 	return "越来越不稳定了..."
 }
+layers.m.milestones[190-1].effectDescription=function(){
+	return "试一下增加一个层级，说不定可能会有效果..."
+}
+layers.m.milestones[191-1].effectDescription="第105个里程碑的效果变得更好。";
+layers.m.milestones[192-1].effectDescription=function(){
+	return "越来，越来越不稳定了..."
+}
+layers.m.milestones[193-1].effectDescription=function(){
+	return "增加一个大重置层级，说不定会有效果..."
+}
+layers.m.milestones[194-1].effectDescription="第105个里程碑的效果变为原来的1.067次方。";
+layers.m.milestones[195-1].effectDescription="原子级挑战6的目标减少了。";
+layers.m.milestones[196-1].effectDescription=function(){
+	return "我们只能通过大重置来修复这个问题了..."
+}
+layers.m.milestones[197-1].effectDescription=function(){
+	return "一个第7行的大重置..."
+}
+layers.m.milestones[198-1].effectDescription=function(){
+	return "里程碑之树已经非常不稳定了..."
+}
+layers.m.milestones[199-1].effectDescription=function(){
+	return "解锁一个新的层级。"
+}
 
 layers.m.tabFormat[3][1]=function(){
 	return "里程碑成本快速增加在"+format(tmp.m.getScalingStart,4)+"开始";
@@ -500,7 +534,10 @@ layers.mm.milestones[1-1].effectDescription=function(){
 	if(player.um.meta.gte(1))return "自动获得里程碑和里程碑升级。（已升级）"
 	return "自动获得里程碑。";
 }
-layers.mm.milestones[2-1].effectDescription=layers.mm.milestones[3-1].effectDescription=layers.mm.milestones[4-1].effectDescription="第27个里程碑的效果变为原来的平方。";
+layers.mm.milestones[2-1].effectDescription=layers.mm.milestones[3-1].effectDescription=layers.mm.milestones[4-1].effectDescription=function(){
+	if(player.um.meta.gte(parseInt(this.id)+1))return "第6个和第27个里程碑的效果变为原来的平方。（已升级）"
+	return "第27个里程碑的效果变为原来的平方。";
+}
 layers.mm.milestones[5-1].effectDescription=layers.mm.milestones[10-1].effectDescription=layers.mm.milestones[15-1].effectDescription=layers.mm.milestones[20-1].effectDescription="基于你的元里程碑数量，第三个里程碑的效果变得更好。";
 layers.mm.milestones[6-1].effectDescription=layers.mm.milestones[7-1].effectDescription=layers.mm.milestones[8-1].effectDescription="第27个里程碑的效果变为原来的1.5次方。";
 layers.mm.milestones[9-1].effectDescription="第六个里程碑的效果变为原来的1.5次方。";
@@ -917,7 +954,7 @@ for(i in layers.a.upgrades){
 	layers.a.upgrades[i].title="原子升级"+i;
 }
 layers.a.upgrades[11].description="原子影响第一个里程碑的软上限。";
-layers.a.upgrades[12].description="超级加成升级12的效果变得更好。";
+layers.a.upgrades[12].description=layers.a.upgrades[13].description=layers.a.upgrades[14].description="超级加成升级12的效果变得更好。";
 
 layers.pe.resource="声望能量";
 layers.pe.baseResource="声望点数";

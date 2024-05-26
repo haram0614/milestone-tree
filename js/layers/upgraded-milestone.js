@@ -9,6 +9,7 @@ addLayer("um", {
     }},
     color: "#ccbb00",
     requires(){
+		if(player.um.points.gte(50))return new Decimal(Infinity);
 		if(player.em.points.gte(5))return new Decimal("e6e12");
 		return new Decimal("e11111111111111");
 	},
@@ -25,7 +26,10 @@ addLayer("um", {
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
     base(){
-		if(player.um.points.gte(40))return new Decimal("ee13");
+		if(player.um.points.gte(50))return new Decimal("ee14");
+		if(player.um.points.gte(45))return new Decimal("ee13");
+		if(player.um.points.gte(43))return new Decimal("e44e11");
+		if(player.um.points.gte(40))return new Decimal("e46e11");
 		if(player.um.points.gte(21))return new Decimal("e13e11");
 		if(player.um.points.gte(15))return new Decimal("e96e10");
 		if(player.um.points.gte(8))return new Decimal("e85e10");
@@ -33,7 +37,7 @@ addLayer("um", {
 	},
 	effectDescription(){
 		if(player.um.meta.gte(1)){
-			return "providing "+format(player.um.meta)+" upgraded Meta-Milestones.";
+			return "providing "+formatWhole(player.um.meta)+" upgraded Meta-Milestones.";
 		}
 		return "";
 	},

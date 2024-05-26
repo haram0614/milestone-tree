@@ -30,7 +30,7 @@ addLayer("ap", {
     hotkeys: [
         {key: "a", description: "A: Reset for atomic-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(80)},
+    layerShown(){return player.m.points.gte(80)},
 	branches: ["hp"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
@@ -385,6 +385,10 @@ addLayer("ap", {
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.points.gte(195)){
+				if(p.lte("ee8"))return 0;
+				return p.log10().div(1e8).log(1.2).pow(1/1.5).toNumber();
+			}
 			if(player.m.points.gte(169)){
 				if(p.lte("e1.15e9"))return 0;
 				return p.log10().div(1.15e9).log(1.2).pow(1/1.5).toNumber();
@@ -405,6 +409,7 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.points.gte(195))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e8));
 			if(player.m.points.gte(169))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1.15e9));
 			if(player.m.points.gte(152))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(5e9));
 			if(player.m.points.gte(141))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e10));
@@ -474,7 +479,7 @@ addLayer("ap", {
 				player.ap.challenges[32]=Math.max(player.ap.challenges[32],layers.ap.challenges[32].completionsAfter120());
 			}
 			if(player.m.points.gte(157)){
-				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.best).add(10).log10().div(600).log(1.035).toNumber());
+				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.points).add(10).log10().div(600).log(1.035).toNumber());
 			}
 		}
 })

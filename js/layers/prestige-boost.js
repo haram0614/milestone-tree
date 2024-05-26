@@ -27,7 +27,7 @@ addLayer("pb", {
     hotkeys: [
         {key: "b", description: "B: Reset for prestige boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(50)},
+    layerShown(){return player.m.points.gte(50)},
 	branches(){
 		if(player.m.points.gte(184)){//unstable
 			if(Date.now()%1400<350)return [["mm",2]];
@@ -174,7 +174,7 @@ addLayer("pb", {
 				if(hasUpgrade("pb",33))e+=0.1;
 				if(hasUpgrade("pb",34))e+=0.1;
 				if(hasUpgrade("pb",43))e+=0.1;
-				if(player.m.best.gte(180))e+=0.02*(player.m.best.sub(179).toNumber());
+				if(player.m.points.gte(180))e+=0.02*(player.m.points.sub(179).toNumber());
 				let p=tmp.pb.effect.pow(e);
 				return p;
             },

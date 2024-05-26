@@ -48,7 +48,7 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.best.gte(5)},
+    layerShown(){return player.m.points.gte(5)},
 	upgrades: {
         rows: 4,
         cols: 4,
@@ -69,7 +69,8 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.9;
 				if(player.um.points.gte(11))base+=1;
-				if(player.um.points.gte(31))base+=0.5;//7.5
+				if(player.um.points.gte(31))base+=0.5;
+				if(player.um.points.gte(44))base+=0.1;//7.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -92,7 +93,8 @@ addLayer("p", {
 				if(player.m.points.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.1;
 				if(player.um.points.gte(12))base+=0.5;
-				if(player.um.points.gte(32))base+=0.5;//4.5
+				if(player.um.points.gte(32))base+=0.5;
+				if(player.um.points.gte(44))base+=0.1;//4.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -116,6 +118,7 @@ addLayer("p", {
 				if(player.um.points.gte(13))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(33))base+=0.15;//2.2
+				if(player.um.points.gte(44))base+=0.3;//2.5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -139,6 +142,7 @@ addLayer("p", {
 				if(player.um.points.gte(14))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(34))base+=0.15;//2
+				if(player.um.points.gte(44))base+=0.1;//2.1
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -178,6 +182,10 @@ addLayer("p", {
 				if(hasUpgrade("p",33))p=p.mul(1.5);
 				if(hasUpgrade("p",34))p=p.mul(1.2);
 				if(hasUpgrade("t",21))p=p.mul(1.1);
+				if(player.um.points.gte(45))p=p.mul(1.001);
+				if(player.um.points.gte(45)&&hasUpgrade("p",32))p=p.mul(1.001);
+				if(player.um.points.gte(45)&&hasUpgrade("p",33))p=p.mul(1.001);
+				if(player.um.points.gte(45)&&hasUpgrade("p",34))p=p.mul(1.001);
 				return p.add(1);
 			},
             unlocked() { return player.m.points.gte(45)}, // The upgrade is only visible when this is true
