@@ -33,11 +33,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.190",
-	name: "The Unstable Update"
+	num: "1.200",
+	name: "The Big Reset"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.200£º The Unstable Update - 2024/5/27</h3><br>
+		- Added 10 milestones<br>
+		- Added reincarnate...<br>
+		- The Tree is becoming unstable so cannot read the full changelog.<br>
 	<h3>v1.190£º The Unstable Update - 2024/5/25</h3><br>
 		- Added 10 milestones<br>
 		- Added 1 meta-milestone<br>
@@ -199,8 +203,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.m.effective.gte(MILESTONES.length+1);
-	//return player.m.effective.gte(MILESTONES.length);
+	return player.m.points.gte(MILESTONES.length);
 }
 
 
