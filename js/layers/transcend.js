@@ -102,8 +102,8 @@ addLayer("t", {
     }},
     color: "#FFFF00",
     requires1(){
-		if(player.m.points.gte(163))return new Decimal("1e510");
-		if(player.m.points.gte(137))return new Decimal("1e640");
+		if(player.m.effective.gte(163))return new Decimal("1e510");
+		if(player.m.effective.gte(137))return new Decimal("1e640");
 		return new Decimal("1e850");
 	},
     requires(){
@@ -118,7 +118,7 @@ addLayer("t", {
     hotkeys: [
         {key: "t", description: "T: Reset for transcend points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(99)},
+    layerShown(){return player.m.effective.gte(99)},
 	branches: ["ap"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
@@ -134,26 +134,26 @@ addLayer("t", {
 		if(hasUpgrade("he",22))mult=mult.mul(upgradeEffect("he",22));
 		if(hasUpgrade("t",63))mult=mult.mul(upgradeEffect("t",63));
 		if(player.em.points.gte(4))mult=mult.mul(player.em.points.gte(8)?player.em.points:player.em.points.gte(7)?player.em.points.sqrt():1.1);
-		if(player.m.points.gte(163))mult=mult.mul(1.1);
+		if(player.m.effective.gte(163))mult=mult.mul(1.1);
 		return mult;
 	},
 	getResetGain() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(0);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.points.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
 		amt=amt.floor();
 		return amt;
 	},
 	getNextAt() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.points.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
 		amt=amt.floor().plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.points.gte(163)?500:600));
+		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.effective.gte(163)?500:600));
 		return amt;
 	},
 	getNextSPAt() {
 		if(!player.t.activeChallenge)return new Decimal(0);
 		let amt=player.t.specialPoints[player.t.activeChallenge].plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.points.gte(163)?500:600));
+		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.effective.gte(163)?500:600));
 		if(amt.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
 		return amt;
 	},
@@ -224,37 +224,37 @@ addLayer("t", {
 			title: "Transcend Upgrade 41",
             description(){return "Hyper Boost cost /"+format("1e60000")},
             cost: new Decimal(300),
-			unlocked(){return player.m.points.gte(104);}
+			unlocked(){return player.m.effective.gte(104);}
         },
 		42: {
 			title: "Transcend Upgrade 42",
             description(){return "Gain an extra Hyper Boost."},
             cost: new Decimal(400),
-			unlocked(){return player.m.points.gte(104);}
+			unlocked(){return player.m.effective.gte(104);}
         },
 		43: {
 			title: "Transcend Upgrade 43",
             description(){return "Hyper Boost's effect is better."},
             cost: new Decimal(500),
-			unlocked(){return player.m.points.gte(104);}
+			unlocked(){return player.m.effective.gte(104);}
         },
 		44: {
 			title: "Transcend Upgrade 44",
             description(){return "Unlock a new row of Atomic-Prestige upgrades."},
             cost: new Decimal(600),
-			unlocked(){return player.m.points.gte(104);}
+			unlocked(){return player.m.effective.gte(104);}
         },
 		51: {
 			title: "Transcend Upgrade 51",
             description(){return "First HP buyable's effect ^2.1"},
             cost: new Decimal(30000),
-			unlocked(){return player.m.points.gte(111);}
+			unlocked(){return player.m.effective.gte(111);}
         },
 		52: {
 			title: "Transcend Upgrade 52",
             description(){return "Milestone cost scaling starts later based on your transcend points."},
             cost: new Decimal(60000),
-			unlocked(){return player.m.points.gte(111);},
+			unlocked(){return player.m.effective.gte(111);},
 			effect(){
 				let b = player.t.points.add(10).log10().sqrt().mul(1.2);
 				if(player.t.points.add(10).log10().gte(625/36))b = player.t.points.add(10).log10().mul(0.288);
@@ -268,17 +268,17 @@ addLayer("t", {
 			title: "Transcend Upgrade 53",
             description(){return "Reduce the 1st Milestone's softcap's potency."},
             cost: new Decimal(2e6),
-			unlocked(){return player.m.points.gte(111);},
+			unlocked(){return player.m.effective.gte(111);},
         },
 		54: {
 			title: "Transcend Upgrade 54",
             description(){return "1st Milestone's softcap starts later based on your transcend points."},
             cost: new Decimal(1e7),
-			unlocked(){return player.m.points.gte(111);},
+			unlocked(){return player.m.effective.gte(111);},
 			effect(){
 				let p=0.8;
 				let m=0.05;
-				if(player.m.points.gte(128)){
+				if(player.m.effective.gte(128)){
 					p+=0.1;
 				}
 				if(hasUpgrade("t",83)){
@@ -293,13 +293,13 @@ addLayer("t", {
 			title: "Transcend Upgrade 61",
             description(){return "All Dilation Effects +0.05"},
             cost: new Decimal(1e10),
-			unlocked(){return player.m.points.gte(125);},
+			unlocked(){return player.m.effective.gte(125);},
         },
 		62: {
 			title: "Transcend Upgrade 62",
             description(){return "Atomic-Prestige point gain is boosted based on your transcend points."},
             cost: new Decimal(1e11),
-			unlocked(){return player.m.points.gte(125);},
+			unlocked(){return player.m.effective.gte(125);},
 			effect(){
 				let base=80;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
@@ -311,7 +311,7 @@ addLayer("t", {
 			title: "Transcend Upgrade 63",
             description(){return "Transcend point gain is boosted based on your transcend points."},
             cost: new Decimal(1e12),
-			unlocked(){return player.m.points.gte(125);},
+			unlocked(){return player.m.effective.gte(125);},
 			effect(){
 				let base=1.05;
 				if(hasUpgrade("t",84))base+=0.05;
@@ -324,19 +324,19 @@ addLayer("t", {
 			title: "Transcend Upgrade 64",
             description(){return "Hyper Boost cost /"+format("1e300000")},
             cost: new Decimal(4e12),
-			unlocked(){return player.m.points.gte(125);}
+			unlocked(){return player.m.effective.gte(125);}
         },
 		71: {
 			title: "Transcend Upgrade 71",
             description(){return "Hyper Boost cost /"+format("1e30000")},
             cost: new Decimal(1e13),
-			unlocked(){return player.m.points.gte(136);}
+			unlocked(){return player.m.effective.gte(136);}
         },
 		72: {
 			title: "Transcend Upgrade 72",
             description(){return "Meta-Milestones are cheaper based on Transcend Points."},
             cost: new Decimal(2e13),
-			unlocked(){return player.m.points.gte(136);},
+			unlocked(){return player.m.effective.gte(136);},
 			effect(){
 				let p=0.5;
 				let m=0.01;
@@ -350,7 +350,7 @@ addLayer("t", {
 			title: "Transcend Upgrade 73",
             description(){return "1st Milestone's softcap starts later based on AP challenge completions."},
             cost: new Decimal(1e14),
-			unlocked(){return player.m.points.gte(136);},
+			unlocked(){return player.m.effective.gte(136);},
 			effect(){
 				let c=0;
 				for(var i in player.ap.challenges)c+=player.ap.challenges[i];
@@ -367,31 +367,31 @@ addLayer("t", {
 			title: "Transcend Upgrade 74",
             description(){return "Transcend Upgrade 72 and 73 are boosted."},
             cost: new Decimal(4e14),
-			unlocked(){return player.m.points.gte(136);},
+			unlocked(){return player.m.effective.gte(136);},
         },
 		81: {
 			title: "Transcend Upgrade 81",
             description(){return "Transcend Upgrade 52 is boosted."},
             cost: new Decimal(5e17),
-			unlocked(){return player.m.points.gte(153);},
+			unlocked(){return player.m.effective.gte(153);},
         },
 		82: {
 			title: "Transcend Upgrade 82",
             description(){return "Transcend Upgrade 73 is better."},
             cost: new Decimal(3e19),
-			unlocked(){return player.m.points.gte(153);},
+			unlocked(){return player.m.effective.gte(153);},
         },
 		83: {
 			title: "Transcend Upgrade 83",
             description(){return "Transcend Upgrade 54 is better."},
             cost: new Decimal(1e21),
-			unlocked(){return player.m.points.gte(153);},
+			unlocked(){return player.m.effective.gte(153);},
         },
 		84: {
 			title: "Transcend Upgrade 84",
             description(){return "Transcend Upgrade 63 is better."},
             cost: new Decimal(5e22),
-			unlocked(){return player.m.points.gte(153);},
+			unlocked(){return player.m.effective.gte(153);},
         },
 	},
 	
@@ -404,7 +404,7 @@ addLayer("t", {
 			    challengeDescription() {return "1st milestone's effect ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
                 unlocked() { return true },
                 goal: function(){
-					if(player.m.points.gte(110))return (player.t.challenges[11]+1)*(player.t.challenges[11]+1);
+					if(player.m.effective.gte(110))return (player.t.challenges[11]+1)*(player.t.challenges[11]+1);
 					return 2*Math.pow(3,player.t.challenges[11]);
 				},
 				canComplete(){
@@ -420,7 +420,7 @@ addLayer("t", {
                 name: "Softcapped",
                 completionLimit: Infinity,
 			    challengeDescription() {return "1st milestone's softcap starts earlier<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(104) },
+                unlocked() { return player.m.effective.gte(104) },
                 goal: function(){
 					return (player.t.challenges[12]+1)*(player.t.challenges[12]+1);
 				},
@@ -431,7 +431,7 @@ addLayer("t", {
 					return false;
 				},
 				rewardEffect() {
-		if(player.m.points.lt(112) && player.t.activeChallenge==12)return 1;
+		if(player.m.effective.lt(112) && player.t.activeChallenge==12)return 1;
                     let ret = 1+player.t.challenges[12]*0.1;
                     return ret;
                 },
@@ -440,7 +440,7 @@ addLayer("t", {
                 },
                 currencyDisplayName: "AP challenge completions",
                 rewardDescription() { 
-				if(player.m.points.lt(112))return "1st milestone's softcap starts later, but the reward is disabled in this challenge.";
+				if(player.m.effective.lt(112))return "1st milestone's softcap starts later, but the reward is disabled in this challenge.";
 				else return "1st milestone's softcap starts later.";
 		 },
 		},
@@ -448,7 +448,7 @@ addLayer("t", {
                 name: "Prestige Dilation",
                 completionLimit: Infinity,
 			    challengeDescription() {return "1st milestone's effect and prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(109) },
+                unlocked() { return player.m.effective.gte(109) },
                 goal: function(){
 					return (player.t.challenges[21]+1)*(player.t.challenges[21]+1);
 				},
@@ -465,7 +465,7 @@ addLayer("t", {
                 name: "Hardcapped",
                 completionLimit: Infinity,
 			    challengeDescription() {return "'Softcapped' is applied, and 1st milestone's softcap is its hardcap.<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(115) },
+                unlocked() { return player.m.effective.gte(115) },
                 goal: function(){
 					return (player.t.challenges[22]+1)*(player.t.challenges[22]+1);
 				},
@@ -489,7 +489,7 @@ addLayer("t", {
                 name: "Super Dilation",
                 completionLimit: Infinity,
 			    challengeDescription() {return "1st milestone's effect, prestige point gain and super-prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(125) },
+                unlocked() { return player.m.effective.gte(125) },
                 goal: function(){
 					return (player.t.challenges[31]+1)*(player.t.challenges[31]+1);
 				},
@@ -506,7 +506,7 @@ addLayer("t", {
                 name: "Prestige Hardcapped",
                 completionLimit: Infinity,
 			    challengeDescription() {return "'Hardcapped' is applied, and prestige point gain is affected by 1st Milestone's softcap<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(137) },
+                unlocked() { return player.m.effective.gte(137) },
                 goal: function(){
 					return (player.t.challenges[32]+1)*(player.t.challenges[32]+1);
 				},
@@ -530,7 +530,7 @@ addLayer("t", {
                 name: "Hyper Dilation",
                 completionLimit: Infinity,
 			    challengeDescription() {return "'Super Dilation' is applied, and hyper-prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(158) },
+                unlocked() { return player.m.effective.gte(158) },
                 goal: function(){
 					return (player.t.challenges[41]+1)*(player.t.challenges[41]+1);
 				},
@@ -547,7 +547,7 @@ addLayer("t", {
                 name: "Super Hardcapped",
                 completionLimit: Infinity,
 			    challengeDescription() {return "'Prestige Hardcapped' is applied, and super prestige point gain is affected by 1st Milestone's softcap<br>"+challengeCompletions(this.layer, this.id) +" completions"},
-                unlocked() { return player.m.points.gte(170) },
+                unlocked() { return player.m.effective.gte(170) },
                 goal: function(){
 					return (player.t.challenges[42]+1)*(player.t.challenges[42]+1);
 				},
@@ -559,10 +559,10 @@ addLayer("t", {
 				},
 				rewardEffect() {
 		            let ret = 1+player.t.challenges[42]*0.02;
-					if(player.m.points.gte(171))ret = 1+player.t.challenges[42]*0.04;
-					if(player.m.points.gte(172))ret = 1+player.t.challenges[42]*0.06;
-					if(player.m.points.gte(173))ret = 1+player.t.challenges[42]*0.08;
-					if(player.m.points.gte(174))ret = 1+player.t.challenges[42]*0.1;
+					if(player.m.effective.gte(171))ret = 1+player.t.challenges[42]*0.04;
+					if(player.m.effective.gte(172))ret = 1+player.t.challenges[42]*0.06;
+					if(player.m.effective.gte(173))ret = 1+player.t.challenges[42]*0.08;
+					if(player.m.effective.gte(174))ret = 1+player.t.challenges[42]*0.1;
                     return ret;
                 },
 				rewardDisplay() {
@@ -575,24 +575,24 @@ addLayer("t", {
 	hardcap:new Decimal(1e35),
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
-		if(player.m.points.gte(183))return 19;
-		if(player.m.points.gte(178))return 10;
-		if(player.m.points.gte(164))return 7;
-		if(player.m.points.gte(161))return 5;
-		if(player.m.points.gte(154))return 3;
-		if(player.m.points.gte(151))return 2;
-		if(player.m.points.gte(133))return 1;
-		if(player.m.points.gte(130))return 0.8;
-		if(player.m.points.gte(127))return 0.6;
-		if(player.m.points.gte(123))return 0.45;
-		if(player.m.points.gte(120))return 0.3;
-		if(player.m.points.gte(119))return 0.2;
-		if(player.m.points.gte(118))return 0.1;
-		if(player.m.points.gte(117))return 0.05;
-		if(player.m.points.gte(116))return 0.02;
-		if(player.m.points.gte(115))return 0.01;
-		if(player.m.points.gte(113))return 0.005;
-		if(player.m.points.gte(110))return 0.002;
+		if(player.m.effective.gte(183))return 19;
+		if(player.m.effective.gte(178))return 10;
+		if(player.m.effective.gte(164))return 7;
+		if(player.m.effective.gte(161))return 5;
+		if(player.m.effective.gte(154))return 3;
+		if(player.m.effective.gte(151))return 2;
+		if(player.m.effective.gte(133))return 1;
+		if(player.m.effective.gte(130))return 0.8;
+		if(player.m.effective.gte(127))return 0.6;
+		if(player.m.effective.gte(123))return 0.45;
+		if(player.m.effective.gte(120))return 0.3;
+		if(player.m.effective.gte(119))return 0.2;
+		if(player.m.effective.gte(118))return 0.1;
+		if(player.m.effective.gte(117))return 0.05;
+		if(player.m.effective.gte(116))return 0.02;
+		if(player.m.effective.gte(115))return 0.01;
+		if(player.m.effective.gte(113))return 0.005;
+		if(player.m.effective.gte(110))return 0.002;
 		return 0;
 	},
 	tabFormat: {
@@ -624,22 +624,22 @@ addLayer("t", {
 				["display-text",function(){return "You have "+format(player.t.specialPoints[41])+" Hyper-Dilated Transcend Points, Hyper-Prestige Point gain ^"+format(layers.t.getSpecialEffect(41),4)}],
 				["display-text",function(){return "You have "+format(player.t.specialPoints[42])+" Super-Hardcapped Transcend Points, 1st Milestone's softcap starts "+format(layers.t.getSpecialEffect(42),4)+"x later"}],
 			],
-			unlocked(){return player.m.points.gte(130);}
+			unlocked(){return player.m.effective.gte(130);}
 		},
 	},
 	update(){
 		if(player.t.points.gte(layers.t.hardcap))player.t.points=new Decimal(layers.t.hardcap);
-		if(player.m.points.gte(130) && player.t.activeChallenge){
+		if(player.m.effective.gte(130) && player.t.activeChallenge){
 			if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain())){
 				player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain();
 			}
 		}
-		if(player.m.points.gte(140)&&player.t.activeChallenge){
+		if(player.m.effective.gte(140)&&player.t.activeChallenge){
 			if(layers.t.challenges[player.t.activeChallenge].canComplete()){
 				player.t.challenges[player.t.activeChallenge]++;
 			}
 		}
-		if(player.m.points.gte(176)){
+		if(player.m.effective.gte(176)){
 			if(layers.t.challenges[11].canComplete()){
 				player.t.challenges[11]++;
 			}
@@ -648,7 +648,7 @@ addLayer("t", {
 			}
 			player.t.highestAPC[11]=player.t.highestAPC[0];
 		}
-		if(player.m.points.gte(177)){
+		if(player.m.effective.gte(177)){
 			if(layers.t.challenges[12].canComplete()){
 				player.t.challenges[12]++;
 			}
@@ -657,7 +657,7 @@ addLayer("t", {
 			}
 			player.t.highestAPC[12]=player.t.highestAPC[0];
 		}
-		if(player.m.points.gte(188)){
+		if(player.m.effective.gte(188)){
 			if(layers.t.challenges[21].canComplete()){
 				player.t.challenges[21]++;
 			}

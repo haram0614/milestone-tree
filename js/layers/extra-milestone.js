@@ -103,7 +103,7 @@ addLayer("em", {
         },
 	],
 	branches(){
-		if(player.m.points.gte(184)){//unstable
+		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1200<400)return ["pb"];
 			if(Date.now()%1200<800)return ["pe"];
 			return ["mm"];

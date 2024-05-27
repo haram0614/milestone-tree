@@ -343,8 +343,8 @@ addLayer("mm", {
 		return b;
 	}, // Can be a function that takes requirement increases into account
     resource: "meta-milestones", // Name of prestige currency
-    baseResource: "milestones", // Name of resource prestige is based on
-    baseAmount() {return player.m.points}, // Get the current amount of baseResource
+    baseResource() {if(player.r.stage>=1)return "effective milestones";return "milestones"}, // Name of resource prestige is based on
+    baseAmount() {return player.m.effective}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -361,7 +361,7 @@ addLayer("mm", {
     hotkeys: [
         {key: "M", description: "Shift+M: Get Meta-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(40)},
+    layerShown(){return player.m.effective.gte(40)},
 	resetsNothing(){return true},
 	autoPrestige(){return player.em.points.gte(1)},
 	milestones: METAMILESTONES,

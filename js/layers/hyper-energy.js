@@ -24,9 +24,9 @@ addLayer("he", {
     hotkeys: [
         {key: "ctrl+e", description: "Ctrl+E: Collect Hyper Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(150)},
+    layerShown(){return player.m.effective.gte(150)},
 	branches(){
-		if(player.m.points.gte(189)){//unstable
+		if(player.m.effective.gte(189)){//unstable
 			if(Date.now()%1300<300)return ["se","um"];
 			if(Date.now()%1300<600)return ["se","em"];
 			if(Date.now()%1300<900)return ["um","em"];
@@ -45,7 +45,7 @@ addLayer("he", {
 	resetsNothing:true,
 	doReset(l){},
 	canBuyMax:true,
-	autoPrestige(){return player.m.points.gte(150)},
+	autoPrestige(){return player.m.effective.gte(150)},
 	upgrades: {
         rows: 2,
         cols: 4,

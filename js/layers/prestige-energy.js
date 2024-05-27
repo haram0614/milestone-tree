@@ -24,9 +24,9 @@ addLayer("pe", {
     hotkeys: [
         {key: "e", description: "E: Collect Prestige Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(125)},
+    layerShown(){return player.m.effective.gte(125)},
 	branches(){
-		if(player.m.points.gte(184)){//unstable
+		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1400<350)return ["mm"];
 			if(Date.now()%1400<700)return [["p",2]];
 			if(Date.now()%1400<1050)return ["p"];
@@ -54,7 +54,7 @@ addLayer("pe", {
 	resetsNothing:true,
 	doReset(l){},
 	canBuyMax:true,
-	autoPrestige(){return player.m.points.gte(126)},
+	autoPrestige(){return player.m.effective.gte(126)},
 	upgrades: {
         rows: 2,
         cols: 4,

@@ -53,14 +53,14 @@ addLayer("um", {
     hotkeys: [
         {key: "u", description: "U: Get Upgraded Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(160)},
+    layerShown(){return player.m.effective.gte(160)},
 	resetsNothing(){return true},
 	autoPrestige(){return false},
     resetDescription: "Get ",
 	doReset(){},
 	tabFormat: ["main-display","prestige-button","resource-display"],
 	branches(){
-		if(player.m.points.gte(184)){
+		if(player.m.effective.gte(184)){
 			return ["pb"];
 		}
 		return ["m"];

@@ -27,9 +27,9 @@ addLayer("pb", {
     hotkeys: [
         {key: "b", description: "B: Reset for prestige boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(50)},
+    layerShown(){return player.m.effective.gte(50)},
 	branches(){
-		if(player.m.points.gte(184)){//unstable
+		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1400<350)return [["mm",2]];
 			if(Date.now()%1400<700)return ["mm"];
 			if(Date.now()%1400<1050)return [["p",2]];
@@ -46,8 +46,8 @@ addLayer("pb", {
 		if(x.gte(15)){
 			let scaling=x.sub(15).pow(2).div(2600);
 			if(hasUpgrade("t",24))scaling=scaling.div(1.1);
-			if(player.m.points.gte(111))scaling=scaling.div(1.048);
-			if(player.m.points.gte(117))scaling=scaling.div(1.02);
+			if(player.m.effective.gte(111))scaling=scaling.div(1.048);
+			if(player.m.effective.gte(117))scaling=scaling.div(1.02);
 			if(hasUpgrade("pb",41))scaling=scaling.div(upgradeEffect("pb",41));
 			p=p.add(scaling);
 		}
@@ -167,14 +167,14 @@ addLayer("pb", {
 			title: "Prestige Boost Upgrade 31",
             description: "Prestige Boost affects the 1st Milestone's softcap at a reduced rate.",
             cost: new Decimal(90),
-            unlocked() { return player.m.points.gte(111)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(111)}, // The upgrade is only visible when this is true
 			effect() {
 				let e=0.1;
 				if(hasUpgrade("pb",32))e+=0.1;
 				if(hasUpgrade("pb",33))e+=0.1;
 				if(hasUpgrade("pb",34))e+=0.1;
 				if(hasUpgrade("pb",43))e+=0.1;
-				if(player.m.points.gte(180))e+=0.02*(player.m.points.sub(179).toNumber());
+				if(player.m.effective.gte(180))e+=0.02*(player.m.points.sub(179).min(0.5).toNumber());
 				let p=tmp.pb.effect.pow(e);
 				return p;
             },
@@ -184,19 +184,19 @@ addLayer("pb", {
 			title: "Prestige Boost Upgrade 32",
             description: "Prestige Boost Upgrade 31 is boosted.",
             cost: new Decimal(92),
-            unlocked() { return player.m.points.gte(111)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(111)}, // The upgrade is only visible when this is true
         },
 		33: {
 			title: "Prestige Boost Upgrade 33",
             description: "Prestige Boost Upgrade 31 is boosted.",
             cost: new Decimal(95),
-            unlocked() { return player.m.points.gte(111)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(111)}, // The upgrade is only visible when this is true
         },
 		34: {
 			title: "Prestige Boost Upgrade 34",
             description: "Prestige Boost Upgrade 31 is boosted.",
             cost: new Decimal(98),
-            unlocked() { return player.m.points.gte(111)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(111)}, // The upgrade is only visible when this is true
         },
 		41: {
 			title: "Prestige Boost Upgrade 41",
@@ -205,7 +205,7 @@ addLayer("pb", {
 				if(player.ap.activeChallenge!=12)return new Decimal(Infinity);
 				return new Decimal(102);
 			},
-            unlocked() { return player.m.points.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
 			effect() {
 				let p=player.sp.points.add(1e20).log10().log10().div(200);
 				return p.add(1);
@@ -219,7 +219,7 @@ addLayer("pb", {
 				if(player.ap.activeChallenge!=21)return new Decimal(Infinity);
 				return new Decimal(109);
 			},
-            unlocked() { return player.m.points.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
 			effect() {
 				let e=0.01;
 				let p=tmp.pb.effect.pow(e);
@@ -233,7 +233,7 @@ addLayer("pb", {
             cost(){
 				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
 				return new Decimal(77);
-			},unlocked() { return player.m.points.gte(132)}, // The upgrade is only visible when this is true
+			},unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
         },
 		44: {
 			title: "Super-Prestige Upgrade 44",
@@ -242,22 +242,22 @@ addLayer("pb", {
 				if(player.ap.challenges[31]<18)return new Decimal(Infinity);
 				return new Decimal(112);
 			},
-            unlocked() { return player.m.points.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
         },
 	},
 	
-	resetsNothing(){return player.m.points.gte(65)},
+	resetsNothing(){return player.m.effective.gte(65)},
 		doReset(l){
 			if(l=="pb"){return;}
-			if(l=="hp")if(player.m.points.gte(70))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
-			if(l=="ap")if(player.m.points.gte(81))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
-			if(l=="t")if(player.m.points.gte(101))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
-			if(l=="hb")if(player.m.points.gte(104))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
+			if(l=="hp")if(player.m.effective.gte(70))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
+			if(l=="ap")if(player.m.effective.gte(81))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
+			if(l=="t")if(player.m.effective.gte(101))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
+			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
 			if(l=="a")layerDataReset("pb",["upgrades"]);
 		},
-	//autoPrestige(){return player.m.points.gte(80)},
+	//autoPrestige(){return player.m.effective.gte(80)},
 	update(){
-		if(player.m.points.gte(80)&&player.ap.activeChallenge!=11){//quick autobuy
+		if(player.m.effective.gte(80)&&player.ap.activeChallenge!=11){//quick autobuy
 			while(true){
 				let req=layers.pb.requires().mul(layers.pb.base.pow(Decimal.pow(player.pb.points,layers.pb.exponent())));
 				if(player.p.points.gt(req))player.pb.points=player.pb.points.add(1);

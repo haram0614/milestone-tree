@@ -24,9 +24,9 @@ addLayer("se", {
     hotkeys: [
         {key: "E", description: "Shift+E: Collect Super Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(140)},
+    layerShown(){return player.m.effective.gte(140)},
 	branches(){
-		if(player.m.points.gte(186)){//unstable
+		if(player.m.effective.gte(186)){//unstable
 			if(Date.now()%1500<500)return ["pb","pe"];
 			if(Date.now()%1500<1000)return ["sp","pb"];
 			return ["sp","pe"];
@@ -47,7 +47,7 @@ addLayer("se", {
 	resetsNothing:true,
 	doReset(l){},
 	canBuyMax:true,
-	autoPrestige(){return player.m.points.gte(140)},
+	autoPrestige(){return player.m.effective.gte(140)},
 	upgrades: {
         rows: 2,
         cols: 4,

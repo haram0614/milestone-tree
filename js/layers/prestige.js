@@ -18,10 +18,10 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
 		if(player.ap.activeChallenge==31)return new Decimal(0);
-		if(player.m.points.gte(6))mult=mult.mul(tmp.m.milestone6Effect);
+		if(player.m.effective.gte(6))mult=mult.mul(tmp.m.milestone6Effect);
 		if(hasUpgrade("p",13))mult=mult.mul(upgradeEffect("p",13));
 		if(hasUpgrade("p",14))mult=mult.mul(upgradeEffect("p",14));
-		if(player.m.points.gte(22))mult=mult.mul(player.um.points.gte(22)?100:22);
+		if(player.m.effective.gte(22))mult=mult.mul(player.um.points.gte(22)?100:22);
 		if(hasUpgrade("sp",13))mult=mult.mul(upgradeEffect("sp",13));
 		if(hasUpgrade("sp",14))mult=mult.mul(upgradeEffect("sp",14));
 		if(hasUpgrade("hp",13))mult=mult.mul(upgradeEffect("hp",13));
@@ -48,7 +48,7 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(5)},
+    layerShown(){return player.m.effective.gte(5)},
 	upgrades: {
         rows: 4,
         cols: 4,
@@ -59,14 +59,14 @@ addLayer("p", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=3;
-				if(player.m.points.gte(11))base+=0.5;
-				if(player.m.points.gte(31))base+=0.5;
-				if(player.m.points.gte(44))base+=0.2;
-				if(player.m.points.gte(54))base+=0.3;
-				if(player.m.points.gte(64))base+=0.1;
-				if(player.m.points.gte(74))base+=0.244;
-				if(player.m.points.gte(84))base+=0.156;
-				if(player.m.points.gte(94))base+=0.1;
+				if(player.m.effective.gte(11))base+=0.5;
+				if(player.m.effective.gte(31))base+=0.5;
+				if(player.m.effective.gte(44))base+=0.2;
+				if(player.m.effective.gte(54))base+=0.3;
+				if(player.m.effective.gte(64))base+=0.1;
+				if(player.m.effective.gte(74))base+=0.244;
+				if(player.m.effective.gte(84))base+=0.156;
+				if(player.m.effective.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.9;
 				if(player.um.points.gte(11))base+=1;
 				if(player.um.points.gte(31))base+=0.5;
@@ -83,14 +83,14 @@ addLayer("p", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=2;
-				if(player.m.points.gte(12))base+=0.4;
-				if(player.m.points.gte(32))base+=0.2;
-				if(player.m.points.gte(44))base+=0.2;
-				if(player.m.points.gte(54))base+=0.2;
-				if(player.m.points.gte(64))base+=0.1;
-				if(player.m.points.gte(74))base+=0.1;
-				if(player.m.points.gte(84))base+=0.1;
-				if(player.m.points.gte(94))base+=0.1;
+				if(player.m.effective.gte(12))base+=0.4;
+				if(player.m.effective.gte(32))base+=0.2;
+				if(player.m.effective.gte(44))base+=0.2;
+				if(player.m.effective.gte(54))base+=0.2;
+				if(player.m.effective.gte(64))base+=0.1;
+				if(player.m.effective.gte(74))base+=0.1;
+				if(player.m.effective.gte(84))base+=0.1;
+				if(player.m.effective.gte(94))base+=0.1;
 				if(player.um.points.gte(10))base+=0.1;
 				if(player.um.points.gte(12))base+=0.5;
 				if(player.um.points.gte(32))base+=0.5;
@@ -104,17 +104,17 @@ addLayer("p", {
 			title: "Prestige Upgrade 13",
             description: "Prestige Point gain is boosted by your prestige points.",
             cost: new Decimal(100000000),
-            unlocked() { return player.m.points.gte(10)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(10)}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=1.4;
-				if(player.m.points.gte(13))base+=0.1;
-				if(player.m.points.gte(33))base+=0.05;
-				if(player.m.points.gte(44))base+=0.05;
-				if(player.m.points.gte(54))base+=0.1;
-				if(player.m.points.gte(64))base+=0.05;
-				if(player.m.points.gte(74))base+=0.1;
-				if(player.m.points.gte(84))base+=0.05;
-				if(player.m.points.gte(94))base+=0.05;
+				if(player.m.effective.gte(13))base+=0.1;
+				if(player.m.effective.gte(33))base+=0.05;
+				if(player.m.effective.gte(44))base+=0.05;
+				if(player.m.effective.gte(54))base+=0.1;
+				if(player.m.effective.gte(64))base+=0.05;
+				if(player.m.effective.gte(74))base+=0.1;
+				if(player.m.effective.gte(84))base+=0.05;
+				if(player.m.effective.gte(94))base+=0.05;
 				if(player.um.points.gte(13))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(33))base+=0.15;//2.2
@@ -128,17 +128,17 @@ addLayer("p", {
 			title: "Prestige Upgrade 14",
             description: "Prestige Point gain is boosted by your prestige points.",
             cost: new Decimal(1e11),
-            unlocked() { return player.m.points.gte(10)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(10)}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=1.2;
-				if(player.m.points.gte(14))base+=0.05;
-				if(player.m.points.gte(34))base+=0.1;
-				if(player.m.points.gte(44))base+=0.05;
-				if(player.m.points.gte(54))base+=0.1;
-				if(player.m.points.gte(64))base+=0.05;
-				if(player.m.points.gte(74))base+=0.1;
-				if(player.m.points.gte(84))base+=0.05;
-				if(player.m.points.gte(94))base+=0.05;
+				if(player.m.effective.gte(14))base+=0.05;
+				if(player.m.effective.gte(34))base+=0.1;
+				if(player.m.effective.gte(44))base+=0.05;
+				if(player.m.effective.gte(54))base+=0.1;
+				if(player.m.effective.gte(64))base+=0.05;
+				if(player.m.effective.gte(74))base+=0.1;
+				if(player.m.effective.gte(84))base+=0.05;
+				if(player.m.effective.gte(94))base+=0.05;
 				if(player.um.points.gte(14))base+=0.05;
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(34))base+=0.15;//2
@@ -152,25 +152,25 @@ addLayer("p", {
 			title: "Prestige Upgrade 21",
             description(){ if(player.um.points.gte(21))return "6th Milestone's effect is squared";return "6th Milestone's effect ^1.5";},
             cost: new Decimal(1e25),
-            unlocked() { return player.m.points.gte(15)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(15)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Prestige Upgrade 22",
             description(){ if(player.um.points.gte(21))return "6th Milestone's effect is squared";return "6th Milestone's effect ^1.5";},
             cost: new Decimal(1e33),
-            unlocked() { return player.m.points.gte(15)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(15)}, // The upgrade is only visible when this is true
         },
 		23: {
 			title: "Prestige Upgrade 23",
             description: "Third Milestone's effect is boosted by your prestige points.",
             cost: new Decimal(1e63),
-            unlocked() { return player.m.points.gte(21)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(21)}, // The upgrade is only visible when this is true
         },
 		24: {
 			title: "Prestige Upgrade 24",
             description: "Third Milestone's effect is boosted by your prestige points.",
             cost: new Decimal(1e80),
-            unlocked() { return player.m.points.gte(21)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(21)}, // The upgrade is only visible when this is true
         },
 		31: {
 			title: "Prestige Upgrade 31",
@@ -188,26 +188,26 @@ addLayer("p", {
 				if(player.um.points.gte(45)&&hasUpgrade("p",34))p=p.mul(1.001);
 				return p.add(1);
 			},
-            unlocked() { return player.m.points.gte(45)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(45)}, // The upgrade is only visible when this is true
             effectDisplay() { return format(this.effect(),4)+"x weaker" }, // Add formatting to the effect
         },
 		32: {
 			title: "Prestige Upgrade 32",
             description: "Prestige Upgrade 31 is boosted.",
             cost: new Decimal("1e8740"),
-            unlocked() { return player.m.points.gte(45)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(45)}, // The upgrade is only visible when this is true
         },
 		33: {
 			title: "Prestige Upgrade 33",
             description: "Prestige Upgrade 31 is boosted.",
             cost: new Decimal("1e10927"),
-            unlocked() { return player.m.points.gte(45)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(45)}, // The upgrade is only visible when this is true
         },
 		34: {
 			title: "Prestige Upgrade 34",
             description: "Prestige Upgrade 31 is boosted.",
             cost: new Decimal("1e16335"),
-            unlocked() { return player.m.points.gte(45)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(45)}, // The upgrade is only visible when this is true
         },
 		41: {
 			title: "Prestige Upgrade 41",
@@ -216,7 +216,7 @@ addLayer("p", {
 				if(player.ap.challenges[22]<19.7)return new Decimal(Infinity);
 				return new Decimal("e185e9");
 			},
-            unlocked() { return player.m.points.gte(124)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
         },
 		42: {
 			title: "Prestige Upgrade 42",
@@ -225,7 +225,7 @@ addLayer("p", {
 				if(player.ap.challenges[21]<14.1)return new Decimal(Infinity);
 				return new Decimal("e210e9");
 			},
-            unlocked() { return player.m.points.gte(124)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
         },
 		43: {
 			title: "Prestige Upgrade 43",
@@ -234,7 +234,7 @@ addLayer("p", {
 				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
 				return new Decimal("e188e6");
 			},
-            unlocked() { return player.m.points.gte(124)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
         },
 		44: {
 			title: "Prestige Upgrade 44",
@@ -243,7 +243,7 @@ addLayer("p", {
 				if(player.t.activeChallenge!=22)return new Decimal(Infinity);
 				return new Decimal("e501000");
 			},
-            unlocked() { return player.m.points.gte(124)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
 			currencyDisplayName(){ return "points"},
 			currencyInternalName(){ return "points"},
         },
@@ -277,13 +277,13 @@ addLayer("p", {
 				  let b=0.03;
 				  if(hasUpgrade("p",43))b+=0.011;
 				  if(hasUpgrade("p",44))b+=0.011;
-				  if(player.m.points.gte(162))b+=0.008;
+				  if(player.m.effective.gte(162))b+=0.008;
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
 				  return eff;
 			  },
 			  unlocked(){
-				  return player.m.points.gte(123);
+				  return player.m.effective.gte(123);
 			  }
 		},
 		12:{
@@ -317,15 +317,15 @@ addLayer("p", {
 				  return eff;
 			  },
 			  unlocked(){
-				  return player.m.points.gte(156);
+				  return player.m.effective.gte(156);
 			  }
 		},
 	},
 	branches: ["m"],
 	passiveGeneration(){
 		if(player.um.points.gte(20))return 1e20;
-		if(player.m.points.gte(135))return 1e10;
-		if(player.m.points.gte(20))return 100;
+		if(player.m.effective.gte(135))return 1e10;
+		if(player.m.effective.gte(20))return 100;
 		return 0;
 	},
 	softcap(){
@@ -338,23 +338,23 @@ addLayer("p", {
 	},
 		doReset(l){
 			if(l=="p"){return;}
-			if(l=="sp")if(player.um.points.gte(26))layerDataReset("p",["upgrades","buyables"]);else if(player.m.points.gte(26))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="pb")if(player.m.points.gte(60))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="hp")if(player.m.points.gte(65))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="ap")if(player.m.points.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="t")if(player.m.points.gte(100))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="hb")if(player.m.points.gte(104))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="sp")if(player.um.points.gte(26))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(26))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="pb")if(player.m.effective.gte(60))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="hp")if(player.m.effective.gte(65))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="ap")if(player.m.effective.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="t")if(player.m.effective.gte(100))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="a")layerDataReset("p",["upgrades"]);
 		},
 	update(){
-		if(player.m.points.gte(124)){
+		if(player.m.effective.gte(124)){
 			var target=player.p.points.add(1).div(1).log("ee10").max(0.1).log(2);
 			target=target.add(1).floor();
 			if(target.gt(player.p.buyables[11])){
 				player.p.buyables[11]=target;
 			}
 		}
-		if(player.m.points.gte(156)){
+		if(player.m.effective.gte(156)){
 			var target=player.p.points.add(1).log("1e100000");
 			if(target.gte(3)){
 				let p=1.3;

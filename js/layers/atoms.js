@@ -27,9 +27,9 @@ addLayer("a", {
     hotkeys: [
         {key: "A", description: "Shift+A: Reset for atoms", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.points.gte(175)},
+    layerShown(){return player.m.effective.gte(175)},
 	branches(){
-		if(player.m.points.gte(192)){//unstable
+		if(player.m.effective.gte(192)){//unstable
 			if(Date.now()%1110<370)return ["ap","he"];
 			if(Date.now()%1110<740)return ["hb","he"];
 			return ["ap","hb"];
@@ -63,9 +63,9 @@ addLayer("a", {
 			if(l=="t"){return;}
 			if(l=="a"){return;}
 		},
-	//autoPrestige(){return player.m.points.gte(999)},
+	//autoPrestige(){return player.m.effective.gte(999)},
 	update(){
-		if(player.m.points.gte(999)){//quick autobuy
+		if(player.m.effective.gte(999)){//quick autobuy
 			while(true){
 				let req=layers.a.requires().mul(layers.a.base.pow(Decimal.pow(player.a.points,layers.a.exponent())));
 				if(player.a.points.gt(req))player.a.points=player.a.points.add(1);
@@ -80,7 +80,7 @@ addLayer("a", {
 			title: "Atom Upgrade 11",
             description: "Atom affects the 1st Milestone's softcap.",
             cost: new Decimal(5),
-            unlocked() { return player.m.points.gte(179)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(179)}, // The upgrade is only visible when this is true
 			effect() {
 				let p=tmp.a.effect;
 				return p;
@@ -91,19 +91,19 @@ addLayer("a", {
 			title: "Atom Upgrade 12",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(6),
-            unlocked() { return player.m.points.gte(179)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(179)}, // The upgrade is only visible when this is true
         },
 		13: {
 			title: "Atom Upgrade 13",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(25),
-            unlocked() { return player.m.points.gte(185)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(185)}, // The upgrade is only visible when this is true
         },
 		14: {
 			title: "Atom Upgrade 14",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(26),
-            unlocked() { return player.m.points.gte(185)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(185)}, // The upgrade is only visible when this is true
         },
 	},
 	

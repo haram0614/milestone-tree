@@ -932,7 +932,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(109)},
             done() {return player[this.layer].points.gte(110)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Transcend challenge 1's base goal is decreased to x^2. You can complete an AP challenge without exiting it.";
+				if(player.m.effective.gte(183))return "Transcend challenge 1's base goal is decreased to x^2. You can complete an AP challenge without exiting it.";
 				return "Gain 0.2% of Transcend Point gain per second. Transcend challenge 1's base goal is decreased to x^2. You can complete an AP challenge without exiting it.";
 			},
         },
@@ -957,7 +957,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(112)},
             done() {return player[this.layer].points.gte(113)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "6th and 27th milestone's effect ^(meta-milestones^0.3).";
+				if(player.m.effective.gte(183))return "6th and 27th milestone's effect ^(meta-milestones^0.3).";
 				return "Gain additional 0.3% of Transcend Point gain per second (total 0.5%). 6th and 27th milestone's effect ^(meta-milestones^0.3).";
 			},
         },
@@ -974,7 +974,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(114)},
             done() {return player[this.layer].points.gte(115)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Unlock a Transcend challenge.";
+				if(player.m.effective.gte(183))return "Unlock a Transcend challenge.";
 				return "Gain additional 0.5% of Transcend Point gain per second (total 1%). Unlock a Transcend challenge.";
 			},
         },
@@ -983,7 +983,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(115)},
             done() {return player[this.layer].points.gte(116)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Autoget Hyper Boosts.";
+				if(player.m.effective.gte(183))return "Autoget Hyper Boosts.";
 				return "Gain additional 1% of Transcend Point gain per second (total 2%). Autoget Hyper Boosts.";
 			},
         },
@@ -992,7 +992,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(116)},
             done() {return player[this.layer].points.gte(117)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Prestige boost is cheaper.";
+				if(player.m.effective.gte(183))return "Prestige boost is cheaper.";
 				return "Gain additional 3% of Transcend Point gain per second (total 5%). Prestige boost is cheaper.";
 			},
         },
@@ -1001,7 +1001,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(117)},
             done() {return player[this.layer].points.gte(118)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "4th Milestone is boosted.";
+				if(player.m.effective.gte(183))return "4th Milestone is boosted.";
 				return "Gain additional 5% of Transcend Point gain per second (total 10%). 4th Milestone is boosted.";
 			},
         },
@@ -1010,7 +1010,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(118)},
             done() {return player[this.layer].points.gte(119)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Hyper boost is cheaper.";
+				if(player.m.effective.gte(183))return "Hyper boost is cheaper.";
 				return "Gain additional 10% of Transcend Point gain per second (total 20%). Hyper boost is cheaper.";
 			},
         },
@@ -1019,7 +1019,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(119)},
             done() {return player[this.layer].points.gte(120)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "AP challenge 1-5 goals are reduced, and you can complete an AP challenge a non-integer number of times.";
+				if(player.m.effective.gte(183))return "AP challenge 1-5 goals are reduced, and you can complete an AP challenge a non-integer number of times.";
 				return "Gain additional 10% of Transcend Point gain per second (total 30%). AP challenge 1-5 goals are reduced, and you can complete an AP challenge a non-integer number of times.";
 			},
         },
@@ -1044,7 +1044,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(122)},
             done() {return player[this.layer].points.gte(123)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Unlock a Prestige buyable.";
+				if(player.m.effective.gte(183))return "Unlock a Prestige buyable.";
 				return "Gain additional 15% of Transcend Point gain per second (total 45%). Unlock a Prestige buyable.";
 			},
         },
@@ -1077,7 +1077,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(126)},
             done() {return player[this.layer].points.gte(127)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Unlock a new row of Super-Prestige upgrades.";
+				if(player.m.effective.gte(183))return "Unlock a new row of Super-Prestige upgrades.";
 				return "Gain additional 15% of Transcend Point gain per second (total 60%). Unlock a new row of Super-Prestige upgrades.";
 			},
         },
@@ -1102,7 +1102,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(129)},
             done() {return player[this.layer].points.gte(130)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "Autobuy the second Super-Prestige buyable. AP challenge 1-3 and 6 goals are reduced. Unlock a new tab in Transcend.";
+				if(player.m.effective.gte(183))return "Autobuy the second Super-Prestige buyable. AP challenge 1-3 and 6 goals are reduced. Unlock a new tab in Transcend.";
 				return "Gain additional 20% of Transcend Point gain per second (total 80%). Autobuy the second Super-Prestige buyable. AP challenge 1-3 and 6 goals are reduced. Unlock a new tab in Transcend.";
 			},
         },
@@ -1127,7 +1127,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(132)},
             done() {return player[this.layer].points.gte(133)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.m.points.gte(183))return "The 105th milestone's effect ^1.2";
+				if(player.m.effective.gte(183))return "The 105th milestone's effect ^1.2";
 				return "Gain additional 20% of Transcend Point gain per second (total 100%). The 105th milestone's effect ^1.2";
 			},
         },
@@ -1260,7 +1260,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(150)},
             done() {return player[this.layer].points.gte(151)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.points.gte(183))return "Gain 100% of Transcend Point gain per second.";
+				if(player.m.effective.gte(183))return "Gain 100% of Transcend Point gain per second.";
 				return "Gain additional 100% of Transcend Point gain per second (total 200%).";
 			},
         },
@@ -1285,7 +1285,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(153)},
             done() {return player[this.layer].points.gte(154)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.points.gte(183))return "Gain additional 100% of Transcend Point gain per second (total 200%).";
+				if(player.m.effective.gte(183))return "Gain additional 100% of Transcend Point gain per second (total 200%).";
 				return "Gain additional 100% of Transcend Point gain per second (total 300%).";
 			},
         },
@@ -1342,7 +1342,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(160)},
             done() {return player[this.layer].points.gte(161)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.points.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 400%).";
+				if(player.m.effective.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 400%).";
 				return "Gain additional 200% of Transcend Point gain per second (total 500%)."
 			},
         },
@@ -1367,7 +1367,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(163)},
             done() {return player[this.layer].points.gte(164)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.points.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 600%).";
+				if(player.m.effective.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 600%).";
 				return "Gain additional 200% of Transcend Point gain per second (total 700%)."
 			},
         },
@@ -1480,7 +1480,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(177)},
             done() {return player[this.layer].points.gte(178)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.points.gte(183))return "Gain additional 300% of Transcend Point gain per second (total 900%).";
+				if(player.m.effective.gte(183))return "Gain additional 300% of Transcend Point gain per second (total 900%).";
 				return "Gain additional 300% of Transcend Point gain per second (total 1000%)."
 			},
         },
@@ -1655,9 +1655,20 @@ var MILESTONES=[
 				return "Unlock a new layer."
 			},
         },
+		{
+			requirementDescription: "200th Milestone",
+            unlocked() {return player[this.layer].best.gte(199)},
+            done() {return player[this.layer].points.gte(200)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Current Endgame"
+			},
+        },
 	];
 
 var st=function(){
+	if(player.m.effective.lte(this.id)){
+		return {backgroundColor: "#bf8f8f"};
+	}
 	if(player.um.points.gt(this.id)){
 		return {backgroundColor: "#cccc00"};
 	}
@@ -1674,9 +1685,11 @@ addLayer("m", {
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
+		effective: new Decimal(0),
     }},
     color: "#793784",
     requires(){
+		if(player.m.points.gte(200))return new Decimal(10);
 		if(player.m.points.gte(199))return new Decimal(Infinity);
 		return new Decimal(10);
 	},
@@ -1693,13 +1706,14 @@ addLayer("m", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
 	base(){
+		if(player.r.stage==1)return new Decimal(10);
 		if(player.m.points.gte(195))return player.m.points.sub(192);
 		if(player.m.points.gte(190))return player.m.points.div(5).sub(36);
 		return new Decimal(1.5);
 	},
 	exponent: function(){
 		var base=new Decimal(1.7);
-		if(player.m.points.gte(195)){
+		if(player.m.points.gte(195) || player.r.stage==1){
 			base=new Decimal(2);
 		}
 			
@@ -1721,7 +1735,9 @@ addLayer("m", {
 		if(hasUpgrade("he",12))firstScaling=firstScaling.div(upgradeEffect("he",12));
 		
 		var secondScaling=player.m.points.sub(tmp.m.getScalingStart2).max(0);
-		if(player.m.points.gte(180)){
+		if(player.r.stage==1){
+			secondScaling=secondScaling.pow(2).div(20);
+		}else if(player.m.points.gte(180)){
 			secondScaling=secondScaling.div(20);
 		}else if(player.m.points.gte(150)){
 			secondScaling=new Decimal(0.25);
@@ -1732,6 +1748,7 @@ addLayer("m", {
 	},
     getScalingStart(){
         let start=new Decimal(14);
+		if(player.r.stage==1)start = new Decimal(25);
 		if(hasUpgrade("t",52))start=start.add(upgradeEffect("t",52));
 		return start;
     },
@@ -1750,25 +1767,25 @@ addLayer("m", {
 		if(player.um.points.gte(48))return 1.2;
 		if(player.um.points.gte(43))return 1.1;
 		if(player.um.points.gte(4))return 1;
-		if(player.m.points.gte(118))return 0.8;
-		if(player.m.points.gte(109))return 0.76;
-		if(player.m.points.gte(104))return 0.75;
-		if(player.m.points.gte(98))return 0.72;
-		if(player.m.points.gte(93))return 0.7;
-		if(player.m.points.gte(88))return 0.67;
-		if(player.m.points.gte(83))return 0.66;
-		if(player.m.points.gte(78))return 0.6426;
-		if(player.m.points.gte(73))return 0.62;
-		if(player.m.points.gte(68))return 0.61;
-		if(player.m.points.gte(63))return 0.5875;
-		if(player.m.points.gte(58))return 0.57;
-		if(player.m.points.gte(53))return 0.5687;
-		if(player.m.points.gte(48))return 0.55;
-		if(player.m.points.gte(43))return 0.533;
+		if(player.m.effective.gte(118))return 0.8;
+		if(player.m.effective.gte(109))return 0.76;
+		if(player.m.effective.gte(104))return 0.75;
+		if(player.m.effective.gte(98))return 0.72;
+		if(player.m.effective.gte(93))return 0.7;
+		if(player.m.effective.gte(88))return 0.67;
+		if(player.m.effective.gte(83))return 0.66;
+		if(player.m.effective.gte(78))return 0.6426;
+		if(player.m.effective.gte(73))return 0.62;
+		if(player.m.effective.gte(68))return 0.61;
+		if(player.m.effective.gte(63))return 0.5875;
+		if(player.m.effective.gte(58))return 0.57;
+		if(player.m.effective.gte(53))return 0.5687;
+		if(player.m.effective.gte(48))return 0.55;
+		if(player.m.effective.gte(43))return 0.533;
 		return 0.5;
 	},
 	milestone4Effect(){
-		if(player.m.points.gte(139)){
+		if(player.m.effective.gte(139)){
 			return Decimal.pow(1.05,player.m.points).pow(layers.m.milestone4EffectExponent());
 		}
 		return player.m.points.sub(2).pow(layers.m.milestone4EffectExponent());
@@ -1776,42 +1793,42 @@ addLayer("m", {
 	milestone3Effect(){
 		if(player.ap.activeChallenge==21)return new Decimal(1);
 		var m=Decimal.log10(player.points.add(20)).pow(0.9);
-		if(player.m.points.gte(41))m=m.pow(player.um.points.gte(41)?1.005:1.003);
-		if(player.m.points.gte(46))m=m.pow(player.um.points.gte(46)?1.005:1.001);
-		if(player.m.points.gte(51))m=m.pow(1.00175);
-		if(player.m.points.gte(56))m=m.pow(1.00078);
-		if(player.m.points.gte(61))m=m.pow(1.0005);
-		if(player.m.points.gte(66))m=m.pow(1.0005);
-		if(player.m.points.gte(71))m=m.pow(1.001236);
-		if(player.m.points.gte(76))m=m.pow(1.00157);
-		if(player.m.points.gte(81))m=m.pow(1.0005);
-		if(player.m.points.gte(86))m=m.pow(1.0005);
-		if(player.m.points.gte(91))m=m.pow(1.0005);
-		if(player.m.points.gte(96))m=m.pow(1.0005);
-		if(player.m.points.gte(107))m=m.pow(1.002);
+		if(player.m.effective.gte(41))m=m.pow(player.um.points.gte(41)?1.005:1.003);
+		if(player.m.effective.gte(46))m=m.pow(player.um.points.gte(46)?1.005:1.001);
+		if(player.m.effective.gte(51))m=m.pow(1.00175);
+		if(player.m.effective.gte(56))m=m.pow(1.00078);
+		if(player.m.effective.gte(61))m=m.pow(1.0005);
+		if(player.m.effective.gte(66))m=m.pow(1.0005);
+		if(player.m.effective.gte(71))m=m.pow(1.001236);
+		if(player.m.effective.gte(76))m=m.pow(1.00157);
+		if(player.m.effective.gte(81))m=m.pow(1.0005);
+		if(player.m.effective.gte(86))m=m.pow(1.0005);
+		if(player.m.effective.gte(91))m=m.pow(1.0005);
+		if(player.m.effective.gte(96))m=m.pow(1.0005);
+		if(player.m.effective.gte(107))m=m.pow(1.002);
 		if(player.um.points.gte(3))m=m.pow(1.001);//0.9193793030048590903868028321863
 		var b=new Decimal(2);
-		if(player.m.points.gte(4)){
+		if(player.m.effective.gte(4)){
 			b=b.add(layers.m.milestone4Effect());
 		}
-		if(player.m.points.gte(16))m=m.mul(player.um.points.gte(16)?1.05:1.016);
-		if(player.m.points.gte(17))m=m.mul(player.um.points.gte(17)?1.05:1.017);
-		if(player.m.points.gte(18))m=m.mul(player.um.points.gte(18)?1.05:1.018);
-		if(player.m.points.gte(19))m=m.mul(player.um.points.gte(19)?1.05:1.019);
-		if(player.m.points.gte(36))m=m.mul(player.um.points.gte(36)?1.05:1.036);
-		if(player.m.points.gte(37))m=m.mul(player.um.points.gte(37)?1.05:1.037);
-		if(player.m.points.gte(38))m=m.mul(player.um.points.gte(38)?1.05:1.038);
-		if(player.m.points.gte(39))m=m.mul(player.um.points.gte(39)?1.05:1.039);
+		if(player.m.effective.gte(16))m=m.mul(player.um.points.gte(16)?1.05:1.016);
+		if(player.m.effective.gte(17))m=m.mul(player.um.points.gte(17)?1.05:1.017);
+		if(player.m.effective.gte(18))m=m.mul(player.um.points.gte(18)?1.05:1.018);
+		if(player.m.effective.gte(19))m=m.mul(player.um.points.gte(19)?1.05:1.019);
+		if(player.m.effective.gte(36))m=m.mul(player.um.points.gte(36)?1.05:1.036);
+		if(player.m.effective.gte(37))m=m.mul(player.um.points.gte(37)?1.05:1.037);
+		if(player.m.effective.gte(38))m=m.mul(player.um.points.gte(38)?1.05:1.038);
+		if(player.m.effective.gte(39))m=m.mul(player.um.points.gte(39)?1.05:1.039);
 		if(hasUpgrade("t",11))m=m.mul(1.005);
 		if(hasUpgrade("t",23))m=m.mul(1.005);
 		if(hasUpgrade("t",31))m=m.mul(1.005);
 		m=m.mul(layers.t.getSpecialEffect(11));
 		if(hasUpgrade("pb",42))m=m.mul(upgradeEffect("pb",42));
 		if(hasUpgrade("p",23)){
-			b=b.mul(player.p.points.add(1e20).log10().log10().div(player.um.points.gte(23)?15:player.m.points.gte(23)?28:30).add(1));
+			b=b.mul(player.p.points.add(1e20).log10().log10().div(player.um.points.gte(23)?15:player.m.effective.gte(23)?28:30).add(1));
 		}
 		if(hasUpgrade("p",24)){
-			b=b.mul(player.p.points.add(1e20).log10().log10().div(player.um.points.gte(24)?15:player.m.points.gte(24)?20:30).add(1));
+			b=b.mul(player.p.points.add(1e20).log10().log10().div(player.um.points.gte(24)?15:player.m.effective.gte(24)?20:30).add(1));
 		}
 		if(hasUpgrade("sp",24)){
 			b=b.mul(player.sp.points.add(1e20).log10().log10().div(30).add(1));
@@ -1854,28 +1871,28 @@ addLayer("m", {
 	},
 	milestone6Effect(){
 		var p=player.m.points;
-		if(player.m.points.gte(139)){
+		if(player.m.effective.gte(139)){
 			p=Decimal.pow(1.05,p);
 		}
-		if(player.m.points.gte(7))p=p.pow(player.um.points.gte(7)?2:1.5);
-		if(player.m.points.gte(8))p=p.pow(player.um.points.gte(8)?2:1.2);
-		if(player.m.points.gte(9))p=p.pow(player.um.points.gte(9)?2:1.1);
+		if(player.m.effective.gte(7))p=p.pow(player.um.points.gte(7)?2:1.5);
+		if(player.m.effective.gte(8))p=p.pow(player.um.points.gte(8)?2:1.2);
+		if(player.m.effective.gte(9))p=p.pow(player.um.points.gte(9)?2:1.1);
 		if(hasUpgrade("p",21))p=p.pow(player.um.points.gte(21)?2:1.5);
 		if(hasUpgrade("p",22))p=p.pow(player.um.points.gte(21)?2:1.5);
-		if(player.m.points.gte(35))p=p.pow(player.um.points.gte(35)?5:3.5);
+		if(player.m.effective.gte(35))p=p.pow(player.um.points.gte(35)?5:3.5);
 		if(hasUpgrade("sp",23))p=p.pow(player.mm.points.add(2));
-		if(player.m.points.gte(42))p=p.pow(player.mm.points.add(player.um.points.gte(42)?player.um.points:1));
-		if(player.m.points.gte(52))p=p.pow(player.mm.points.pow(0.1).add(1));
+		if(player.m.effective.gte(42))p=p.pow(player.mm.points.add(player.um.points.gte(42)?player.um.points:1));
+		if(player.m.effective.gte(52))p=p.pow(player.mm.points.pow(0.1).add(1));
 		if(player.mm.points.gte(9))p=p.pow(1.5);
-		if(player.m.points.gte(62))p=p.pow(player.mm.points.pow(0.129));
+		if(player.m.effective.gte(62))p=p.pow(player.mm.points.pow(0.129));
 		if(player.mm.points.gte(13))p=p.pow(1.2);
-		if(player.m.points.gte(72))p=p.pow(player.mm.points.pow(0.1));
+		if(player.m.effective.gte(72))p=p.pow(player.mm.points.pow(0.1));
 		if(player.mm.points.gte(14))p=p.pow(1.2);
-		if(player.m.points.gte(82))p=p.pow(player.mm.points.pow(0.2));
+		if(player.m.effective.gte(82))p=p.pow(player.mm.points.pow(0.2));
 		if(player.mm.points.gte(17))p=p.pow(1.7);
-		if(player.m.points.gte(92))p=p.pow(player.mm.points.pow(0.3));
-		if(player.m.points.gte(106))p=p.pow(player.mm.points.pow(0.5));
-		if(player.m.points.gte(113))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(92))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(0.5));
+		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(0.3));
 		if(player.um.points.gte(6))p=p.pow(player.um.points);
 		if(player.mm.points.gte(2))p=p.pow(player.um.meta.gte(2)?2:1);
 		if(player.mm.points.gte(3))p=p.pow(player.um.meta.gte(2)?2:1);
@@ -1884,42 +1901,42 @@ addLayer("m", {
 	},
 	milestone27Effect(){
 		var p=player.m.points;
-		if(player.m.points.gte(139)){
+		if(player.m.effective.gte(139)){
 			p=Decimal.pow(1.05,p);
 		}
-		if(player.m.points.gte(28))p=p.pow(player.um.points.gte(28)?2:1.5);
-		if(player.m.points.gte(29))p=p.pow(player.um.points.gte(29)?2:1.2);
+		if(player.m.effective.gte(28))p=p.pow(player.um.points.gte(28)?2:1.5);
+		if(player.m.effective.gte(29))p=p.pow(player.um.points.gte(29)?2:1.2);
 		if(hasUpgrade("sp",23))p=p.pow(player.mm.points.add(2));
 		if(player.mm.points.gte(2))p=p.pow(2);
 		if(player.mm.points.gte(3))p=p.pow(2);
 		if(player.mm.points.gte(4))p=p.pow(2);
-		if(player.m.points.gte(47))p=p.pow(player.um.points.gte(47)?(player.mm.points.pow(0.5)):(player.mm.points.pow(0.25).add(1)));
+		if(player.m.effective.gte(47))p=p.pow(player.um.points.gte(47)?(player.mm.points.pow(0.5)):(player.mm.points.pow(0.25).add(1)));
 		if(player.mm.points.gte(6))p=p.pow(1.5);
 		if(player.mm.points.gte(7))p=p.pow(1.5);
 		if(player.mm.points.gte(8))p=p.pow(1.5);
 		if(player.mm.points.gte(11))p=p.pow(1.2);
 		if(player.mm.points.gte(12))p=p.pow(1.2);
-		if(player.m.points.gte(67))p=p.pow(player.mm.points.pow(0.147));
+		if(player.m.effective.gte(67))p=p.pow(player.mm.points.pow(0.147));
 		if(player.mm.points.gte(16))p=p.pow(1.2);
-		if(player.m.points.gte(87))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(87))p=p.pow(player.mm.points.pow(0.3));
 		if(player.mm.points.gte(18))p=p.pow(1.8);
 		if(player.mm.points.gte(19))p=p.pow(1.9);
-		if(player.m.points.gte(97))p=p.pow(player.mm.points.pow(0.4));
-		if(player.m.points.gte(106))p=p.pow(player.mm.points.pow(0.5));
-		if(player.m.points.gte(113))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(97))p=p.pow(player.mm.points.pow(0.4));
+		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(0.5));
+		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(0.3));
 		if(player.um.points.gte(27))p=p.pow(player.um.points.pow(0.5));
 		return p;
 	},
 	milestone105Effect(){
 		var p=player.m.points.div(100);
-		if(player.m.points.gte(191)){
+		if(player.m.effective.gte(191)){
 			p=Decimal.pow(1.004,player.m.points);
 		}
-		if(player.m.points.gte(133))p=p.pow(1.2);
-		if(player.m.points.gte(143))p=p.pow(1.1);
-		if(player.m.points.gte(155))p=p.pow(1.03);
-		if(player.m.points.gte(159))p=p.pow(1.103);
-		if(player.m.points.gte(194))p=p.pow(1.067);
+		if(player.m.effective.gte(133))p=p.pow(1.2);
+		if(player.m.effective.gte(143))p=p.pow(1.1);
+		if(player.m.effective.gte(155))p=p.pow(1.03);
+		if(player.m.effective.gte(159))p=p.pow(1.103);
+		if(player.m.effective.gte(194))p=p.pow(1.067);
 		return p;
 	},
     resetDescription: "Get ",
@@ -1930,4 +1947,7 @@ addLayer("m", {
 				["display-text",function(){return "Milestone cost exponent is "+format(tmp.m.exponent,4)}],
 				"milestones"
 				],
+				update(){
+					if(player.r.stage==0)player.m.effective=player.m.points;
+				},
 })

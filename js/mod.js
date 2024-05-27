@@ -19,6 +19,7 @@ let modInfo = {
 	"layers/hyper-energy.js",
 	"layers/upgraded-milestone.js",
 	"layers/atoms.js",
+	"layers/reincarnate.js",
 	
 	"checkdomain.js",
 	
@@ -115,9 +116,9 @@ function getPointGen() {
 
 function getPointGenBeforeSoftcap() {
 	var b=new Decimal(0)
-	if(player.m.points.gte(1))b=b.add(1);
-	if(player.m.points.gte(2))b=b.mul(3);
-	if(player.m.points.gte(3))b=b.mul(tmp.m.milestone3Effect);
+	if(player.m.effective.gte(1))b=b.add(1);
+	if(player.m.effective.gte(2))b=b.mul(3);
+	if(player.m.effective.gte(3))b=b.mul(tmp.m.milestone3Effect);
 	if(hasUpgrade("p",11))b=b.mul(upgradeEffect("p",11));
 	if(hasUpgrade("p",12))b=b.mul(upgradeEffect("p",12));
 	if(hasUpgrade("sp",11))b=b.mul(upgradeEffect("sp",11));
@@ -127,7 +128,7 @@ function getPointGenBeforeSoftcap() {
 	if(hasUpgrade("ap",11))b=b.mul(upgradeEffect("ap",11));
 	if(player.um.points.gte(2))b=b.pow(1.01);
 	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)b=b.pow(tmp.t.dilationEffect);
-	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.points.gte(122)?player.m.points:100);
+	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.effective.gte(122)?player.m.points:100);
 	return b
 }
 
@@ -137,7 +138,7 @@ function getPointGenString(){
 
 function getPointSoftcapStart(){
 	var sc=new Decimal("ee9");
-	if(player.m.points.gte(105))sc=sc.pow(tmp.m.milestone105Effect);
+	if(player.m.effective.gte(105))sc=sc.pow(tmp.m.milestone105Effect);
 	if(player.t.activeChallenge==12||player.t.activeChallenge==22||player.t.activeChallenge==32||player.t.activeChallenge==42)sc=sc.pow(0.0001);
 	sc=sc.pow(tmp.t.challenges[12].rewardEffect);
 	sc=sc.pow(tmp.t.challenges[22].rewardEffect);
@@ -155,24 +156,24 @@ function getPointSoftcapStart(){
 	if(hasUpgrade("se",11))sc=sc.pow(upgradeEffect("se",11));
 	sc=sc.pow(layers.t.getSpecialEffect(22));
 	if(hasUpgrade("he",11))sc=sc.pow(upgradeEffect("he",11));
-	if(player.m.points.gte(181) && player.um.points.gte(16)){
+	if(player.m.effective.gte(181) && player.um.points.gte(16)){
 		sc=sc.pow(player.um.points.mul(0.0165).add(1));
 	} else {
-		if(player.um.points.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.points.gte(165)?player.um.points.mul(0.01):0));
+		if(player.um.points.gte(1))sc=sc.pow(Decimal.add(1.1,player.m.effective.gte(165)?player.um.points.mul(0.01):0));
 	}
 	sc=sc.pow(layers.t.getSpecialEffect(32));
 	sc=sc.pow(layers.t.getSpecialEffect(42));
 	if(hasUpgrade("a",11))sc=sc.pow(upgradeEffect("a",11));
-	if(player.m.points.gte(199))sc=sc.pow(1+Math.random()*8);
-	else if(player.m.points.gte(198))sc=sc.pow(1+Math.random()*6);
-	else if(player.m.points.gte(197))sc=sc.pow(1+Math.random()*4);
-	else if(player.m.points.gte(196))sc=sc.pow(1+Math.random()*2);
-	else if(player.m.points.gte(195))sc=sc.pow(1+Math.random());
-	else if(player.m.points.gte(194))sc=sc.pow(1+Math.random()/2);
-	else if(player.m.points.gte(192))sc=sc.pow(1+Math.random()/5);
-	else if(player.m.points.gte(191))sc=sc.pow(1+Math.random()/10);
-	else if(player.m.points.gte(186))sc=sc.pow(1+Math.random()/50);
-	else if(player.m.points.gte(184))sc=sc.pow(1+Math.random()/100);
+	if(player.m.effective.gte(199))sc=sc.pow(1+Math.random()*8);
+	else if(player.m.effective.gte(198))sc=sc.pow(1+Math.random()*6);
+	else if(player.m.effective.gte(197))sc=sc.pow(1+Math.random()*4);
+	else if(player.m.effective.gte(196))sc=sc.pow(1+Math.random()*2);
+	else if(player.m.effective.gte(195))sc=sc.pow(1+Math.random());
+	else if(player.m.effective.gte(194))sc=sc.pow(1+Math.random()/2);
+	else if(player.m.effective.gte(192))sc=sc.pow(1+Math.random()/5);
+	else if(player.m.effective.gte(191))sc=sc.pow(1+Math.random()/10);
+	else if(player.m.effective.gte(186))sc=sc.pow(1+Math.random()/50);
+	else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/100);
 	return sc;
 }
 
@@ -189,7 +190,7 @@ var displayThings = [
 		return "";
 	},
 	function(){
-		if(player.m.points.gte(190)){
+		if(player.m.effective.gte(190)){
 			return "The Milestone Tree is unstable now. Fixing The Milestone Tree... Milestone Requirement is increased.";
 		}
 		return "";
@@ -198,8 +199,8 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.m.points.gte(MILESTONES.length+1);
-	//return player.m.points.gte(MILESTONES.length);
+	return player.m.effective.gte(MILESTONES.length+1);
+	//return player.m.effective.gte(MILESTONES.length);
 }
 
 
