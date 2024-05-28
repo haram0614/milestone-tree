@@ -29,6 +29,7 @@ addLayer("a", {
     ],
     layerShown(){return player.m.effective.gte(175)},
 	branches(){
+		if(player.r.stage>=1)return ["hb","he"];
 		if(player.m.effective.gte(192)){//unstable
 			if(Date.now()%1110<370)return ["ap","he"];
 			if(Date.now()%1110<740)return ["hb","he"];
@@ -58,17 +59,17 @@ addLayer("a", {
 		return "atomic-prestige points and hyper boost effect ^"+format(layers.a.effect(),4)
 	},
 	
-	resetsNothing(){return false},
+	resetsNothing(){return player.m.effective.gte(186)&&player.r.stage>=1},
 		doReset(l){
 			if(l=="t"){return;}
 			if(l=="a"){return;}
 		},
 	//autoPrestige(){return player.m.effective.gte(999)},
 	update(){
-		if(player.m.effective.gte(999)){//quick autobuy
+		if(player.m.effective.gte(186)&&player.r.stage>=1){//quick autobuy
 			while(true){
 				let req=layers.a.requires().mul(layers.a.base.pow(Decimal.pow(player.a.points,layers.a.exponent())));
-				if(player.a.points.gt(req))player.a.points=player.a.points.add(1);
+				if(player.ap.points.gt(req))player.a.points=player.a.points.add(1);
 				else break;
 			}
 		}
@@ -104,6 +105,18 @@ addLayer("a", {
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(26),
             unlocked() { return player.m.effective.gte(185)}, // The upgrade is only visible when this is true
+        },
+		21: {
+			title: "Atom Upgrade 21",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(55),
+            unlocked() { return player.m.effective.gte(190)&&player.r.stage>=1}, // The upgrade is only visible when this is true
+        },
+		22: {
+			title: "Atom Upgrade 22",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(62),
+            unlocked() { return player.m.effective.gte(190)&&player.r.stage>=1}, // The upgrade is only visible when this is true
         },
 	},
 	

@@ -13,7 +13,7 @@ displayThings = [
 		return "";
 	},
 	function(){
-		if(player.m.effective.gte(190)){
+		if(player.m.effective.gte(190)&&player.r.stage==0){
 		return "系统检测到里程碑之树已经不稳定，正在尝试修复中... 此期间里程碑的需求将会上升。";
 		}
 		return "";
@@ -473,6 +473,9 @@ layers.m.milestones[183-1].effectDescription=function(){
 	return "每秒额外获得重置可以获得的超越点数的1000%，总计1900%。但是去除所有在第150个里程碑之前每秒获得超越点数的效果。";
 }
 layers.m.milestones[184-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "转世不再重置升级。";
+				}
 	if(player[this.layer].best.gte(184)){
 		return "里程碑之树正在变得不稳定...";
 	}
@@ -480,42 +483,82 @@ layers.m.milestones[184-1].effectDescription=function(){
 }
 layers.m.milestones[185-1].effectDescription="解锁新的原子升级。";
 layers.m.milestones[186-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "自动获得原子。原子不再重置任何东西。";
+				}
 	return "更不稳定了..."
 }
 layers.m.milestones[187-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "转世时保留元里程碑和额外里程碑。";
+				}
 	return "怎么解决这种不稳定的情况？"
 }
 layers.m.milestones[188-1].effectDescription="自动获得第三个超越挑战的完成数和挑战点数。";
 layers.m.milestones[189-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "转世时保留里程碑升级。";
+				}
 	return "越来越不稳定了..."
 }
 layers.m.milestones[190-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "解锁新的原子升级。";
+				}
 	return "试一下增加一个层级，说不定可能会有效果..."
 }
 layers.m.milestones[191-1].effectDescription="第105个里程碑的效果变得更好。";
 layers.m.milestones[192-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "自动获得第四个超越挑战的完成数和挑战点数。";
+				}
 	return "越来，越来越不稳定了..."
 }
 layers.m.milestones[193-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "原子级挑战1-3的目标减少了。";
+				}
 	return "增加一个大重置层级，说不定会有效果..."
 }
 layers.m.milestones[194-1].effectDescription="第105个里程碑的效果变为原来的1.067次方。";
 layers.m.milestones[195-1].effectDescription="原子级挑战6的目标减少了。";
 layers.m.milestones[196-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "原子级挑战2超过5次的完成数每次将奖励+0.03而不是+0.025。";
+				}
 	return "我们只能通过大重置来修复这个问题了..."
 }
 layers.m.milestones[197-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "原子级挑战2超过5次的完成数每次将奖励+0.035而不是+0.03。";
+				}
 	return "一个第7行的大重置..."
 }
 layers.m.milestones[198-1].effectDescription=function(){
+				if(player.r.stage>=1){
+					return "原子级挑战2超过5次的完成数每次将奖励+0.04而不是+0.035。";
+				}
 	return "里程碑之树已经非常不稳定了..."
 }
 layers.m.milestones[199-1].effectDescription=function(){
 	return "解锁一个新的层级。"
 }
 layers.m.milestones[200-1].effectDescription=function(){
-	return "当前残局"
+				if(player.r.stage>=1){
+					return "基于你的总里程碑数量，超越点数和转世点数的获得变得更好。当前："+format(tmp.m.milestone200Effect)+"x";
+				}
+	return "..."
 }
+layers.m.milestones[201-1].effectDescription="超越挑战完成15次之后，目标会减少。";
+layers.m.milestones[202-1].effectDescription="原子级挑战6的目标减少了。";
+layers.m.milestones[203-1].effectDescription="第三级声望升级22的效果变得更好。";
+layers.m.milestones[204-1].effectDescription="解锁一个新的转世可重复购买项。";
+layers.m.milestones[205-1].effectDescription="当前残局";
+
+
+
+
+
 
 layers.m.tabFormat[3][1]=function(){
 	return "里程碑成本快速增加在"+format(tmp.m.getScalingStart,4)+"开始";
@@ -578,6 +621,7 @@ layers.em.milestones[1-1].effectDescription="自动获得元里程碑。";
 layers.em.milestones[2-1].effectDescription="基于你的额外里程碑数量，第三个里程碑的效果变得更好。";
 layers.em.milestones[3-1].effectDescription="解锁4个新的超级能量升级。";
 layers.em.milestones[4-1].effectDescription=function(){
+	if(player.em.points.gte(8))return "超越点数的获得变为原来的"+format(player.em.points)+"倍。";
 	if(player.em.points.gte(7))return "超越点数的获得变为原来的"+format(player.em.points.sqrt())+"倍。";
 	return "超越点数的获得变为原来的1.1倍。";
 }
@@ -585,6 +629,7 @@ layers.em.milestones[5-1].effectDescription="里程碑升级变得更便宜。";
 layers.em.milestones[6-1].effectDescription="解锁4个新的终极能量升级。";
 layers.em.milestones[7-1].effectDescription="基于你的额外里程碑数量，第4个额外里程碑的效果变得更好。";
 layers.em.milestones[8-1].effectDescription="第4个额外里程碑的效果变为原来的平方。";
+layers.em.milestones[9-1].effectDescription="里程碑升级变得更便宜。";
 
 layers.p.resource="声望点数";
 layers.p.effectDescription="";
@@ -907,7 +952,7 @@ layers.t.challenges[12].rewardDescription=function(){
 }
 layers.t.challenges[22].rewardDescription=layers.t.challenges[32].rewardDescription=layers.t.challenges[42].rewardDescription="第一个里程碑的软上限开始得更迟。";
 layers.t.tabFormat.Main.content[3][1]=function(){
-	return "超越点数的硬上限为"+format(layers.t.hardcap);
+	return "超越点数的硬上限为"+format(layers.t.hardcap());
 }
 layers.t.tabFormat.Main.content[5][1]="超越挑战先生效，原子级挑战再生效，软上限最后生效。";
 layers.t.tabFormat.Main.content[6][1]=function(){
@@ -961,7 +1006,7 @@ for(i in layers.a.upgrades){
 	layers.a.upgrades[i].title="原子升级"+i;
 }
 layers.a.upgrades[11].description="原子影响第一个里程碑的软上限。";
-layers.a.upgrades[12].description=layers.a.upgrades[13].description=layers.a.upgrades[14].description="超级加成升级12的效果变得更好。";
+layers.a.upgrades[12].description=layers.a.upgrades[13].description=layers.a.upgrades[14].description=layers.a.upgrades[21].description=layers.a.upgrades[22].description="超级加成升级12的效果变得更好。";
 
 layers.pe.resource="声望能量";
 layers.pe.baseResource="声望点数";
@@ -1043,3 +1088,29 @@ layers.r.resource="转世点数";
 layers.r.effectDescription="";
 layers.r.baseResource="超越点数";
 layers.r.resetDescription="重置以获得";
+layers.r.tabFormat.Main.content[3][1]=function(){
+	return "你有"+format(player.r.power)+"转世力量";
+}
+
+
+layers.r.buyables[11].title="重新生效里程碑";
+layers.r.buyables[11].display=function(){
+	let data = tmp[this.layer].buyables[this.id];
+	return "等级："+formatWhole(player[this.layer].buyables[this.id])+"<br>"+
+	"使前"+formatWhole(data.effect)+"个里程碑重新生效<br>"+
+	"花费："+format(data.cost)+"转世力量";
+};
+layers.r.buyables[12].title="软上限延迟器";
+layers.r.buyables[12].display=function(){
+	let data = tmp[this.layer].buyables[this.id];
+	return "等级："+format(player[this.layer].buyables[this.id])+"<br>"+
+	"第一个里程碑的软上限开始得更迟。当前："+format(data.effect)+"x<br>"+
+	"花费："+format(data.cost)+"转世力量";
+};
+layers.r.buyables[21].title="超越点数倍数";
+layers.r.buyables[21].display=function(){
+	let data = tmp[this.layer].buyables[this.id];
+	return "等级："+format(player[this.layer].buyables[this.id])+"<br>"+
+	"超越点数的获得变为原来的"+format(data.effect)+"倍。<br>"+
+	"花费："+format(data.cost)+"转世力量";
+};

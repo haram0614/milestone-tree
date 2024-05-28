@@ -9,6 +9,12 @@ addLayer("um", {
     }},
     color: "#ccbb00",
     requires(){
+		if(player.r.stage>=1){
+			if(player.um.points.gte(50))return new Decimal(Infinity);
+			if(player.em.points.gte(9))return new Decimal(1);
+			if(player.em.points.gte(5))return new Decimal("e5e16");
+			return new Decimal("ee17");
+		}
 		if(player.um.points.gte(50))return new Decimal(Infinity);
 		if(player.em.points.gte(5))return new Decimal("e6e12");
 		return new Decimal("e11111111111111");
@@ -26,6 +32,11 @@ addLayer("um", {
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
     base(){
+		if(player.r.stage>=1){
+			if(player.em.points.gte(9))return new Decimal("e3e16");
+			if(player.em.points.gte(5))return new Decimal("e5e16");
+			return new Decimal("ee17");
+		}
 		if(player.um.points.gte(50))return new Decimal("ee14");
 		if(player.um.points.gte(45))return new Decimal("ee13");
 		if(player.um.points.gte(43))return new Decimal("e44e11");
@@ -44,7 +55,11 @@ addLayer("um", {
 	exponent: function(x){
 		if(x===undefined)x=player.um.points;
 		var p=new Decimal(2);
-		if(x.gte(24)){
+		if(player.r.stage>=1)p=new Decimal(1.5);
+		if(player.r.stage>=1){
+			let scaling=x.sub(10).div(20);
+			p=p.add(scaling);
+		}else if(x.gte(24)){
 			let scaling=x.sub(23).div(35);
 			p=p.add(scaling);
 		}
@@ -60,7 +75,7 @@ addLayer("um", {
 	doReset(){},
 	tabFormat: ["main-display","prestige-button","resource-display"],
 	branches(){
-		if(player.m.effective.gte(184)){
+		if(player.m.effective.gte(184)||player.r.stage>=1){
 			return ["pb"];
 		}
 		return ["m"];

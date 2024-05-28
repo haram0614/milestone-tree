@@ -6,6 +6,7 @@ addLayer("r", {
     startData() { return {
         unlocked: false,
 	    points: new Decimal(0),
+	    power: new Decimal(0),
 	    stage: 0,
     }},
     color: "#00FFFF",
@@ -30,6 +31,7 @@ addLayer("r", {
 	softcapPower:new Decimal(1),
 	gainMult(){
 		let mult=new Decimal(1);
+		if(player.m.effective.gte(200))mult=mult.mul(tmp.m.milestone200Effect);
 		return mult;
 	},
 	getResetGain() {
@@ -53,9 +55,9 @@ addLayer("r", {
 		"Main":{
 			content:[
 				"main-display","prestige-button","resource-display",
-				//["display-text",function(){return "Reincarnation point is hardcapped at "+format(layers.r.hardcap)}],
+				["display-text",function(){return "You have "+format(player.r.power)+" Reincarnation Power"}],
 				["display-text",function(){if(player.r.unlocked)return "Welcome to The Milestone Tree NG-"+player.r.stage+"!";return "";}],
-				//"upgrades",
+				"buyables",
 				//["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
 				//["display-text",function(){
 				//	let c=0;
@@ -82,29 +84,35 @@ addLayer("r", {
 			unlocked(){return player.m.effective.gte(130);}
 		},*/
 	},
-	update(){
+	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e27);
+	},
+	powerGain(){
+		return player.points.max(10).log10().sub(1).mul(player.r.points.pow(1.5));
 	},
 		doReset(l){
 			if(l=="r"){
+				if(player.r.stage==0){
+					layerDataReset("m",["milestones"]);
+					player.m.points=player.m.best=new Decimal(200);
+					player.m.effective=new Decimal(0);
+				}
 				player.r.stage=Math.max(player.r.stage,1);
-				layerDataReset("t",[]);
-				layerDataReset("a",[]);
-				layerDataReset("ap",[]);
-				layerDataReset("he",[]);
-				layerDataReset("hb",[]);
-				layerDataReset("hp",[]);
-				layerDataReset("se",[]);
-				layerDataReset("em",[]);
-				layerDataReset("um",[]);
-				layerDataReset("sp",[]);
-				layerDataReset("pe",[]);
-				layerDataReset("pb",[]);
-				layerDataReset("p",[]);
-				layerDataReset("mm",[]);
-				layerDataReset("m",[]);
-				player.m.points=player.m.best=new Decimal(200);
-				player.m.effective=new Decimal(0);
+				layerDataReset("t",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("a",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("ap",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("he",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("hb",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("hp",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("se",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				if(player.r.buyables[11].lt(187))layerDataReset("em",[]);
+				if(player.r.buyables[11].lt(189))layerDataReset("um",[]);
+				layerDataReset("sp",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("pe",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("pb",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("p",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				if(player.r.buyables[11].lt(187))layerDataReset("mm",[]);
 				updateTemp();
 				updateTemp();
 				updateTemp();
@@ -112,4 +120,102 @@ addLayer("r", {
 				updateTemp();
 			}
 		},
+	buyables: {
+		rows: 2,
+		cols: 2,
+		11:{
+			title(){
+				return "Re-enable Milestones";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+formatWhole(player[this.layer].buyables[this.id])+"<br>"+
+				"Effective Milestones +"+formatWhole(data.effect)+"<br>"+
+				"Cost for Next Level: "+format(data.cost)+" reincarnation power";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				if(a.gte(player.m.points))return new Decimal(Infinity);
+				a=Decimal.pow(a.div(800).add(1),a).mul(a.pow(2.5));
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].power.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+			       player[this.layer].power=player[this.layer].power.sub(tmp[this.layer].buyables[this.id].cost)
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+				   updateTemp();
+               },
+			  effect(){
+				  let eff=player[this.layer].buyables[this.id];
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.r.unlocked;
+			  }
+		},
+		12:{
+			title(){
+				return "Softcap Delayer";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"1st Milestone's softcap starts "+format(data.effect)+"x later<br>"+
+				"Cost for Next Level: "+format(data.cost)+" reincarnation power";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a).mul(1e17);
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].power.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+			       player[this.layer].power=player[this.layer].power.sub(tmp[this.layer].buyables[this.id].cost)
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+				   updateTemp();
+               },
+			  effect(){
+				  let eff=player[this.layer].buyables[this.id].add(1).mul(Decimal.pow(1.02,player[this.layer].buyables[this.id]));
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.r.unlocked;
+			  }
+		},
+		21:{
+			title(){
+				return "Transcend Point Gain";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"Effect: "+format(data.effect)+"x Transcend Point Gain<br>"+
+				"Cost for Next Level: "+format(data.cost)+" reincarnation power";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a).mul(1e25);
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].power.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+			       player[this.layer].power=player[this.layer].power.sub(tmp[this.layer].buyables[this.id].cost)
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+				   updateTemp();
+               },
+			  effect(){
+				  let eff=Decimal.pow(2,player[this.layer].buyables[this.id]);
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.m.effective.gte(204);
+			  }
+		},
+	}
 })

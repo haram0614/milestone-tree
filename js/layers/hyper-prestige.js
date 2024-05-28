@@ -121,6 +121,7 @@ addLayer("hp", {
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=3;
 				if(player.m.effective.gte(182))base=30;
+				if(player.m.effective.gte(203))base=1e3;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e91");
             },

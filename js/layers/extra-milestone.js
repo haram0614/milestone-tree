@@ -101,8 +101,17 @@ addLayer("em", {
 				return "4th Extra-Milestone's effect is squared."
 			},
         },
+		{
+			requirementDescription: "9th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(8)},
+            done() {return player[this.layer].points.gte(9)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Milestone Upgrades are cheaper.";
+			},
+        },
 	],
 	branches(){
+		if(player.r.stage>=1)return ["pb","pe"];
 		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1200<400)return ["pb"];
 			if(Date.now()%1200<800)return ["pe"];

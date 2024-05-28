@@ -32,6 +32,7 @@ addLayer("hb", {
     ],
     layerShown(){return player.m.effective.gte(104)},
 	branches(){
+		if(player.r.stage>=1)return ["um","em"];
 		if(player.m.effective.gte(189)){//unstable
 			if(Date.now()%1300<300)return ["pb","um"];
 			if(Date.now()%1300<600)return ["pb","em"];
@@ -100,6 +101,8 @@ addLayer("hb", {
 				if(hasUpgrade("a",12))exp+=0.01;
 				if(hasUpgrade("a",13))exp+=0.01;
 				if(hasUpgrade("a",14))exp+=0.01;
+				if(hasUpgrade("a",21))exp+=0.01;
+				if(hasUpgrade("a",22))exp+=0.01;
 				let p=player.hb.points.pow(exp);
 				return p;
             },

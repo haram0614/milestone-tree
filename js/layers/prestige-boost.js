@@ -29,6 +29,7 @@ addLayer("pb", {
     ],
     layerShown(){return player.m.effective.gte(50)},
 	branches(){
+		if(player.r.stage>=1)return ["mm"];
 		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1400<350)return [["mm",2]];
 			if(Date.now()%1400<700)return ["mm"];
@@ -85,7 +86,7 @@ addLayer("pb", {
 		}
 		if(hasUpgrade("pb",24)){
 			m+=0.00201;
-		}
+		}if(player.r.stage==0){
 		if(player.ap.challenges[11]>=1){
 			p+=0.01;
 		}
@@ -95,9 +96,12 @@ addLayer("pb", {
 		if(player.ap.challenges[11]>=3){
 			p+=0.01;
 			m+=0.002*(player.ap.challenges[11]-3);
+		}}else{
+			
+			m+=0.002*player.ap.challenges[11];
 		}
 		m+=0.002*player.ap.challenges[31];
-		if(player.ap.challenges[31]>=17){
+		if(player.ap.challenges[31]>=17&&player.r.stage==0){
 			m+=0.0003;
 		}
 		if(hasUpgrade("hb",12)){

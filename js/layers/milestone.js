@@ -1529,6 +1529,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(183)},
             done() {return player[this.layer].points.gte(184)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Reincarnation won't reset upgrades.";
+				}
 				if(player[this.layer].best.gte(184)){
 					return "The tree is becoming unstable...";
 				}
@@ -1548,6 +1551,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(185)},
             done() {return player[this.layer].points.gte(186)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Atoms won't reset anything. Autoget Atoms.";
+				}
 				return "The tree is becoming more unstable..."
 			},
         },
@@ -1556,6 +1562,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(186)},
             done() {return player[this.layer].points.gte(187)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Reincarnation won't reset meta-milestones and extra-milestones.";
+				}
 				return "How to solve this unstable problem?"
 			},
         },
@@ -1572,6 +1581,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(188)},
             done() {return player[this.layer].points.gte(189)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Reincarnation won't reset upgraded milestones.";
+				}
 				return "The tree is becoming even more unstable..."
 			},
         },
@@ -1580,6 +1592,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(189)},
             done() {return player[this.layer].points.gte(190)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Unlock more Atom Upgrades."
+				}
 				return "Seems like adding a new layer will solve the problem..."
 			},
         },
@@ -1596,6 +1611,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(191)},
             done() {return player[this.layer].points.gte(192)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Autogain T challenge 4 completions and Hardcapped Transcend Points."
+				}
 				return "This tree is becoming more and more unstable..."
 			},
         },
@@ -1604,6 +1622,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(192)},
             done() {return player[this.layer].points.gte(193)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Reduce AP challenge 1-3 goals."
+				}
 				return "Adding a new reset layer will solve the problem..."
 			},
         },
@@ -1628,6 +1649,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(195)},
             done() {return player[this.layer].points.gte(196)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "AP challenge 2 (No Super-Prestige) completions past-5 add the reward by 0.03 each instead of 0.025.";
+				}
 				return "To fix this problem, we will completely reset The Tree..."
 			},
         },
@@ -1636,6 +1660,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(196)},
             done() {return player[this.layer].points.gte(197)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "AP challenge 2 (No Super-Prestige) completions past-5 add the reward by 0.035 each instead of 0.03.";
+				}
 				return "But add a new row 7 layer..."
 			},
         },
@@ -1644,6 +1671,9 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(197)},
             done() {return player[this.layer].points.gte(198)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.r.stage>=1){
+					return "AP challenge 2 (No Super-Prestige) completions past-5 add the reward by 0.04 each instead of 0.035.";
+				}
 				return "The Tree is completely unstable now, so we will reset this tree..."
 			},
         },
@@ -1659,6 +1689,49 @@ var MILESTONES=[
 			requirementDescription: "200th Milestone",
             unlocked() {return player[this.layer].best.gte(199)},
             done() {return player[this.layer].points.gte(200)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				if(player.r.stage>=1){
+					return "Transcend points and reincarnation points is boosted by your Milestones. Currently: "+format(tmp.m.milestone200Effect)+"x";
+				}
+				return "..."
+			},
+        },
+		{
+			requirementDescription: "201st Milestone",
+            unlocked() {return player[this.layer].best.gte(200)},
+            done() {return player[this.layer].points.gte(201)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce T challenge goals after 15 completions."
+			},
+        },
+		{
+			requirementDescription: "202nd Milestone",
+            unlocked() {return player[this.layer].best.gte(201)},
+            done() {return player[this.layer].points.gte(202)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reduce AP challenge 6 goal."
+			},
+        },
+		{
+			requirementDescription: "203rd Milestone",
+            unlocked() {return player[this.layer].best.gte(202)},
+            done() {return player[this.layer].points.gte(203)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Hyper-Prestige Upgrade 22 is better."
+			},
+        },
+		{
+			requirementDescription: "204th Milestone",
+            unlocked() {return player[this.layer].best.gte(203)},
+            done() {return player[this.layer].points.gte(204)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a reincarnation buyable."
+			},
+        },
+		{
+			requirementDescription: "205th Milestone",
+            unlocked() {return player[this.layer].best.gte(204)},
+            done() {return player[this.layer].points.gte(205)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Current Endgame"
 			},
@@ -1689,6 +1762,7 @@ addLayer("m", {
     }},
     color: "#793784",
     requires(){
+		if(player.m.points.gte(205))return new Decimal(Infinity);
 		if(player.m.points.gte(200))return new Decimal(10);
 		if(player.m.points.gte(199))return new Decimal(Infinity);
 		return new Decimal(10);
@@ -1736,7 +1810,7 @@ addLayer("m", {
 		
 		var secondScaling=player.m.points.sub(tmp.m.getScalingStart2).max(0);
 		if(player.r.stage==1){
-			secondScaling=secondScaling.pow(2).div(20);
+			secondScaling=secondScaling.div(7.5);
 		}else if(player.m.points.gte(180)){
 			secondScaling=secondScaling.div(20);
 		}else if(player.m.points.gte(150)){
@@ -1846,12 +1920,14 @@ addLayer("m", {
 			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(150).add(1));
 		}
 	b=b.mul(Decimal.pow(1.05,player.ap.challenges[21]+player.ap.challenges[22]+player.t.challenges[11]+player.t.challenges[21]+player.t.challenges[31]+player.t.challenges[41]));
+	if(player.r.stage==0){
 		if(player.ap.challenges[21]>=1)b=b.mul(1.1/1.05);
 		if(player.ap.challenges[22]>=1)b=b.mul(1.06/1.05);
 		if(player.ap.challenges[21]>=5)b=b.mul(1.1/1.05);
 		if(player.t.challenges[11]>=3)b=b.mul(1.05);
 		if(player.ap.challenges[21]>=10)b=b.mul(1.1);
 		if(player.ap.challenges[22]>=9)b=b.mul(1.1);
+	}
 		if(hasUpgrade("p",41)){
 			b=b.mul(player.p.points.add(1e20).log10().log10().div(30).add(1));
 		}
@@ -1939,6 +2015,10 @@ addLayer("m", {
 		if(player.m.effective.gte(194))p=p.pow(1.067);
 		return p;
 	},
+	milestone200Effect(){
+		var p=player.m.points.div(100);
+		return p;
+	},
     resetDescription: "Get ",
 	doReset(){},
 	tabFormat: ["main-display","prestige-button","resource-display",
@@ -1949,5 +2029,6 @@ addLayer("m", {
 				],
 				update(){
 					if(player.r.stage==0)player.m.effective=player.m.points;
+					if(player.r.stage==1)player.m.effective=player.r.buyables[11];
 				},
 })

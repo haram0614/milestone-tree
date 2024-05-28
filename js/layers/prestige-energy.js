@@ -26,6 +26,7 @@ addLayer("pe", {
     ],
     layerShown(){return player.m.effective.gte(125)},
 	branches(){
+		if(player.r.stage>=1)return ["mm","p"];
 		if(player.m.effective.gte(184)){//unstable
 			if(Date.now()%1400<350)return ["mm"];
 			if(Date.now()%1400<700)return [["p",2]];

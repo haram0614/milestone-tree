@@ -142,6 +142,7 @@ function getPointGenString(){
 
 function getPointSoftcapStart(){
 	var sc=new Decimal("ee9");
+	if(player.r.stage>=1)sc=sc.pow(100);
 	if(player.m.effective.gte(105))sc=sc.pow(tmp.m.milestone105Effect);
 	if(player.t.activeChallenge==12||player.t.activeChallenge==22||player.t.activeChallenge==32||player.t.activeChallenge==42)sc=sc.pow(0.0001);
 	sc=sc.pow(tmp.t.challenges[12].rewardEffect);
@@ -168,16 +169,18 @@ function getPointSoftcapStart(){
 	sc=sc.pow(layers.t.getSpecialEffect(32));
 	sc=sc.pow(layers.t.getSpecialEffect(42));
 	if(hasUpgrade("a",11))sc=sc.pow(upgradeEffect("a",11));
-	if(player.m.effective.gte(199))sc=sc.pow(1+Math.random()*8);
-	else if(player.m.effective.gte(198))sc=sc.pow(1+Math.random()*6);
-	else if(player.m.effective.gte(197))sc=sc.pow(1+Math.random()*4);
-	else if(player.m.effective.gte(196))sc=sc.pow(1+Math.random()*2);
-	else if(player.m.effective.gte(195))sc=sc.pow(1+Math.random());
-	else if(player.m.effective.gte(194))sc=sc.pow(1+Math.random()/2);
-	else if(player.m.effective.gte(192))sc=sc.pow(1+Math.random()/5);
-	else if(player.m.effective.gte(191))sc=sc.pow(1+Math.random()/10);
-	else if(player.m.effective.gte(186))sc=sc.pow(1+Math.random()/50);
-	else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/100);
+	if(player.r.stage==0){
+		if(player.m.effective.gte(199))sc=sc.pow(1+Math.random()*8);
+		else if(player.m.effective.gte(198))sc=sc.pow(1+Math.random()*6);
+		else if(player.m.effective.gte(197))sc=sc.pow(1+Math.random()*4);
+		else if(player.m.effective.gte(196))sc=sc.pow(1+Math.random()*2);
+		else if(player.m.effective.gte(195))sc=sc.pow(1+Math.random());
+		else if(player.m.effective.gte(194))sc=sc.pow(1+Math.random()/2);
+		else if(player.m.effective.gte(192))sc=sc.pow(1+Math.random()/5);
+		else if(player.m.effective.gte(191))sc=sc.pow(1+Math.random()/10);
+		else if(player.m.effective.gte(186))sc=sc.pow(1+Math.random()/50);
+		else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/100);
+	}else sc=sc.pow(tmp.r.buyables[12].effect);
 	return sc;
 }
 
@@ -194,7 +197,7 @@ var displayThings = [
 		return "";
 	},
 	function(){
-		if(player.m.effective.gte(190)){
+		if(player.m.effective.gte(190)&&player.r.stage==0){
 			return "The Milestone Tree is unstable now. Fixing The Milestone Tree... Milestone Requirement is increased.";
 		}
 		return "";
