@@ -33,12 +33,17 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.200",
+	num: "1.205",
 	name: "The Big Reset"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v1.200£º The Unstable Update - 2024/5/27</h3><br>
+	<h3>v1.205 - 2024/5/28</h3><br>
+		- Added 5 milestones<br>
+		- Added 1 extra-milestone<br>
+		- Added 2 atom upgrades<br>
+		- Added 3 reincarnate buyables<br>
+	<h3>v1.200£º The Big Reset - 2024/5/27</h3><br>
 		- Added 10 milestones<br>
 		- Added reincarnate...<br>
 		- The Tree is becoming unstable so cannot read the full changelog.<br>
