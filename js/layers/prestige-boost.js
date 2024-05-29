@@ -178,7 +178,8 @@ addLayer("pb", {
 				if(hasUpgrade("pb",33))e+=0.1;
 				if(hasUpgrade("pb",34))e+=0.1;
 				if(hasUpgrade("pb",43))e+=0.1;
-				if(player.m.effective.gte(180))e+=0.02*(player.m.points.sub(179).min(0.5).toNumber());
+				if(player.r.stage>=1&&player.m.effective.gte(180))e+=0.01*(Decimal.pow(1.1,player.m.points.sub(205)).add(1).min(100).toNumber());
+				else if(player.m.effective.gte(180))e+=0.02*(player.m.points.sub(179).min(50).toNumber());
 				let p=tmp.pb.effect.pow(e);
 				return p;
             },
