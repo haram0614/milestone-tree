@@ -144,21 +144,21 @@ addLayer("t", {
 	},
 	getResetGain() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(0);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
 		amt=amt.floor();
 		return amt;
 	},
 	getNextAt() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(2).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
 		amt=amt.floor().plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.effective.gte(163)?500:600));
+		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.m.effective.gte(163)?500:600));
 		return amt;
 	},
 	getNextSPAt() {
 		if(!player.t.activeChallenge)return new Decimal(0);
 		let amt=player.t.specialPoints[player.t.activeChallenge].plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(1/2).mul(250).add(player.m.effective.gte(163)?500:600));
+		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.m.effective.gte(163)?500:600));
 		if(amt.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
 		return amt;
 	},
@@ -587,11 +587,12 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		if(player.r.stage>=1)return new Decimal(2e47)
+		if(player.r.stage>=1)return new Decimal(1e56)
 		return new Decimal(1e35)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
+		if(player.m.effective.gte(205))return 30;
 		if(player.m.effective.gte(183))return 19;
 		if(player.m.effective.gte(178))return 10;
 		if(player.m.effective.gte(164))return 7;

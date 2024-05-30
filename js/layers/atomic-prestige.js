@@ -406,6 +406,10 @@ addLayer("ap", {
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.effective.gte(209)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.5).toNumber();
+			}
 			if(player.m.effective.gte(202)){
 				if(p.lte("ee7"))return 0;
 				return p.log10().div(1e7).log(1.2).pow(1/1.5).toNumber();
@@ -434,6 +438,7 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.effective.gte(209))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e6));
 			if(player.m.effective.gte(202))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e7));
 			if(player.m.effective.gte(195))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e8));
 			if(player.m.effective.gte(169))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1.15e9));

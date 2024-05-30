@@ -179,6 +179,10 @@ addLayer("sp", {
 				if(hasUpgrade("sp",33))p=p.mul(1.5);
 				if(hasUpgrade("sp",34))p=p.mul(1.2);
 				if(hasUpgrade("t",21))p=p.mul(1.1);
+				if(player.um.points.gte(55))p=p.mul(1.001);
+				if(player.um.points.gte(55)&&hasUpgrade("sp",32))p=p.mul(1.001);
+				if(player.um.points.gte(55)&&hasUpgrade("sp",33))p=p.mul(1.001);
+				if(player.um.points.gte(55)&&hasUpgrade("sp",34))p=p.mul(1.001);
 				return p.add(1);
 			},
             unlocked() { return player.m.effective.gte(55)}, // The upgrade is only visible when this is true

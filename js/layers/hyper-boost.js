@@ -69,6 +69,9 @@ addLayer("hb", {
 		if(hasUpgrade("hb",14)){
 			m+=0.003;
 		}
+		if(hasUpgrade("a",23)){
+			e=e+upgradeEffect("a",23).toNumber();
+		}
 		return new Decimal(1).add(player.hb.points.add(e).pow(p).mul(m)).pow(layers.a.effect());
 	},
 	effectDescription(){

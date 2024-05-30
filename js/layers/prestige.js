@@ -71,6 +71,7 @@ addLayer("p", {
 				if(player.um.points.gte(11))base+=1;
 				if(player.um.points.gte(31))base+=0.5;
 				if(player.um.points.gte(44))base+=0.1;//7.6
+				if(player.um.points.gte(54))base+=1;//8.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -95,6 +96,7 @@ addLayer("p", {
 				if(player.um.points.gte(12))base+=0.5;
 				if(player.um.points.gte(32))base+=0.5;
 				if(player.um.points.gte(44))base+=0.1;//4.6
+				if(player.um.points.gte(54))base+=0.1;//4.7
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -119,6 +121,7 @@ addLayer("p", {
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(33))base+=0.15;//2.2
 				if(player.um.points.gte(44))base+=0.3;//2.5
+				if(player.um.points.gte(54))base+=0.5;//3
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -143,6 +146,7 @@ addLayer("p", {
 				if(player.um.points.gte(15))base+=0.05;
 				if(player.um.points.gte(34))base+=0.15;//2
 				if(player.um.points.gte(44))base+=0.1;//2.1
+				if(player.um.points.gte(54))base+=0.1;//2.2
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },

@@ -35,16 +35,18 @@ addLayer("pe", {
 		}
 		return ["p"];
 	},
-	base: function(){
-		let b=new Decimal(10);
-		if(player.mm.points.gte(26))b=b.sqrt();
-		if(player.mm.points.gte(27))b=b.sqrt();
-		if(player.mm.points.gte(28))b=b.sqrt();
-		if(player.mm.points.gte(29))b=b.sqrt();
-		if(player.mm.points.gte(31))b=b.sqrt();
-		if(player.mm.points.gte(32))b=b.sqrt();
-		if(player.mm.points.gte(33))b=b.sqrt();
-		if(player.mm.points.gte(34))b=b.sqrt();
+	base: 10,
+	directMult(){
+		let b=new Decimal(1);
+		if(player.mm.points.gte(26))b=b.mul(2);
+		if(player.mm.points.gte(27))b=b.mul(2);
+		if(player.mm.points.gte(28))b=b.mul(2);
+		if(player.mm.points.gte(29))b=b.mul(2);
+		if(player.mm.points.gte(31))b=b.mul(2);
+		if(player.mm.points.gte(32))b=b.mul(2);
+		if(player.mm.points.gte(33))b=b.mul(2);
+		if(player.mm.points.gte(34))b=b.mul(2);
+		if(player.mm.points.gte(35))b=b.mul(1.7411);
 		return b;
 	},
 	exponent: function(){
@@ -136,9 +138,8 @@ addLayer("pe", {
 		"main-display",
 		"prestige-button",
 		["display-text",function(){
-			let peroom=new Decimal(10).log(tmp.pe.base);
 			let power=new Decimal(1).div(tmp.pe.exponent);
-			return "("+format(peroom)+" per OoM of prestige points, then raised to a power of "+format(power)+")";
+			return "Prestige Energy="+format(tmp.pe.directMult)+"*log10(Prestige Points)^"+format(power);
 		}],
 		"upgrades"
 	],

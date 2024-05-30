@@ -107,8 +107,8 @@ addLayer("pb", {
 		if(hasUpgrade("hb",12)){
 			e=e.add(upgradeEffect("hb",12));
 		}
-		if(hasUpgrade("pb",44)){
-			m+=0.002;
+		if(player.um.points.gte(50) && player.r.stage>=1){
+			p+=0.02;
 		}
 		return new Decimal(1).add(player.pb.points.add(e).pow(p).mul(m)).pow(layers.hb.effect());
 	},
@@ -178,8 +178,8 @@ addLayer("pb", {
 				if(hasUpgrade("pb",33))e+=0.1;
 				if(hasUpgrade("pb",34))e+=0.1;
 				if(hasUpgrade("pb",43))e+=0.1;
-				if(player.r.stage>=1&&player.m.effective.gte(180))e+=0.01*(Decimal.pow(1.1,player.m.points.sub(205)).add(1).min(100).toNumber());
-				else if(player.m.effective.gte(180))e+=0.02*(player.m.points.sub(179).min(50).toNumber());
+				if(player.r.stage>=1&&player.m.effective.gte(180))e+=0.01*(Decimal.pow(1.1,player.m.points.sub(200)).add(1).min(50).toNumber());
+				else if(player.m.effective.gte(180))e+=0.02*(player.m.points.sub(179).min(25).toNumber());
 				let p=tmp.pb.effect.pow(e);
 				return p;
             },

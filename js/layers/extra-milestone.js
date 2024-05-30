@@ -109,6 +109,14 @@ addLayer("em", {
 				return "Milestone Upgrades are cheaper.";
 			},
         },
+		{
+			requirementDescription: "10th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(9)},
+            done() {return player[this.layer].points.gte(10)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reincarnation Point gain is doubled";
+			},
+        },
 	],
 	branches(){
 		if(player.r.stage>=1)return ["pb","pe"];

@@ -32,19 +32,21 @@ addLayer("r", {
 	gainMult(){
 		let mult=new Decimal(1);
 		if(player.m.effective.gte(200))mult=mult.mul(tmp.m.milestone200Effect);
+		if(player.mm.points.gte(40))mult=mult.mul(2);
+		if(player.em.points.gte(10))mult=mult.mul(2);
 		return mult;
 	},
 	getResetGain() {
 		if(player.t.points.lt(tmp.r.requires1))return new Decimal(0);
-		let amt=Decimal.log10(player.t.points.add(10)).pow(2).div(1000).mul(tmp.r.gainMult);
+		let amt=Decimal.log10(player.t.points.add(10)).pow(tmp.m.milestone208Effect).div(1000).mul(tmp.r.gainMult);
 		amt=amt.floor();
 		return amt;
 	},
 	getNextAt() {
 		if(player.t.points.lt(tmp.r.requires1))return new Decimal(tmp.r.requires1);
-		let amt=Decimal.log10(player.t.points.add(10)).pow(2).div(1000).mul(tmp.r.gainMult);
+		let amt=Decimal.log10(player.t.points.add(10)).pow(tmp.m.milestone208Effect).div(1000).mul(tmp.r.gainMult);
 		amt=amt.floor().plus(1).div(tmp.r.gainMult);
-		amt=Decimal.pow(10,amt.mul(1000).pow(1/2));
+		amt=Decimal.pow(10,amt.mul(1000).pow(tmp.m.milestone208Effect.recip()));
 		return amt;
 	},
 	hardcap:new Decimal(1e35),
@@ -86,7 +88,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e27);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e30);
 	},
 	powerGain(){
 		return player.points.max(10).log10().sub(1).mul(player.r.points.pow(1.5));
@@ -99,7 +101,10 @@ addLayer("r", {
 					player.m.effective=new Decimal(0);
 				}
 				player.r.stage=Math.max(player.r.stage,1);
-				layerDataReset("t",player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				let tmp={};
+				for(var i in player.t.specialPoints)tmp[i]=player.t.specialPoints[i];
+				layerDataReset("t",player.r.buyables[11].gte(206)?["upgrades","challenges"]:player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				if(player.r.buyables[11].gte(206))player.t.specialPoints=tmp;
 				layerDataReset("a",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				layerDataReset("ap",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				layerDataReset("he",player.r.buyables[11].gte(184)?["upgrades"]:[]);

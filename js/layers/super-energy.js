@@ -34,12 +34,13 @@ addLayer("se", {
 		}
 		return ["sp","pe"];
 	},
-	base: function(){
-		let b=new Decimal(10);
-		if(player.mm.points.gte(36))b=b.sqrt();
-		if(player.mm.points.gte(37))b=b.sqrt();
-		if(player.mm.points.gte(38))b=b.sqrt();
-		if(player.mm.points.gte(39))b=b.sqrt();
+	base: 10,
+	directMult(){
+		let b=new Decimal(1);
+		if(player.mm.points.gte(36))b=b.mul(2);
+		if(player.mm.points.gte(37))b=b.mul(2);
+		if(player.mm.points.gte(38))b=b.mul(2);
+		if(player.mm.points.gte(39))b=b.mul(2);
 		return b;
 	},
 	exponent: function(){
@@ -129,9 +130,8 @@ addLayer("se", {
 		"main-display",
 		"prestige-button",
 		["display-text",function(){
-			let peroom=new Decimal(10).log(tmp.se.base);
 			let power=new Decimal(1).div(tmp.se.exponent);
-			return "("+format(peroom)+" per OoM of super-prestige points, then raised to a power of "+format(power)+")";
+			return "Super Energy="+format(tmp.se.directMult)+"*log10(Super Prestige Points)^"+format(power);
 		}],
 		"upgrades"
 	],

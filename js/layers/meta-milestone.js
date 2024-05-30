@@ -280,7 +280,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(34)},
             done() {return player[this.layer].points.gte(35)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Prestige Energy gain ^1.1";
+				return "Base Prestige Energy gain ^1.1, Prestige Energy gain is multiplied by 1.741";
 			},
         },
 		{
@@ -313,6 +313,14 @@ var METAMILESTONES=[
             done() {return player[this.layer].points.gte(39)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "40th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(39)},
+            done() {return player[this.layer].points.gte(40)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reincarnation Point gain is doubled";
 			},
         },
 	]

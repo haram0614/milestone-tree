@@ -118,6 +118,18 @@ addLayer("a", {
             cost: new Decimal(62),
             unlocked() { return player.m.effective.gte(190)&&player.r.stage>=1}, // The upgrade is only visible when this is true
         },
+		23: {
+			title: "Atom Upgrade 23",
+            description: "Non-Extra Atoms provide extra Hyper Boosts.",
+            cost: new Decimal(71),
+			effect() {
+				let exp=0.2;
+				let p=player.a.points.pow(exp).div(10);
+				return p;
+            },
+            effectDisplay() { return "+"+format(this.effect(),4) },
+            unlocked() { return player.m.effective.gte(207)}, // The upgrade is only visible when this is true
+        },
 	},
 	
 })
