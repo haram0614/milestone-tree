@@ -592,9 +592,9 @@ addLayer("t", {
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
-		if(player.m.effective.gte(205))return 30;
-		if(player.m.effective.gte(183))return 19;
-		if(player.m.effective.gte(178))return 10;
+		if(player.m.effective.gte(205))return 32;
+		if(player.m.effective.gte(183))return 21;
+		if(player.m.effective.gte(178))return 11;
 		if(player.m.effective.gte(164))return 7;
 		if(player.m.effective.gte(161))return 5;
 		if(player.m.effective.gte(154))return 3;

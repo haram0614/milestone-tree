@@ -185,10 +185,16 @@ function getPointSoftcapStart(){
 		else if(player.m.effective.gte(196))sc=sc.pow(1+Math.random()*2);
 		else if(player.m.effective.gte(195))sc=sc.pow(1+Math.random());
 		else if(player.m.effective.gte(194))sc=sc.pow(1+Math.random()/2);
-		else if(player.m.effective.gte(192))sc=sc.pow(1+Math.random()/5);
-		else if(player.m.effective.gte(191))sc=sc.pow(1+Math.random()/10);
-		else if(player.m.effective.gte(186))sc=sc.pow(1+Math.random()/50);
-		else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/100);
+		else if(player.m.effective.gte(193))sc=sc.pow(1+Math.random()/3);
+		else if(player.m.effective.gte(192))sc=sc.pow(1+Math.random()/4);
+		else if(player.m.effective.gte(191))sc=sc.pow(1+Math.random()/6);
+		else if(player.m.effective.gte(190))sc=sc.pow(1+Math.random()/8);
+		else if(player.m.effective.gte(189))sc=sc.pow(1+Math.random()/10);
+		else if(player.m.effective.gte(188))sc=sc.pow(1+Math.random()/20);
+		else if(player.m.effective.gte(187))sc=sc.pow(1+Math.random()/30);
+		else if(player.m.effective.gte(186))sc=sc.pow(1+Math.random()/40);
+		else if(player.m.effective.gte(185))sc=sc.pow(1+Math.random()/60);
+		else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/80);
 	}else sc=sc.pow(tmp.r.buyables[12].effect);
 	return sc;
 }

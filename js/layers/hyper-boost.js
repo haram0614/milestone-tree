@@ -51,6 +51,7 @@ addLayer("hb", {
 		if(x.gte(10)){
 			let scaling=x.sub(10).pow(2).div(1000);
 			if(player.m.effective.gte(119))scaling=scaling.div(1.2);
+			if(x.eq(65))scaling=scaling.div(1.003);
 			p=p.add(scaling);
 		}
 		return p;

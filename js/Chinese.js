@@ -472,15 +472,15 @@ layers.m.milestones[175-1].effectDescription="解锁一个层级。";
 layers.m.milestones[176-1].effectDescription="自动获得第一个超越挑战的完成数和挑战点数。";
 layers.m.milestones[177-1].effectDescription="自动获得第二个超越挑战的完成数和挑战点数。";
 layers.m.milestones[178-1].effectDescription=function(){
-	if(player.m.effective.gte(183))return "每秒额外获得重置可以获得的超越点数的300%，总计900%。";
-	return "每秒额外获得重置可以获得的超越点数的300%，总计1000%。";
+	if(player.m.effective.gte(183))return "每秒额外获得重置可以获得的超越点数的400%，总计1000%。";
+	return "每秒额外获得重置可以获得的超越点数的400%，总计1100%。";
 }
 layers.m.milestones[179-1].effectDescription="解锁原子升级。";
 layers.m.milestones[180-1].effectDescription="基于里程碑，声望加成升级31的效果变得更好。";
 layers.m.milestones[181-1].effectDescription="第165个里程碑的效果变得更好。";
 layers.m.milestones[182-1].effectDescription="第三级声望升级22的效果变得更好。";
 layers.m.milestones[183-1].effectDescription=function(){
-	return "每秒额外获得重置可以获得的超越点数的1000%，总计1900%。但是去除所有在第150个里程碑之前每秒获得超越点数的效果。";
+	return "每秒额外获得重置可以获得的超越点数的1100%，总计2100%。但是去除所有在第150个里程碑之前每秒获得超越点数的效果。";
 }
 layers.m.milestones[184-1].effectDescription=function(){
 				if(player.r.stage>=1){
@@ -563,7 +563,7 @@ layers.m.milestones[201-1].effectDescription="超越挑战完成15次之后，�
 layers.m.milestones[202-1].effectDescription="原子级挑战6的目标减少了。";
 layers.m.milestones[203-1].effectDescription="第三级声望升级22的效果变得更好。";
 layers.m.milestones[204-1].effectDescription="解锁一个新的转世可重复购买项。";
-layers.m.milestones[205-1].effectDescription="每秒额外获得重置可以获得的超越点数的1100%，总计3000%。";
+layers.m.milestones[205-1].effectDescription="每秒额外获得重置可以获得的超越点数的1100%，总计3200%。";
 layers.m.milestones[206-1].effectDescription="转世不再重置超越挑战完成数和超越挑战点数。";
 layers.m.milestones[207-1].effectDescription="解锁新的原子升级。";
 layers.m.milestones[208-1].effectDescription=function(){

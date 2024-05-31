@@ -1486,8 +1486,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(177)},
             done() {return player[this.layer].points.gte(178)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.effective.gte(183))return "Gain additional 300% of Transcend Point gain per second (total 900%).";
-				return "Gain additional 300% of Transcend Point gain per second (total 1000%)."
+				if(player.m.effective.gte(183))return "Gain additional 400% of Transcend Point gain per second (total 1000%).";
+				return "Gain additional 400% of Transcend Point gain per second (total 1100%)."
 			},
         },
 		{
@@ -1527,7 +1527,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(182)},
             done() {return player[this.layer].points.gte(183)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Gain additional 1000% of Transcend Point gain per second (total 1900%) but Nullify Transcend Point gain effects in milestones before 150th Milestone."
+				return "Gain additional 1100% of Transcend Point gain per second (total 2100%) but Nullify Transcend Point gain effects in milestones before 150th Milestone."
 			},
         },
 		{
@@ -1739,7 +1739,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(204)},
             done() {return player[this.layer].points.gte(205)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Gain additional 1100% of Transcend Point gain per second (total 3000%)"
+				return "Gain additional 1100% of Transcend Point gain per second (total 3200%)"
 			},
         },
 		{
