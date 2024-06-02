@@ -503,6 +503,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(55)},
             done() {return player[this.layer].points.gte(56)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(56))return "3rd Milestone's base effect exponent ^1.002 (Upgraded)";
 				return "3rd Milestone's base effect exponent ^1.00078";
 			},
         },
@@ -511,6 +512,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(56)},
             done() {return player[this.layer].points.gte(57)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(57))return "Gain 1e22% of Super-Prestige Point gain per second. (Upgraded)";
 				if(player[this.layer].best.gte(135))return "Gain 1e12% of Super-Prestige Point gain per second.";
 				return "Gain 100% of Super-Prestige Point gain per second.";
 			},
@@ -520,7 +522,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(57)},
             done() {return player[this.layer].points.gte(58)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "4th Milestone is boosted.";
+				let ret="4th Milestone is boosted.";
+				if(player.um.points.gte(58))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -1348,8 +1351,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(160)},
             done() {return player[this.layer].points.gte(161)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.effective.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 400%).";
-				return "Gain additional 200% of Transcend Point gain per second (total 500%)."
+				return "The 154th milestone now based on your point gain before 1st milestone's softcap."
 			},
         },
 		{
@@ -1373,8 +1375,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(163)},
             done() {return player[this.layer].points.gte(164)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.effective.gte(183))return "Gain additional 200% of Transcend Point gain per second (total 600%).";
-				return "Gain additional 200% of Transcend Point gain per second (total 700%)."
+				if(player.m.effective.gte(183))return "Gain additional 300% of Transcend Point gain per second (total 500%).";
+				return "Gain additional 300% of Transcend Point gain per second (total 600%)."
 			},
         },
 		{
@@ -1486,8 +1488,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(177)},
             done() {return player[this.layer].points.gte(178)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.m.effective.gte(183))return "Gain additional 400% of Transcend Point gain per second (total 1000%).";
-				return "Gain additional 400% of Transcend Point gain per second (total 1100%)."
+				if(player.m.effective.gte(183))return "Gain additional 500% of Transcend Point gain per second (total 1000%).";
+				return "Gain additional 500% of Transcend Point gain per second (total 1100%)."
 			},
         },
 		{
@@ -1779,6 +1781,14 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(209)},
             done() {return player[this.layer].points.gte(210)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				return "Unlock a reincarnation buyable."
+			},
+        },
+		{
+			requirementDescription: "211th Milestone",
+            unlocked() {return player[this.layer].best.gte(210)},
+            done() {return player[this.layer].points.gte(211)}, // Used to determine when to give the milestone
+            effectDescription: function(){
 				return "Current Endgame"
 			},
         },
@@ -1917,7 +1927,7 @@ addLayer("m", {
 		if(player.m.effective.gte(41))m=m.pow(player.um.points.gte(41)?1.005:1.003);
 		if(player.m.effective.gte(46))m=m.pow(player.um.points.gte(46)?1.005:1.001);
 		if(player.m.effective.gte(51))m=m.pow(player.um.points.gte(51)?1.005:1.00175);
-		if(player.m.effective.gte(56))m=m.pow(1.00078);
+		if(player.m.effective.gte(56))m=m.pow(player.um.points.gte(56)?1.002:1.00078);
 		if(player.m.effective.gte(61))m=m.pow(1.0005);
 		if(player.m.effective.gte(66))m=m.pow(1.0005);
 		if(player.m.effective.gte(71))m=m.pow(1.001236);
@@ -1927,7 +1937,7 @@ addLayer("m", {
 		if(player.m.effective.gte(91))m=m.pow(1.0005);
 		if(player.m.effective.gte(96))m=m.pow(1.0005);
 		if(player.m.effective.gte(107))m=m.pow(1.002);
-		if(player.um.points.gte(3))m=m.pow(1.001);//0.92236206590455042259918826688019
+		if(player.um.points.gte(3))m=m.pow(1.001);//0.92348647058929986954614065370406
 		var b=new Decimal(2);
 		if(player.m.effective.gte(4)){
 			b=b.add(layers.m.milestone4Effect());

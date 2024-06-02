@@ -236,7 +236,7 @@ addLayer("p", {
             description: "First Prestige buyable is boosted. You can buy this upgrade while you're in T challenge 2.",
             cost(){
 				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
-				return new Decimal("e188e6");
+				return new Decimal("e1875e5");
 			},
             unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
         },
@@ -245,7 +245,7 @@ addLayer("p", {
             description: "First Prestige buyable is boosted. You can buy this upgrade while you're in T challenge 4.",
             cost(){
 				if(player.t.activeChallenge!=22)return new Decimal(Infinity);
-				return new Decimal("e501000");
+				return new Decimal("e5e5");
 			},
             unlocked() { return player.m.effective.gte(124)}, // The upgrade is only visible when this is true
 			currencyDisplayName(){ return "points"},

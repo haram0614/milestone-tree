@@ -11,7 +11,8 @@ addLayer("r", {
     }},
     color: "#00FFFF",
     requires1(){
-		return new Decimal(1e35);
+		if(player.r.stage>=1)return Decimal.pow(10,10*Math.sqrt(10));
+		return new Decimal(1e36);
 	},
     requires(){
 		if(player.r.activeChallenge)return new Decimal(Infinity);
@@ -88,7 +89,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e30);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e31);
 	},
 	powerGain(){
 		return player.points.max(10).log10().sub(1).mul(player.r.points.pow(1.5));
@@ -220,6 +221,37 @@ addLayer("r", {
 			  },
 			  unlocked(){
 				  return player.m.effective.gte(204);
+			  }
+		},
+		22:{
+			title(){
+				return "Prestige Energy Gain";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"Effect: "+format(data.effect)+"x Prestige Energy Gain<br>"+
+				"Cost for Next Level: "+format(data.cost)+" reincarnation power";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a).mul(1e30);
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].power.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+			       player[this.layer].power=player[this.layer].power.sub(tmp[this.layer].buyables[this.id].cost)
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+				   updateTemp();
+               },
+			  effect(){
+				  let eff=Decimal.pow(1.5,player[this.layer].buyables[this.id]);
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.m.effective.gte(210);
 			  }
 		},
 	}

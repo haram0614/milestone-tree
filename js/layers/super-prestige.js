@@ -229,7 +229,7 @@ addLayer("sp", {
             description: "First Super-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
             cost(){
 				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
-				return new Decimal("e401e8");
+				return new Decimal("e4e10");
 			},
             unlocked() { return player.m.effective.gte(127)}, // The upgrade is only visible when this is true
         },
@@ -238,7 +238,7 @@ addLayer("sp", {
             description: "First row of Super-Prestige upgrades is boosted. You can buy this upgrade while you're in T challenge 5.",
             cost(){
 				if(player.t.activeChallenge!=31)return new Decimal(Infinity);
-				return new Decimal("e1293e4");
+				return new Decimal("e127e5");
 			},
             unlocked() { return player.m.effective.gte(127)}, // The upgrade is only visible when this is true
         },
@@ -318,6 +318,7 @@ addLayer("sp", {
 	},
 	branches: ["p"],
 	passiveGeneration(){
+		if(player.um.points.gte(57))return 1e20;
 		if(player.m.effective.gte(135))return 1e10;
 		if(player.m.effective.gte(57))return 1;
 		return 0;

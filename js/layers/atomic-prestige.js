@@ -157,13 +157,13 @@ addLayer("ap", {
 		33: {
 			title: "Atomic-Prestige Upgrade 33",
             description: "Atomic-Prestige Upgrade 23 and 32 are boosted.",
-            cost: new Decimal("3e6045"),
+            cost: new Decimal("1e6045"),
             unlocked() { return hasUpgrade("t",44);}, // The upgrade is only visible when this is true
         },
 		34: {
 			title: "Atomic-Prestige Upgrade 34",
             description: "Atomic-Prestige Upgrade 23 and 32 are boosted.",
-            cost: new Decimal("3e6951"),
+            cost: new Decimal("1e6951"),
             unlocked() { return hasUpgrade("t",44);}, // The upgrade is only visible when this is true
         },
 	},
@@ -509,8 +509,11 @@ addLayer("ap", {
 			if(player.m.effective.gte(149)){
 				player.ap.challenges[32]=Math.max(player.ap.challenges[32],layers.ap.challenges[32].completionsAfter120());
 			}
-			if(player.m.effective.gte(157)){
+			if(player.m.effective.gte(161)){
+				player.ap.challenges[22]=Math.max(player.ap.challenges[22],getPointGenBeforeSoftcap().add(1e100).log10().pow(player.m.points).add(10).mul(player.m.points).log10().div(600).log(1.035).toNumber());
+			}else if(player.m.effective.gte(157)){
 				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.points).add(10).log10().div(600).log(1.035).toNumber());
 			}
+			
 		}
 })

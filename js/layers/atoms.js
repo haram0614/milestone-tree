@@ -123,8 +123,8 @@ addLayer("a", {
             description: "Non-Extra Atoms provide extra Hyper Boosts.",
             cost: new Decimal(71),
 			effect() {
-				let exp=0.2;
-				let p=player.a.points.pow(exp).div(10);
+				let exp=0.1;
+				let p=player.a.points.pow(exp);
 				return p;
             },
             effectDisplay() { return "+"+format(this.effect(),4) },

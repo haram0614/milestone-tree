@@ -176,7 +176,7 @@ addLayer("hp", {
             description: "First Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
             cost(){
 				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
-				return new Decimal("e176e7");
+				return new Decimal("e195e7");
 			},
             unlocked() { return player.m.effective.gte(142)}, // The upgrade is only visible when this is true
         },
@@ -185,7 +185,7 @@ addLayer("hp", {
             description: "Second Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
             cost(){
 				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
-				return new Decimal("e479e7");
+				return new Decimal("e24e8");
 			},
             unlocked() { return player.m.effective.gte(142)}, // The upgrade is only visible when this is true
         },
@@ -194,7 +194,7 @@ addLayer("hp", {
             description: "First Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
             cost(){
 				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
-				return new Decimal("e1e10");
+				return new Decimal("e47e8");
 			},
             unlocked() { return player.m.effective.gte(142)}, // The upgrade is only visible when this is true
         },
@@ -203,7 +203,7 @@ addLayer("hp", {
             description: "Second Hyper-Prestige buyable is cheaper. You can buy this upgrade while you're in AP challenge 6.",
             cost(){
 				if(player.ap.activeChallenge!=32)return new Decimal(Infinity);
-				return new Decimal("e361e8");
+				return new Decimal("e98e8");
 			},
             unlocked() { return player.m.effective.gte(142)}, // The upgrade is only visible when this is true
         },

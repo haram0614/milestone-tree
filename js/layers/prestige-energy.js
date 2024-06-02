@@ -47,6 +47,7 @@ addLayer("pe", {
 		if(player.mm.points.gte(33))b=b.mul(2);
 		if(player.mm.points.gte(34))b=b.mul(2);
 		if(player.mm.points.gte(35))b=b.mul(1.7411);
+		b=b.mul(buyableEffect("r",22));
 		return b;
 	},
 	exponent: function(){
@@ -103,7 +104,7 @@ addLayer("pe", {
 		21: {
 			title: "Prestige Energy Upgrade 21",
             description: "Transcend point gain is boosted based on your prestige energy.",
-            cost: new Decimal(1.34e12),
+            cost: new Decimal(9.41e11),
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.1;
@@ -116,13 +117,13 @@ addLayer("pe", {
 		22: {
 			title: "Prestige Energy Upgrade 22",
             description: "Prestige Energy Upgrade 12 is boosted.",
-            cost: new Decimal(1.42e12),
+            cost: new Decimal(1.4e12),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		23: {
 			title: "Prestige Energy Upgrade 23",
             description: "Prestige Energy Upgrade 11 is boosted.",
-            cost: new Decimal(3.38e12),
+            cost: new Decimal(3.37e12),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		24: {

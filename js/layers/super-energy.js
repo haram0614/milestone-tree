@@ -70,7 +70,7 @@ addLayer("se", {
 		12: {
 			title: "Super Energy Upgrade 12",
             description: "Milestone Cost Scaling is weaker based on your super energy.",
-            cost: new Decimal(1.53e12),
+            cost: new Decimal(1.46e12),
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.se.points.add(1).log10().div(200);
@@ -83,25 +83,25 @@ addLayer("se", {
 		13: {
 			title: "Super Energy Upgrade 13",
             description: "Super Energy Upgrade 11 is boosted.",
-            cost: new Decimal(8.06e12),
+            cost: new Decimal(8.33e12),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		14: {
 			title: "Super Energy Upgrade 14",
             description: "Super Energy Upgrade 12 is boosted.",
-            cost: new Decimal(1.01e13),
+            cost: new Decimal(1.09e13),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		21: {
 			title: "Super Energy Upgrade 21",
             description: "Super Energy Upgrade 11 is boosted.",
-            cost: new Decimal(3.27e13),
+            cost: new Decimal(3.17e13),
             unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Super Energy Upgrade 22",
             description: "Transcend point gain is boosted based on your super energy.",
-            cost: new Decimal(3.61e13),
+            cost: new Decimal(3.51e13),
             unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.1;
@@ -114,13 +114,13 @@ addLayer("se", {
 		23: {
 			title: "Super Energy Upgrade 23",
             description: "Super Energy Upgrade 12 is boosted.",
-            cost: new Decimal(1e14),
+            cost: new Decimal(7.14e13),
             unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 		24: {
 			title: "Super Energy Upgrade 24",
             description: "Super Energy Upgrade 22 is boosted.",
-            cost: new Decimal(3.86e14),
+            cost: new Decimal(2.59e14),
             unlocked() { return player.em.points.gte(3)}, // The upgrade is only visible when this is true
         },
 	},

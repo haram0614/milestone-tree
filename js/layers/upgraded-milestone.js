@@ -17,7 +17,7 @@ addLayer("um", {
 		}
 		if(player.um.points.gte(50))return new Decimal(Infinity);
 		if(player.em.points.gte(5))return new Decimal("e6e12");
-		return new Decimal("e11111111111111");
+		return new Decimal("ee13");
 	},
     resource: "upgraded milestones", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
@@ -38,12 +38,10 @@ addLayer("um", {
 			if(player.em.points.gte(5))return new Decimal("e5e16");
 			return new Decimal("ee17");
 		}
-		if(player.um.points.gte(50))return new Decimal("ee14");
-		if(player.um.points.gte(45))return new Decimal("ee13");
-		if(player.um.points.gte(43))return new Decimal("e44e11");
-		if(player.um.points.gte(40))return new Decimal("e46e11");
-		if(player.um.points.gte(21))return new Decimal("e13e11");
-		if(player.um.points.gte(15))return new Decimal("e96e10");
+		if(player.um.points.gte(42))return new Decimal("e62e11");
+		if(player.um.points.gte(40))return new Decimal("e71e11");
+		if(player.um.points.gte(21))return new Decimal("e103e10");
+		if(player.um.points.gte(13))return new Decimal("e95e10");
 		if(player.um.points.gte(8))return new Decimal("e85e10");
 		return new Decimal("ee12");
 	},
@@ -55,7 +53,7 @@ addLayer("um", {
 	},
 	exponent: function(x){
 		if(x===undefined)x=player.um.points;
-		var p=new Decimal(2);
+		var p=new Decimal(1.9);
 		if(player.r.stage>=1)p=new Decimal(1.5);
 		if(player.r.stage>=1){
 			let scaling=x.sub(10).div(20);

@@ -86,18 +86,22 @@ addLayer("pb", {
 		}
 		if(hasUpgrade("pb",24)){
 			m+=0.00201;
-		}if(player.r.stage==0){
-		if(player.ap.challenges[11]>=1){
-			p+=0.01;
 		}
-		if(player.ap.challenges[11]>=2){
-			m+=0.001;
+		if(hasUpgrade("pb",44)){
+			m+=0.000426;
 		}
-		if(player.ap.challenges[11]>=3){
-			p+=0.01;
-			m+=0.002*(player.ap.challenges[11]-3);
-		}}else{
-			
+		if(player.r.stage==0){
+			if(player.ap.challenges[11]>=1){
+				p+=0.01;
+			}
+			if(player.ap.challenges[11]>=2){
+				m+=0.001;
+			}
+			if(player.ap.challenges[11]>=3){
+				p+=0.01;
+				m+=0.002*(player.ap.challenges[11]-3);
+			}
+		}else{
 			m+=0.002*player.ap.challenges[11];
 		}
 		m+=0.002*player.ap.challenges[31];
@@ -110,6 +114,7 @@ addLayer("pb", {
 		if(player.um.points.gte(50) && player.r.stage>=1){
 			p+=0.02;
 		}
+		//console.log(p,m);
 		return new Decimal(1).add(player.pb.points.add(e).pow(p).mul(m)).pow(layers.hb.effect());
 	},
 	effectDescription(){
@@ -241,7 +246,7 @@ addLayer("pb", {
 			},unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
         },
 		44: {
-			title: "Super-Prestige Upgrade 44",
+			title: "Prestige Boost Upgrade 44",
             description: "Prestige Boost's effect is better. To buy this upgrade, You need to complete AP challenge 5 18 times.",
             cost(){
 				if(player.ap.challenges[31]<18)return new Decimal(Infinity);

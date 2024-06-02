@@ -316,7 +316,7 @@ addLayer("t", {
 		63: {
 			title: "Transcend Upgrade 63",
             description(){return "Transcend point gain is boosted based on your transcend points."},
-            cost: new Decimal(1e12),
+            cost: new Decimal(6e11),
 			unlocked(){return player.m.effective.gte(125);},
 			effect(){
 				let base=1.05;
@@ -355,7 +355,7 @@ addLayer("t", {
 		73: {
 			title: "Transcend Upgrade 73",
             description(){return "1st Milestone's softcap starts later based on AP challenge completions."},
-            cost: new Decimal(1e14),
+            cost: new Decimal(3e13),
 			unlocked(){return player.m.effective.gte(136);},
 			effect(){
 				let c=0;
@@ -372,7 +372,7 @@ addLayer("t", {
 		74: {
 			title: "Transcend Upgrade 74",
             description(){return "Transcend Upgrade 72 and 73 are boosted."},
-            cost: new Decimal(4e14),
+            cost: new Decimal(1.5e14),
 			unlocked(){return player.m.effective.gte(136);},
         },
 		81: {
@@ -390,7 +390,7 @@ addLayer("t", {
 		83: {
 			title: "Transcend Upgrade 83",
             description(){return "Transcend Upgrade 54 is better."},
-            cost: new Decimal(1e21),
+            cost: new Decimal(4e20),
 			unlocked(){return player.m.effective.gte(153);},
         },
 		84: {
@@ -573,7 +573,7 @@ addLayer("t", {
 				},
 				rewardEffect() {
 		            let ret = 1+player.t.challenges[42]*0.02;
-					if(player.m.effective.gte(171))ret = 1+player.t.challenges[42]*0.04;
+					if(player.m.effective.gte(171))ret = 1+player.t.challenges[42]*0.043;
 					if(player.m.effective.gte(172))ret = 1+player.t.challenges[42]*0.06;
 					if(player.m.effective.gte(173))ret = 1+player.t.challenges[42]*0.08;
 					if(player.m.effective.gte(174))ret = 1+player.t.challenges[42]*0.1;
@@ -587,16 +587,15 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		if(player.r.stage>=1)return new Decimal(1e56)
-		return new Decimal(1e35)
+		if(player.r.stage>=1)return new Decimal(1e57)
+		return new Decimal(1e36)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
 		if(player.m.effective.gte(205))return 32;
 		if(player.m.effective.gte(183))return 21;
 		if(player.m.effective.gte(178))return 11;
-		if(player.m.effective.gte(164))return 7;
-		if(player.m.effective.gte(161))return 5;
+		if(player.m.effective.gte(164))return 6;
 		if(player.m.effective.gte(154))return 3;
 		if(player.m.effective.gte(151))return 2;
 		if(player.m.effective.gte(133))return 1;

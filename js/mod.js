@@ -33,11 +33,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.210",
+	num: "1.211",
 	name: "The Big Reset"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.211 - 2024/6/2</h3><br>
+		- Added 1 milestone<br>
+		- Added 1 reincarnate buyable<br>
+		- Rebalanced Early Game<br>
 	<h3>v1.210 - 2024/5/28</h3><br>
 		- Added 5 milestones<br>
 		- Added 1 extra-milestone<br>

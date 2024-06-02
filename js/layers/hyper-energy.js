@@ -53,7 +53,7 @@ addLayer("he", {
 		11: {
 			title: "Hyper Energy Upgrade 11",
             description: "1st Milestone's softcap starts later based on your hyper energy.",
-            cost: new Decimal(1.4e10),
+            cost: new Decimal(1.45e10),
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.he.points.add(1).log10().div(90);
@@ -67,7 +67,7 @@ addLayer("he", {
 		12: {
 			title: "Hyper Energy Upgrade 12",
             description: "Milestone Cost Scaling is weaker based on your hyper energy.",
-            cost: new Decimal(2.49e10),
+            cost: new Decimal(2.56e10),
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() {
 				let b=player.he.points.add(1).log10().div(500);
@@ -79,25 +79,25 @@ addLayer("he", {
 		13: {
 			title: "Hyper Energy Upgrade 13",
             description: "Hyper Energy Upgrade 11 is boosted.",
-            cost: new Decimal(4.42e10),
+            cost: new Decimal(3.07e10),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		14: {
 			title: "Hyper Energy Upgrade 14",
             description: "Hyper Energy Upgrade 12 is boosted.",
-            cost: new Decimal(7.66e10),
+            cost: new Decimal(9.5e10),
             unlocked() { return true}, // The upgrade is only visible when this is true
         },
 		21: {
 			title: "Hyper Energy Upgrade 21",
             description: "Hyper Energy Upgrade 11 is boosted.",
-            cost: new Decimal(1.08e13),
+            cost: new Decimal(1.55e13),
             unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
         },
 		22: {
 			title: "Hyper Energy Upgrade 22",
             description: "Transcend point gain is boosted based on your hyper energy.",
-            cost: new Decimal(1.66e13),
+            cost: new Decimal(2.83e13),
             unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
 			effect() {
 				let base=1.05;
@@ -109,7 +109,7 @@ addLayer("he", {
 		23: {
 			title: "Hyper Energy Upgrade 23",
             description: "Hyper Energy Upgrade 11 is boosted.",
-            cost: new Decimal(6e13),
+            cost: new Decimal(1e14),
             unlocked() { return player.em.points.gte(6)}, // The upgrade is only visible when this is true
         },
 		24: {
