@@ -531,7 +531,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(58)},
             done() {return player[this.layer].points.gte(59)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "First row of Super-Prestige Upgrades is boosted.";
+				let ret="First row of Super-Prestige Upgrades is boosted.";
+				if(player.um.points.gte(59))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -539,7 +540,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(59)},
             done() {return player[this.layer].points.gte(60)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Unlock a new layer. Keep Prestige upgrades on Prestige Boost.";
+				return "Unlock a new layer. Prestige Boost doesn't reset anything. Autoget Prestige Boosts.";
 			},
         },
 		{
@@ -579,7 +580,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(64)},
             done() {return player[this.layer].points.gte(65)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Prestige Boost doesn't reset anything. Keep Prestige and Super-Prestige upgrades on Hyper-Prestige. Unlock 2 new Hyper-Prestige Upgrades.";
+				return "Keep Prestige and Super-Prestige upgrades on Hyper-Prestige. Unlock 2 new Hyper-Prestige Upgrades.";
 			},
         },
 		{
@@ -700,7 +701,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(79)},
             done() {return player[this.layer].points.gte(80)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Unlock a new layer. Autoget Prestige Boosts.";
+				return "Unlock a new layer.";
 			},
         },
 		{

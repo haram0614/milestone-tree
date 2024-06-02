@@ -256,7 +256,7 @@ addLayer("pb", {
         },
 	},
 	
-	resetsNothing(){return player.m.effective.gte(65)},
+	resetsNothing(){return player.m.effective.gte(60)},
 		doReset(l){
 			if(l=="pb"){return;}
 			if(l=="hp")if(player.m.effective.gte(70))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
@@ -265,9 +265,8 @@ addLayer("pb", {
 			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("pb",["upgrades"]);else layerDataReset("pb",[]);
 			if(l=="a")layerDataReset("pb",["upgrades"]);
 		},
-	//autoPrestige(){return player.m.effective.gte(80)},
 	update(){
-		if(player.m.effective.gte(80)&&player.ap.activeChallenge!=11){//quick autobuy
+		if(player.m.effective.gte(60)&&player.ap.activeChallenge!=11){//quick autobuy
 			while(true){
 				let req=layers.pb.requires().mul(layers.pb.base.pow(Decimal.pow(player.pb.points,layers.pb.exponent())));
 				if(player.p.points.gt(req))player.pb.points=player.pb.points.add(1);

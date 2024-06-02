@@ -201,11 +201,11 @@ layers.m.milestones[42-1].effectDescription=function(){
 	if(player.um.points.gte(42))return "第六个里程碑的效果变为原来的(里程碑升级数量+元里程碑数量)次方。（已升级）";
 	return "第六个里程碑的效果变为原来的(1+元里程碑数量)次方。";
 }
-layers.m.milestones[43-1].effectDescription=layers.m.milestones[58-1].effectDescription=function(){
+layers.m.milestones[43-1].effectDescription=layers.m.milestones[48-1].effectDescription=layers.m.milestones[53-1].effectDescription=layers.m.milestones[58-1].effectDescription=function(){
 	let ret="第四个里程碑的效果变得更好。";
 	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
-layers.m.milestones[44-1].effectDescription=function(){
+layers.m.milestones[44-1].effectDescription=layers.m.milestones[54-1].effectDescription=function(){
 	let ret="第一行声望升级的效果变得更好。";
 	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
@@ -221,11 +221,7 @@ layers.m.milestones[47-1].effectDescription=function(){
 	if(player.um.points.gte(47))return "第27个里程碑的效果变为原来的(元里程碑数量的0.5次方)次方。（已升级）";
 	return "第27个里程碑的效果变为原来的(1+元里程碑数量的0.25次方)次方。";
 }
-layers.m.milestones[48-1].effectDescription=function(){
-	let ret="第四个里程碑的效果变得更好。";
-	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
-}
-layers.m.milestones[49-1].effectDescription=function(){
+layers.m.milestones[49-1].effectDescription=layers.m.milestones[59-1].effectDescription=function(){
 	let ret="第一行超级声望升级的效果变得更好。";
 	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
 }
@@ -242,14 +238,6 @@ layers.m.milestones[52-1].effectDescription=function(){
 	if(player.um.points.gte(52))return "第六个里程碑的效果变为原来的(元里程碑数量)次方。（已升级）";
 	return "第六个里程碑的效果变为原来的(1+元里程碑数量的0.1次方)次方。";
 }
-layers.m.milestones[53-1].effectDescription=function(){
-	let ret="第四个里程碑的效果变得更好。";
-	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
-}
-layers.m.milestones[54-1].effectDescription=function(){
-	let ret="第一行声望升级的效果变得更好。";
-	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
-}
 layers.m.milestones[55-1].effectDescription=function(){
 	if(player.um.points.gte(55))return "解锁4个新的超级声望升级，并且这4个升级效果变得更好。（已升级）";
 	return "解锁4个新的超级声望升级。";
@@ -263,11 +251,8 @@ layers.m.milestones[57-1].effectDescription=function(){
 	if(player.m.effective.gte(135))return "每秒获得重置可以获得的超级声望点数的1e12%。";
 	return "每秒获得重置可以获得的超级声望点数的100%。";
 }
-layers.m.milestones[59-1].effectDescription=function(){
-	return "第一行超级声望升级的效果变得更好。";
-}
 layers.m.milestones[60-1].effectDescription=function(){
-	return "解锁下一个层级。在获得声望加成时保留声望升级。";
+	return "解锁下一个层级。声望加成不重置任何东西，并且自动获取声望加成。";
 }
 layers.m.milestones[61-1].effectDescription=function(){
 	return "第三个里程碑的基础效果指数变为原来的1.0005次方。";
@@ -282,7 +267,7 @@ layers.m.milestones[64-1].effectDescription=function(){
 	return "第一行声望升级的效果变得更好。";
 }
 layers.m.milestones[65-1].effectDescription=function(){
-	return "在获得声望加成时不会重置。在第三级声望时保留声望升级和超级声望升级。解锁2个新的第三级声望升级。";
+	return "在第三级声望时保留声望升级和超级声望升级。解锁2个新的第三级声望升级。";
 }
 layers.m.milestones[66-1].effectDescription=function(){
 	return "第三个里程碑的基础效果指数变为原来的1.0005次方。";
@@ -319,7 +304,7 @@ layers.m.milestones[76-1].effectDescription="第三个里程碑的基础效果�
 layers.m.milestones[77-1].effectDescription="解锁一个超级声望可重复购买项。";
 layers.m.milestones[78-1].effectDescription="第四个里程碑的效果变得更好。";
 layers.m.milestones[79-1].effectDescription="第一行超级声望升级和第一行第三级声望升级的效果变得更好。";
-layers.m.milestones[80-1].effectDescription="解锁下一个层级。自动获得声望加成。";
+layers.m.milestones[80-1].effectDescription="解锁下一个层级。";
 layers.m.milestones[81-1].effectDescription="第三个里程碑的基础效果指数变为原来的1.0005次方。在原子级声望时保留声望升级、超级声望升级和声望加成升级。";
 layers.m.milestones[82-1].effectDescription="第六个里程碑的效果变为原来的(元里程碑数量的0.2次方)次方。在原子级声望时保留第三级声望升级。";
 layers.m.milestones[83-1].effectDescription="第四个里程碑的效果变得更好。自动购买第一个超级声望可重复购买项。";
