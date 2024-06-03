@@ -79,7 +79,7 @@ addLayer("hb", {
 	},
 	
 	upgrades: {
-        rows: 2,
+        rows: 3,
 		cols: 4,
 		11: {
 			title: "Hyper Boost Upgrade 11",
@@ -140,6 +140,19 @@ addLayer("hb", {
 			title: "Hyper Boost Upgrade 24",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(42),
+        },
+		31: {
+			title: "Hyper Boost Upgrade 31",
+            description: "Atom Upgrade 23's effect provide extra Prestige Boosts.",
+            cost: new Decimal(113),
+			effect() {
+				let exp=0.1
+				if(hasUpgrade("a",24))exp+=0.2;
+				let p=player.a.points.pow(exp);
+				return p;
+            },
+            effectDisplay() { return "+"+format(this.effect(),4) },
+            unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
         },
 	},
 	resetsNothing(){return player.m.effective.gte(111)},

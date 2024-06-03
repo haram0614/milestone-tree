@@ -108,9 +108,8 @@ addLayer("pb", {
 		if(player.ap.challenges[31]>=17&&player.r.stage==0){
 			m+=0.0003;
 		}
-		if(hasUpgrade("hb",12)){
-			e=e.add(upgradeEffect("hb",12));
-		}
+		if(hasUpgrade("hb",12))e=e.add(upgradeEffect("hb",12));
+		if(hasUpgrade("hb",31))e=e.add(upgradeEffect("hb",31));
 		if(player.um.points.gte(50) && player.r.stage>=1){
 			p+=0.02;
 		}
@@ -215,7 +214,7 @@ addLayer("pb", {
 				if(player.ap.activeChallenge!=12)return new Decimal(Infinity);
 				return new Decimal(102);
 			},
-            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(131)}, // The upgrade is only visible when this is true
 			effect() {
 				let p=player.sp.points.add(1e20).log10().log10().div(200);
 				return p.add(1);
@@ -229,7 +228,7 @@ addLayer("pb", {
 				if(player.ap.activeChallenge!=21)return new Decimal(Infinity);
 				return new Decimal(109);
 			},
-            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(131)}, // The upgrade is only visible when this is true
 			effect() {
 				let e=0.01;
 				let p=tmp.pb.effect.pow(e);
@@ -243,7 +242,7 @@ addLayer("pb", {
             cost(){
 				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
 				return new Decimal(77);
-			},unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
+			},unlocked() { return player.m.effective.gte(131)}, // The upgrade is only visible when this is true
         },
 		44: {
 			title: "Prestige Boost Upgrade 44",
@@ -252,7 +251,7 @@ addLayer("pb", {
 				if(player.ap.challenges[31]<18)return new Decimal(Infinity);
 				return new Decimal(112);
 			},
-            unlocked() { return player.m.effective.gte(132)}, // The upgrade is only visible when this is true
+            unlocked() { return player.m.effective.gte(131)}, // The upgrade is only visible when this is true
         },
 	},
 	

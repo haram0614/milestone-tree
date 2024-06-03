@@ -72,6 +72,8 @@ addLayer("p", {
 				if(player.um.points.gte(31))base+=0.5;
 				if(player.um.points.gte(44))base+=0.1;//7.6
 				if(player.um.points.gte(54))base+=1;//8.6
+				if(player.um.points.gte(64))base+=0.4;//9
+				if(player.um.points.gte(74))base+=0.4;//9.4
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -97,6 +99,8 @@ addLayer("p", {
 				if(player.um.points.gte(32))base+=0.5;
 				if(player.um.points.gte(44))base+=0.1;//4.6
 				if(player.um.points.gte(54))base+=0.1;//4.7
+				if(player.um.points.gte(64))base+=0.1;//4.8
+				if(player.um.points.gte(74))base+=0.1;//4.9
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -122,6 +126,8 @@ addLayer("p", {
 				if(player.um.points.gte(33))base+=0.15;//2.2
 				if(player.um.points.gte(44))base+=0.3;//2.5
 				if(player.um.points.gte(54))base+=0.5;//3
+				if(player.um.points.gte(64))base+=0.1;//3.1
+				if(player.um.points.gte(74))base+=0.2;//3.3
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -147,6 +153,8 @@ addLayer("p", {
 				if(player.um.points.gte(34))base+=0.15;//2
 				if(player.um.points.gte(44))base+=0.1;//2.1
 				if(player.um.points.gte(54))base+=0.1;//2.2
+				if(player.um.points.gte(64))base+=0.1;//2.3
+				if(player.um.points.gte(74))base+=0.2;//2.5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -351,7 +359,7 @@ addLayer("p", {
 			if(l=="a")layerDataReset("p",["upgrades"]);
 		},
 	update(){
-		if(player.m.effective.gte(124)){
+		if(player.m.effective.gte(121)){
 			var target=player.p.points.add(1).div(1).log("ee10").max(0.1).log(2);
 			target=target.add(1).floor();
 			if(target.gt(player.p.buyables[11])){

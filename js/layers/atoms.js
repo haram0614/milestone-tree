@@ -124,10 +124,17 @@ addLayer("a", {
             cost: new Decimal(71),
 			effect() {
 				let exp=0.1;
+				if(hasUpgrade("a",24))exp+=0.2;
 				let p=player.a.points.pow(exp);
 				return p;
             },
             effectDisplay() { return "+"+format(this.effect(),4) },
+            unlocked() { return player.m.effective.gte(207)}, // The upgrade is only visible when this is true
+        },
+		24: {
+			title: "Atom Upgrade 24",
+            description: "Atom Upgrade 23 is boosted.",
+            cost: new Decimal(75),
             unlocked() { return player.m.effective.gte(207)}, // The upgrade is only visible when this is true
         },
 	},

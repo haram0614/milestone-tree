@@ -40,6 +40,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(4)},
             done() {return player[this.layer].points.gte(5)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.meta.gte(5))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
 				return "Third Milestone's effect is better based on your meta-milestones.";
 			},
         },
@@ -48,6 +49,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(5)},
             done() {return player[this.layer].points.gte(6)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(6))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.5"
 			},
         },
@@ -56,6 +58,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(6)},
             done() {return player[this.layer].points.gte(7)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(7))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.5"
 			},
         },
@@ -64,6 +67,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(7)},
             done() {return player[this.layer].points.gte(8)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(8))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.5"
 			},
         },
@@ -72,6 +76,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(8)},
             done() {return player[this.layer].points.gte(9)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(9))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "6th Milestone's effect ^1.5"
 			},
         },
@@ -80,6 +85,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(9)},
             done() {return player[this.layer].points.gte(10)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(10))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
         },
@@ -120,6 +126,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(14)},
             done() {return player[this.layer].points.gte(15)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(5))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
         },
@@ -160,6 +167,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(19)},
             done() {return player[this.layer].points.gte(20)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(5))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
         },
@@ -321,6 +329,38 @@ var METAMILESTONES=[
             done() {return player[this.layer].points.gte(40)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Reincarnation Point gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "41st Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(40)},
+            done() {return player[this.layer].points.gte(41)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "42nd Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(41)},
+            done() {return player[this.layer].points.gte(42)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "43rd Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(42)},
+            done() {return player[this.layer].points.gte(43)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "44th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(43)},
+            done() {return player[this.layer].points.gte(44)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Super Energy gain is doubled";
 			},
         },
 	]

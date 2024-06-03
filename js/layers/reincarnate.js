@@ -89,10 +89,15 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e31);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e99);
 	},
 	powerGain(){
-		return player.points.max(10).log10().sub(1).mul(player.r.points.pow(1.5));
+		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.effective.min(220).sub(215).mul(0.06).toNumber():1.5));
+		if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return ret.mul(3)}
+		return ret;
+	},
+	effectDescription(){
+		return "which are generating "+format(layers.r.powerGain(),4)+" reincarnation power per second";
 	},
 		doReset(l){
 			if(l=="r"){
@@ -185,8 +190,9 @@ addLayer("r", {
 				   updateTemp();
                },
 			  effect(){
-				  let eff=player[this.layer].buyables[this.id].add(1).mul(Decimal.pow(1.02,player[this.layer].buyables[this.id]));
-				  return eff;
+				  let x = player[this.layer].buyables[this.id];
+				  if(x.gte(51))return x.sqrt().mul(Decimal.pow(1.062,x));
+				  return x.add(1).mul(Decimal.pow(1.02,x));
 			  },
 			  unlocked(){
 				  return player.r.unlocked;

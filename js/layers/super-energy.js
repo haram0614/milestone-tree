@@ -41,6 +41,10 @@ addLayer("se", {
 		if(player.mm.points.gte(37))b=b.mul(2);
 		if(player.mm.points.gte(38))b=b.mul(2);
 		if(player.mm.points.gte(39))b=b.mul(2);
+		if(player.mm.points.gte(41))b=b.mul(2);
+		if(player.mm.points.gte(42))b=b.mul(2);
+		if(player.mm.points.gte(43))b=b.mul(2);
+		if(player.mm.points.gte(44))b=b.mul(2);
 		return b;
 	},
 	exponent: function(){

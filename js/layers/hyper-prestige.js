@@ -26,6 +26,7 @@ addLayer("hp", {
 		if(hasUpgrade("t",34))mult=mult.mul(1.005);
 		if(player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(41));
+		if(player.um.points.gte(60))mult=mult.mul(1.03);
         return mult
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
@@ -51,6 +52,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(69))base+=1e30;
 				if(player.m.effective.gte(79))base+=1e45;
 				if(player.m.effective.gte(89))base+=1e60;
+				if(player.um.points.gte(65))base+=1e65;
+				if(player.um.points.gte(69))base+=1e70;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -66,6 +69,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(69))base+=3e20;
 				if(player.m.effective.gte(79))base+=1e35;
 				if(player.m.effective.gte(89))base+=1e50;
+				if(player.um.points.gte(65))base+=1e55;
+				if(player.um.points.gte(69))base+=1e60;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -81,6 +86,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(69))base+=1e20;
 				if(player.m.effective.gte(79))base+=1e30;
 				if(player.m.effective.gte(89))base+=1e40;
+				if(player.um.points.gte(65))base+=1e45;
+				if(player.um.points.gte(69))base+=1e50;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e450");
             },
@@ -96,6 +103,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(69))base+=1e15;
 				if(player.m.effective.gte(79))base+=1e25;
 				if(player.m.effective.gte(89))base+=1e30;
+				if(player.um.points.gte(65))base+=1e35;
+				if(player.um.points.gte(69))base+=1e40;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -108,6 +117,7 @@ addLayer("hp", {
             unlocked() { return player.m.effective.gte(70)}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=1e18;
+				if(player.um.points.gte(70))base+=1e30;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e965");
             },
@@ -120,8 +130,9 @@ addLayer("hp", {
             unlocked() { return player.m.effective.gte(70)}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=3;
-				if(player.m.effective.gte(182))base=30;
-				if(player.m.effective.gte(203))base=1e3;
+				if(player.m.effective.gte(182))base+=27;
+				if(player.m.effective.gte(203))base+=970;
+				if(player.um.points.gte(70))base+=9000;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e91");
             },
@@ -137,6 +148,8 @@ addLayer("hp", {
 				if(hasUpgrade("hp",24))p=p.mul(2);
 				if(hasUpgrade("hp",33))p=p.mul(1.5);
 				if(hasUpgrade("hp",34))p=p.mul(1.2);
+				if(player.um.points.gte(70))p=p.mul(1.001);
+				if(hasUpgrade("hp",24)&&player.um.points.gte(70))p=p.mul(1.001);
 				return p.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x weaker" }, // Add formatting to the effect
@@ -293,6 +306,7 @@ addLayer("hp", {
 		},
 	},
 	passiveGeneration(){
+		if(player.um.points.gte(75))return 1e20;
 		if(player.m.effective.gte(135))return 1e10;
 		if(player.m.effective.gte(75))return 100;
 		return 0;

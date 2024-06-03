@@ -407,11 +407,11 @@ addLayer("t", {
 		11:{
                 name: "Dilation",
                 completionLimit: Infinity,
-			    challengeDescription() {return "1st milestone's effect ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "1st milestone's effect ^"+format(tmp.t.dilationEffect)+"<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0)  +" completions"},
                 unlocked() { return true },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[11]>=15)return (player.t.challenges[11]+1)*15;
-					if(player.m.effective.gte(110))return (player.t.challenges[11]+1)*(player.t.challenges[11]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[11]>=15)return Math.ceil(player.t.challenges[11]+0.001)*15;
+					if(player.m.effective.gte(110))return Math.ceil(player.t.challenges[11]+0.001)*Math.ceil(player.t.challenges[11]+0.001);
 					return 2*Math.pow(3,player.t.challenges[11]);
 				},
 				canComplete(){
@@ -426,11 +426,11 @@ addLayer("t", {
 		12:{
                 name: "Softcapped",
                 completionLimit: Infinity,
-			    challengeDescription() {return "1st milestone's softcap starts earlier<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "1st milestone's softcap starts earlier<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0)+" completions"},
                 unlocked() { return player.m.effective.gte(104) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[12]>=15)return (player.t.challenges[12]+1)*15;
-					return (player.t.challenges[12]+1)*(player.t.challenges[12]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -455,11 +455,11 @@ addLayer("t", {
 		21:{
                 name: "Prestige Dilation",
                 completionLimit: Infinity,
-			    challengeDescription() {return "1st milestone's effect and prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "1st milestone's effect and prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0) +" completions"},
                 unlocked() { return player.m.effective.gte(109) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[21]>=15)return (player.t.challenges[21]+1)*15;
-					return (player.t.challenges[21]+1)*(player.t.challenges[21]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -473,11 +473,11 @@ addLayer("t", {
 		22:{
                 name: "Hardcapped",
                 completionLimit: Infinity,
-			    challengeDescription() {return "'Softcapped' is applied, and 1st milestone's softcap is its hardcap.<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "'Softcapped' is applied, and 1st milestone's softcap is its hardcap.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0) +" completions"},
                 unlocked() { return player.m.effective.gte(115) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[22]>=15)return (player.t.challenges[22]+1)*15;
-					return (player.t.challenges[22]+1)*(player.t.challenges[22]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -498,11 +498,11 @@ addLayer("t", {
 		31:{
                 name: "Super Dilation",
                 completionLimit: Infinity,
-			    challengeDescription() {return "1st milestone's effect, prestige point gain and super-prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "1st milestone's effect, prestige point gain and super-prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0) +" completions"},
                 unlocked() { return player.m.effective.gte(125) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[31]>=15)return (player.t.challenges[31]+1)*15;
-					return (player.t.challenges[31]+1)*(player.t.challenges[31]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -516,11 +516,11 @@ addLayer("t", {
 		32:{
                 name: "Prestige Hardcapped",
                 completionLimit: Infinity,
-			    challengeDescription() {return "'Hardcapped' is applied, and prestige point gain is affected by 1st Milestone's softcap<br>"+challengeCompletions(this.layer, this.id) +" completions"},
+			    challengeDescription() {return "'Hardcapped' is applied, and prestige point gain is affected by 1st Milestone's softcap<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(219)?4:0)+" completions"},
                 unlocked() { return player.m.effective.gte(137) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[32]>=15)return (player.t.challenges[32]+1)*15;
-					return (player.t.challenges[32]+1)*(player.t.challenges[32]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -544,8 +544,8 @@ addLayer("t", {
 			    challengeDescription() {return "'Super Dilation' is applied, and hyper-prestige point gain ^"+format(tmp.t.dilationEffect)+"<br>"+challengeCompletions(this.layer, this.id) +" completions"},
                 unlocked() { return player.m.effective.gte(158) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[41]>=15)return (player.t.challenges[41]+1)*15;
-					return (player.t.challenges[41]+1)*(player.t.challenges[41]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -562,8 +562,8 @@ addLayer("t", {
 			    challengeDescription() {return "'Prestige Hardcapped' is applied, and super prestige point gain is affected by 1st Milestone's softcap<br>"+challengeCompletions(this.layer, this.id) +" completions"},
                 unlocked() { return player.m.effective.gte(170) },
                 goal: function(){
-					if(player.m.effective.gte(201)&&player.t.challenges[42]>=15)return (player.t.challenges[42]+1)*15;
-					return (player.t.challenges[42]+1)*(player.t.challenges[42]+1);
+					if(player.m.effective.gte(201)&&player.t.challenges[this.id]>=15)return Math.ceil(player.t.challenges[this.id]+0.001)*15;
+					return Math.ceil(player.t.challenges[this.id]+0.001)*Math.ceil(player.t.challenges[this.id]+0.001);
 				},
 				canComplete(){
 					let c=0;
@@ -587,7 +587,7 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		if(player.r.stage>=1)return new Decimal(1e57)
+		if(player.r.stage>=1)return new Decimal(1e99)
 		return new Decimal(1e36)
 	},
 	passiveGeneration(){
@@ -646,51 +646,99 @@ addLayer("t", {
 	},
 	update(){
 		if(player.t.points.gte(layers.t.hardcap()))player.t.points=new Decimal(layers.t.hardcap());
-		if(player.m.effective.gte(130) && player.t.activeChallenge){
-			if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain())){
-				player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain();
+		if(player.m.effective.gte(219)){
+			let c=0;
+			for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+			for(var i in player.t.specialPoints){
+				player.t.challenges[i]=Math.max(player.t.challenges[i],Math.max(Math.sqrt(c),c/15));
+				if(player.t.specialPoints[i].lt(layers.t.getResetGain())){
+					player.t.specialPoints[i]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[i]=player.t.highestAPC[0];
 			}
-		}
-		if(player.m.effective.gte(140)&&player.t.activeChallenge){
-			if(layers.t.challenges[player.t.activeChallenge].canComplete()){
-				player.t.challenges[player.t.activeChallenge]++;
+		}else{
+			if(player.m.effective.gte(130) && player.t.activeChallenge){
+				if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain())){
+					player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain();
+				}
 			}
-		}
-		if(player.m.effective.gte(176)){
-			if(layers.t.challenges[11].canComplete()){
-				player.t.challenges[11]++;
+			if(player.m.effective.gte(114)&&player.t.activeChallenge){
+				if(layers.t.challenges[player.t.activeChallenge].canComplete()){
+					player.t.challenges[player.t.activeChallenge]++;
+				}
 			}
-			if(player.t.specialPoints[11].lt(layers.t.getResetGain())){
-				player.t.specialPoints[11]=layers.t.getResetGain();
+			if(player.m.effective.gte(176)){
+				if(layers.t.challenges[11].canComplete()){
+					player.t.challenges[11]++;
+				}
+				if(player.t.specialPoints[11].lt(layers.t.getResetGain())){
+					player.t.specialPoints[11]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[11]=player.t.highestAPC[0];
 			}
-			player.t.highestAPC[11]=player.t.highestAPC[0];
-		}
-		if(player.m.effective.gte(177)){
-			if(layers.t.challenges[12].canComplete()){
-				player.t.challenges[12]++;
+			if(player.m.effective.gte(177)){
+				if(layers.t.challenges[12].canComplete()){
+					player.t.challenges[12]++;
+				}
+				if(player.t.specialPoints[12].lt(layers.t.getResetGain())){
+					player.t.specialPoints[12]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[12]=player.t.highestAPC[0];
 			}
-			if(player.t.specialPoints[12].lt(layers.t.getResetGain())){
-				player.t.specialPoints[12]=layers.t.getResetGain();
+			if(player.m.effective.gte(188)){
+				if(layers.t.challenges[21].canComplete()){
+					player.t.challenges[21]++;
+				}
+				if(player.t.specialPoints[21].lt(layers.t.getResetGain())){
+					player.t.specialPoints[21]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[21]=player.t.highestAPC[0];
 			}
-			player.t.highestAPC[12]=player.t.highestAPC[0];
-		}
-		if(player.m.effective.gte(188)){
-			if(layers.t.challenges[21].canComplete()){
-				player.t.challenges[21]++;
+			if(player.m.effective.gte(192)&&player.r.stage>=1){
+				if(layers.t.challenges[22].canComplete()){
+					player.t.challenges[22]++;
+				}
+				if(player.t.specialPoints[22].lt(layers.t.getResetGain())){
+					player.t.specialPoints[22]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[22]=player.t.highestAPC[0];
 			}
-			if(player.t.specialPoints[21].lt(layers.t.getResetGain())){
-				player.t.specialPoints[21]=layers.t.getResetGain();
+			if(player.m.effective.gte(211)&&player.r.stage>=1){
+				if(layers.t.challenges[31].canComplete()){
+					player.t.challenges[31]++;
+				}
+				if(player.t.specialPoints[31].lt(layers.t.getResetGain())){
+					player.t.specialPoints[31]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[31]=player.t.highestAPC[0];
 			}
-			player.t.highestAPC[21]=player.t.highestAPC[0];
-		}
-		if(player.m.effective.gte(192)&&player.r.stage>=1){
-			if(layers.t.challenges[22].canComplete()){
-				player.t.challenges[22]++;
+			if(player.m.effective.gte(213)&&player.r.stage>=1){
+				if(layers.t.challenges[41].canComplete()){
+					player.t.challenges[41]++;
+				}
+				if(player.t.specialPoints[41].lt(layers.t.getResetGain())){
+					player.t.specialPoints[41]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[41]=player.t.highestAPC[0];
 			}
-			if(player.t.specialPoints[22].lt(layers.t.getResetGain())){
-				player.t.specialPoints[22]=layers.t.getResetGain();
+			if(player.m.effective.gte(214)&&player.r.stage>=1){
+				if(layers.t.challenges[32].canComplete()){
+					player.t.challenges[32]++;
+				}
+				if(player.t.specialPoints[32].lt(layers.t.getResetGain())){
+					player.t.specialPoints[32]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[32]=player.t.highestAPC[0];
 			}
-			player.t.highestAPC[22]=player.t.highestAPC[0];
+			if(player.m.effective.gte(217)&&player.r.stage>=1){
+				if(layers.t.challenges[42].canComplete()){
+					player.t.challenges[42]++;
+				}
+				if(player.t.specialPoints[42].lt(layers.t.getResetGain())){
+					player.t.specialPoints[42]=layers.t.getResetGain();
+				}
+				player.t.highestAPC[42]=player.t.highestAPC[0];
+			}
 		}
 	},
 	dilationEffect(){
@@ -706,6 +754,7 @@ addLayer("t", {
 		if(x==31)return "Super-Dilated Transcend Point";
 		if(x==32)return "Prestige-Hardcapped Transcend Point";
 		if(x==41)return "Hyper-Dilated Transcend Point";
+		if(x==42)return "Super-Hardcapped Transcend Point";
 	},
 	getSpecialEffect(x){
 		let effect=(player.t.specialPoints[x] ?? new Decimal(0)).add(1).log10().div(100).add(1);

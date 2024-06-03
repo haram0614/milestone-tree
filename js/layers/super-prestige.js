@@ -64,6 +64,8 @@ addLayer("sp", {
 				if(player.um.points.gte(30))base+=2;
 				if(player.um.points.gte(31))base+=3;//100
 				if(player.um.points.gte(49))base+=5;//105
+				if(player.um.points.gte(59))base+=5;//110
+				if(player.um.points.gte(69))base+=5;//115
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -86,6 +88,8 @@ addLayer("sp", {
 				if(player.um.points.gte(30))base+=2;
 				if(player.um.points.gte(32))base+=3;//25
 				if(player.um.points.gte(49))base+=5;//30
+				if(player.um.points.gte(59))base+=2;//32
+				if(player.um.points.gte(69))base+=2;//34
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -107,6 +111,8 @@ addLayer("sp", {
 				if(hasUpgrade("sp",44))base+=1;
 				if(player.um.points.gte(33))base+=2;//10
 				if(player.um.points.gte(49))base+=2;//12
+				if(player.um.points.gte(59))base+=1;//13
+				if(player.um.points.gte(69))base+=2;//15
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -128,6 +134,8 @@ addLayer("sp", {
 				if(hasUpgrade("sp",44))base+=1;
 				if(player.um.points.gte(34))base+=0.5;//6
 				if(player.um.points.gte(49))base+=1;//7
+				if(player.um.points.gte(59))base+=0.5;//7.5
+				if(player.um.points.gte(69))base+=0.5;//8
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -263,6 +271,7 @@ addLayer("sp", {
 					if(hasUpgrade("sp",43))p-=0.029;
 					a=a.div(3).pow(p).mul(3);
 				}
+				if(player.um.points.gte(77))return Decimal.pow("ee3",a);
 				return new Decimal("1e652955").mul(Decimal.pow("1e12345",a));
 			},
 			canAfford() {
@@ -342,6 +351,7 @@ addLayer("sp", {
 	update(){
 		if(player.m.effective.gte(83)){
 			var target=player.sp.points.add(1).div("1e652955").log("1e12345");
+			if(player.um.points.gte(77))target=player.sp.points.add(1).log("ee3");
 			if(target.gte(3)){
 				let p=1.309;
 				if(hasUpgrade("sp",43))p-=0.029;

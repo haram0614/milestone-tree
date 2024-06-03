@@ -174,7 +174,7 @@ addLayer("ap", {
 		11:{
                 name: "No Prestige Boost",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain prestige boosts.<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+			    challengeDescription() {return "You can't gain prestige boosts.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",21) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[11]+0.001));
@@ -215,7 +215,7 @@ addLayer("ap", {
 		12:{
                 name: "No Super-Prestige",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain super-prestige points.<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+			    challengeDescription() {return "You can't gain super-prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",22) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[12]+0.001));
@@ -275,7 +275,7 @@ addLayer("ap", {
 		21:{
                 name: "No Self-Boost",
                 completionLimit: Infinity,
-			    challengeDescription() {return "3rd milestone's effect is always 1.<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+			    challengeDescription() {return "3rd milestone's effect is always 1.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",23) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[21]+0.001));
@@ -322,7 +322,7 @@ addLayer("ap", {
                 name: "Reduced Points",
                 completionLimit: Infinity,
 			    challengeDescription() {
-			if(player.m.effective.gte(122))return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^(milestones)<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions";
+			if(player.m.effective.gte(122))return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^(milestones)<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions";
 			return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^100<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions";
 		},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",24) },
@@ -355,7 +355,7 @@ addLayer("ap", {
 		31:{
                 name: "No Prestige",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain prestige points.<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+			    challengeDescription() {return "You can't gain prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
                 unlocked() { return player.m.effective.gte(95) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[31]+0.001));
@@ -391,7 +391,7 @@ addLayer("ap", {
 		32:{
                 name: "Disabled Buyables",
                 completionLimit: Infinity,
-			    challengeDescription() {return "All Prestige, Super-Prestige and Hyper-Prestige buyables have no effect.<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+			    challengeDescription() {return "All Prestige, Super-Prestige and Hyper-Prestige buyables have no effect.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
                 unlocked() { return player.m.effective.gte(128) },
                 goal: function(){
 					return this.goalAfter120(Math.ceil(player.ap.challenges[32]+0.002));
@@ -406,6 +406,14 @@ addLayer("ap", {
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.effective.gte(218)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.475).toNumber();
+			}
+			if(player.m.effective.gte(212)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.48).toNumber();
+			}
 			if(player.m.effective.gte(209)){
 				if(p.lte("ee6"))return 0;
 				return p.log10().div(1e6).log(1.2).pow(1/1.5).toNumber();
@@ -438,6 +446,8 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.effective.gte(218))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.475)).mul(1e6));
+			if(player.m.effective.gte(212))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.48)).mul(1e6));
 			if(player.m.effective.gte(209))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e6));
 			if(player.m.effective.gte(202))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e7));
 			if(player.m.effective.gte(195))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e8));
@@ -467,9 +477,6 @@ addLayer("ap", {
 			if(player.m.effective.gte(103)&&!player.t.activeChallenge){
 				let keep=3;
 				if(player.m.effective.gte(108))keep=6;
-				if(player.m.effective.gte(114))keep=9;
-				if(player.m.effective.gte(121))keep=12;
-				if(player.m.effective.gte(131))keep=15;
 				player.ap.challenges[11]=Math.max(player.ap.challenges[11],keep);
 				player.ap.challenges[12]=Math.max(player.ap.challenges[12],keep);
 				player.ap.challenges[21]=Math.max(player.ap.challenges[21],keep);
@@ -488,7 +495,7 @@ addLayer("ap", {
 					player.ap.challenges[player.ap.activeChallenge]=Math.max(player.ap.challenges[player.ap.activeChallenge],layers.ap.challenges[player.ap.activeChallenge].completionsAfter120());
 				}
 			}
-			if(player.m.effective.gte(140)){
+			if(player.m.effective.gte(114)){
 				for(var i in player.ap.challenges){
 					player.t.highestAPC[player.t.activeChallenge||0][i]=Math.max(player.t.highestAPC[player.t.activeChallenge||0][i],player.ap.challenges[i]);
 					player.ap.challenges[i]=Math.max(player.t.highestAPC[player.t.activeChallenge||0][i],player.ap.challenges[i]);
