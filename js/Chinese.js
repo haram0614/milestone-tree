@@ -450,8 +450,8 @@ layers.m.milestones[175-1].effectDescription="解锁一个层级。";
 layers.m.milestones[176-1].effectDescription="自动获得第一个超越挑战的完成数和挑战点数。";
 layers.m.milestones[177-1].effectDescription="自动获得第二个超越挑战的完成数和挑战点数。";
 layers.m.milestones[178-1].effectDescription=function(){
-	if(player.m.effective.gte(183))return "每秒额外获得重置可以获得的超越点数的400%，总计1000%。";
-	return "每秒额外获得重置可以获得的超越点数的400%，总计1100%。";
+	if(player.m.effective.gte(183))return "每秒额外获得重置可以获得的超越点数的500%，总计1000%。";
+	return "每秒额外获得重置可以获得的超越点数的500%，总计1100%。";
 }
 layers.m.milestones[179-1].effectDescription="解锁原子升级。";
 layers.m.milestones[180-1].effectDescription="基于里程碑，声望加成升级31的效果变得更好。";
