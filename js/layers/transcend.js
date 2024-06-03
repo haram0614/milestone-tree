@@ -587,8 +587,7 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		if(player.r.stage>=1)return new Decimal(1e99)
-		return new Decimal(1e36)
+		return new Decimal(1e72)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
@@ -616,7 +615,7 @@ addLayer("t", {
 		"Main":{
 			content:[
 				"main-display","prestige-button","resource-display",
-				["display-text",function(){return "Transcend point is hardcapped at "+format(layers.t.hardcap())}],
+				["display-text",function(){if(player.r.stage>=1)return "Transcend point is hardcapped at "+format(layers.t.hardcap());return "";}],
 				"upgrades",
 				["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
 				["display-text",function(){

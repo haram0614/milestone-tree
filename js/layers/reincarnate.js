@@ -11,8 +11,7 @@ addLayer("r", {
     }},
     color: "#00FFFF",
     requires1(){
-		if(player.r.stage>=1)return Decimal.pow(10,10*Math.sqrt(10));
-		return new Decimal(1e36);
+		return Decimal.pow(10,10*Math.sqrt(10));
 	},
     requires(){
 		if(player.r.activeChallenge)return new Decimal(Infinity);
@@ -89,10 +88,10 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e99);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(5e36);
 	},
 	powerGain(){
-		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.effective.min(220).sub(215).mul(0.06).toNumber():1.5));
+		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
 		if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return ret.mul(3)}
 		return ret;
 	},

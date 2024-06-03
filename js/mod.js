@@ -33,7 +33,7 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.211",
+	num: "1.220",
 	name: "The Big Reset"
 }
 

@@ -703,7 +703,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(77)},
             done() {return player[this.layer].points.gte(78)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "4th Milestone is boosted.";
+				let ret="4th Milestone is boosted.";
+				if(player.um.points.gte(78))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -1977,6 +1978,7 @@ addLayer("m", {
 	autoPrestige(){return player.mm.points.gte(1)},
 	milestones: MILESTONES,
 	milestone4EffectExponent(){
+		if(player.um.points.gte(78))return 6;
 		if(player.um.points.gte(73))return 4;
 		if(player.um.points.gte(68))return 3;
 		if(player.um.points.gte(63))return 2;
