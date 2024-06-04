@@ -74,7 +74,9 @@ addLayer("p", {
 				if(player.um.points.gte(54))base+=1;//8.6
 				if(player.um.points.gte(64))base+=0.4;//9
 				if(player.um.points.gte(74))base+=0.4;//9.4
+				if(player.um.points.gte(84))base+=0.1;//9.5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+                if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -101,7 +103,9 @@ addLayer("p", {
 				if(player.um.points.gte(54))base+=0.1;//4.7
 				if(player.um.points.gte(64))base+=0.1;//4.8
 				if(player.um.points.gte(74))base+=0.1;//4.9
+				if(player.um.points.gte(84))base+=0.1;//5
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+                if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -128,7 +132,9 @@ addLayer("p", {
 				if(player.um.points.gte(54))base+=0.5;//3
 				if(player.um.points.gte(64))base+=0.1;//3.1
 				if(player.um.points.gte(74))base+=0.2;//3.3
+				if(player.um.points.gte(84))base+=0.1;//3.4
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+                if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -155,7 +161,9 @@ addLayer("p", {
 				if(player.um.points.gte(54))base+=0.1;//2.2
 				if(player.um.points.gte(64))base+=0.1;//2.3
 				if(player.um.points.gte(74))base+=0.2;//2.5
+				if(player.um.points.gte(84))base+=0.1;//2.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+                if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -290,6 +298,7 @@ addLayer("p", {
 				  if(hasUpgrade("p",43))b+=0.011;
 				  if(hasUpgrade("p",44))b+=0.011;
 				  if(player.m.effective.gte(162))b+=0.008;
+                  if (hasUpgrade('pp', 13))b+=upgradeEffect('pp', 13);
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
 				  return eff;

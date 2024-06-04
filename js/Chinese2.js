@@ -61,6 +61,7 @@ var cnItems = {
 	'Ctrl+E: Collect Hyper Energy': 'Shift+E：收集终极能量',
 	
 	'Main': '主要',
+	'Challenges': '挑战',
 	'Special Transcend Points': '超越挑战点数',
 	
 	'Afdian.net Donation': '用爱发电（捐赠）',

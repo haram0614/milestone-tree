@@ -34,7 +34,7 @@ addLayer("hp", {
     hotkeys: [
         {key: "h", description: "H: Reset for hyper-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(60)},
+    layerShown(){return player.m.effective.gte(60) && player.r.universe==0},
 	branches: ["sp"],
 	softcap:new Decimal(Infinity),
 	softcapPower:new Decimal(1),
@@ -54,6 +54,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(89))base+=1e60;
 				if(player.um.points.gte(65))base+=1e65;
 				if(player.um.points.gte(69))base+=1e70;
+				if(player.um.points.gte(79))base+=1e87;
+				if(player.um.points.gte(89))base+=8e88;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -71,6 +73,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(89))base+=1e50;
 				if(player.um.points.gte(65))base+=1e55;
 				if(player.um.points.gte(69))base+=1e60;
+				if(player.um.points.gte(79))base+=1e67;
+				if(player.um.points.gte(89))base+=2e68;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -88,6 +92,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(89))base+=1e40;
 				if(player.um.points.gte(65))base+=1e45;
 				if(player.um.points.gte(69))base+=1e50;
+				if(player.um.points.gte(79))base+=1e52;
+				if(player.um.points.gte(89))base+=3e52;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e450");
             },
@@ -105,6 +111,8 @@ addLayer("hp", {
 				if(player.m.effective.gte(89))base+=1e30;
 				if(player.um.points.gte(65))base+=1e35;
 				if(player.um.points.gte(69))base+=1e40;
+				if(player.um.points.gte(79))base+=1e40;
+				if(player.um.points.gte(89))base+=1e40;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -243,6 +251,7 @@ addLayer("hp", {
 					if(hasUpgrade("hp",43))p-=0.1;
 					a=a.div(3).pow(p).mul(3);
 				}
+				if(player.um.points.gte(85))return Decimal.pow("ee2",a);
 				return new Decimal("1e8150").mul(Decimal.pow("1e500",a));
 			},
 			canAfford() {
@@ -321,6 +330,7 @@ addLayer("hp", {
 	update(){
 		if(player.m.effective.gte(95)){
 			var target=player.hp.points.add(1).div("1e8150").log("1e500");
+			if(player.um.points.gte(85))target=player.hp.points.add(1).log("ee2");
 			if(target.gte(3)){
 				let p=1.5;
 				if(hasUpgrade("hp",41))p-=0.1;

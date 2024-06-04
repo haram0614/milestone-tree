@@ -31,7 +31,7 @@ addLayer("em", {
     hotkeys: [
         {key: "ctrl+m", description: "Ctrl+M: Get Extra-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.mm.points.gte(30)},
+    layerShown(){return player.mm.points.gte(30) && player.r.universe==0},
 	resetsNothing(){return true},
 	autoPrestige(){return false},
 	milestones: [
@@ -115,6 +115,22 @@ addLayer("em", {
             done() {return player[this.layer].points.gte(10)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Reincarnation Point gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "11th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(10)},
+            done() {return player[this.layer].points.gte(11)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a Transcend Buyable.";
+			},
+        },
+		{
+			requirementDescription: "12th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(11)},
+            done() {return player[this.layer].points.gte(12)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock a Transcend Buyable.";
 			},
         },
 	],

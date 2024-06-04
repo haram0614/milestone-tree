@@ -8,6 +8,7 @@ addLayer("r", {
 	    points: new Decimal(0),
 	    power: new Decimal(0),
 	    stage: 0,
+	    universe: 0,
     }},
     color: "#00FFFF",
     requires1(){
@@ -49,7 +50,7 @@ addLayer("r", {
 		amt=Decimal.pow(10,amt.mul(1000).pow(tmp.m.milestone208Effect.recip()));
 		return amt;
 	},
-	hardcap:new Decimal(1e35),
+	hardcap:new Decimal(1e99),
 	passiveGeneration(){
 		return 0;
 	},
@@ -58,8 +59,8 @@ addLayer("r", {
 			content:[
 				"main-display","prestige-button","resource-display",
 				["display-text",function(){return "You have "+format(player.r.power)+" Reincarnation Power"}],
-				["display-text",function(){if(player.r.unlocked)return "Welcome to The Milestone Tree NG-"+player.r.stage+"!";return "";}],
-				"buyables",
+				["display-text",function(){if(player.r.universe==1)return "Welcome to The Milestone Tree NG+!";if(player.r.unlocked)return "Welcome to The Milestone Tree NG-"+player.r.stage+"!";return "";}]
+				,["clickable",11],"buyables"
 				//["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
 				//["display-text",function(){
 				//	let c=0;
@@ -88,7 +89,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(5e36);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(2.5e39);
 	},
 	powerGain(){
 		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
@@ -96,7 +97,7 @@ addLayer("r", {
 		return ret;
 	},
 	effectDescription(){
-		return "which are generating "+format(layers.r.powerGain(),4)+" reincarnation power per second";
+		return "which are generating "+format(layers.r.powerGain())+" reincarnation power per second";
 	},
 		doReset(l){
 			if(l=="r"){
@@ -123,6 +124,7 @@ addLayer("r", {
 				layerDataReset("pb",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				layerDataReset("p",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				if(player.r.buyables[11].lt(187))layerDataReset("mm",[]);
+				layerDataReset("pp",["upgrades"]);
 				updateTemp();
 				updateTemp();
 				updateTemp();
@@ -130,6 +132,23 @@ addLayer("r", {
 				updateTemp();
 			}
 		},
+	clickables: {
+		rows: 2,
+		cols: 2,
+		11:{
+                title(){
+					if(player[this.layer].universe==1)return "Return To Loader's Universe";
+					return "Go To Seder's Universe";
+				},
+                display: "",
+                unlocked() { return player.m.effective.gte(220)}, 
+				canClick(){return player.m.effective.gte(220)},
+				onClick(){
+					player[this.layer].universe=1-player[this.layer].universe;
+				},
+                style: {'height':'100px','width':'150px'},
+		},
+	},
 	buyables: {
 		rows: 2,
 		cols: 2,
@@ -190,6 +209,7 @@ addLayer("r", {
                },
 			  effect(){
 				  let x = player[this.layer].buyables[this.id];
+				  if(x.gte(70))return Decimal.pow(1.095,x);
 				  if(x.gte(51))return x.sqrt().mul(Decimal.pow(1.062,x));
 				  return x.add(1).mul(Decimal.pow(1.02,x));
 			  },

@@ -118,7 +118,7 @@ addLayer("t", {
     hotkeys: [
         {key: "t", description: "T: Reset for transcend points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(99)},
+    layerShown(){return player.m.effective.gte(99) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["he","ap"];
 		return ["ap"]
@@ -401,6 +401,40 @@ addLayer("t", {
         },
 	},
 	
+	buyables: {
+		rows: 1,
+		cols: 2,
+		11:{
+			title(){
+				return "Softcap Delayer";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"1st Milestone's softcap starts "+format(data.effect)+"x later<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Transcend Points";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a).mul(1e77);
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+               },
+			  effect(){
+				  let b=0.05;
+				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.em.points.gte(11);
+			  }
+		},
+	},
 	challenges: {
         rows: 4,
 		cols: 2,
@@ -587,7 +621,7 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		return new Decimal(1e72)
+		return new Decimal(6e81)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
@@ -616,7 +650,12 @@ addLayer("t", {
 			content:[
 				"main-display","prestige-button","resource-display",
 				["display-text",function(){if(player.r.stage>=1)return "Transcend point is hardcapped at "+format(layers.t.hardcap());return "";}],
-				"upgrades",
+				"buyables","upgrades",
+
+			]
+		},"Challenges":{
+			content:[
+				"main-display",
 				["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
 				["display-text",function(){
 					let c=0;

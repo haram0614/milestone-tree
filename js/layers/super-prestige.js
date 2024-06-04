@@ -43,7 +43,7 @@ addLayer("sp", {
     hotkeys: [
         {key: "s", description: "S: Reset for super-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(25)},
+    layerShown(){return player.m.effective.gte(25) && player.r.universe==0},
 	upgrades: {
         rows: 4,
         cols: 4,
@@ -66,6 +66,8 @@ addLayer("sp", {
 				if(player.um.points.gte(49))base+=5;//105
 				if(player.um.points.gte(59))base+=5;//110
 				if(player.um.points.gte(69))base+=5;//115
+				if(player.um.points.gte(79))base+=5;//120
+				if(player.um.points.gte(89))base+=1;//121
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -90,6 +92,8 @@ addLayer("sp", {
 				if(player.um.points.gte(49))base+=5;//30
 				if(player.um.points.gte(59))base+=2;//32
 				if(player.um.points.gte(69))base+=2;//34
+				if(player.um.points.gte(79))base+=3;//37
+				if(player.um.points.gte(89))base+=3;//40
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -113,6 +117,8 @@ addLayer("sp", {
 				if(player.um.points.gte(49))base+=2;//12
 				if(player.um.points.gte(59))base+=1;//13
 				if(player.um.points.gte(69))base+=2;//15
+				if(player.um.points.gte(79))base+=1;//16
+				if(player.um.points.gte(89))base+=1;//17
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },
@@ -136,6 +142,8 @@ addLayer("sp", {
 				if(player.um.points.gte(49))base+=1;//7
 				if(player.um.points.gte(59))base+=0.5;//7.5
 				if(player.um.points.gte(69))base+=0.5;//8
+				if(player.um.points.gte(79))base+=0.5;//8.5
+				if(player.um.points.gte(89))base+=0.5;//9
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret;
             },

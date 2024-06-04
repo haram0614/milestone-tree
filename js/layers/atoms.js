@@ -27,7 +27,7 @@ addLayer("a", {
     hotkeys: [
         {key: "A", description: "Shift+A: Reset for atoms", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(175)},
+    layerShown(){return player.m.effective.gte(175) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["hb","he"];
 		if(player.m.effective.gte(192)){//unstable

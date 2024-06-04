@@ -30,7 +30,7 @@ addLayer("hb", {
     hotkeys: [
         {key: "B", description: "Shift+B: Reset for hyper boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(104)},
+    layerShown(){return player.m.effective.gte(104) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["um","em"];
 		if(player.m.effective.gte(189)){//unstable
@@ -101,6 +101,7 @@ addLayer("hb", {
 				if(hasUpgrade("hb",22))exp+=0.05;
 				if(hasUpgrade("hb",23))exp+=0.05;
 				if(hasUpgrade("hb",24))exp+=0.05;
+				if(hasUpgrade("hb",32))exp+=0.02;
 				if(hasUpgrade("a",12))exp+=0.01;
 				if(hasUpgrade("a",13))exp+=0.01;
 				if(hasUpgrade("a",14))exp+=0.01;
@@ -152,6 +153,12 @@ addLayer("hb", {
 				return p;
             },
             effectDisplay() { return "+"+format(this.effect(),4) },
+            unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
+        },
+		32: {
+			title: "Hyper Boost Upgrade 32",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(115),
             unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
         },
 	},

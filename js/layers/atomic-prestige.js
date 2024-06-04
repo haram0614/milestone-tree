@@ -23,6 +23,7 @@ addLayer("ap", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         let m=layers.a.effect();
 		if(hasUpgrade("t",22))m=m.mul(1.01);
+		if(player.um.points.gte(80))m=m.mul(1.04);
 		return m;
     },
     row: 4, // Row the layer is in on the tree (0 is the first row)
@@ -30,7 +31,7 @@ addLayer("ap", {
     hotkeys: [
         {key: "a", description: "A: Reset for atomic-prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(80)},
+    layerShown(){return player.m.effective.gte(80) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["se","hp"];
 		return ["hp"]
@@ -50,7 +51,9 @@ addLayer("ap", {
 				let base=new Decimal("1e2000");
 				if(player.m.effective.gte(84))base=base.mul("1e4000");
 				if(player.m.effective.gte(94))base=base.mul("1e4000");
+				if(player.um.points.gte(84))base=base.mul("1e500");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e48000").mul(Decimal.pow("1e500",player[this.layer].points.min(140)));
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -64,7 +67,9 @@ addLayer("ap", {
 				let base=new Decimal("1e1000");
 				if(player.m.effective.gte(84))base=base.mul("1e2000");
 				if(player.m.effective.gte(94))base=base.mul("1e2000");
+				if(player.um.points.gte(84))base=base.mul("1e2500");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e39000").mul(Decimal.pow("1e150",player[this.layer].points.min(500)));
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -78,7 +83,9 @@ addLayer("ap", {
 				let base=new Decimal("1e5000");
 				if(player.m.effective.gte(84))base=base.mul("1e1000");
 				if(player.m.effective.gte(94))base=base.mul("1e1000");
+				if(player.um.points.gte(84))base=base.mul("1e100");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
+				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e20000").mul(Decimal.pow("1e30",player[this.layer].points.sqrt().min(2300)));
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -92,6 +99,7 @@ addLayer("ap", {
 				let base=new Decimal("1e15");
 				if(player.m.effective.gte(84))base=base.mul("1e10");
 				if(player.m.effective.gte(94))base=base.mul("1e10");
+				if(player.um.points.gte(84))base=base.mul("1e65");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
 				return ret;
             },
@@ -406,6 +414,10 @@ addLayer("ap", {
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.effective.gte(225)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.47).toNumber();
+			}
 			if(player.m.effective.gte(218)){
 				if(p.lte("ee6"))return 0;
 				return p.log10().div(1e6).log(1.2).pow(1/1.475).toNumber();
@@ -446,6 +458,7 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.effective.gte(225))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.47)).mul(1e6));
 			if(player.m.effective.gte(218))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.475)).mul(1e6));
 			if(player.m.effective.gte(212))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.48)).mul(1e6));
 			if(player.m.effective.gte(209))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e6));
@@ -463,7 +476,44 @@ addLayer("ap", {
 		
 		},
 	},
+	buyables: {
+		rows: 1,
+		cols: 2,
+		11:{
+			title(){
+				return "Softcap Delayer";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"1st Milestone's softcap starts "+format(data.effect)+"x later<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Atomic-Prestige points";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a);
+				return new Decimal(1).mul(Decimal.pow("e5e23",a));
+			},
+			canAfford() {
+                   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+               },
+			  effect(){
+				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  let b=0.03;
+				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
+				  if(player.m.effective.gte(222))eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.m.effective.gte(221);
+			  }
+		},
+	},
 	passiveGeneration(){
+		if(player.um.points.gte(90))return 1e20;
 		if(player.m.effective.gte(135))return 1e10;
 		if(player.m.effective.gte(90))return 5;
 		return 0;
@@ -521,6 +571,13 @@ addLayer("ap", {
 			}else if(player.m.effective.gte(157)){
 				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.points).add(10).log10().div(600).log(1.035).toNumber());
 			}
+		if(player.m.effective.gte(222)){
+			var target=player.ap.points.add(1).div(1).log("e5e23").max(0.1).log(2);
+			target=target.add(1).floor();
+			if(target.gt(player.ap.buyables[11])){
+				player.ap.buyables[11]=target;
+			}
+		}
 			
 		}
 })

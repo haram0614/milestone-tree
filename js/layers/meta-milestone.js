@@ -94,6 +94,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(10)},
             done() {return player[this.layer].points.gte(11)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(11))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.2"
 			},
         },
@@ -102,6 +103,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(11)},
             done() {return player[this.layer].points.gte(12)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(12))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.2"
 			},
         },
@@ -126,7 +128,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(14)},
             done() {return player[this.layer].points.gte(15)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				if(player.um.meta.gte(5))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
+				if(player.um.meta.gte(15))return "Third Milestone's effect is better based on your meta-milestones. (Upgraded)";
 				return "Third Milestone's effect is better based on your meta-milestones."
 			},
         },
@@ -409,7 +411,7 @@ addLayer("mm", {
     hotkeys: [
         {key: "M", description: "Shift+M: Get Meta-Milestone", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(40)},
+    layerShown(){return player.m.effective.gte(40) && player.r.universe==0},
 	resetsNothing(){return true},
 	autoPrestige(){return player.em.points.gte(1)},
 	milestones: METAMILESTONES,

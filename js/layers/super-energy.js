@@ -24,7 +24,7 @@ addLayer("se", {
     hotkeys: [
         {key: "E", description: "Shift+E: Collect Super Energy", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(140)},
+    layerShown(){return player.m.effective.gte(140) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["sp","pe"];
 		if(player.m.effective.gte(186)){//unstable

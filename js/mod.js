@@ -21,6 +21,8 @@ let modInfo = {
 	"layers/atoms.js",
 	"layers/reincarnate.js",
 	
+	"layers/extend/prestige-power.js",
+	
 	"checkdomain.js",
 	
 	"tree.js"],
@@ -33,11 +35,19 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.220",
-	name: "The Big Reset"
+	num: "1.227",
+	name: "The Parallel Universe"
 }
 
-let changelog = `<h1>Changelog:</h1><br>
+let changelog = `<h1>Changelog:</h1><br
+	<h3>v1.227: The Parallel Universe - 2024/6/4</h3><br>
+		- Added 7 milestones<br>
+		- Added an atomic-prestige buyable<br>
+		- Added a transcend buyable<br>
+		- Ported Prestige Power from Seder's NG+<br>
+	<h3>v1.220 - 2024/6/3</h3><br>
+		- Added 9 milestones<br>
+		- Added 2 hyper boost upgrades<br>
 	<h3>v1.211 - 2024/6/2</h3><br>
 		- Added 1 milestone<br>
 		- Added 1 reincarnate buyable<br>
@@ -200,6 +210,9 @@ function getPointSoftcapStart(){
 		else if(player.m.effective.gte(185))sc=sc.pow(1+Math.random()/60);
 		else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/80);
 	}else sc=sc.pow(tmp.r.buyables[12].effect);
+	sc=sc.pow(tmp.ap.buyables[11].effect);
+	sc=sc.pow(tmp.t.buyables[11].effect);
+	if(hasUpgrade("pp",11))sc=sc.pow(upgradeEffect("pp",11));
 	return sc;
 }
 

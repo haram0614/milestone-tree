@@ -27,7 +27,7 @@ addLayer("pb", {
     hotkeys: [
         {key: "b", description: "B: Reset for prestige boosts", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return player.m.effective.gte(50)},
+    layerShown(){return player.m.effective.gte(50) && player.r.universe==0},
 	branches(){
 		if(player.r.stage>=1)return ["mm"];
 		if(player.m.effective.gte(184)){//unstable
