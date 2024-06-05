@@ -133,6 +133,14 @@ addLayer("em", {
 				return "Unlock a Transcend Buyable.";
 			},
         },
+		{
+			requirementDescription: "13th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(12)},
+            done() {return player[this.layer].points.gte(13)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "First Exotic-Prestige points effect is doubled.";
+			},
+        },
 	],
 	branches(){
 		if(player.r.stage>=1)return ["pb","pe"];

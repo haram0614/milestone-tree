@@ -36,6 +36,7 @@ addLayer("sp", {
 		if(player.t.activeChallenge==31||player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(31));
 		if(player.um.points.gte(25))mult=mult.mul(1.02);
+		mult=mult.mul(tmp.t.buyables[12].effect);
         return mult
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
@@ -350,10 +351,10 @@ addLayer("sp", {
 	},
 		doReset(l){
 			if(l=="sp"){return;}
-			if(l=="hp")if(player.m.effective.gte(65))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
-			if(l=="ap")if(player.m.effective.gte(81))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
-			if(l=="t")if(player.m.effective.gte(100))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
-			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
+			if(l=="hp")if(player.um.points.gte(65))layerDataReset("sp",["upgrades","buyables"]);else if(player.m.effective.gte(65))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
+			if(l=="ap")if(player.um.points.gte(81))layerDataReset("sp",["upgrades","buyables"]);else if(player.m.effective.gte(81))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
+			if(l=="t")if(player.um.points.gte(100))layerDataReset("sp",["upgrades","buyables"]);else if(player.m.effective.gte(100))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
+			if(l=="hb")if(player.um.points.gte(104))layerDataReset("sp",["upgrades","buyables"]);else if(player.m.effective.gte(104))layerDataReset("sp",["upgrades"]);else layerDataReset("sp",[]);
 			if(l=="a")layerDataReset("sp",["upgrades"]);
 		},
 	update(){

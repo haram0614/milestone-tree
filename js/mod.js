@@ -22,6 +22,8 @@ let modInfo = {
 	"layers/reincarnate.js",
 	
 	"layers/extend/prestige-power.js",
+	"layers/extend/exotic-prestige.js",
+	"layers/extend/multiverse-prestige.js",
 	
 	"checkdomain.js",
 	
@@ -35,11 +37,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.227",
-	name: "The Parallel Universe"
+	num: "1.245",
+	name: "The Parallel Multiverse"
 }
 
-let changelog = `<h1>Changelog:</h1><br
+let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.245: The Parallel Multiverse - 2024/6/5</h3><br>
+		- Added 18 milestones<br>
+		- Ported Exotic Prestige from Seder's NG+<br>
+		- Ported Multiverse Prestige from Seder's NG+<br>
 	<h3>v1.227: The Parallel Universe - 2024/6/4</h3><br>
 		- Added 7 milestones<br>
 		- Added an atomic-prestige buyable<br>
@@ -210,6 +216,7 @@ function getPointSoftcapStart(){
 		else if(player.m.effective.gte(185))sc=sc.pow(1+Math.random()/60);
 		else if(player.m.effective.gte(184))sc=sc.pow(1+Math.random()/80);
 	}else sc=sc.pow(tmp.r.buyables[12].effect);
+	sc=sc.pow(tmp.hp.buyables[21].effect);
 	sc=sc.pow(tmp.ap.buyables[11].effect);
 	sc=sc.pow(tmp.t.buyables[11].effect);
 	if(hasUpgrade("pp",11))sc=sc.pow(upgradeEffect("pp",11));

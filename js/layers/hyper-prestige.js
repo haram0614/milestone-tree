@@ -27,6 +27,8 @@ addLayer("hp", {
 		if(player.t.activeChallenge==41)mult=mult.mul(tmp.t.dilationEffect);
 		mult=mult.mul(layers.t.getSpecialEffect(41));
 		if(player.um.points.gte(60))mult=mult.mul(1.03);
+		if (player.ep.buyables[11].gte(5)) mult = mult.mul(tmp.ep.fiveEffect)
+
         return mult
     },
     row: 3, // Row the layer is in on the tree (0 is the first row)
@@ -231,7 +233,7 @@ addLayer("hp", {
 	},
 	
 	buyables: {
-		rows: 1,
+		rows: 2,
 		cols: 2,
 		11:{
 			title(){
@@ -313,6 +315,38 @@ addLayer("hp", {
 				  return player.m.effective.gte(104);
 			  }
 		},
+		21:{
+			title(){
+				return "Softcap Delayer";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"1st Milestone's softcap starts "+format(data.effect)+"x later<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Hyper-Prestige points";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a);
+				return new Decimal(1).mul(Decimal.pow("e25e27",a));
+			},
+			canAfford() {
+                   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+               },
+			  effect(){
+				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  let b=0.01;
+				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
+				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.m.effective.gte(221);
+			  }
+		},
 	},
 	passiveGeneration(){
 		if(player.um.points.gte(75))return 1e20;
@@ -322,9 +356,9 @@ addLayer("hp", {
 	},
 		doReset(l){
 			if(l=="hp"){return;}
-			if(l=="ap")if(player.m.effective.gte(82))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
-			if(l=="t")if(player.m.effective.gte(101))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
-			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
+			if(l=="ap")if(player.um.points.gte(82))layerDataReset("hp",["upgrades","buyables"]);else if(player.m.effective.gte(82))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
+			if(l=="t")if(player.um.points.gte(100))layerDataReset("hp",["upgrades","buyables"]);else if(player.m.effective.gte(101))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
+			if(l=="hb")if(player.um.points.gte(104))layerDataReset("hp",["upgrades","buyables"]);else if(player.m.effective.gte(104))layerDataReset("hp",["upgrades"]);else layerDataReset("hp",[]);
 			if(l=="a")layerDataReset("hp",["upgrades"]);
 		},
 	update(){
@@ -357,6 +391,13 @@ addLayer("hp", {
 			target=target.add(1).floor();
 			if(target.gt(player.hp.buyables[12])){
 				player.hp.buyables[12]=target;
+			}
+		}
+		if(player.m.effective.gte(228)){
+			var target=player.hp.points.add(1).div(1).log("e25e27").max(0.1).log(2);
+			target=target.add(1).floor();
+			if(target.gt(player.hp.buyables[21])){
+				player.hp.buyables[21]=target;
 			}
 		}
 	}

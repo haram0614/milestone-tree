@@ -585,7 +585,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(64)},
             done() {return player[this.layer].points.gte(65)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(65))return "Keep Prestige and Super-Prestige upgrades on Hyper-Prestige. Unlock 2 new Hyper-Prestige Upgrades, First row of Hyper-Prestige Upgrades is better. (Upgraded)";
+				if(player.um.points.gte(65))return "Keep Prestige and Super-Prestige upgrades and buyables on Hyper-Prestige. Unlock 2 new Hyper-Prestige Upgrades, First row of Hyper-Prestige Upgrades is better. (Upgraded)";
 				return "Keep Prestige and Super-Prestige upgrades on Hyper-Prestige. Unlock 2 new Hyper-Prestige Upgrades.";
 			},
         },
@@ -730,7 +730,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(80)},
             done() {return player[this.layer].points.gte(81)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(81))return "3rd Milestone's base effect exponent ^1.001. You keep Prestige, Super-Prestige and Prestige Boost Upgrades on Atomic-Prestige. (Upgraded)";
+				if(player.um.points.gte(81))return "3rd Milestone's base effect exponent ^1.001. You keep Prestige, Super-Prestige and Prestige Boost Upgrades and buyables on Atomic-Prestige. (Upgraded)";
 				return "3rd Milestone's base effect exponent ^1.0005. You keep Prestige, Super-Prestige and Prestige Boost Upgrades on Atomic-Prestige.";
 			},
         },
@@ -739,7 +739,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(81)},
             done() {return player[this.layer].points.gte(82)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(82))return "6th Milestone's effect ^(meta-milestones). You keep Hyper-Prestige Upgrades on Atomic-Prestige. (Upgraded)";
+				if(player.um.points.gte(82))return "6th Milestone's effect ^(meta-milestones). You keep Hyper-Prestige Upgrades and buyables on Atomic-Prestige. (Upgraded)";
 				return "6th Milestone's effect ^(meta-milestones^0.2). You keep Hyper-Prestige Upgrades on Atomic-Prestige.";
 			},
         },
@@ -1955,6 +1955,150 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(226)},
             done() {return player[this.layer].points.gte(227)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				return "Unlock a HP buyable."
+			},
+        },
+        {
+			requirementDescription: "228th Milestone",
+            unlocked() {return player[this.layer].best.gte(227)},
+            done() {return player[this.layer].points.gte(228)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Autobuy Third HP buyable."
+			},
+        },
+        {
+			requirementDescription: "229th Milestone",
+            unlocked() {return player[this.layer].best.gte(228)},
+            done() {return player[this.layer].points.gte(229)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "230th Milestone",
+            unlocked() {return player[this.layer].best.gte(229)},
+            done() {return player[this.layer].points.gte(230)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock the second layer in Seder's Universe"
+			},
+        },
+        {
+			requirementDescription: "231st Milestone",
+            unlocked() {return player[this.layer].best.gte(230)},
+            done() {return player[this.layer].points.gte(231)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock more AP upgrades."
+			},
+        },
+        {
+			requirementDescription: "232nd Milestone",
+            unlocked() {return player[this.layer].best.gte(231)},
+            done() {return player[this.layer].points.gte(232)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "233rd Milestone",
+            unlocked() {return player[this.layer].best.gte(232)},
+            done() {return player[this.layer].points.gte(233)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Gain 10000% of Exotic-Prestige gain per second.";
+			},
+        },
+        {
+			requirementDescription: "234th Milestone",
+            unlocked() {return player[this.layer].best.gte(233)},
+            done() {return player[this.layer].points.gte(234)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock Reincarnation Upgrades."
+			},
+        },
+        {
+			requirementDescription: "235th Milestone",
+            unlocked() {return player[this.layer].best.gte(234)},
+            done() {return player[this.layer].points.gte(235)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "236th Milestone",
+            unlocked() {return player[this.layer].best.gte(235)},
+            done() {return player[this.layer].points.gte(236)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 5 goal."
+			},
+        },
+        {
+			requirementDescription: "237th Milestone",
+            unlocked() {return player[this.layer].best.gte(236)},
+            done() {return player[this.layer].points.gte(237)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 6 goal."
+			},
+        },
+        {
+			requirementDescription: "238th Milestone",
+            unlocked() {return player[this.layer].best.gte(237)},
+            done() {return player[this.layer].points.gte(238)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "239th Milestone",
+            unlocked() {return player[this.layer].best.gte(238)},
+            done() {return player[this.layer].points.gte(239)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "240th Milestone",
+            unlocked() {return player[this.layer].best.gte(239)},
+            done() {return player[this.layer].points.gte(240)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock the third layer in Seder's Universe"
+			},
+        },
+        {
+			requirementDescription: "241st Milestone",
+            unlocked() {return player[this.layer].best.gte(240)},
+            done() {return player[this.layer].points.gte(241)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "242nd Milestone",
+            unlocked() {return player[this.layer].best.gte(241)},
+            done() {return player[this.layer].points.gte(242)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 5 goal."
+			},
+        },
+        {
+			requirementDescription: "243rd Milestone",
+            unlocked() {return player[this.layer].best.gte(242)},
+            done() {return player[this.layer].points.gte(243)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock more Prestige Power upgrades.";
+			},
+        },
+        {
+			requirementDescription: "244th Milestone",
+            unlocked() {return player[this.layer].best.gte(243)},
+            done() {return player[this.layer].points.gte(244)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "245th Milestone",
+            unlocked() {return player[this.layer].best.gte(244)},
+            done() {return player[this.layer].points.gte(245)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
 				return "Current Endgame"
 			},
         },
@@ -1984,7 +2128,7 @@ addLayer("m", {
     }},
     color: "#793784",
     requires(){
-		if(player.m.points.gte(227))return new Decimal(Infinity);
+		//if(player.m.points.gte(227))return new Decimal(Infinity);
 		if(player.m.points.gte(200))return new Decimal(10);
 		if(player.m.points.gte(199))return new Decimal(Infinity);
 		return new Decimal(10);
@@ -2032,7 +2176,8 @@ addLayer("m", {
 		
 		var secondScaling=player.m.points.sub(tmp.m.getScalingStart2).max(0);
 		if(player.r.stage==1){
-			secondScaling=secondScaling.div(7.5);
+			if(secondScaling.gte(75))secondScaling=secondScaling.sub(25).div(5);
+			else secondScaling=secondScaling.div(7.5);
 		}else if(player.m.points.gte(180)){
 			secondScaling=secondScaling.div(20);
 		}else if(player.m.points.gte(150)){
@@ -2050,6 +2195,7 @@ addLayer("m", {
     },
     getScalingStart2(){
         let start=new Decimal(175);
+		if(hasUpgrade("mp",12))start=start.add(upgradeEffect("mp",12));
 		return start;
     },
     hotkeys: [
@@ -2060,6 +2206,7 @@ addLayer("m", {
 	autoPrestige(){return player.mm.points.gte(1)},
 	milestones: MILESTONES,
 	milestone4EffectExponent(){
+		if(player.um.points.gte(98))return 11;
 		if(player.um.points.gte(93))return 10;
 		if(player.um.points.gte(88))return 9;
 		if(player.um.points.gte(83))return 7;
@@ -2091,7 +2238,7 @@ addLayer("m", {
 	},
 	milestone4Effect(){
 		if(player.m.effective.gte(139)){
-			return Decimal.pow(1.05,player.m.points).pow(layers.m.milestone4EffectExponent());
+			return Decimal.pow(1.05,player.m.points).pow(layers.m.milestone4EffectExponent()).mul(hasUpgrade('ep', 11)?upgradeEffect('ep', 11):1);
 		}
 		return player.m.points.sub(2).pow(layers.m.milestone4EffectExponent());
 	},
@@ -2150,7 +2297,7 @@ addLayer("m", {
 		if(player.mm.points.gte(20)){
 			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(150).add(1));
 		}
-	b=b.mul(Decimal.pow(1.05,player.ap.challenges[21]+player.ap.challenges[22]+player.t.challenges[11]+player.t.challenges[21]+player.t.challenges[31]+player.t.challenges[41]));
+	b=b.mul(Decimal.pow(1.05,player.ap.challenges[21]+player.ap.challenges[22]+player.t.challenges[11]+player.t.challenges[21]+player.t.challenges[31]+player.t.challenges[41]+(layers.ap.freeChall().toNumber()*2)));
 	if(player.r.stage==0){
 		if(player.ap.challenges[21]>=1)b=b.mul(1.1/1.05);
 		if(player.ap.challenges[22]>=1)b=b.mul(1.06/1.05);
@@ -2251,6 +2398,13 @@ addLayer("m", {
 		if(player.m.effective.gte(159))p=p.pow(1.103);
 		if(player.m.effective.gte(194))p=p.pow(1.067);
 		if(player.m.effective.gte(226))p=p.pow(1.01);
+		if(player.m.effective.gte(229))p=p.pow(1.01);
+		if(player.m.effective.gte(232))p=p.pow(1.01);
+		if(player.m.effective.gte(235))p=p.pow(1.01);
+		if(player.m.effective.gte(238))p=p.pow(1.01);
+		if(player.m.effective.gte(239))p=p.pow(1.01);
+		if(player.m.effective.gte(241))p=p.pow(1.01);
+		if(player.m.effective.gte(244))p=p.pow(1.01);
 		return p;
 	},
 	milestone200Effect(){

@@ -52,6 +52,7 @@ addLayer("ap", {
 				if(player.m.effective.gte(84))base=base.mul("1e4000");
 				if(player.m.effective.gte(94))base=base.mul("1e4000");
 				if(player.um.points.gte(84))base=base.mul("1e500");
+				if(player.um.points.gte(94))base=base.mul("1e500");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
 				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e48000").mul(Decimal.pow("1e500",player[this.layer].points.min(140)));
@@ -68,6 +69,7 @@ addLayer("ap", {
 				if(player.m.effective.gte(84))base=base.mul("1e2000");
 				if(player.m.effective.gte(94))base=base.mul("1e2000");
 				if(player.um.points.gte(84))base=base.mul("1e2500");
+				if(player.um.points.gte(94))base=base.mul("1e1000");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
 				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e39000").mul(Decimal.pow("1e150",player[this.layer].points.min(500)));
@@ -84,6 +86,7 @@ addLayer("ap", {
 				if(player.m.effective.gte(84))base=base.mul("1e1000");
 				if(player.m.effective.gte(94))base=base.mul("1e1000");
 				if(player.um.points.gte(84))base=base.mul("1e100");
+				if(player.um.points.gte(94))base=base.mul("1e100");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
 				if(player.um.points.gte(84))return ret.mul("e2e5");
                 return ret.mul("1e20000").mul(Decimal.pow("1e30",player[this.layer].points.sqrt().min(2300)));
@@ -100,6 +103,7 @@ addLayer("ap", {
 				if(player.m.effective.gte(84))base=base.mul("1e10");
 				if(player.m.effective.gte(94))base=base.mul("1e10");
 				if(player.um.points.gte(84))base=base.mul("1e65");
+				if(player.um.points.gte(94))base=base.mul("1e900");
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
 				return ret;
             },
@@ -182,7 +186,7 @@ addLayer("ap", {
 		11:{
                 name: "No Prestige Boost",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain prestige boosts.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
+			    challengeDescription() {return "You can't gain prestige boosts.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",21) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[11]+0.001));
@@ -223,7 +227,7 @@ addLayer("ap", {
 		12:{
                 name: "No Super-Prestige",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain super-prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
+			    challengeDescription() {return "You can't gain super-prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",22) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[12]+0.001));
@@ -233,15 +237,16 @@ addLayer("ap", {
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
 				rewardEffect() {
-                    let ret = 1+player.ap.challenges[12]*0.05;
-					if(player.ap.challenges[12]>=5){
-						ret=1.2+player.ap.challenges[12]*0.01;
-						if(player.m.effective.gte(122))ret=1.175+player.ap.challenges[12]*0.015;
-						if(player.m.effective.gte(138))ret=1.15+player.ap.challenges[12]*0.02;
-						if(player.m.effective.gte(144))ret=1.125+player.ap.challenges[12]*0.025;
-						if(player.m.effective.gte(196)&&player.r.stage>=1)ret=1.1+player.ap.challenges[12]*0.03;
-						if(player.m.effective.gte(197)&&player.r.stage>=1)ret=1.075+player.ap.challenges[12]*0.035;
-						if(player.m.effective.gte(198)&&player.r.stage>=1)ret=1.05+player.ap.challenges[12]*0.04;
+					let comp=player.ap.challenges[12]+layers.ap.freeChall().toNumber();
+                    let ret = 1+comp*0.05;
+					if(comp>=5){
+						ret=1.2+comp*0.01;
+						if(player.m.effective.gte(122))ret=1.175+comp*0.015;
+						if(player.m.effective.gte(138))ret=1.15+comp*0.02;
+						if(player.m.effective.gte(144))ret=1.125+comp*0.025;
+						if(player.m.effective.gte(196)&&player.r.stage>=1)ret=1.1+comp*0.03;
+						if(player.m.effective.gte(197)&&player.r.stage>=1)ret=1.075+comp*0.035;
+						if(player.m.effective.gte(198)&&player.r.stage>=1)ret=1.05+comp*0.04;
 					}
                     return ret;
                 },
@@ -283,7 +288,7 @@ addLayer("ap", {
 		21:{
                 name: "No Self-Boost",
                 completionLimit: Infinity,
-			    challengeDescription() {return "3rd milestone's effect is always 1.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
+			    challengeDescription() {return "3rd milestone's effect is always 1.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions"},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",23) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[21]+0.001));
@@ -330,8 +335,8 @@ addLayer("ap", {
                 name: "Reduced Points",
                 completionLimit: Infinity,
 			    challengeDescription() {
-			if(player.m.effective.gte(122))return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^(milestones)<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions";
-			return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^100<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions";
+			if(player.m.effective.gte(122))return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^(milestones)<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions";
+			return "1st milestone's effect is replaced by (log10(1st milestone's effect+1))^100<br>"+format(challengeCompletions(this.layer, this.id),4)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions";
 		},
                 unlocked() { return hasUpgrade("ap",22) && hasUpgrade("ap",24) },
                 goal: function(){
@@ -363,7 +368,7 @@ addLayer("ap", {
 		31:{
                 name: "No Prestige",
                 completionLimit: Infinity,
-			    challengeDescription() {return "You can't gain prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
+			    challengeDescription() {return "You can't gain prestige points.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions"},
                 unlocked() { return player.m.effective.gte(95) },
                 goal: function(){
 					if(player.m.effective.gte(120))return this.goalAfter120(Math.ceil(player.ap.challenges[31]+0.001));
@@ -374,22 +379,30 @@ addLayer("ap", {
                 currencyInternalName: "points",
                 rewardDescription() { return "Prestige Boost's effect is better." },
 		completionsAfter120(){
+			let a=1.2;
+			let b=1.36;
+			let c=1700000;
+			if(player.m.effective.gte(136))b-=0.01,c-=100000;
+			if(player.m.effective.gte(152))c-=600000;
+			if(player.um.points.gte(95))b-=0.001;
+			if(player.m.effective.gte(236))b-=0.001;
+			if(player.m.effective.gte(242))b-=0.003;
+			
 			let p=player.points;
-			if(player.m.effective.gte(152)){
-				if(p.lte("1e1600000"))return 0;
-				return p.log10().div(1000000).log(1.2).pow(1/1.35).toNumber();
-			}
-			if(player.m.effective.gte(136)){
-				if(p.lte("1e1600000"))return 0;
-				return p.log10().div(1600000).log(1.2).pow(1/1.35).toNumber();
-			}
-			if(p.lte("1e1700000"))return 0;
-			return p.log10().div(1700000).log(1.2).pow(1/1.36).toNumber();
+			
+			if(p.lte(Decimal.pow(10,c)))return 0;
+			return p.log10().div(c).log(a).pow(1/b).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
-			if(player.m.effective.gte(152))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.35)).mul(1000000));
-			if(player.m.effective.gte(136))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.35)).mul(1600000));
-			return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.36)).mul(1700000));
+			let a=1.2;
+			let b=1.36;
+			let c=1700000;
+			if(player.m.effective.gte(136))b-=0.01,c-=100000;
+			if(player.m.effective.gte(152))c-=600000;
+			if(player.um.points.gte(95))b-=0.001;
+			if(player.m.effective.gte(236))b-=0.001;
+			if(player.m.effective.gte(242))b-=0.003;
+			return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,b)).mul(c));
 		},
 		canComplete(){
 			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
@@ -399,7 +412,7 @@ addLayer("ap", {
 		32:{
                 name: "Disabled Buyables",
                 completionLimit: Infinity,
-			    challengeDescription() {return "All Prestige, Super-Prestige and Hyper-Prestige buyables have no effect.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0) +" completions"},
+			    challengeDescription() {return "All Prestige, Super-Prestige and Hyper-Prestige buyables have no effect.<br>"+format(challengeCompletions(this.layer, this.id),player.m.effective.gte(120)?4:0)+(player.m.effective.gte(230)?"+"+format(layers.ap.freeChall(),4):"")+" completions"},
                 unlocked() { return player.m.effective.gte(128) },
                 goal: function(){
 					return this.goalAfter120(Math.ceil(player.ap.challenges[32]+0.002));
@@ -407,13 +420,21 @@ addLayer("ap", {
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
 				rewardEffect() {
-                    let ret = 1+player.ap.challenges[32]*0.05;
+                    let ret = 1+(player.ap.challenges[32]+layers.ap.freeChall().toNumber())*0.05;
                     return ret;
                 },
                 rewardDisplay() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables ^"+format(this.rewardEffect()) },
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
 			let p=player.points;
+			if(player.m.effective.gte(237)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.46).toNumber();
+			}
+			if(player.m.effective.gte(229)){
+				if(p.lte("ee6"))return 0;
+				return p.log10().div(1e6).log(1.2).pow(1/1.465).toNumber();
+			}
 			if(player.m.effective.gte(225)){
 				if(p.lte("ee6"))return 0;
 				return p.log10().div(1e6).log(1.2).pow(1/1.47).toNumber();
@@ -458,6 +479,8 @@ addLayer("ap", {
 			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
+			if(player.m.effective.gte(237))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.46)).mul(1e6));
+			if(player.m.effective.gte(229))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.465)).mul(1e6));
 			if(player.m.effective.gte(225))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.47)).mul(1e6));
 			if(player.m.effective.gte(218))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.475)).mul(1e6));
 			if(player.m.effective.gte(212))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.48)).mul(1e6));
@@ -475,6 +498,11 @@ addLayer("ap", {
 		},
 		
 		},
+	},
+	freeChall(){
+		let ret=new Decimal(0);
+		if(player.ep.buyables[11].gte(1))ret=ret.add(layers.ep.oneEffect());
+		return ret;
 	},
 	buyables: {
 		rows: 1,
@@ -520,7 +548,7 @@ addLayer("ap", {
 	},
 		doReset(l){
 			if(l=="ap"){return;}
-			if(l=="t")if(player.m.effective.gte(102))layerDataReset("ap",["upgrades"]);else layerDataReset("ap",[]);
+			if(l=="t")if(player.um.points.gte(102))layerDataReset("ap",["upgrades","buyables"]);else if(player.m.effective.gte(102))layerDataReset("ap",["upgrades"]);else layerDataReset("ap",[]);
 			if(l=="a")layerDataReset("ap",["upgrades"]);
 		},
 		update(){

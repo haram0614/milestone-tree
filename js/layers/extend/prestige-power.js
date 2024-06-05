@@ -17,10 +17,12 @@ addLayer("pp", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade(this.layer, 22)) mult = mult.mul(upgradeEffect(this.layer, 22))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
 		let m= new Decimal(1)
+        if (hasUpgrade('mp', 11)) m=m.mul(upgradeEffect('mp', 11))
 		return m;
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
@@ -69,12 +71,22 @@ addLayer("pp", {
             currencyLayer: "pp",
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-				let base=1.05;
                 let ret = Decimal.log10(player[this.layer].power.add(1)).pow(0.05).div(1000).toNumber();
+				if (hasUpgrade('pp', 21)) ret *= 2;
                 return ret;
             },
             effectDisplay() { return "+"+format(this.effect())+" to base" }, // Add formatting to the effect
         },
+        21: {
+			unlocked() {return player.m.effective.gte(243)},
+			title: "Prestige Power Upgrade 21",
+			description: "Prestige Power Upgrade 13 is better.<br>Req: Power Scaler - [17 Lvl]",
+			cost: new Decimal(1e10),
+			canAfford() {return player.pp.buyables[11].gte(17) && player.pp.power.gte(1e10)},
+			currencyDisplayName: "Hz of Prestige Power", // Use if using a nonstandard currency
+			currencyInternalName: "power", // Use if using a nonstandard currency
+			currencyLayer: "pp", // The upgrade is only visible when this is true
+		},
 	},
     buyables: {
 		rows: 1,
@@ -134,7 +146,7 @@ addLayer("pp", {
 			if(l=="pp")layerDataReset("p",["upgrades"]);
 		},
 	update(diff){
-        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff))
+        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff)).min(1e16/3)
 			
 		if(player.m.effective.gte(224)){
 			var target=player.pp.points.add(1).div(3).root(1.4).log(2);

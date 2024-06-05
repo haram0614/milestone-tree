@@ -89,7 +89,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(2.5e39);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(3e46);
 	},
 	powerGain(){
 		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
@@ -125,6 +125,7 @@ addLayer("r", {
 				layerDataReset("p",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				if(player.r.buyables[11].lt(187))layerDataReset("mm",[]);
 				layerDataReset("pp",["upgrades"]);
+				layerDataReset("ep",["upgrades"]);
 				updateTemp();
 				updateTemp();
 				updateTemp();

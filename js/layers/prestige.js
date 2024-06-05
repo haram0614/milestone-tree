@@ -75,6 +75,7 @@ addLayer("p", {
 				if(player.um.points.gte(64))base+=0.4;//9
 				if(player.um.points.gte(74))base+=0.4;//9.4
 				if(player.um.points.gte(84))base+=0.1;//9.5
+				if(player.um.points.gte(94))base+=0.1;//9.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
@@ -104,6 +105,7 @@ addLayer("p", {
 				if(player.um.points.gte(64))base+=0.1;//4.8
 				if(player.um.points.gte(74))base+=0.1;//4.9
 				if(player.um.points.gte(84))base+=0.1;//5
+				if(player.um.points.gte(94))base+=0.1;//5.3
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
@@ -133,6 +135,7 @@ addLayer("p", {
 				if(player.um.points.gte(64))base+=0.1;//3.1
 				if(player.um.points.gte(74))base+=0.2;//3.3
 				if(player.um.points.gte(84))base+=0.1;//3.4
+				if(player.um.points.gte(94))base+=0.2;//3.6
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
@@ -162,6 +165,7 @@ addLayer("p", {
 				if(player.um.points.gte(64))base+=0.1;//2.3
 				if(player.um.points.gte(74))base+=0.2;//2.5
 				if(player.um.points.gte(84))base+=0.1;//2.6
+				if(player.um.points.gte(94))base+=0.1;//2.7
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 if (hasUpgrade('pp',12)) ret = ret.pow(upgradeEffect('pp', 12))
                 return ret;
@@ -360,11 +364,11 @@ addLayer("p", {
 		doReset(l){
 			if(l=="p"){return;}
 			if(l=="sp")if(player.um.points.gte(26))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(26))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="pb")if(player.m.effective.gte(60))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="hp")if(player.m.effective.gte(65))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="ap")if(player.m.effective.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="t")if(player.m.effective.gte(100))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
-			if(l=="hb")if(player.m.effective.gte(104))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="pb")if(player.um.points.gte(60))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(60))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="hp")if(player.um.points.gte(65))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(65))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="ap")if(player.um.points.gte(81))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(81))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="t")if(player.um.points.gte(100))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(100))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
+			if(l=="hb")if(player.um.points.gte(104))layerDataReset("p",["upgrades","buyables"]);else if(player.m.effective.gte(104))layerDataReset("p",["upgrades"]);else layerDataReset("p",[]);
 			if(l=="a")layerDataReset("p",["upgrades"]);
 		},
 	update(){

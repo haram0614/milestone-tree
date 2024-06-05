@@ -139,26 +139,28 @@ addLayer("t", {
 		if(player.em.points.gte(4))mult=mult.mul(player.em.points.gte(8)?player.em.points:player.em.points.gte(7)?player.em.points.sqrt():1.1);
 		if(player.m.effective.gte(163))mult=mult.mul(1.1);
 		if(player.m.effective.gte(200))mult=mult.mul(tmp.m.milestone200Effect);
+		if(player.um.points.gte(99))mult=mult.mul(1.1);
 		mult=mult.mul(buyableEffect("r",21));
+		if (player.ep.buyables[11].gte(2)) mult = mult.mul(tmp.ep.twoEffect);
 		return mult;
 	},
 	getResetGain() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(0);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.um.points.gte(99)?300:player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
 		amt=amt.floor();
 		return amt;
 	},
 	getNextAt() {
 		if(player.ap.points.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
-		let amt=Decimal.log10(player.ap.points).sub(player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
+		let amt=Decimal.log10(player.ap.points).sub(player.um.points.gte(99)?300:player.m.effective.gte(163)?500:600).div(250).pow(tmp.m.milestone208Effect).mul(tmp.t.gainMult);
 		amt=amt.floor().plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.m.effective.gte(163)?500:600));
+		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.um.points.gte(99)?300:player.m.effective.gte(163)?500:600));
 		return amt;
 	},
 	getNextSPAt() {
 		if(!player.t.activeChallenge)return new Decimal(0);
-		let amt=player.t.specialPoints[player.t.activeChallenge].plus(1).div(tmp.t.gainMult);
-		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.m.effective.gte(163)?500:600));
+		let amt=player.t.specialPoints[player.t.activeChallenge].plus(1).div(tmp.t.gainMult).div(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
+		amt=Decimal.pow(10,amt.pow(tmp.m.milestone208Effect.recip()).mul(250).add(player.um.points.gte(99)?300:player.m.effective.gte(163)?500:600));
 		if(amt.lt(tmp.t.requires1))return new Decimal(tmp.t.requires1);
 		return amt;
 	},
@@ -360,6 +362,7 @@ addLayer("t", {
 			effect(){
 				let c=0;
 				for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+				c+=layers.ap.freeChall().toNumber()*6;
 				let p=2;
 				if(hasUpgrade("t",74))p+=0.1;
 				let m=1e-5;
@@ -434,6 +437,36 @@ addLayer("t", {
 				  return player.em.points.gte(11);
 			  }
 		},
+		12:{
+			title(){
+				return "Super Prestige Boost";
+			},
+			display(){
+				let data = tmp[this.layer].buyables[this.id];
+				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"Super Prestige Points ^"+format(data.effect)+"<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Transcend Points";
+			},
+			cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(10,a).mul(1e90);
+				return a;
+			},
+			canAfford() {
+                   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+			},
+               buy() { 
+                   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+               },
+			  effect(){
+				  let b=0.005;
+				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
+				  return eff;
+			  },
+			  unlocked(){
+				  return player.em.points.gte(12);
+			  }
+		},
 	},
 	challenges: {
         rows: 4,
@@ -451,6 +484,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -469,6 +503,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -498,6 +533,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -516,6 +552,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -541,6 +578,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -559,6 +597,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -584,6 +623,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -602,6 +642,7 @@ addLayer("t", {
 				canComplete(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+					c+=layers.ap.freeChall().toNumber()*6;
 					if(c>=tmp.t.challenges[this.id].goal)return true;
 					return false;
 				},
@@ -621,7 +662,7 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		return new Decimal(6e81)
+		return new Decimal(1e110)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
@@ -660,7 +701,7 @@ addLayer("t", {
 				["display-text",function(){
 					let c=0;
 					for(var i in player.ap.challenges)c+=player.ap.challenges[i];
-					return "AP challenge completions: "+format(c,4)
+					return "AP challenge completions: "+format(c,4)+(player.m.effective.gte(230)?("+"+format(layers.ap.freeChall().toNumber()*6,4)):"");
 				}],
 				"challenges"
 			]
@@ -687,17 +728,17 @@ addLayer("t", {
 		if(player.m.effective.gte(219)){
 			let c=0;
 			for(var i in player.ap.challenges)c+=player.ap.challenges[i];
+			c+=layers.ap.freeChall().toNumber()*6;
 			for(var i in player.t.specialPoints){
 				player.t.challenges[i]=Math.max(player.t.challenges[i],Math.max(Math.sqrt(c),c/15));
-				if(player.t.specialPoints[i].lt(layers.t.getResetGain())){
-					player.t.specialPoints[i]=layers.t.getResetGain();
+				if(player.t.specialPoints[i].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[i]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[i]=player.t.highestAPC[0];
 			}
 		}else{
 			if(player.m.effective.gte(130) && player.t.activeChallenge){
-				if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain())){
-					player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain();
+				if(player.t.specialPoints[player.t.activeChallenge].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[player.t.activeChallenge]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
 			}
 			if(player.m.effective.gte(114)&&player.t.activeChallenge){
@@ -709,73 +750,65 @@ addLayer("t", {
 				if(layers.t.challenges[11].canComplete()){
 					player.t.challenges[11]++;
 				}
-				if(player.t.specialPoints[11].lt(layers.t.getResetGain())){
-					player.t.specialPoints[11]=layers.t.getResetGain();
+				if(player.t.specialPoints[11].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[11]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[11]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(177)){
 				if(layers.t.challenges[12].canComplete()){
 					player.t.challenges[12]++;
 				}
-				if(player.t.specialPoints[12].lt(layers.t.getResetGain())){
-					player.t.specialPoints[12]=layers.t.getResetGain();
+				if(player.t.specialPoints[12].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[12]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[12]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(188)){
 				if(layers.t.challenges[21].canComplete()){
 					player.t.challenges[21]++;
 				}
-				if(player.t.specialPoints[21].lt(layers.t.getResetGain())){
-					player.t.specialPoints[21]=layers.t.getResetGain();
+				if(player.t.specialPoints[21].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[21]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[21]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(192)&&player.r.stage>=1){
 				if(layers.t.challenges[22].canComplete()){
 					player.t.challenges[22]++;
 				}
-				if(player.t.specialPoints[22].lt(layers.t.getResetGain())){
-					player.t.specialPoints[22]=layers.t.getResetGain();
+				if(player.t.specialPoints[22].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[22]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[22]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(211)&&player.r.stage>=1){
 				if(layers.t.challenges[31].canComplete()){
 					player.t.challenges[31]++;
 				}
-				if(player.t.specialPoints[31].lt(layers.t.getResetGain())){
-					player.t.specialPoints[31]=layers.t.getResetGain();
+				if(player.t.specialPoints[31].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[31]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[31]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(213)&&player.r.stage>=1){
 				if(layers.t.challenges[41].canComplete()){
 					player.t.challenges[41]++;
 				}
-				if(player.t.specialPoints[41].lt(layers.t.getResetGain())){
-					player.t.specialPoints[41]=layers.t.getResetGain();
+				if(player.t.specialPoints[41].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[41]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[41]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(214)&&player.r.stage>=1){
 				if(layers.t.challenges[32].canComplete()){
 					player.t.challenges[32]++;
 				}
-				if(player.t.specialPoints[32].lt(layers.t.getResetGain())){
-					player.t.specialPoints[32]=layers.t.getResetGain();
+				if(player.t.specialPoints[32].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[32]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[32]=player.t.highestAPC[0];
 			}
 			if(player.m.effective.gte(217)&&player.r.stage>=1){
 				if(layers.t.challenges[42].canComplete()){
 					player.t.challenges[42]++;
 				}
-				if(player.t.specialPoints[42].lt(layers.t.getResetGain())){
-					player.t.specialPoints[42]=layers.t.getResetGain();
+				if(player.t.specialPoints[42].lt(layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1))){
+					player.t.specialPoints[42]=layers.t.getResetGain().mul(player.ep.buyables[11].gte(6)?tmp.ep.sixEffect:1);
 				}
-				player.t.highestAPC[42]=player.t.highestAPC[0];
 			}
 		}
 	},

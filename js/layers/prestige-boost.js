@@ -102,14 +102,15 @@ addLayer("pb", {
 				m+=0.002*(player.ap.challenges[11]-3);
 			}
 		}else{
-			m+=0.002*player.ap.challenges[11];
+			m+=0.002*(player.ap.challenges[11]+layers.ap.freeChall().toNumber());
 		}
-		m+=0.002*player.ap.challenges[31];
+		m+=0.002*(player.ap.challenges[31]+layers.ap.freeChall().toNumber());
 		if(player.ap.challenges[31]>=17&&player.r.stage==0){
 			m+=0.0003;
 		}
 		if(hasUpgrade("hb",12))e=e.add(upgradeEffect("hb",12));
 		if(hasUpgrade("hb",31))e=e.add(upgradeEffect("hb",31));
+		e=e.add(player.ep.buyables[11].gte(7)?tmp.ep.sevenEffect:0)
 		if(player.um.points.gte(50) && player.r.stage>=1){
 			p+=0.02;
 		}

@@ -69,6 +69,10 @@ addLayer("hb", {
 		if(hasUpgrade("hb",14)){
 			m+=0.003;
 		}
+		if (player.ep.buyables[11].gte(3)){
+			m+=(tmp.ep.threeEffect-1)
+		}
+
 		if(hasUpgrade("a",23)){
 			e=e+upgradeEffect("a",23).toNumber();
 		}
@@ -102,6 +106,8 @@ addLayer("hb", {
 				if(hasUpgrade("hb",23))exp+=0.05;
 				if(hasUpgrade("hb",24))exp+=0.05;
 				if(hasUpgrade("hb",32))exp+=0.02;
+				if(hasUpgrade("hb",33))exp+=0.02;
+				if(hasUpgrade("hb",34))exp+=0.01;
 				if(hasUpgrade("a",12))exp+=0.01;
 				if(hasUpgrade("a",13))exp+=0.01;
 				if(hasUpgrade("a",14))exp+=0.01;
@@ -159,6 +165,18 @@ addLayer("hb", {
 			title: "Hyper Boost Upgrade 32",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(115),
+            unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
+        },
+		33: {
+			title: "Hyper Boost Upgrade 33",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(123),
+            unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
+        },
+		34: {
+			title: "Hyper Boost Upgrade 33",
+            description: "Hyper Boost Upgrade 12 is boosted.",
+            cost: new Decimal(126),
             unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
         },
 	},
