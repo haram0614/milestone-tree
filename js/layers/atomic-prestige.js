@@ -40,7 +40,7 @@ addLayer("ap", {
 	softcapPower:new Decimal(1),
 	
 	upgrades: {
-        rows: 3,
+        rows: 4,
 		cols: 4,
 		11: {
 			title: "Atomic-Prestige Upgrade 11",
@@ -177,6 +177,15 @@ addLayer("ap", {
             description: "Atomic-Prestige Upgrade 23 and 32 are boosted.",
             cost: new Decimal("1e6951"),
             unlocked() { return hasUpgrade("t",44);}, // The upgrade is only visible when this is true
+        },
+		41: {
+			title: "Hyper-Prestige Upgrade 41",
+            description: "Atomic-Prestige Upgrade 32 is better. You can buy this upgrade while you're in T challenge 2.",
+            cost(){
+				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
+				return new Decimal("e32e26");
+			},
+            unlocked() { return player.m.effective.gte(231)}, // The upgrade is only visible when this is true
         },
 	},
 	
