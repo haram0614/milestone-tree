@@ -60,7 +60,7 @@ addLayer("r", {
 				"main-display","prestige-button","resource-display",
 				["display-text",function(){return "You have "+format(player.r.power)+" Reincarnation Power"}],
 				["display-text",function(){if(player.r.universe==1)return "Welcome to The Milestone Tree NG+!";if(player.r.unlocked)return "Welcome to The Milestone Tree NG-"+player.r.stage+"!";return "";}]
-				,["clickable",11],"buyables"
+				,["clickable",11],"buyables","upgrades"
 				//["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
 				//["display-text",function(){
 				//	let c=0;
@@ -93,6 +93,7 @@ addLayer("r", {
 	},
 	powerGain(){
 		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
+		if(hasUpgrade("r",11))ret = ret.mul(2);
 		if(sha512_256(localStorage.supporterCode).slice(0,2) == 'b4' && window.supporterCodeInput){return ret.mul(3)}
 		return ret;
 	},
@@ -149,6 +150,16 @@ addLayer("r", {
 				},
                 style: {'height':'100px','width':'150px'},
 		},
+	},
+	upgrades: {
+        rows: 8,
+		cols: 4,
+		11: {
+			title: "Reincarnation Upgrade 11",
+            description: "Double reincarnation power gain.",
+            cost: new Decimal(1e5),
+			unlocked(){return player.m.effective.gte(234);}
+        },
 	},
 	buyables: {
 		rows: 2,

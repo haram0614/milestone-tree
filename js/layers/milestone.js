@@ -1875,7 +1875,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(216)},
             done() {return player[this.layer].points.gte(217)}, // Used to determine when to give the milestone
             effectDescription: function(){
-				return "Autogain T challenge 6 completions and Super-Hardcapped Transcend Points."
+				return "Autogain T challenge 8 completions and Super-Hardcapped Transcend Points."
 			},
         },
 		{
