@@ -365,6 +365,14 @@ var METAMILESTONES=[
 				return "Super Energy gain is doubled";
 			},
         },
+		{
+			requirementDescription: "45th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(44)},
+            done() {return player[this.layer].points.gte(45)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Reincarnation Point gain is doubled";
+			},
+        },
 	]
 	
 var meta_st=function(){

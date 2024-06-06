@@ -141,6 +141,14 @@ addLayer("em", {
 				return "First Exotic-Prestige points effect is doubled.";
 			},
         },
+		{
+			requirementDescription: "14th Extra-Milestone",
+            unlocked() {return player[this.layer].best.gte(13)},
+            done() {return player[this.layer].points.gte(14)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Unlock an AP Buyable.";
+			},
+        },
 	],
 	branches(){
 		if(player.r.stage>=1)return ["pb","pe"];

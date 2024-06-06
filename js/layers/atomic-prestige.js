@@ -162,6 +162,9 @@ addLayer("ap", {
 				let p=player.ap.points.add(1e20).log10().log10().div(57);
 				if(hasUpgrade("ap",33))p=p.mul(2);
 				if(hasUpgrade("ap",34))p=p.mul(1.2);
+				if(hasUpgrade("ap",41))p=p.mul(1.2);
+				if(hasUpgrade("ap",42))p=p.mul(1.2369791666666666666666666666667);
+				if(hasUpgrade("ap",43))p=p.mul(1.2307692307692307692307692307692);
 				return p.add(1);
             },
             effectDisplay() { return format(this.effect(),4)+"x later" },
@@ -179,11 +182,29 @@ addLayer("ap", {
             unlocked() { return hasUpgrade("t",44);}, // The upgrade is only visible when this is true
         },
 		41: {
-			title: "Hyper-Prestige Upgrade 41",
+			title: "Atomic-Prestige Upgrade 41",
             description: "Atomic-Prestige Upgrade 32 is better. You can buy this upgrade while you're in T challenge 2.",
             cost(){
 				if(player.t.activeChallenge!=12)return new Decimal(Infinity);
-				return new Decimal("e32e26");
+				return new Decimal("e5e27");
+			},
+            unlocked() { return player.m.effective.gte(231)}, // The upgrade is only visible when this is true
+        },
+		42: {
+			title: "Atomic-Prestige Upgrade 42",
+            description: "Atomic-Prestige Upgrade 32 is better. You can buy this upgrade while you're in T challenge 4.",
+            cost(){
+				if(player.t.activeChallenge!=22)return new Decimal(Infinity);
+				return new Decimal("e5e28");
+			},
+            unlocked() { return player.m.effective.gte(231)}, // The upgrade is only visible when this is true
+        },
+		43: {
+			title: "Atomic-Prestige Upgrade 43",
+            description: "Atomic-Prestige Upgrade 32 is better. You can buy this upgrade while you're in T challenge 6.",
+            cost(){
+				if(player.t.activeChallenge!=32)return new Decimal(Infinity);
+				return new Decimal("ee23");
 			},
             unlocked() { return player.m.effective.gte(231)}, // The upgrade is only visible when this is true
         },
@@ -206,27 +227,27 @@ addLayer("ap", {
                 currencyInternalName: "points",
                 rewardDescription() { return "Prestige Boost's effect is better." },
 		completionsAfter120(){
-			let p=player.points;
-			if(player.m.effective.gte(193)&&player.r.stage>=1){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.25).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(166)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(130)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
-			}
-			if(p.lte("1e1400000"))return 0;
-			return p.log10().div(1400000).log(1.32).pow(1/1.3).toNumber();
+				let a=1.32;
+				let b=1.3;
+				let c=1.4e6;
+				if(player.m.effective.gte(130))a-=0.02,c-=4e5;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				
+				let p=player.points;
+				
+				if(p.lte(Decimal.pow(10,c)))return 0;
+				return p.log10().div(c).log(a).pow(new Decimal(1).div(b).mul(buyableEffect('ap', 12))).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[11]){
-			if(player.m.effective.gte(193)&&player.r.stage>=1)return Decimal.pow(10,Decimal.pow(1.25,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(166))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(130))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
-			return Decimal.pow(10,Decimal.pow(1.32,Decimal.pow(x,1.3)).mul(1400000));
+				let a=1.32;
+				let b=1.3;
+				let c=1.4e6;
+				if(player.m.effective.gte(130))a-=0.02,c-=4e5;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				
+				return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,new Decimal(b).div(buyableEffect('ap', 12)))).mul(c));
 		},
 		canComplete(){
 			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
@@ -262,32 +283,29 @@ addLayer("ap", {
                 rewardDisplay() { return "Super-Prestige points ^"+format(this.rewardEffect()) },
                 rewardDescription() { return "Super-Prestige points is boosted based on this challenge's completions." },
 		completionsAfter120(){
-			let p=player.points;
-			if(player.m.effective.gte(193)&&player.r.stage>=1){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.25).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(167)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(152)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(130)){
-				if(p.lte("1e1500000"))return 0;
-				return p.log10().div(1500000).log(1.31).pow(1/1.3).toNumber();
-			}
-			if(p.lte("1e1700000"))return 0;
-			return p.log10().div(1700000).log(1.32).pow(1/1.3).toNumber();
+				let a=1.32;
+				let b=1.3;
+				let c=1.7e6;
+				if(player.m.effective.gte(130))a-=0.01,c-=2e5;
+				if(player.m.effective.gte(152))a-=0.01,c-=5e5;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				
+				let p=player.points;
+				
+				if(p.lte(Decimal.pow(10,c)))return 0;
+				return p.log10().div(c).log(a).pow(new Decimal(1).div(b).mul(buyableEffect('ap', 12))).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[12]){
-			if(player.m.effective.gte(193)&&player.r.stage>=1)return Decimal.pow(10,Decimal.pow(1.25,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(167))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(152))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(130))return Decimal.pow(10,Decimal.pow(1.31,Decimal.pow(x,1.3)).mul(1500000));
-			return Decimal.pow(10,Decimal.pow(1.32,Decimal.pow(x,1.3)).mul(1700000));
+				let a=1.32;
+				let b=1.3;
+				let c=1.7e6;
+				if(player.m.effective.gte(130))a-=0.01,c-=2e5;
+				if(player.m.effective.gte(152))a-=0.01,c-=5e5;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				
+				return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,new Decimal(b).div(buyableEffect('ap', 12)))).mul(c));
 		},
 		canComplete(){
 			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
@@ -307,37 +325,33 @@ addLayer("ap", {
                 currencyDisplayName: "points",
                 currencyInternalName: "points",
                 rewardDescription() { return "3rd milestone's effect is better." },
-		completionsAfter120(){
-			let p=player.points;
-			if(player.m.effective.gte(193)&&player.r.stage>=1){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.25).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(168)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.28).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(152)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.3).pow(1/1.3).toNumber();
-			}
-			if(player.m.effective.gte(130)){
-				if(p.lte("1e1000000"))return 0;
-				return p.log10().div(1000000).log(1.3).pow(1/1.34).toNumber();
-			}
-			if(p.lte("1e1140000"))return 0;
-			return p.log10().div(1140000).log(1.3).pow(1/1.36).toNumber();
-		},
-		goalAfter120(x=player.ap.challenges[21]){
-			if(player.m.effective.gte(193)&&player.r.stage>=1)return Decimal.pow(10,Decimal.pow(1.25,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(168))return Decimal.pow(10,Decimal.pow(1.28,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(152))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.3)).mul(1000000));
-			if(player.m.effective.gte(130))return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.34)).mul(1000000));
-			return Decimal.pow(10,Decimal.pow(1.3,Decimal.pow(x,1.36)).mul(1140000));
-		},
-		canComplete(){
-			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
-		},
+			completionsAfter120(){
+				let a=1.3;
+				let b=1.36;
+				let c=1.14e6;
+				if(player.m.effective.gte(130))c-=1.4e5,b-=0.02;
+				if(player.m.effective.gte(152))b-=0.04;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				
+				let p=player.points;
+				
+				if(p.lte(Decimal.pow(10,c)))return 0;
+				return p.log10().div(c).log(a).pow(new Decimal(1).div(b).mul(buyableEffect('ap', 12))).toNumber();
+			},
+			goalAfter120(x=player.ap.challenges[21]){
+				let a=1.3;
+				let b=1.36;
+				let c=1.14e6;
+				if(player.m.effective.gte(130))c-=1.4e5,b-=0.02;
+				if(player.m.effective.gte(152))b-=0.04;
+				if(player.m.effective.gte(168))a-=0.02;
+				if(player.m.effective.gte(193)&&player.r.stage>=1)a-=0.03;
+				return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,new Decimal(b).div(buyableEffect('ap', 12)))).mul(c));
+			},
+			canComplete(){
+				return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
+			},
 		
 		},
 		22:{
@@ -357,6 +371,9 @@ addLayer("ap", {
                 currencyInternalName: "points",
                 rewardDescription() { return "3rd milestone's effect is better, again." },
 		completionsAfter120(){
+			if(player.m.effective.gte(245)){
+				return player.points.add(10).log10().div(500).mul(buyableEffect('ap', 12)).log(1.035).toNumber();
+			}
 			let p=player.points.add(10).log10().div(600).log(1.035);
 			if(p.lte(3)){
 				return p.toNumber()/2+3;
@@ -364,6 +381,9 @@ addLayer("ap", {
 			return p.toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[22]){
+			if(player.m.effective.gte(245)){
+				return Decimal.pow(10,Decimal.pow(1.035,x).mul(500).div(buyableEffect('ap', 12)));
+			}
 			if(player.ap.challenges[22]<=3){
 				return Decimal.pow(10,Decimal.pow(1.035,x*2-3).mul(600));
 			}
@@ -390,28 +410,30 @@ addLayer("ap", {
 		completionsAfter120(){
 			let a=1.2;
 			let b=1.36;
-			let c=1700000;
-			if(player.m.effective.gte(136))b-=0.01,c-=100000;
-			if(player.m.effective.gte(152))c-=600000;
+			let c=1.7e6;
+			if(player.m.effective.gte(136))b-=0.01,c-=1e5;
+			if(player.m.effective.gte(152))c-=6e5;
 			if(player.um.points.gte(95))b-=0.001;
 			if(player.m.effective.gte(236))b-=0.001;
 			if(player.m.effective.gte(242))b-=0.003;
+			if(player.m.effective.gte(248))b-=0.005;
 			
 			let p=player.points;
 			
 			if(p.lte(Decimal.pow(10,c)))return 0;
-			return p.log10().div(c).log(a).pow(1/b).toNumber();
+			return p.log10().div(c).log(a).pow(new Decimal(1).div(b).mul(buyableEffect('ap', 12))).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
 			let a=1.2;
 			let b=1.36;
-			let c=1700000;
-			if(player.m.effective.gte(136))b-=0.01,c-=100000;
-			if(player.m.effective.gte(152))c-=600000;
+			let c=1.7e6;
+			if(player.m.effective.gte(136))b-=0.01,c-=1e5;
+			if(player.m.effective.gte(152))c-=6e5;
 			if(player.um.points.gte(95))b-=0.001;
 			if(player.m.effective.gte(236))b-=0.001;
 			if(player.m.effective.gte(242))b-=0.003;
-			return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,b)).mul(c));
+			if(player.m.effective.gte(248))b-=0.005;
+			return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,new Decimal(b).div(buyableEffect('ap', 12)))).mul(c));
 		},
 		canComplete(){
 			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
@@ -435,72 +457,46 @@ addLayer("ap", {
                 rewardDisplay() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables ^"+format(this.rewardEffect()) },
                 rewardDescription() { return "Effect of All Prestige, Super-Prestige and Hyper-Prestige Buyables is better." },
 		completionsAfter120(){
+			let a=1.2;
+			let b=1.5;
+			let c=3e10;
+			if(player.m.effective.gte(130))c-=1e10;
+			if(player.m.effective.gte(141))c-=1e10;
+			if(player.m.effective.gte(152))c-=5e9;
+			if(player.m.effective.gte(169))c-=3.85e9;
+			if(player.m.effective.gte(195))c-=1.05e9;
+			if(player.m.effective.gte(202))c-=9e7;
+			if(player.m.effective.gte(209))c-=9e6;
+			if(player.m.effective.gte(212))b-=0.02;
+			if(player.m.effective.gte(218))b-=0.005;
+			if(player.m.effective.gte(225))b-=0.005;
+			if(player.m.effective.gte(229))b-=0.005;
+			if(player.m.effective.gte(237))b-=0.005;
+			if(player.m.effective.gte(249))b-=0.01;
+			
 			let p=player.points;
-			if(player.m.effective.gte(237)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.46).toNumber();
-			}
-			if(player.m.effective.gte(229)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.465).toNumber();
-			}
-			if(player.m.effective.gte(225)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.47).toNumber();
-			}
-			if(player.m.effective.gte(218)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.475).toNumber();
-			}
-			if(player.m.effective.gte(212)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.48).toNumber();
-			}
-			if(player.m.effective.gte(209)){
-				if(p.lte("ee6"))return 0;
-				return p.log10().div(1e6).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(202)){
-				if(p.lte("ee7"))return 0;
-				return p.log10().div(1e7).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(195)){
-				if(p.lte("ee8"))return 0;
-				return p.log10().div(1e8).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(169)){
-				if(p.lte("e1.15e9"))return 0;
-				return p.log10().div(1.15e9).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(152)){
-				if(p.lte("e5e9"))return 0;
-				return p.log10().div(5e9).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(141)){
-				if(p.lte("e1e10"))return 0;
-				return p.log10().div(1e10).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(player.m.effective.gte(130)){
-				if(p.lte("e2e10"))return 0;
-				return p.log10().div(2e10).log(1.2).pow(1/1.5).toNumber();
-			}
-			if(p.lte("e3e10"))return 0;
-			return p.log10().div(3e10).log(1.2).pow(1/1.5).toNumber();
+			
+			if(p.lte(Decimal.pow(10,c)))return 0;
+			return p.log10().div(c).log(a).pow(new Decimal(1).div(b).mul(buyableEffect('ap', 12))).toNumber();
 		},
 		goalAfter120(x=player.ap.challenges[31]){
-			if(player.m.effective.gte(237))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.46)).mul(1e6));
-			if(player.m.effective.gte(229))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.465)).mul(1e6));
-			if(player.m.effective.gte(225))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.47)).mul(1e6));
-			if(player.m.effective.gte(218))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.475)).mul(1e6));
-			if(player.m.effective.gte(212))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.48)).mul(1e6));
-			if(player.m.effective.gte(209))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e6));
-			if(player.m.effective.gte(202))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e7));
-			if(player.m.effective.gte(195))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e8));
-			if(player.m.effective.gte(169))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1.15e9));
-			if(player.m.effective.gte(152))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(5e9));
-			if(player.m.effective.gte(141))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(1e10));
-			if(player.m.effective.gte(130))return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(2e10));
-			return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.5)).mul(3e10));
+			let a=1.2;
+			let b=1.5;
+			let c=3e10;
+			if(player.m.effective.gte(130))c-=1e10;
+			if(player.m.effective.gte(141))c-=1e10;
+			if(player.m.effective.gte(152))c-=5e9;
+			if(player.m.effective.gte(169))c-=3.85e9;
+			if(player.m.effective.gte(195))c-=1.05e9;
+			if(player.m.effective.gte(202))c-=9e7;
+			if(player.m.effective.gte(209))c-=9e6;
+			if(player.m.effective.gte(212))b-=0.02;
+			if(player.m.effective.gte(218))b-=0.005;
+			if(player.m.effective.gte(225))b-=0.005;
+			if(player.m.effective.gte(229))b-=0.005;
+			if(player.m.effective.gte(237))b-=0.005;
+			if(player.m.effective.gte(249))b-=0.01;
+			return Decimal.pow(10,Decimal.pow(a,Decimal.pow(x,new Decimal(b).div(buyableEffect('ap', 12)))).mul(c));
 		},
 		canComplete(){
 			return player.points.gte(tmp.ap.challenges[this.id].goal)&&player.m.effective.lt(110);
@@ -538,7 +534,6 @@ addLayer("ap", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
 				  let b=0.03;
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
 				  if(player.m.effective.gte(222))eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
@@ -548,6 +543,38 @@ addLayer("ap", {
 				  return player.m.effective.gte(221);
 			  }
 		},
+		12:{
+		title(){
+			return "Challenge Slayer";
+		},
+		display(){
+			let data = tmp[this.layer].buyables[this.id];
+			return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+			"Reduce AP Challenges base costs by /"+format(data.effect,4)+" (based on exotic prestige points)<br>"+
+			"Cost for Next Level: "+format(data.cost)+" Atomic-Prestige points";
+		},
+		cost(){
+				let a=player[this.layer].buyables[this.id];
+				a=Decimal.pow(2,a);
+				return new Decimal(1).mul(Decimal.pow("e4e34",a));
+		},
+		canAfford() {
+			   return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
+		},
+		   buy() { 
+			   player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+		   },
+		  effect(){
+			  let b=0.0002;
+			  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b)).pow(player.ep.points.add(1).log10().add(1).log10().pow(0.5));
+			  //if (hasMalware("m",2)) eff=eff.mul(milestoneEffect("m",2))
+			  return eff;
+		  },
+		  unlocked(){
+			  return player.em.points.gte(14);
+		  },
+	},
+
 	},
 	passiveGeneration(){
 		if(player.um.points.gte(90))return 1e20;
@@ -603,7 +630,9 @@ addLayer("ap", {
 			if(player.m.effective.gte(149)){
 				player.ap.challenges[32]=Math.max(player.ap.challenges[32],layers.ap.challenges[32].completionsAfter120());
 			}
-			if(player.m.effective.gte(161)){
+			if(player.m.effective.gte(245)){
+				player.ap.challenges[22]=Math.max(player.ap.challenges[22],getPointGenBeforeSoftcap().add(1e100).log10().pow(player.m.points).add(10).mul(player.m.points).log10().div(500).mul(buyableEffect('ap', 12)).log(1.035).toNumber());
+			}else if(player.m.effective.gte(161)){
 				player.ap.challenges[22]=Math.max(player.ap.challenges[22],getPointGenBeforeSoftcap().add(1e100).log10().pow(player.m.points).add(10).mul(player.m.points).log10().div(600).log(1.035).toNumber());
 			}else if(player.m.effective.gte(157)){
 				player.ap.challenges[22]=Math.max(player.ap.challenges[22],player.points.add(1e100).log10().pow(player.m.points).add(10).log10().div(600).log(1.035).toNumber());
@@ -613,6 +642,13 @@ addLayer("ap", {
 			target=target.add(1).floor();
 			if(target.gt(player.ap.buyables[11])){
 				player.ap.buyables[11]=target;
+			}
+		}
+		if(player.m.effective.gte(254)&&player.em.points.gte(14)){
+			var target=player.ap.points.add(1).div(1).log("e4e34").max(0.1).log(2);
+			target=target.add(1).floor();
+			if(target.gt(player.ap.buyables[12])){
+				player.ap.buyables[12]=target;
 			}
 		}
 			

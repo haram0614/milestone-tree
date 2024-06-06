@@ -21,6 +21,26 @@ displayThings = [
 ]
 
 changelog = `<h1>更新日志：</h1><br>
+	<h3>v1.245: 平行多宇宙 - 2024/6/5</h3><br>
+		- 增加了18个里程碑<br>
+		- Ported Exotic Prestige from Seder's NG+<br>
+		- Ported Multiverse Prestige from Seder's NG+<br>
+	<h3>v1.227: 平行宇宙 - 2024/6/4</h3><br>
+		- 增加了7个里程碑<br>
+		- 增加了1个原子级声望可购买项<br>
+		- 增加了1个超越可购买项<br>
+		- Ported Prestige Power from Seder's NG+<br>
+	<h3>v1.220 - 2024/6/3</h3><br>
+		- 增加了9个里程碑<br>
+		- 增加了2个超级加成升级<br>
+	<h3>v1.211 - 2024/6/2</h3><br>
+		- 增加了1个里程碑<br>
+		- 增加了1个转世可购买项<br>
+		- 重新平衡200里程碑之前的游戏内容<br>
+	<h3>v1.210 - 2024/5/28</h3><br>
+		- 增加了5个里程碑<br>
+		- 增加了1个额外里程碑<br>
+		- 增加了1个原子升级<br>
 	<h3>v1.205 - 2024/5/28</h3><br>
 		- 增加了5个里程碑<br>
 		- 增加了1个额外里程碑<br>
@@ -665,7 +685,7 @@ layers.mm.milestones[30-1].effectDescription="第25个元里程碑的效果变�
 layers.mm.milestones[31-1].effectDescription=layers.mm.milestones[32-1].effectDescription=layers.mm.milestones[33-1].effectDescription=layers.mm.milestones[34-1].effectDescription="声望能量的获得变为原来的2倍。";
 layers.mm.milestones[35-1].effectDescription="基础声望能量的获得变为原来的1.1次方。声望能量的获得变为原来的1.741倍。";
 layers.mm.milestones[36-1].effectDescription=layers.mm.milestones[37-1].effectDescription=layers.mm.milestones[38-1].effectDescription=layers.mm.milestones[39-1].effectDescription="超级能量的获得变为原来的2倍。";
-layers.mm.milestones[40-1].effectDescription="转世点数的获得变为原来的2倍。";
+layers.mm.milestones[40-1].effectDescription=layers.mm.milestones[45-1].effectDescription="转世点数的获得变为原来的2倍。";
 layers.mm.milestones[41-1].effectDescription=layers.mm.milestones[42-1].effectDescription=layers.mm.milestones[43-1].effectDescription=layers.mm.milestones[44-1].effectDescription="超级能量的获得变为原来的2倍。";
 
 
@@ -901,6 +921,9 @@ layers.ap.upgrades[32].description="基于你的原子级声望点数，第一�
 layers.ap.upgrades[33].description=layers.ap.upgrades[34].description="原子级声望升级23和32的效果变得更好。";
 layers.ap.upgrades[23].effectDisplay=function(){return format(this.effect(),4)+"x";}
 layers.ap.upgrades[32].effectDisplay=function(){return format(this.effect(),4)+"x";}
+layers.ap.upgrades[41].description="原子级声望升级32的效果变得更好，你需要在超越挑战2里面购买这个升级。";
+layers.ap.upgrades[42].description="原子级声望升级32的效果变得更好，你需要在超越挑战4里面购买这个升级。";
+layers.ap.upgrades[43].description="原子级声望升级32的效果变得更好，你需要在超越挑战6里面购买这个升级。";
 
 layers.ap.challenges[11].name="无声望加成挑战";
 layers.ap.challenges[12].name="无超级声望挑战";
@@ -1224,6 +1247,12 @@ layers.r.buyables[22].display=function(){
 	"花费："+format(data.cost)+"转世力量";
 };
 
+for(i in layers.r.upgrades){
+	if(i=="rows"||i=="cols")continue;
+	layers.r.upgrades[i].title="转世升级"+i;
+}
+layers.r.upgrades[11].description="转世力量的获得变为原来的2倍。";
+layers.r.upgrades[12].description="转世点数的获得变为原来的2倍。";
 
 
 layers.pp.resource="声望力量";

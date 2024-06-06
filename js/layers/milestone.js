@@ -2099,7 +2099,95 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(244)},
             done() {return player[this.layer].points.gte(245)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Current Endgame"
+				return "Reduce AP challenge 4 goal."
+			},
+        },
+        {
+			requirementDescription: "246th Milestone",
+            unlocked() {return player[this.layer].best.gte(245)},
+            done() {return player[this.layer].points.gte(246)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Gain additional 1800% of Transcend Point gain per second (total 5000%)"
+			},
+        },
+		{
+			requirementDescription: "247th Milestone",
+            unlocked() {return player[this.layer].best.gte(246)},
+            done() {return player[this.layer].points.gte(247)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Hyper-Prestige Upgrade 22 is better."
+			},
+        },
+        {
+			requirementDescription: "248th Milestone",
+            unlocked() {return player[this.layer].best.gte(247)},
+            done() {return player[this.layer].points.gte(248)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 5 goal."
+			},
+        },
+        {
+			requirementDescription: "249th Milestone",
+            unlocked() {return player[this.layer].best.gte(248)},
+            done() {return player[this.layer].points.gte(249)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 6 goal."
+			},
+        },
+        {
+			requirementDescription: "250th Milestone",
+            unlocked() {return player[this.layer].best.gte(249)},
+            done() {return player[this.layer].points.gte(250)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock a Reincarnation Challenge."
+			},
+        },
+        {
+			requirementDescription: "251th Milestone",
+            unlocked() {return player[this.layer].best.gte(250)},
+            done() {return player[this.layer].points.gte(251)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "252th Milestone",
+            unlocked() {return player[this.layer].best.gte(251)},
+            done() {return player[this.layer].points.gte(252)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Atom Upgrade 23 is better."
+			},
+        },
+        {
+			requirementDescription: "253th Milestone",
+            unlocked() {return player[this.layer].best.gte(252)},
+            done() {return player[this.layer].points.gte(253)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Atom Upgrade 23 is better."
+			},
+        },
+        {
+			requirementDescription: "254th Milestone",
+            unlocked() {return player[this.layer].best.gte(253)},
+            done() {return player[this.layer].points.gte(254)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Autobuy 2nd AP buyable."
+			},
+        },
+        {
+			requirementDescription: "255th Milestone",
+            unlocked() {return player[this.layer].best.gte(254)},
+            done() {return player[this.layer].points.gte(255)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce Transcend Challenge goals."
+			},
+        },
+        {
+			requirementDescription: "256th Milestone",
+            unlocked() {return player[this.layer].best.gte(255)},
+            done() {return player[this.layer].points.gte(256)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Exotic Fusioners won't reset on Reincarnation."
 			},
         },
 	];
@@ -2128,7 +2216,7 @@ addLayer("m", {
     }},
     color: "#793784",
     requires(){
-		//if(player.m.points.gte(227))return new Decimal(Infinity);
+		if(player.m.points.gte(256))return new Decimal(Infinity);
 		if(player.m.points.gte(200))return new Decimal(10);
 		if(player.m.points.gte(199))return new Decimal(Infinity);
 		return new Decimal(10);
@@ -2195,7 +2283,7 @@ addLayer("m", {
     },
     getScalingStart2(){
         let start=new Decimal(175);
-		if(hasUpgrade("mp",12))start=start.add(upgradeEffect("mp",12));
+		if(hasUpgrade("mp",12))start=start.add(upgradeEffect("mp",12).sub(1));
 		return start;
     },
     hotkeys: [
@@ -2243,7 +2331,7 @@ addLayer("m", {
 		return player.m.points.sub(2).pow(layers.m.milestone4EffectExponent());
 	},
 	milestone3Effect(){
-		if(player.ap.activeChallenge==21)return new Decimal(1);
+		if(player.ap.activeChallenge==21||player.r.activeChallenge==11)return new Decimal(1);
 		var m=Decimal.log10(player.points.add(20)).pow(0.9);
 		if(player.m.effective.gte(41))m=m.pow(player.um.points.gte(41)?1.005:1.003);
 		if(player.m.effective.gte(46))m=m.pow(player.um.points.gte(46)?1.005:1.001);
@@ -2405,6 +2493,7 @@ addLayer("m", {
 		if(player.m.effective.gte(239))p=p.pow(1.01);
 		if(player.m.effective.gte(241))p=p.pow(1.01);
 		if(player.m.effective.gte(244))p=p.pow(1.01);
+		if(player.m.effective.gte(251))p=p.pow(1.01);
 		return p;
 	},
 	milestone200Effect(){

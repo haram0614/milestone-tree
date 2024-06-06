@@ -35,6 +35,10 @@ addLayer("r", {
 		if(player.m.effective.gte(200))mult=mult.mul(tmp.m.milestone200Effect);
 		if(player.mm.points.gte(40))mult=mult.mul(2);
 		if(player.em.points.gte(10))mult=mult.mul(2);
+		if(player.mm.points.gte(45))mult=mult.mul(2);
+		if(hasUpgrade("pp",14))mult=mult.mul(upgradeEffect("pp",14));
+		if (player.ep.buyables[11].gte(9)) mult = mult.mul(tmp.ep.nineEffect);
+		if(hasUpgrade("r",12))ret = ret.mul(2);
 		return mult;
 	},
 	getResetGain() {
@@ -61,14 +65,13 @@ addLayer("r", {
 				["display-text",function(){return "You have "+format(player.r.power)+" Reincarnation Power"}],
 				["display-text",function(){if(player.r.universe==1)return "Welcome to The Milestone Tree NG+!";if(player.r.unlocked)return "Welcome to The Milestone Tree NG-"+player.r.stage+"!";return "";}]
 				,["clickable",11],"buyables","upgrades"
-				//["display-text",function(){return "AP challenge is applied after T challenge, softcap is applied after AP challenge"}],
-				//["display-text",function(){
-				//	let c=0;
-				//	for(var i in player.ap.challenges)c+=player.ap.challenges[i];
-				//	return "AP challenge completions: "+format(c,4)
-				//}],
-				//"challenges"
 			]
+		},"Challenges":{
+			content:[
+				"main-display",
+				"challenges"
+			],
+			unlocked(){return player.m.effective.gte(250);}
 		},/*"Special Transcend Points":{
 			content:[
 				"main-display",
@@ -89,7 +92,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(3e46);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e52);
 	},
 	powerGain(){
 		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
@@ -126,7 +129,7 @@ addLayer("r", {
 				layerDataReset("p",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				if(player.r.buyables[11].lt(187))layerDataReset("mm",[]);
 				layerDataReset("pp",["upgrades"]);
-				layerDataReset("ep",["upgrades"]);
+				layerDataReset("ep",player.r.buyables[11].gte(256)?["upgrades","buyables"]:["upgrades"]);
 				updateTemp();
 				updateTemp();
 				updateTemp();
@@ -158,6 +161,12 @@ addLayer("r", {
 			title: "Reincarnation Upgrade 11",
             description: "Double reincarnation power gain.",
             cost: new Decimal(1e5),
+			unlocked(){return player.m.effective.gte(234);}
+        },
+		12: {
+			title: "Reincarnation Upgrade 12",
+            description: "Double reincarnation points gain.",
+            cost: new Decimal(1e6),
 			unlocked(){return player.m.effective.gte(234);}
         },
 	},
@@ -291,5 +300,30 @@ addLayer("r", {
 				  return player.m.effective.gte(210);
 			  }
 		},
-	}
+	},
+	
+	challenges: {
+        rows: 4,
+		cols: 2,
+		11:{
+                name: "Ex-AP Challenge",
+                completionLimit: Infinity,
+			    challengeDescription() {return "All 6 AP Challenges at once.<br>"+format(challengeCompletions(this.layer, this.id),0)+" completions"},
+                unlocked() { return true },
+                goal: function(){
+					return 50+player.r.challenges[11]*10;
+				},
+				canComplete(){
+					let c=0;
+					for(var i in player.t.challenges)c+=player.t.challenges[i];
+					if(c>=tmp.r.challenges[this.id].goal)return true;
+					return false;
+				},
+                currencyDisplayName: "T challenge completions",
+                rewardDescription() { return "..." },
+            onEnter() {
+                layerDataReset("t",["upgrades"]);
+            },
+		},
+	},
 })

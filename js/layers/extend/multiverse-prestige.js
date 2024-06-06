@@ -54,11 +54,11 @@ addLayer("mp", {
             unlocked() { return true}, // The upgrade is only visible when this is true
 			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
 				let base=0.15;
-                let ret = player.mp.best.add(1).pow(base).sub(1)
-                return ret.add(hasUpgrade('mp',13)?upgradeEffect('mp',13):0);
+                let ret = player.mp.best.add(1).pow(base)
+                return ret.add(hasUpgrade('mp',13)?upgradeEffect('mp',13).sub(1):0);
             },
-            effectDisplay() { return "+"+format(this.effect(),4) }, // Add formatting to the effect
-        },/*
+            effectDisplay() { return "+"+format(this.effect().sub(1),4) }, // Add formatting to the effect
+        },
         13:  {
 			title: "Multiverse Prestige Upgrade 13",
             description: "Unlock Multiverse Fusioners. Previous upgrade is better based on Multiverse Points",
@@ -68,16 +68,16 @@ addLayer("mp", {
 				let base=0.05;
                 let ret = player.mp.best.add(1).pow(base).sub(1)
 				if (hasUpgrade('mp',14)) ret = ret.mul(5)
-                return ret.max(0);
+                return ret.max(0).add(1);
             },
-            effectDisplay() { return "+"+format(this.effect()) }, // Add formatting to the effect
+            effectDisplay() { return "+"+format(this.effect().sub(1),4) }, // Add formatting to the effect
         },
         14:  {
 			title: "Multiverse Prestige Upgrade 14",
-            description: "Milestone Cost Scaling is disabled, and 5.00x prev. upgrade effect",
-            cost: new Decimal(11),
+            description: "5.00x prev. upgrade effect",
+            cost: new Decimal(17),
             unlocked() { return true}, // The upgrade is only visible when this is true
-        },
+        },/*
 		21:  {
 			title: "Multiverse Prestige Upgrade 21",
             description: "<i>Prestige Universe is corrupting Milestone Universe...</i><br>Unlock Malware Milestones",
@@ -252,22 +252,15 @@ player.tab='m'
 	rewardDescription() { return "Unlock Ascensions<br><hr color='black'><i>You've reached the limit of Milestones Power. Travel into <b>Prestige Dimension</b> to get some kind of better Milestones... <br>Or even <b>Ascend</b>?</i>" },
 },*/
     },
-	buyables: {/*
+	buyables: {
 		rows: 2,
 		cols: 3,
         respec() {
-            player.mp.points = new Decimal(7)
-player.mp.perkPoints = new Decimal(0)
-for (i in player.mp.buyables){
-player.mp.buyables[i] = new Decimal(0)}
-player.mp.totalF = new Decimal(0)
-player.t.dChoose = false
-            player.t.sChoose = false
-            player.t.pdChoose = false
-            player.t.hChoose = false
-            player.t.sdChoose = false
-            player.t.phChoose = false
-player.t.choose = new Decimal(0)
+			player.mp.perkPoints = new Decimal(0)
+			for (i in player.mp.buyables){
+				player.mp.buyables[i] = new Decimal(0)
+			}
+			player.mp.totalF = new Decimal(0)
         },
         respecMessage: "Are you sure you want to respec Multiversal Fusioners? This will reset all of multiversal progress to pre-Fusioners stage!",
         respecText: "Respec Multiversal Fusioners",
@@ -292,7 +285,7 @@ player.t.choose = new Decimal(0)
                    player.mp.totalF = player.mp.totalF.add(1)
                },
 			  effect(x){
-                let eff = x.add(1).pow(player.m.best.pow(2.5)).pow(new Decimal(2).pow(x))
+                let eff = x.add(1).pow(player.m.best.pow(2)).pow(new Decimal(2).pow(x))
 				  return eff;
 			  },
 			  unlocked(){
@@ -399,7 +392,7 @@ player.t.choose = new Decimal(0)
 				  return eff;
 			  },
 			  unlocked(){
-				  return hasUpgrade('mp',13);
+				  return false;//return hasUpgrade('mp',13);
 			  },
 			  style() {
 				if (player.mp.buyables[13].gte(this.purchaseLimit)) return {
@@ -436,7 +429,7 @@ player.t.choose = new Decimal(0)
 			display(){
 				let data = tmp[this.layer].buyables[this.id];
 				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
-				"(This fusioner's cost is not affected by amount of buyed Fusioners) Per level, unlock 2 more Exotic Prestige upgrades. <br>Currently: "+format(data.effect,0)+" / 5 more upgrades.<br>"+
+				"(This fusioner's cost is not affected by amount of buyed Fusioners) Per level, unlock 1 more Exotic Prestige upgrades. <br>Currently: "+format(data.effect,0)+" / 5 more upgrades.<br>"+
 				"Cost for Next Level: "+format(data.cost)+" Multiversal Prestige Points";
 			},
 			cost(x) {if (x.gte(1)) return new Decimal(10).mul(x)
@@ -449,8 +442,8 @@ player.t.choose = new Decimal(0)
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(x){
-                let eff = x.mul(2)
-				if (x.gte(3)) return new Decimal(5)
+                let eff = x.mul(1)
+				if (x.gte(5)) return new Decimal(5)
 				  return eff;
 			  },
 			  unlocked(){
@@ -482,7 +475,7 @@ player.t.choose = new Decimal(0)
 					'width':'300px',
 				}
             }
-        },
+        },/*
         22:{
 			scaled() {
 				let a = new Decimal(20)
@@ -688,7 +681,8 @@ player.points = new Decimal(0)
 			content:[
 				"main-display","prestige-button","resource-display",
 				"challenges"
-			]
+			],
+        unlocked() {return false},
 		},
         "Fusioners": {
 			content: [

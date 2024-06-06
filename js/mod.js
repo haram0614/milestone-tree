@@ -37,7 +37,7 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.245",
+	num: "1.256",
 	name: "The Parallel Multiverse"
 }
 
@@ -161,7 +161,7 @@ function getPointGenBeforeSoftcap() {
 	if(hasUpgrade("ap",11))b=b.mul(upgradeEffect("ap",11));
 	if(player.um.points.gte(2))b=b.pow(1.01);
 	if(player.t.activeChallenge==11||player.t.activeChallenge==21||player.t.activeChallenge==31||player.t.activeChallenge==41)b=b.pow(tmp.t.dilationEffect);
-	if(player.ap.activeChallenge==22)b=b.add(1).log10().pow(player.m.effective.gte(122)?player.m.points:100);
+	if(player.ap.activeChallenge==22||player.r.activeChallenge==11)b=b.add(1).log10().pow(player.m.effective.gte(122)?player.m.points:100);
 	return b
 }
 

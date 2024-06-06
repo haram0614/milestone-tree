@@ -77,6 +77,21 @@ addLayer("pp", {
             },
             effectDisplay() { return "+"+format(this.effect())+" to base" }, // Add formatting to the effect
         },
+        14: {
+			unlocked() {return player.m.effective.gte(243)},
+			title: "Prestige Power Upgrade 14",
+            description: "Reincarnation Point gain is boosted by your prestige power strength.",
+            cost: new Decimal(1e16),
+            currencyDisplayName: "Hz of Prestige Power", // Use if using a nonstandard currency
+            currencyInternalName: "power", // Use if using a nonstandard currency
+            currencyLayer: "pp",
+            unlocked() { return true}, // The upgrade is only visible when this is true
+			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].power.add(1).log10().add(1).log10().div(5).add(1)
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
         21: {
 			unlocked() {return player.m.effective.gte(243)},
 			title: "Prestige Power Upgrade 21",
@@ -146,7 +161,7 @@ addLayer("pp", {
 			if(l=="pp")layerDataReset("p",["upgrades"]);
 		},
 	update(diff){
-        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff)).min(1e16/3)
+        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff)).min(1e21)
 			
 		if(player.m.effective.gte(224)){
 			var target=player.pp.points.add(1).div(3).root(1.4).log(2);

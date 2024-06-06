@@ -143,6 +143,7 @@ addLayer("hp", {
 				if(player.m.effective.gte(182))base+=27;
 				if(player.m.effective.gte(203))base+=970;
 				if(player.um.points.gte(70))base+=9000;
+				if(player.m.effective.gte(247))base+=1e23;
                 let ret = Decimal.pow(base,Decimal.log10(player[this.layer].points.add(1)).pow(0.9).add(1))
                 return ret.mul("1e91");
             },
@@ -263,7 +264,7 @@ addLayer("hp", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let eff=new Decimal("1e50000").pow(player[this.layer].buyables[this.id]);
 				  if(hasUpgrade("hp",32))eff=eff.pow(1.1);
 				  if(hasUpgrade("t",51))eff=eff.pow(2.1);
@@ -305,7 +306,7 @@ addLayer("hp", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let eff=new Decimal("1e1000000").pow(player[this.layer].buyables[this.id]);
 				  if(hasUpgrade("ap",31))eff=eff.pow(1.5);
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
@@ -337,7 +338,7 @@ addLayer("hp", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let b=0.01;
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);

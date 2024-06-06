@@ -1,4 +1,4 @@
-localStorage.supporterCode = localStorage.supporterCode && "";
+localStorage.supporterCode = localStorage.supporterCode || "";
 
 addLayer("donate", {
 	startData() { return {unlocked: true}},

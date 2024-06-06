@@ -53,6 +53,7 @@ addLayer("pe", {
 	exponent: function(){
 		let b=new Decimal(1);
 		if(player.mm.points.gte(35))b=b.div(1.1);
+		if(player.ep.buyables[11].gte(8))b=b.div(tmp.ep.fiveEffect)
 		return b;
 	},
 	resetsNothing:true,

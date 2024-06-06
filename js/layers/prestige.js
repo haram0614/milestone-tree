@@ -17,7 +17,7 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
-		if(player.ap.activeChallenge==31)return new Decimal(0);
+		if(player.ap.activeChallenge==31||player.r.activeChallenge==11)return new Decimal(0);
 		if(player.m.effective.gte(6))mult=mult.mul(tmp.m.milestone6Effect);
 		if(hasUpgrade("p",13))mult=mult.mul(upgradeEffect("p",13));
 		if(hasUpgrade("p",14))mult=mult.mul(upgradeEffect("p",14));
@@ -288,7 +288,7 @@ addLayer("p", {
 			cost(){
 				let a=player[this.layer].buyables[this.id];
 				a=Decimal.pow(2,a);
-				return new Decimal(1).mul(Decimal.pow("ee10",a));
+				return new Decimal(1).mul(Decimal.pow((hasUpgrade("ep",12)?"ee9":"ee10"),a));
 			},
 			canAfford() {
                    return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
@@ -297,7 +297,7 @@ addLayer("p", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let b=0.03;
 				  if(hasUpgrade("p",43))b+=0.011;
 				  if(hasUpgrade("p",44))b+=0.011;
@@ -336,7 +336,7 @@ addLayer("p", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let eff=new Decimal("1e10000").pow(player[this.layer].buyables[this.id]);
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
 				  return eff;
@@ -373,7 +373,7 @@ addLayer("p", {
 		},
 	update(){
 		if(player.m.effective.gte(121)){
-			var target=player.p.points.add(1).div(1).log("ee10").max(0.1).log(2);
+			var target=player.p.points.add(1).div(1).log(hasUpgrade("ep",12)?"ee9":"ee10").max(0.1).log(2);
 			target=target.add(1).floor();
 			if(target.gt(player.p.buyables[11])){
 				player.p.buyables[11]=target;

@@ -290,7 +290,7 @@ addLayer("sp", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let eff=new Decimal("1e10000").pow(player[this.layer].buyables[this.id]);
 				  if(hasUpgrade("hp",31))eff=eff.pow(1.05);
 				  eff=eff.pow(tmp.ap.challenges[32].rewardEffect);
@@ -313,7 +313,7 @@ addLayer("sp", {
 			cost(){
 				let a=player[this.layer].buyables[this.id];
 				a=Decimal.pow(2,a);
-				return new Decimal(1).mul(Decimal.pow("ee10",a));
+				return new Decimal(1).mul(Decimal.pow((hasUpgrade("ep",13)?"ee9":"ee10"),a));
 			},
 			canAfford() {
                    return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
@@ -322,7 +322,7 @@ addLayer("sp", {
                    player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
                },
 			  effect(){
-				  if(player.ap.activeChallenge==32)return new Decimal(1);
+				  if(player.ap.activeChallenge==32||player.r.activeChallenge==11)return new Decimal(1);
 				  let b=0.02;
 				  if(player.m.effective.gte(132))b+=0.01;
 				  let eff=new Decimal(1).add(player[this.layer].buyables[this.id].mul(b));
@@ -372,7 +372,7 @@ addLayer("sp", {
 			}
 		}
 		if(player.m.effective.gte(130)){
-			var target=player.sp.points.add(1).div(1).log("ee10").max(0.1).log(2);
+			var target=player.sp.points.add(1).div(1).log((hasUpgrade("ep",13)?"ee9":"ee10")).max(0.1).log(2);
 			target=target.add(1).floor();
 			if(target.gt(player.sp.buyables[12])){
 				player.sp.buyables[12]=target;
