@@ -25,21 +25,25 @@ addLayer("ep", {
     },
 	exponent: 1e-3,
     oneEffect() {
+		if(inChallenge("mp",11))return new Decimal(0);
         let eff = player.ep.points.add(1).log10().add(1).log10().div(10);
 		if (player.em.best.gte(13)) eff = eff.mul(2)
 		if (player.mp.buyables[12].gte(3))eff = eff.mul(1.1)
 		return eff;
     },
     twoEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(10).log10();
 		if(player.mp.buyables[12].gte(1)){
 			if(eff.gte(10))eff = eff.log10().mul(10);
 		}else{
 			if(eff.gte(3))eff = eff.div(3).log10().add(1).mul(3);
 		}
+		eff = eff.mul(challengeEffect("mp",11));
 		return eff;
     },
 	threeEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(10).log10().pow(0.01).div(player.mp.buyables[12].gte(2)?4000:10000).add(1)
         return eff.toNumber();
     },
@@ -48,11 +52,13 @@ addLayer("ep", {
 		return eff;
     },
 	fiveEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(10).add(1).pow(0.5)
 		if (player.mp.buyables[12].gte(4)) eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(5).add(1).pow(0.5)
         return eff;
     },
 	sixEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(10).log10();
 		if(player.mp.buyables[12].gte(5)){
 			if(eff.gte(10))eff = eff.log10().mul(10);
@@ -62,20 +68,22 @@ addLayer("ep", {
 		return eff;
 	},
 	sevenEffect() {
+		if(inChallenge("mp",11))return new Decimal(0);
         let eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().add(1);
-		//if (player.mp.challenges[12]>0) eff=eff.add(tmp.mp.challenges[12].rewardEffect)
-		//	if (player.mp.buyables[12].gte(4)) eff = eff.mul(2.56)
-		//if (player.mp.activeChallenge==13) return new Decimal(0)
+		if (player.em.best.gte(15)) eff = player.ep.points.add(1).log10().add(1).log10().add(1);
+		if (player.mp.buyables[12].gte(7)) eff = player.ep.points.add(1).log10().add(1).log10().add(1).pow(1.05);
         return eff;
     },
 	eightEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(10).add(1).pow(0.5);
 		if (player.mp.buyables[12].gte(6)) eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(5).add(1).pow(0.5);
 		return eff;
     },
 	nineEffect() {
+		if(inChallenge("mp",11))return new Decimal(1);
         let eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(10).add(1).pow(0.5);
-		if (player.mp.buyables[12].gte(7)) eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(5).add(1).pow(0.5);
+		if (player.mp.buyables[12].gte(8)) eff = player.ep.points.add(1).log10().add(1).log10().add(1).log10().div(5).add(1).pow(0.5);
 		return eff;
     },
     row: 3,
@@ -109,13 +117,24 @@ addLayer("ep", {
             description: "Super Prestige Buyable 'Softcap Delayer' is cheaper.",
             cost: new Decimal('e2e7'),
             unlocked() { return player.mp.buyables[21].gte(2)&& player.mp.activeChallenge!=21}, // The upgrade is only visible when this is true
-        },/*
+        },
 		14: {
 			title: "Exotic Prestige Upgrade 14",
             description: "Change the formula for Power Scaler.",
-            cost: new Decimal('e4650000'),
-            unlocked() { return player.mp.buyables[21].gte(2)&& player.mp.activeChallenge!=21},
+            cost: new Decimal('ee9'),
+            unlocked() { return player.mp.buyables[21].gte(3)&& player.mp.activeChallenge!=21},
         },
+		21: {
+			title: "Exotic Prestige Upgrade 21",
+            description: "Reincarnation Point gain is boosted by your exotic prestige points.",
+            cost: new Decimal('ee11'),
+            unlocked() { return player.mp.buyables[21].gte(4)&& player.mp.activeChallenge!=21},
+			effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).log10().add(1).log10().add(1).log10().div(20).add(1)
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },/*
 		21: {
 			title: "Exotic Prestige Upgrade 21",
             description: "Reduce goal scaling of <b>Dilation</b> challenges by sum of this challenge completions and Exotic Prestige Points",

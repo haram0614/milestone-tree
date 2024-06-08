@@ -112,6 +112,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(12)},
             done() {return player[this.layer].points.gte(13)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(13))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "6th Milestone's effect ^1.2"
 			},
         },
@@ -120,6 +121,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(13)},
             done() {return player[this.layer].points.gte(14)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(14))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "6th Milestone's effect ^1.2"
 			},
         },
@@ -137,6 +139,7 @@ var METAMILESTONES=[
             unlocked() {return player[this.layer].best.gte(15)},
             done() {return player[this.layer].points.gte(16)}, // Used to determine when to give the milestone
             effectDescription: function(){
+				if(player.um.meta.gte(16))return "6th and 27th Milestone's effect ^2 (Upgraded)"
 				return "27th Milestone's effect ^1.2"
 			},
         },
@@ -371,6 +374,14 @@ var METAMILESTONES=[
             done() {return player[this.layer].points.gte(45)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				return "Reincarnation Point gain is doubled";
+			},
+        },
+		{
+			requirementDescription: "46th Meta-Milestone",
+            unlocked() {return player[this.layer].best.gte(45)},
+            done() {return player[this.layer].points.gte(46)}, // Used to determine when to give the milestone
+            effectDescription: function(){
+				return "Hyper Energy gain is doubled";
 			},
         },
 	]

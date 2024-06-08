@@ -28,6 +28,7 @@ addLayer("mp", {
 		return m;
     },
     row: 4,
+	base: 2,
 	exponent: 7.5,
     hotkeys: [
         {key: "v", description: "V: Reset for Multiverse Prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
@@ -85,39 +86,37 @@ addLayer("mp", {
             unlocked() { return player.pm.best.gte(15)}, // The upgrade is only visible when this is true
         },*/
 	},
-    challenges: {/*
+    challenges: {
         11:{
             onEnter() {
                 player.t.points=new Decimal(0)
                 player.p.points=new Decimal(0)
             },
-            name: "Ex-Dilation",
+            name: "Disabled Fusioner",
             completionLimit: Infinity,
-            challengeDescription() {return "4th Exotic Fusioner effect is ^0.15 weaker."+"<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
+            challengeDescription() {return "Exotic Fusioner is disabled."+"<br>"+format(challengeCompletions(this.layer, this.id),4) +" completions"},
             unlocked() { return true },
             goal: function(){
-                if(player.m.best.gte(120))return this.goalAfter120(Math.ceil(player.mp.challenges[11]+0.001));
+                return this.goalAfter120(Math.ceil(player.mp.challenges[11]+0.001));
             },
             canComplete(){
-                return player.ep.points.gte(tmp.mp.challenges[this.id].goal)&&player.m.points.lt(110);
+                return false;
             },
             completionsAfter120(){
                 let p=player.ep.points;
-                if(player.m.best.gte(130)){
-                    if(p.lte("1e4500"))return 0;
-                    return p.log10().div(4500).log(1.1).pow(1/1.1).toNumber();
-                }
+                if(p.lte("e4.5e11"))return 0;
+                return p.log10().div(4.5e11).log(1.2).pow(1/1.3).toNumber();
             },
             rewardEffect() {
-                let ret = (player.mp.challenges[11]+1*1.46)**1.75
+                let ret = (player.mp.challenges[11]+1)**2;
                 return ret;
             },
             goalAfter120(x=player.mp.challenges[11]){
-                if(player.m.best.gte(130))return Decimal.pow(10,Decimal.pow(1.1,Decimal.pow(x,1.1)).mul(4500));
+                return Decimal.pow(10,Decimal.pow(1.2,Decimal.pow(x,1.3)).mul(4.5e11));
             },
             currencyDisplayName: "Exotic Prestige Points",
-            rewardDescription() { return "6th Exotic Fusioner effect is x"+ format(this.rewardEffect())+" better." },
-    },
+            rewardDescription() { return "2nd Exotic Fusioner effect is x"+format(this.rewardEffect())+" better." },
+    },/*
     12:{
         onEnter() {
             layerDataReset("t",['challenges','upgrades'])
@@ -266,7 +265,10 @@ player.tab='m'
         respecText: "Respec Multiversal Fusioners",
         11:{
 			title(){
-				return "<h3 class='mr'>Milestone Fusioner</h3>";
+				let table=""
+				if (player[this.layer].buyables[this.id].gte(this.scaled())) table="<h3>[ Scaled ] </h3> "
+				//if (player[this.layer].buyables[this.id].gte(this.ultraScaled())) table="<h3>[ Ultra Scaled ] </h3> "
+				return table+"<h3 class='mr'>Milestone Fusioner</h3>";
 			},
 			display(){
 				let data = tmp[this.layer].buyables[this.id];
@@ -274,8 +276,15 @@ player.tab='m'
 				"Based on Milestones, get a boost to Exotic Prestige Points. <br>Effect: x"+format(data.effect)+"<br>"+
 				"Cost for Next Level: "+format(data.cost)+" Multiversal Prestige Points";
 			},
+			scaled() {
+				let a = new Decimal(20)
+				return a
+			},
 			cost(x) {
-				return new Decimal(6).add(x).add(player.mp.totalF.div(2));
+				let pow = new Decimal(1)
+				if (x.gte(this.scaled())) pow = new Decimal(1).add(x.add(1).sub(this.scaled()).div(15));
+				if(player.m.effective.gte(259))return new Decimal(6).add(x.mul(1.5)).pow(pow);
+				return new Decimal(6).add(x).add(player.mp.totalF.div(2)).pow(pow);
 			},
 			canAfford() {
                    return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
@@ -311,17 +320,23 @@ player.tab='m'
             }
         },
         12:{
-			purchaseLimit: new Decimal(6),
+			purchaseLimit(){
+				if(player.m.effective.gte(263)&&player.em.points.gte(15))return new Decimal(8);
+				if(player.m.effective.gte(263))return new Decimal(7);
+				if(player.em.points.gte(15))return new Decimal(7);
+				return new Decimal(6);
+			},
 			title(){
 				return "<h3 class='mr'>Exotic Fusioner II</h3>";
 			},
 			display(){
 				let data = tmp[this.layer].buyables[this.id];
 				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
-				"Per level, change Exotic Fusioner's effect's formulas or make effect's softcaps weaker. <br>Currently: "+format(data.effect,0)+" / 6 effects boosted (starting at second).<br>"+
+				"Per level, change Exotic Fusioner's effect's formulas or make effect's softcaps weaker. <br>Currently: "+format(data.effect,0)+" / "+format(data.purchaseLimit,0)+" effects boosted (starting at second).<br>"+
 				"Cost for Next Level: "+format(data.cost)+" Multiversal Prestige Points";
 			},
 			cost(x) {
+				if(player.m.effective.gte(259))return new Decimal(7).add(x.mul(2));
 				return new Decimal(7).add(x.div(5)).add(player.mp.totalF.mul(2).div(3));
 			},
 			canAfford() {
@@ -339,7 +354,7 @@ player.tab='m'
 				  return hasUpgrade('mp',13);
 			  },
 			  style() {
-				if (player.mp.buyables[12].gte(this.purchaseLimit)) return {
+				if (player.mp.buyables[12].gte(this.purchaseLimit())) return {
 					'border-radius': '0%',
 					'color':'white',
 					'background-color':'darkgreen',
@@ -366,7 +381,10 @@ player.tab='m'
             }
         },
         13:{
-			purchaseLimit: new Decimal(6),
+			purchaseLimit(){
+				if(player.em.points.gte(15))return new Decimal(7);
+				return new Decimal(6);
+			},
 			title(){
 				return "<h3 class='mr'>Transcend Fusioner</h3>";
 			},
@@ -395,7 +413,7 @@ player.tab='m'
 				  return false;//return hasUpgrade('mp',13);
 			  },
 			  style() {
-				if (player.mp.buyables[13].gte(this.purchaseLimit)) return {
+				if (player.mp.buyables[13].gte(this.purchaseLimit())) return {
 					'border-radius': '0%',
 					'color':'white',
 					'background-color':'darkgreen',
@@ -422,18 +440,21 @@ player.tab='m'
             }
         },
         21:{
-			purchaseLimit: new Decimal(3),
+			purchaseLimit: new Decimal(5),
 			title(){
 				return "<h3 class='mr'>Upgrading Fusioner</h3>";
 			},
 			display(){
 				let data = tmp[this.layer].buyables[this.id];
+				if(player.m.effective.gte(259))return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
+				"Per level, unlock 1 more Exotic Prestige upgrades. <br>Currently: "+format(data.effect,0)+" / "+format(data.purchaseLimit,0)+" more upgrades.<br>"+
+				"Cost for Next Level: "+format(data.cost)+" Multiversal Prestige Points";
 				return "Level: "+format(player[this.layer].buyables[this.id])+"<br>"+
-				"(This fusioner's cost is not affected by amount of buyed Fusioners) Per level, unlock 1 more Exotic Prestige upgrades. <br>Currently: "+format(data.effect,0)+" / 5 more upgrades.<br>"+
+				"(This fusioner's cost is not affected by amount of buyed Fusioners) Per level, unlock 1 more Exotic Prestige upgrades. <br>Currently: "+format(data.effect,0)+" / "+format(data.purchaseLimit,0)+" more upgrades.<br>"+
 				"Cost for Next Level: "+format(data.cost)+" Multiversal Prestige Points";
 			},
-			cost(x) {if (x.gte(1)) return new Decimal(10).mul(x)
-				else return new Decimal(8);
+			cost(x) {
+				return [8,10,20,38,56,Infinity][x.toNumber()];
 			},
 			canAfford() {
                    return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)
@@ -682,7 +703,7 @@ player.points = new Decimal(0)
 				"main-display","prestige-button","resource-display",
 				"challenges"
 			],
-        unlocked() {return false},
+        unlocked() {return player.m.effective.gte(260)},
 		},
         "Fusioners": {
 			content: [
@@ -727,14 +748,12 @@ player.points = new Decimal(0)
 				layerDataReset('pb',["upgrades"])
 				layerDataReset('hb',["upgrades"])
 				layerDataReset('se',["upgrades"])
-                //if (hasMalware("m",6)) layerDataReset("ep",["buyables","upgrades"]); else layerDataReset("ep",["buyables"])
+                layerDataReset("ep",["buyables","upgrades"])
 			};
 		},
-	update(diff){/*
-        if(player.m.best.gte(120)){
-            if(player.mp.activeChallenge){
-                player.mp.challenges[player.mp.activeChallenge]=Math.max(player.mp.challenges[player.mp.activeChallenge],layers.mp.challenges[player.mp.activeChallenge].completionsAfter120());
-            }
-        }*/
+	update(diff){
+        if(player.mp.activeChallenge){
+            player.mp.challenges[player.mp.activeChallenge]=Math.max(player.mp.challenges[player.mp.activeChallenge],layers.mp.challenges[player.mp.activeChallenge].completionsAfter120());
+        }
 	}
 })

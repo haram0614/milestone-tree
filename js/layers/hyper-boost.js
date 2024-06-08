@@ -13,6 +13,7 @@ addLayer("hb", {
 		if(hasUpgrade("t",41))r=r.div("1e60000");
 		if(hasUpgrade("t",64))r=r.div("1e300000");
 		if(hasUpgrade("t",71))r=r.div("1e30000");
+		if(player.um.points.gte(104))r=r.div("1e70000");
         return r
 	}, // Can be a function that takes requirement increases into account
     resource: "hyper boosts", // Name of prestige currency
@@ -51,6 +52,7 @@ addLayer("hb", {
 		if(x.gte(10)){
 			let scaling=x.sub(10).pow(2).div(1000);
 			if(player.m.effective.gte(119))scaling=scaling.div(1.2);
+			if(player.um.points.gte(104))scaling=scaling.div(1.01);
 			p=p.add(scaling);
 		}
 		return p;
@@ -83,7 +85,7 @@ addLayer("hb", {
 	},
 	
 	upgrades: {
-        rows: 3,
+        rows: 4,
 		cols: 4,
 		11: {
 			title: "Hyper Boost Upgrade 11",
@@ -157,6 +159,7 @@ addLayer("hb", {
 				if(hasUpgrade("a",24))exp+=0.2;
 				if(player.m.effective.gte(252))exp+=0.1;
 				if(player.m.effective.gte(253))exp+=0.1;
+				if(hasUpgrade("hb",41))exp+=0.05;
 				let p=player.a.points.pow(exp);
 				return p;
             },
@@ -176,10 +179,19 @@ addLayer("hb", {
             unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
         },
 		34: {
-			title: "Hyper Boost Upgrade 33",
+			title: "Hyper Boost Upgrade 34",
             description: "Hyper Boost Upgrade 12 is boosted.",
             cost: new Decimal(126),
             unlocked() { return player.m.effective.gte(216)}, // The upgrade is only visible when this is true
+        },
+		41: {
+			title: "Hyper Boost Upgrade 41",
+            description: "Atom Upgrade 23 is boosted. You can buy this upgrade while you're in T challenge 1.",
+            cost(){
+				if(player.t.activeChallenge!=11)return new Decimal(Infinity);
+				return new Decimal(139);
+			},
+            unlocked() { return player.m.effective.gte(257)}, // The upgrade is only visible when this is true
         },
 	},
 	resetsNothing(){return player.m.effective.gte(111)},

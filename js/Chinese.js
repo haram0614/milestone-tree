@@ -373,25 +373,61 @@ layers.m.milestones[99-1].effectDescription=function(){
 	if(player.um.points.gte(99))return "解锁超越，并且超越点数的获得变得更好。（已升级）";
 	return "解锁下一个层级。";
 }
-layers.m.milestones[100-1].effectDescription="在超越时保留声望升级和超级声望升级。";
-layers.m.milestones[101-1].effectDescription="在超越时保留第三级声望升级和声望加成升级。";
-layers.m.milestones[102-1].effectDescription="在超越时保留原子级声望升级。";
-layers.m.milestones[103-1].effectDescription="在超越时自动完成原子级挑战1-5各3次，除非你在一个超越挑战里面。";
-layers.m.milestones[104-1].effectDescription="第四个里程碑的效果变得更好。解锁一个层级。解锁4个新的超越升级。解锁一个第三级声望可重复购买项。解锁一个超越挑战。";
-layers.m.milestones[105-1].effectDescription=function(){
-	return "基于你的总里程碑数量，第一个里程碑的软上限开始得更迟。当前："+format(tmp.m.milestone105Effect)+"x";
+layers.m.milestones[100-1].effectDescription=function(){
+	if(player.um.points.gte(100))return "在超越时保留声望升级和超级声望升级和购买项。（已升级）";
+	return "在超越时保留声望升级和超级声望升级。";
 }
-layers.m.milestones[106-1].effectDescription="第6个和第27个里程碑的效果变为原来的(元里程碑数量的0.5次方)次方。";
-layers.m.milestones[107-1].effectDescription="第三个里程碑的基础效果指数变为原来的1.002次方。自动购买第二个第三级声望可重复购买项。";
-layers.m.milestones[108-1].effectDescription="在超越时自动完成原子级挑战1-5各6次，除非你在一个超越挑战里面。";
-layers.m.milestones[109-1].effectDescription="第四个里程碑的效果变得更好。解锁一个超越挑战。";
+layers.m.milestones[101-1].effectDescription=function(){
+	if(player.um.points.gte(101))return "在超越时保留第三级声望升级和声望加成升级和购买项。（已升级）";
+	return "在超越时保留第三级声望升级和声望加成升级。";
+}
+layers.m.milestones[102-1].effectDescription=function(){
+	if(player.um.points.gte(102))return "在超越时保留原子级声望升级和购买项。（已升级）";
+	return "在超越时保留原子级声望升级。";
+}
+layers.m.milestones[103-1].effectDescription=function(){
+	if(player.um.points.gte(103))return "所有原子级挑战的完成次数永远不小于3，即使你在超越或转世挑战里面。（已升级）";
+	return "在超越时自动完成原子级挑战1-5各3次，除非你在一个超越挑战里面。";
+}
+layers.m.milestones[104-1].effectDescription=function(){
+	if(player.um.points.gte(104))return "第四个里程碑的效果变得更好。解锁超级加成，并且超级加成变得更便宜。解锁4个新的超越升级。解锁一个第三级声望可重复购买项。解锁一个超越挑战。（已升级）";
+	return "第四个里程碑的效果变得更好。解锁一个层级。解锁4个新的超越升级。解锁一个第三级声望可重复购买项。解锁一个超越挑战。";
+}
+layers.m.milestones[105-1].effectDescription=function(){
+	let ret="基于你的总里程碑数量，第一个里程碑的软上限开始得更迟。当前："+format(tmp.m.milestone105Effect)+"x";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
+}
+layers.m.milestones[106-1].effectDescription=function(){
+	if(player.um.points.gte(106))return "第6个和第27个里程碑的效果变为原来的(元里程碑数量)次方。（已升级）";
+	return "第6个和第27个里程碑的效果变为原来的(元里程碑数量的0.5次方)次方。";
+}
+layers.m.milestones[107-1].effectDescription=function(){
+	if(player.um.points.gte(107))return "第三个里程碑的基础效果指数变为原来的1.00284次方。自动购买第二个第三级声望可重复购买项。（已升级）";
+	return "第三个里程碑的基础效果指数变为原来的1.002次方。自动购买第二个第三级声望可重复购买项。";
+}
+layers.m.milestones[108-1].effectDescription=function(){
+	if(player.um.points.gte(108))return "所有原子级挑战的完成次数永远不小于6，即使你在超越或转世挑战里面。（已升级）";
+	return "在超越时自动完成原子级挑战1-5各6次，除非你在一个超越挑战里面。";
+}
+layers.m.milestones[109-1].effectDescription=function(){
+	let ret="第四个里程碑的效果变得更好。解锁一个超越挑战。";
+	if(player.um.points.gte(parseInt(this.id)+1))return ret+"（已升级）";return ret;
+}
 layers.m.milestones[110-1].effectDescription=function(){
+	if(player.um.points.gte(110))return "减少超越挑战的目标。你可以在不退出原子级挑战的情况下完成它。（已升级）";
 	if(player.m.effective.gte(183))return "超越挑战1的基础目标变为x^2。你可以在不退出原子级挑战的情况下完成它。";
 	return "每秒获得重置可以获得的超越点数的0.2%。超越挑战1的基础目标变为x^2。你可以在不退出原子级挑战的情况下完成它。";
 }
-layers.m.milestones[111-1].effectDescription="在获得超级加成时不会重置。声望加成变得更便宜了。解锁4个新的声望加成升级。解锁4个新的超越升级。";
-layers.m.milestones[112-1].effectDescription="超越挑战2的奖励在进行超越挑战2时生效。";
+layers.m.milestones[111-1].effectDescription=function(){
+	if(player.um.points.gte(111))return "在获得超级加成时不会重置。声望加成变得非常便宜了。解锁4个新的声望加成升级。解锁4个新的超越升级。（已升级）";
+	return "在获得超级加成时不会重置。声望加成变得更便宜了。解锁4个新的声望加成升级。解锁4个新的超越升级。";
+}
+layers.m.milestones[112-1].effectDescription=function(){
+	if(player.um.points.gte(112))return "超越挑战2、4、6、8的奖励变得更好，并且在进行超越挑战时生效。（已升级）";
+	return "超越挑战2的奖励在进行超越挑战2时生效。";
+}
 layers.m.milestones[113-1].effectDescription=function(){
+	if(player.um.points.gte(113))return "第6个和第27个里程碑的效果变为原来的(元里程碑数量)次方。（已升级）";
 	if(player.m.effective.gte(183))return "第6个和第27个里程碑的效果变为原来的(元里程碑数量的0.3次方)次方。";
 	return "每秒额外获得重置可以获得的超越点数的0.3%，总计0.5%。第6个和第27个里程碑的效果变为原来的(元里程碑数量的0.3次方)次方。";
 }
@@ -635,6 +671,7 @@ layers.m.tabFormat[4][1]=function(){
 	if(player.m.points.gte(180)){return "第二次里程碑成本快速增加在"+format(tmp.m.getScalingStart2,4)+"开始";}return "";
 }
 layers.m.tabFormat[5][1]=function(){
+	if(player.m.points.gte(200)){return "里程碑需求公式：10^(1+"+formatWhole(player.m.points)+"^(2+"+format(tmp.m.firstScaling,4)+"+"+format(tmp.m.secondScaling,4)+"))=10^(1+"+formatWhole(player.m.points)+"^"+format(tmp.m.exponent,4)+")";}
 	return "里程碑成本指数是"+format(tmp.m.exponent,4);
 }
 
@@ -672,7 +709,10 @@ layers.mm.milestones[11-1].effectDescription=layers.mm.milestones[12-1].effectDe
 	if(player.um.meta.gte(parseInt(this.id)+1))return "第6个和第27个里程碑的效果变为原来的平方。（已升级）"
 	return "第27个里程碑的效果变为原来的1.2次方。";
 }
-layers.mm.milestones[13-1].effectDescription=layers.mm.milestones[14-1].effectDescription="第六个里程碑的效果变为原来的1.2次方。";
+layers.mm.milestones[13-1].effectDescription=layers.mm.milestones[14-1].effectDescription=function(){
+	if(player.um.meta.gte(parseInt(this.id)+1))return "第6个和第27个里程碑的效果变为原来的平方。（已升级）"
+	return "第六个里程碑的效果变为原来的1.2次方。";
+}
 layers.mm.milestones[17-1].effectDescription="第六个里程碑的效果变为原来的1.7次方。";
 layers.mm.milestones[18-1].effectDescription="第27个里程碑的效果变为原来的1.8次方。";
 layers.mm.milestones[19-1].effectDescription="第27个里程碑的效果变为原来的1.9次方。";
@@ -1185,9 +1225,8 @@ layers.he.upgrades[14].description="终极能量升级12的效果变得更好。
 layers.he.upgrades[21].description="终极能量升级11的效果变得更好。";
 layers.he.upgrades[22].description="基于你的终极能量，超越点数的获得变得更好。";
 layers.he.tabFormat[2][1]=function(){
-	let peroom=new Decimal(10).log(tmp.he.base);
 	let power=new Decimal(1).div(tmp.he.exponent);
-	return "(终极能量=("+format(peroom)+"*log10(最高第三级声望点数))^"+format(power)+")";
+	return "终极能量="+format(tmp.he.directMult)+"*log10(最高第三级声望点数)^"+format(power);
 }
 layers.he.upgrades[23].description="终极能量升级11的效果变得更好。";
 layers.he.upgrades[24].description="声望能量升级11和超级能量升级11的效果变得更好。";

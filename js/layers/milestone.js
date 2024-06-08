@@ -5,7 +5,7 @@ var MILESTONES=[
             done() {return player[this.layer].points.gte(1)}, // Used to determine when to give the milestone
             effectDescription: function(){
 				let ret="Gain "+format(new Decimal(1).max(getPointGen()))+" points per second"
-				if(player.um.points.gte(1))ret+=" and this milestone's effect softcap starts later.";
+				if(player.um.points.gte(1))ret+=" and this milestone's effect softcap starts later. (Upgraded)";
 				else ret+=".";
 				return ret;
 			},
@@ -540,7 +540,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(59)},
             done() {return player[this.layer].points.gte(60)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(60))return "Unlock Hyper Prestige and Hyper Prestige Points ^1.03.  Prestige Boost doesn't reset anything. Autoget Prestige Boosts.";
+				if(player.um.points.gte(60))return "Unlock Hyper Prestige and Hyper Prestige Points ^1.03.  Prestige Boost doesn't reset anything. Autoget Prestige Boosts. (Upgraded)";
 				return "Unlock a new layer. Prestige Boost doesn't reset anything. Autoget Prestige Boosts.";
 			},
         },
@@ -675,7 +675,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(74)},
             done() {return player[this.layer].points.gte(75)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(75))return "Gain 1e22% of Hyper-Prestige Point gain per second.";
+				if(player.um.points.gte(75))return "Gain 1e22% of Hyper-Prestige Point gain per second. (Upgraded)";
 				if(player[this.layer].best.gte(135))return "Gain 1e12% of Hyper-Prestige Point gain per second.";
 				return "Gain 10000% of Hyper-Prestige Point gain per second.";
 			},
@@ -749,7 +749,7 @@ var MILESTONES=[
             done() {return player[this.layer].points.gte(83)}, // Used to determine when to give the milestone
             effectDescription:  function(){
 				let ret="4th Milestone is boosted. Autobuy the first Super-Prestige buyable.";
-				if(player.um.points.gte(79))return ret+" (Upgraded)";return ret;
+				if(player.um.points.gte(83))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -766,7 +766,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(84)},
             done() {return player[this.layer].points.gte(85)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				if(player.um.points.gte(85))return "Unlock a Hyper-Prestige buyable and this buyable is cheaper. Unlock a new row of Hyper-Prestige upgrades.";
+				if(player.um.points.gte(85))return "Unlock a Hyper-Prestige buyable and this buyable is cheaper. Unlock a new row of Hyper-Prestige upgrades. (Upgraded)";
 				return "Unlock a Hyper-Prestige buyable. Unlock a new row of Hyper-Prestige upgrades.";
 			},
         },
@@ -857,6 +857,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(94)},
             done() {return player[this.layer].points.gte(95)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(95))return "Unlock an Atomic-Prestige Challenge, and goal of this challenge is reduced. Autobuy the first Hyper-Prestige buyable. (Upgraded)";
 				return "Unlock an Atomic-Prestige Challenge. Autobuy the first Hyper-Prestige buyable.";
 			},
         },
@@ -883,7 +884,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(97)},
             done() {return player[this.layer].points.gte(98)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "4th Milestone is boosted.";
+				let ret="4th Milestone is boosted.";
+				if(player.um.points.gte(98))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -891,6 +893,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(98)},
             done() {return player[this.layer].points.gte(99)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(99))return "Unlock Transcend, and boost Transcend Points Gain. (Upgraded)";
 				return "Unlock a new layer.";
 			},
         },
@@ -899,6 +902,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(99)},
             done() {return player[this.layer].points.gte(100)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(100))return "Keep Prestige and Super-Prestige upgrades and buyables on Transcend (Upgraded)";
 				return "Keep Prestige and Super-Prestige upgrades on Transcend";
 			},
         },
@@ -907,6 +911,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(100)},
             done() {return player[this.layer].points.gte(101)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(101))return "Keep Hyper-Prestige and Prestige Boost upgrades and buyables on Transcend (Upgraded)";
 				return "Keep Hyper-Prestige and Prestige Boost upgrades on Transcend";
 			},
         },
@@ -915,6 +920,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(101)},
             done() {return player[this.layer].points.gte(102)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(102))return "Keep Atomic-Prestige upgrades and buyables on Transcend (Upgraded)";
 				return "Keep Atomic-Prestige upgrades on Transcend";
 			},
         },
@@ -923,6 +929,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(102)},
             done() {return player[this.layer].points.gte(103)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(103))return "Your AP challenge completions won't less than 3. (Upgraded)";
 				return "Autocomplete AP challenge 1-5 3 times on Transcend. This milestone is disabled when you're in a Transcend challenge.";
 			},
         },
@@ -931,6 +938,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(103)},
             done() {return player[this.layer].points.gte(104)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(104))return "4th Milestone is boosted. Unlock Hyper Boost, and it is cheaper. Unlock 4 new Transcend upgrades. Unlock a Hyper-Prestige buyable. Unlock a Transcend challenge. (Upgraded)";
 				return "4th Milestone is boosted. Unlock a new layer. Unlock 4 new Transcend upgrades. Unlock a Hyper-Prestige buyable. Unlock a Transcend challenge.";
 			},
         },
@@ -939,7 +947,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(104)},
             done() {return player[this.layer].points.gte(105)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "1st milestone's softcap starts later based on your milestones. Currently: "+format(tmp.m.milestone105Effect)+"x later";
+				let ret="1st milestone's softcap starts later based on your milestones. Currently: "+format(tmp.m.milestone105Effect)+"x later";
+				if(player.um.points.gte(105))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -947,6 +956,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(105)},
             done() {return player[this.layer].points.gte(106)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(106))return "6th and 27th milestone's effect ^(meta-milestones) (Upgraded)";
 				return "6th and 27th milestone's effect ^(meta-milestones^0.5).";
 			},
         },
@@ -955,6 +965,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(106)},
             done() {return player[this.layer].points.gte(107)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(107))return "3rd Milestone's base effect exponent ^1.00284. Autobuy the second Hyper-Prestige buyable. (Upgraded)";
 				return "3rd Milestone's base effect exponent ^1.002. Autobuy the second Hyper-Prestige buyable.";
 			},
         },
@@ -963,6 +974,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(107)},
             done() {return player[this.layer].points.gte(108)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(108))return "Your AP challenge completions won't less than 6. (Upgraded)";
 				return "Autocomplete AP challenge 1-5 6 times on Transcend. This milestone is disabled when you're in a Transcend challenge.";
 			},
         },
@@ -971,7 +983,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(108)},
             done() {return player[this.layer].points.gte(109)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "4th Milestone is boosted. Unlock a Transcend challenge.";
+				let ret="4th Milestone is boosted. Unlock a Transcend challenge.";
+				if(player.um.points.gte(109))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -979,6 +992,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(109)},
             done() {return player[this.layer].points.gte(110)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(110))return "Reduce T Challenge Goals. You can complete an AP challenge without exiting it. (Upgraded)";
 				if(player.m.effective.gte(183))return "Transcend challenge 1's base goal is decreased to x^2. You can complete an AP challenge without exiting it.";
 				return "Gain 0.2% of Transcend Point gain per second. Transcend challenge 1's base goal is decreased to x^2. You can complete an AP challenge without exiting it.";
 			},
@@ -988,7 +1002,8 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(110)},
             done() {return player[this.layer].points.gte(111)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Hyper Boost doesn't reset anything. Prestige boost is cheaper, and Unlock a new row of Prestige Boost upgrades. Unlock a new row of Transcend upgrades.";
+				let ret="Hyper Boost doesn't reset anything. Prestige boost is cheaper, and Unlock a new row of Prestige Boost upgrades. Unlock a new row of Transcend upgrades.";
+				if(player.um.points.gte(111))return ret+" (Upgraded)";return ret;
 			},
         },
 		{
@@ -996,6 +1011,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(111)},
             done() {return player[this.layer].points.gte(112)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(112))return "Rewards of Transcend Challenge 2,4,6,8 are slightly better, and are enabled while you're in Transcend Challenges. (Upgraded)";
 				return "Transcend Challenge 2's reward is enabled while you're in Transcend Challenge 2.";
 			},
         },
@@ -1004,6 +1020,7 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(112)},
             done() {return player[this.layer].points.gte(113)}, // Used to determine when to give the milestone
             effectDescription:  function(){
+				if(player.um.points.gte(113))return "6th and 27th milestone's effect ^(meta-milestones) (Upgraded)";
 				if(player.m.effective.gte(183))return "6th and 27th milestone's effect ^(meta-milestones^0.3).";
 				return "Gain additional 0.3% of Transcend Point gain per second (total 0.5%). 6th and 27th milestone's effect ^(meta-milestones^0.3).";
 			},
@@ -2187,7 +2204,63 @@ var MILESTONES=[
             unlocked() {return player[this.layer].best.gte(255)},
             done() {return player[this.layer].points.gte(256)}, // Used to determine when to give the milestone
             effectDescription:  function(){
-				return "Exotic Fusioners won't reset on Reincarnation."
+				return "Transcend Buyables and Exotic Fusioners won't reset on Reincarnation."
+			},
+        },
+        {
+			requirementDescription: "257th Milestone",
+            unlocked() {return player[this.layer].best.gte(256)},
+            done() {return player[this.layer].points.gte(257)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock more Hyper Boost upgrades."
+			},
+        },
+        {
+			requirementDescription: "258th Milestone",
+            unlocked() {return player[this.layer].best.gte(257)},
+            done() {return player[this.layer].points.gte(258)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "The 105th milestone's effect ^1.01"
+			},
+        },
+        {
+			requirementDescription: "259th Milestone",
+            unlocked() {return player[this.layer].best.gte(258)},
+            done() {return player[this.layer].points.gte(259)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "MP Fusioners won't increase other's costs.";
+			},
+        },
+        {
+			requirementDescription: "260th Milestone",
+            unlocked() {return player[this.layer].best.gte(259)},
+            done() {return player[this.layer].points.gte(260)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Unlock Multiverse Prestige Challenges.";
+			},
+        },
+        {
+			requirementDescription: "261st Milestone",
+            unlocked() {return player[this.layer].best.gte(260)},
+            done() {return player[this.layer].points.gte(261)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Reduce AP challenge 6 goal based on your milestones.";
+			},
+        },
+        {
+			requirementDescription: "262nd Milestone",
+            unlocked() {return player[this.layer].best.gte(261)},
+            done() {return player[this.layer].points.gte(262)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "Atomic Prestige Upgrades 14 and 21 are better.";
+			},
+        },
+        {
+			requirementDescription: "263rd Milestone",
+            unlocked() {return player[this.layer].best.gte(262)},
+            done() {return player[this.layer].points.gte(263)}, // Used to determine when to give the milestone
+            effectDescription:  function(){
+				return "+1 'Exotic Fusioner II' Max Level";
 			},
         },
 	];
@@ -2216,7 +2289,7 @@ addLayer("m", {
     }},
     color: "#793784",
     requires(){
-		if(player.m.points.gte(256))return new Decimal(Infinity);
+		if(player.m.points.gte(263))return new Decimal(Infinity);
 		if(player.m.points.gte(200))return new Decimal(10);
 		if(player.m.points.gte(199))return new Decimal(Infinity);
 		return new Decimal(10);
@@ -2273,7 +2346,7 @@ addLayer("m", {
 		}else if(player.m.points.gte(5)){
 			secondScaling=new Decimal(0.3);
 		}
-		return base.add(firstScaling).add(secondScaling);
+		return base.add(tmp.m.firstScaling=firstScaling).add(tmp.m.secondScaling=secondScaling);
 	},
     getScalingStart(){
         let start=new Decimal(14);
@@ -2294,6 +2367,8 @@ addLayer("m", {
 	autoPrestige(){return player.mm.points.gte(1)},
 	milestones: MILESTONES,
 	milestone4EffectExponent(){
+		if(player.um.points.gte(109))return player.um.points.div(8).min(20).toNumber();
+		if(player.um.points.gte(104))return 2+player.um.points.div(10).toNumber();
 		if(player.um.points.gte(98))return 11;
 		if(player.um.points.gte(93))return 10;
 		if(player.um.points.gte(88))return 9;
@@ -2345,8 +2420,8 @@ addLayer("m", {
 		if(player.m.effective.gte(86))m=m.pow(player.um.points.gte(86)?1.001:1.0005);
 		if(player.m.effective.gte(91))m=m.pow(player.um.points.gte(91)?1.001:1.0005);
 		if(player.m.effective.gte(96))m=m.pow(player.um.points.gte(96)?1.001:1.0005);
-		if(player.m.effective.gte(107))m=m.pow(1.002);
-		if(player.um.points.gte(3))m=m.pow(1.001);//0.92828950888623837643940657419036
+		if(player.m.effective.gte(107))m=m.pow(player.um.points.gte(107)?1.0028437190308955899542070288359:1.002);
+		if(player.um.points.gte(3))m=m.pow(1.001);//0.93
 		var b=new Decimal(2);
 		if(player.m.effective.gte(4)){
 			b=b.add(layers.m.milestone4Effect());
@@ -2380,7 +2455,7 @@ addLayer("m", {
 			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(player.um.meta.gte(10)?50:100).add(1));
 		}
 		if(player.mm.points.gte(15)){
-			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(125).add(1));
+			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(player.um.meta.gte(15)?50:125).add(1));
 		}
 		if(player.mm.points.gte(20)){
 			b=b.mul(player.mm.points.sub(2).max(1).pow(0.5).div(150).add(1));
@@ -2426,14 +2501,12 @@ addLayer("m", {
 		if(player.m.effective.gte(42))p=p.pow(player.mm.points.add(player.um.points.gte(42)?player.um.points:1));
 		if(player.m.effective.gte(52))p=p.pow(player.um.points.gte(52)?(player.mm.points):(player.mm.points.pow(0.1).add(1)));
 		if(player.m.effective.gte(62))p=p.pow(player.mm.points.pow(player.um.points.gte(62)?1:0.129));
-		if(player.mm.points.gte(13))p=p.pow(1.2);
 		if(player.m.effective.gte(72))p=p.pow(player.mm.points.pow(player.um.points.gte(72)?1:0.1));
-		if(player.mm.points.gte(14))p=p.pow(1.2);
 		if(player.m.effective.gte(82))p=p.pow(player.mm.points.pow(player.um.points.gte(82)?1:0.2));
 		if(player.mm.points.gte(17))p=p.pow(1.7);
 		if(player.m.effective.gte(92))p=p.pow(player.mm.points.pow(player.um.points.gte(92)?1:0.3));
-		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(0.5));
-		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(player.um.points.gte(106)?1:0.5));
+		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(player.um.points.gte(113)?1:0.3));
 		if(player.um.points.gte(6))p=p.pow(player.um.points);
 		if(player.mm.points.gte(2))p=p.pow(player.um.meta.gte(2)?2:1);
 		if(player.mm.points.gte(3))p=p.pow(player.um.meta.gte(3)?2:1);
@@ -2444,6 +2517,8 @@ addLayer("m", {
 		if(player.mm.points.gte(9))p=p.pow(player.um.meta.gte(9)?2:1.5);
 		if(player.mm.points.gte(11))p=p.pow(player.um.meta.gte(11)?2:1);
 		if(player.mm.points.gte(12))p=p.pow(player.um.meta.gte(12)?2:1);
+		if(player.mm.points.gte(13))p=p.pow(player.um.meta.gte(13)?2:1.2);
+		if(player.mm.points.gte(14))p=p.pow(player.um.meta.gte(14)?2:1.2);
 		return p;
 	},
 	milestone27Effect(){
@@ -2464,14 +2539,16 @@ addLayer("m", {
 		if(player.mm.points.gte(9))p=p.pow(player.um.meta.gte(9)?2:1);
 		if(player.mm.points.gte(11))p=p.pow(player.um.meta.gte(11)?2:1.2);
 		if(player.mm.points.gte(12))p=p.pow(player.um.meta.gte(12)?2:1.2);
+		if(player.mm.points.gte(13))p=p.pow(player.um.meta.gte(13)?2:1);
+		if(player.mm.points.gte(14))p=p.pow(player.um.meta.gte(14)?2:1);
 		if(player.m.effective.gte(67))p=p.pow(player.mm.points.pow(player.um.points.gte(67)?1:0.147));
 		if(player.mm.points.gte(16))p=p.pow(1.2);
 		if(player.m.effective.gte(87))p=p.pow(player.mm.points.pow(player.um.points.gte(87)?1:0.3));
 		if(player.mm.points.gte(18))p=p.pow(1.8);
 		if(player.mm.points.gte(19))p=p.pow(1.9);
 		if(player.m.effective.gte(97))p=p.pow(player.mm.points.pow(player.um.points.gte(97)?1:0.4));
-		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(0.5));
-		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(0.3));
+		if(player.m.effective.gte(106))p=p.pow(player.mm.points.pow(player.um.points.gte(106)?1:0.5));
+		if(player.m.effective.gte(113))p=p.pow(player.mm.points.pow(player.um.points.gte(113)?1:0.3));
 		if(player.um.points.gte(27))p=p.pow(player.um.points.pow(0.5));
 		return p;
 	},
@@ -2494,6 +2571,8 @@ addLayer("m", {
 		if(player.m.effective.gte(241))p=p.pow(1.01);
 		if(player.m.effective.gte(244))p=p.pow(1.01);
 		if(player.m.effective.gte(251))p=p.pow(1.01);
+		if(player.m.effective.gte(258))p=p.pow(1.01);
+		if(player.um.points.gte(105))p=p.pow(1.05);
 		return p;
 	},
 	milestone200Effect(){

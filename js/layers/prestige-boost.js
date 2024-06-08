@@ -10,6 +10,7 @@ addLayer("pb", {
     color: "#70C0A0",
     requires(){
 		if(player.ap.activeChallenge==11)return new Decimal(Infinity);
+		if(player.um.points.gte(111))return new Decimal("1e10000");
 		return new Decimal("1e13760");
 	}, // Can be a function that takes requirement increases into account
     resource: "prestige boosts", // Name of prestige currency
@@ -44,10 +45,11 @@ addLayer("pb", {
 	exponent: function(x){
 		if(x===undefined)x=player.pb.points;
 		let p=new Decimal(1.1311);
+		if(player.um.points.gte(111))p=new Decimal(1.1);
 		if(x.gte(15)){
 			let scaling=x.sub(15).pow(2).div(2600);
 			if(hasUpgrade("t",24))scaling=scaling.div(1.1);
-			if(player.m.effective.gte(111))scaling=scaling.div(1.048);
+			if(player.m.effective.gte(111))scaling=scaling.div(player.um.points.gte(111)?1.07:1.048);
 			if(player.m.effective.gte(117))scaling=scaling.div(1.02);
 			if(hasUpgrade("pb",41))scaling=scaling.div(upgradeEffect("pb",41));
 			p=p.add(scaling);

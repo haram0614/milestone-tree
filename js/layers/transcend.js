@@ -511,7 +511,7 @@ addLayer("t", {
 				},
 				rewardEffect() {
 		if(player.m.effective.lt(112) && player.t.activeChallenge==12)return 1;
-                    let ret = 1+player.t.challenges[12]*0.1;
+                    let ret = 1+player.t.challenges[12]*(player.um.points.gte(112)?0.101:0.1);
                     return ret;
                 },
 				rewardDisplay() {
@@ -559,7 +559,7 @@ addLayer("t", {
 					return false;
 				},
 				rewardEffect() {
-		            let ret = 1+player.t.challenges[22]*0.1;
+		            let ret = 1+player.t.challenges[22]*(player.um.points.gte(112)?0.101:0.1);
                     return ret;
                 },
 				rewardDisplay() {
@@ -604,7 +604,7 @@ addLayer("t", {
 					return false;
 				},
 				rewardEffect() {
-		            let ret = 1+player.t.challenges[32]*0.1;
+		            let ret = 1+player.t.challenges[32]*(player.um.points.gte(112)?0.101:0.1);
                     return ret;
                 },
 				rewardDisplay() {
@@ -653,7 +653,7 @@ addLayer("t", {
 					if(player.m.effective.gte(171))ret = 1+player.t.challenges[42]*0.043;
 					if(player.m.effective.gte(172))ret = 1+player.t.challenges[42]*0.06;
 					if(player.m.effective.gte(173))ret = 1+player.t.challenges[42]*0.08;
-					if(player.m.effective.gte(174))ret = 1+player.t.challenges[42]*0.1;
+					if(player.m.effective.gte(174))ret = 1+player.t.challenges[42]*(player.um.points.gte(112)?0.101:0.1);
                     return ret;
                 },
 				rewardDisplay() {
@@ -664,7 +664,7 @@ addLayer("t", {
 		},
 	},
 	hardcap(){
-		return new Decimal(5e130)//Number.MAX_VALUE)
+		return new Decimal(2e146)//Number.MAX_VALUE)
 	},
 	passiveGeneration(){
 		if(player.t.activeChallenge)return 0;
@@ -728,7 +728,8 @@ addLayer("t", {
 	},
 	linearComp(){
 		let ret=15;
-		if(player.m.effective.gte(255))ret=14;
+		if(player.m.effective.gte(255))ret-=1;
+		if(player.um.points.gte(110))ret-=0.5;
 		return ret;
 	},
 	update(){

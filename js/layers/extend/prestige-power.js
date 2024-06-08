@@ -102,6 +102,23 @@ addLayer("pp", {
 			currencyInternalName: "power", // Use if using a nonstandard currency
 			currencyLayer: "pp", // The upgrade is only visible when this is true
 		},
+        22: {
+			unlocked() {return player.m.effective.gte(243)},
+			title: "Prestige Power Upgrade 22",
+			description: "Exotic Prestige Points boosts Prestige Power gain.<br>Req: Power Scaler - [35 Lvl]",
+			cost: new Decimal(1e21),
+			canAfford() {return player.pp.buyables[11].gte(35) && player.pp.power.gte(1e21)},
+            currencyDisplayName: "Hz of Prestige Power", // Use if using a nonstandard currency
+            currencyInternalName: "power", // Use if using a nonstandard currency
+            currencyLayer: "pp", // The upgrade is only visible when this is true
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+				let base=new Decimal("1e1000");
+                let ret = Decimal.pow(base,Decimal.log10(player.ep.points.add(1)).pow(0.9).add(1))
+				return ret;
+            },
+            effectDisplay() { return "x"+format(this.effect()) },
+        },
+
 	},
     buyables: {
 		rows: 1,
@@ -131,6 +148,7 @@ addLayer("pp", {
 			  effect(){
 				  let b=0.23;
 				  let eff=new Decimal(0).add(player[this.layer].buyables[this.id].mul(b).mul(player.m.points.pow(0.15)));
+                  if (hasUpgrade('ep',14))eff=(player[this.layer].buyables[this.id].mul(player.m.points)).pow(player[this.layer].buyables[this.id].add(1).log10().add(1).log10().add(1));
                   if (player.m.points.gte(223)) eff = eff.times(tmp.m.milestone223Effect)
 				  return eff;
 			  },
@@ -161,7 +179,7 @@ addLayer("pp", {
 			if(l=="pp")layerDataReset("p",["upgrades"]);
 		},
 	update(diff){
-        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff)).min(1e21)
+        if (player.pp.buyables[11].gte(1)) player.pp.power = player.pp.power.add(buyableEffect('pp', 11).times(diff)).min(1.14514e50);
 			
 		if(player.m.effective.gte(224)){
 			var target=player.pp.points.add(1).div(3).root(1.4).log(2);

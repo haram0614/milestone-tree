@@ -37,11 +37,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1.256",
+	num: "1.263",
 	name: "The Parallel Multiverse"
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1.263 - 2024/6/8</h3><br>
+		- Added 18 milestones<br>
+		- Added a Reincarnation Challenge<br>
+		- Added a Multiverse Prestige Challenge<br>
 	<h3>v1.245: The Parallel Multiverse - 2024/6/5</h3><br>
 		- Added 18 milestones<br>
 		- Ported Exotic Prestige from Seder's NG+<br>

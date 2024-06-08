@@ -43,6 +43,14 @@ addLayer("he", {
 	exponent: function(){
 		return new Decimal(1);
 	},
+	directMult(){
+		let b=new Decimal(1);
+		if(player.mm.points.gte(46))b=b.mul(2);
+		if(player.mm.points.gte(47))b=b.mul(2);
+		if(player.mm.points.gte(48))b=b.mul(2);
+		if(player.mm.points.gte(49))b=b.mul(2);
+		return b;
+	},
 	resetsNothing:true,
 	doReset(l){},
 	canBuyMax:true,
@@ -125,9 +133,8 @@ addLayer("he", {
 		"main-display",
 		"prestige-button",
 		["display-text",function(){
-			let peroom=new Decimal(10).log(tmp.he.base);
 			let power=new Decimal(1).div(tmp.he.exponent);
-			return "("+format(peroom)+" per OoM of hyper-prestige points, then raised to a power of "+format(power)+")";
+			return "Hyper Energy="+format(tmp.he.directMult)+"*log10(Hyper Prestige Points)^"+format(power);
 		}],
 		"upgrades"
 	],

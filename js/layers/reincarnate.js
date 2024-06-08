@@ -38,7 +38,8 @@ addLayer("r", {
 		if(player.mm.points.gte(45))mult=mult.mul(2);
 		if(hasUpgrade("pp",14))mult=mult.mul(upgradeEffect("pp",14));
 		if (player.ep.buyables[11].gte(9)) mult = mult.mul(tmp.ep.nineEffect);
-		if(hasUpgrade("r",12))ret = ret.mul(2);
+		if(hasUpgrade("r",12))mult=mult.mul(2);
+		if(hasUpgrade("ep",21))mult=mult.mul(upgradeEffect("ep",21));
 		return mult;
 	},
 	getResetGain() {
@@ -92,7 +93,7 @@ addLayer("r", {
 	},
 	update(diff){
 		if(player.r.points.gte(layers.r.hardcap))player.r.points=new Decimal(layers.r.hardcap);
-		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(1e52);
+		if(player.r.stage>=1)player.r.power=player.r.power.add(layers.r.powerGain().mul(diff)).min(6.66e55);
 	},
 	powerGain(){
 		let ret=player.points.max(10).log10().sub(1).mul(player.r.points.pow(player.m.effective.gte(215)?1.7+player.m.points.min(220).sub(215).mul(0.06).toNumber():1.5));
@@ -113,7 +114,7 @@ addLayer("r", {
 				player.r.stage=Math.max(player.r.stage,1);
 				let tmp={};
 				for(var i in player.t.specialPoints)tmp[i]=player.t.specialPoints[i];
-				layerDataReset("t",player.r.buyables[11].gte(206)?["upgrades","challenges"]:player.r.buyables[11].gte(184)?["upgrades"]:[]);
+				layerDataReset("t",player.r.buyables[11].gte(256)?["upgrades","buyables","challenges"]:player.r.buyables[11].gte(206)?["upgrades","challenges"]:player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				if(player.r.buyables[11].gte(206))player.t.specialPoints=tmp;
 				layerDataReset("a",player.r.buyables[11].gte(184)?["upgrades"]:[]);
 				layerDataReset("ap",player.r.buyables[11].gte(184)?["upgrades"]:[]);
@@ -307,11 +308,11 @@ addLayer("r", {
 		cols: 2,
 		11:{
                 name: "Ex-AP Challenge",
-                completionLimit: Infinity,
-			    challengeDescription() {return "All 6 AP Challenges at once.<br>"+format(challengeCompletions(this.layer, this.id),0)+" completions"},
+                completionLimit: 1,
+			    challengeDescription() {return "All 6 AP Challenges at once.<br>"+format(challengeCompletions(this.layer, this.id),0)+"/1 completions"},
                 unlocked() { return true },
                 goal: function(){
-					return 50+player.r.challenges[11]*10;
+					return [43.4,Infinity][player.r.challenges[11]];
 				},
 				canComplete(){
 					let c=0;
@@ -320,7 +321,10 @@ addLayer("r", {
 					return false;
 				},
                 currencyDisplayName: "T challenge completions",
-                rewardDescription() { return "..." },
+                rewardDescription() { 
+					if(player.r.challenges[this.id]>=1)return "You can upgrade more milestones.";
+					return "..."
+				},
             onEnter() {
                 layerDataReset("t",["upgrades"]);
             },
