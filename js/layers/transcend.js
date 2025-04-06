@@ -127,7 +127,7 @@ addLayer("t", {
 	softcapPower:new Decimal(1),
 	gainMult(){
 		let mult=new Decimal(1);
-		if(player.mm.points.gte(21))mult=mult.mul(2);
+		if(player.mm.points.gte(21))mult=mult.mul(2).mul(1e43);
 		if(player.mm.points.gte(22))mult=mult.mul(2);
 		if(player.mm.points.gte(23))mult=mult.mul(2);
 		if(player.mm.points.gte(24))mult=mult.mul(2);
